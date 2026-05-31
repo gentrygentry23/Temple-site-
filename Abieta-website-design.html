@@ -1,0 +1,1349 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Abieta | أبيتا - Healthy Taste. Premium Experience.</title>
+<meta name="description" content="Abieta | أبيتا - Luxury café & healthy restaurant in Ardiya, Kuwait. Specialty coffee, healthy meals, family-friendly dining. Order via Talabat or WhatsApp +965 91102270">
+<meta name="keywords" content="Abieta, Kuwait cafe, healthy restaurant, Ardiya, specialty coffee, Talabat, Zero Carb Pizza, Protein Ice Cream">
+<meta property="og:title" content="Abieta | أبيتا - Luxury Café & Healthy Restaurant">
+<meta property="og:description" content="Healthy Taste. Premium Experience. Fresh ingredients, specialty coffee, and signature dishes in Ardiya, Kuwait.">
+<meta property="og:image" content="https://images.unsplash.com/photo-1445116572660-236099ec97a0?w=1200&q=80">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com"></script>
+
+<!-- GSAP -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+<!-- AOS -->
+<link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+
+<!-- Swiper -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+
+<!-- Font Awesome -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      colors: {
+        beige: '#E8DCC6',
+        black: '#0A0A0A',
+        white: '#FAFAFA',
+        gold: '#C9A961',
+        coffee: '#3E2723',
+      },
+      fontFamily: {
+        heading: ['Cormorant Garamond', 'serif'],
+        body: ['Plus Jakarta Sans', 'sans-serif'],
+        arabic: ['Tajawal', 'sans-serif'],
+      }
+    }
+  }
+}
+</script>
+
+<style>
+  * {
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    background: #0A0A0A;
+    color: #FAFAFA;
+    overflow-x: hidden;
+  }
+  
+  body[dir="rtl"] {
+    font-family: 'Tajawal', sans-serif;
+  }
+  
+  .glassmorphism {
+    background: rgba(232, 220, 198, 0.05);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(201, 169, 97, 0.2);
+  }
+  
+  .hero-slider {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+  }
+  
+  .hero-slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 2s ease-in-out;
+    background-size: cover;
+    background-position: center;
+  }
+  
+  .hero-slide.active {
+    opacity: 1;
+  }
+  
+  .hero-overlay {
+    background: linear-gradient(180deg, rgba(10,10,10,0.7) 0%, rgba(62,39,35,0.6) 100%);
+  }
+  
+  .text-shadow {
+    text-shadow: 2px 2px 20px rgba(0,0,0,0.8);
+  }
+  
+  .menu-card {
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  }
+  
+  .menu-card:hover {
+    transform: translateY(-12px);
+  }
+  
+  .menu-card:hover .menu-overlay {
+    opacity: 1;
+  }
+  
+  .filter-btn.active {
+    background: #C9A961;
+    color: #0A0A0A;
+    border-color: #C9A961;
+  }
+  
+  .masonry-grid {
+    column-count: 1;
+  }
+  
+  @media (min-width: 640px) {
+    .masonry-grid {
+      column-count: 2;
+    }
+  }
+  
+  @media (min-width: 1024px) {
+    .masonry-grid {
+      column-count: 3;
+    }
+  }
+  
+  .masonry-item {
+    break-inside: avoid;
+    margin-bottom: 1.5rem;
+  }
+  
+  /* Google Translate Widget Customization */
+  #google_translate_element {
+    position: fixed;
+    top: 80px;
+    right: 20px;
+    z-index: 9999;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s;
+  }
+  
+  #google_translate_element.active {
+    opacity: 1;
+    pointer-events: all;
+  }
+  
+  .goog-te-gadget {
+    font-family: 'Plus Jakarta Sans' !important;
+    color: transparent !important;
+  }
+  
+  .goog-te-gadget .goog-te-combo {
+    background: rgba(232, 220, 198, 0.1);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(201, 169, 97, 0.3);
+    color: #FAFAFA;
+    padding: 10px 15px;
+    border-radius: 8px;
+    font-size: 14px;
+    cursor: pointer;
+    outline: none;
+  }
+  
+  .goog-logo-link, .goog-te-banner-frame {
+    display: none !important;
+  }
+  
+  .goog-te-gadget span {
+    display: none !important;
+  }
+  
+  body {
+    top: 0 !important;
+  }
+  
+  /* Loading Screen */
+  #loader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #0A0A0A;
+    z-index: 10000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+  }
+  
+  .loader-logo {
+    width: 120px;
+    height: 120px;
+    border: 3px solid transparent;
+    border-top-color: #C9A961;
+    border-radius: 50%;
+    animation: spin 1.5s linear infinite;
+  }
+  
+  @keyframes spin {
+    to { transform: rotate(360deg); }
+  }
+  
+  /* Lightbox */
+  .lightbox {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.95);
+    z-index: 9998;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+  }
+  
+  .lightbox.active {
+    display: flex;
+  }
+  
+  .lightbox img {
+    max-width: 90%;
+    max-height: 90vh;
+    object-fit: contain;
+    border-radius: 8px;
+  }
+  
+  /* Custom Scrollbar */
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    background: #0A0A0A;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background: #C9A961;
+    border-radius: 5px;
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    background: #E8DCC6;
+  }
+</style>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Restaurant",
+  "name": "Abieta | أبيتا",
+  "image": "https://images.unsplash.com/photo-1445116572660-236099ec97a0?w=1200&q=80",
+  "description": "Luxury café & healthy restaurant serving specialty coffee, fresh healthy meals, and premium desserts in Ardiya, Kuwait.",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Ardiya",
+    "addressLocality": "Kuwait",
+    "postalCode": "00965",
+    "addressCountry": "KW"
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": 29.2929,
+    "longitude": 47.9056
+  },
+  "telephone": "+96591102270",
+  "servesCuisine": ["Healthy", "Cafe", "American", "Middle Eastern"],
+  "priceRange": "$$",
+  "openingHoursSpecification": {
+    "@type": "OpeningHoursSpecification",
+    "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+    "opens": "07:00",
+    "closes": "23:00"
+  },
+  "acceptsReservations": "True"
+}
+</script>
+</head>
+
+<body>
+<!-- Loading Screen -->
+<div id="loader">
+  <div class="loader-logo mb-6"></div>
+  <h2 class="font-heading text-4xl text-gold mb-2">Abieta | أبيتا</h2>
+  <p class="text-beige text-sm opacity-0" id="loader-text" data-lang-en="Healthy Taste. Premium Experience." data-lang-ar="طعم صحي. تجربة فاخرة">Healthy Taste. Premium Experience.</p>
+</div>
+
+<!-- Lightbox -->
+<div class="lightbox" id="lightbox">
+  <button class="absolute top-8 right-8 text-white text-4xl hover:text-gold transition" id="lightbox-close">&times;</button>
+  <img src="" alt="Gallery Image" id="lightbox-img">
+</div>
+
+<!-- Google Translate -->
+<div id="google_translate_element"></div>
+
+<!-- Floating WhatsApp Button -->
+<a href="https://wa.me/96591102270" target="_blank" class="fixed bottom-6 right-6 z-50 bg-[#25D366] text-white w-14 h-14 rounded-full flex items-center justify-center text-2xl shadow-2xl hover:scale-110 transition-transform" aria-label="WhatsApp">
+  <i class="fab fa-whatsapp"></i>
+</a>
+
+<!-- Floating Translate Button -->
+<button id="translate-toggle" class="fixed bottom-6 left-6 z-50 glassmorphism text-gold w-14 h-14 rounded-full flex items-center justify-center text-xl shadow-2xl hover:scale-110 transition-transform border-gold/30" aria-label="Translate">
+  <i class="fas fa-language"></i>
+</button>
+
+<!-- Navbar -->
+<nav class="fixed top-0 left-0 w-full z-50 transition-all duration-300" id="navbar">
+  <div class="glassmorphism">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-20">
+        <!-- Logo -->
+        <div class="flex items-center">
+          <h1 class="font-heading text-3xl font-bold text-gold">
+            <span data-lang-en="Abieta" data-lang-ar="أبيتا">Abieta</span>
+          </h1>
+        </div>
+
+        <!-- Desktop Menu -->
+        <div class="hidden lg:flex items-center space-x-8 rtl:space-x-reverse">
+          <a href="#home" class="text-white hover:text-gold transition" data-lang-en="Home" data-lang-ar="الرئيسية">Home</a>
+          <a href="#about" class="text-white hover:text-gold transition" data-lang-en="About" data-lang-ar="من نحن">About</a>
+          <a href="#menu" class="text-white hover:text-gold transition" data-lang-en="Menu" data-lang-ar="القائمة">Menu</a>
+          <a href="#signature" class="text-white hover:text-gold transition" data-lang-en="Signature" data-lang-ar="المميز">Signature</a>
+          <a href="#gallery" class="text-white hover:text-gold transition" data-lang-en="Gallery" data-lang-ar="المعرض">Gallery</a>
+          <a href="#contact" class="text-white hover:text-gold transition" data-lang-en="Contact" data-lang-ar="تواصل">Contact</a>
+        </div>
+
+        <!-- Actions -->
+        <div class="flex items-center space-x-4 rtl:space-x-reverse">
+          <button id="lang-toggle" class="glassmorphism px-4 py-2 rounded-lg text-gold font-semibold hover:bg-gold hover:text-black transition border border-gold/30">
+            <span data-lang-en="EN | ع" data-lang-ar="ع | EN">EN | ع</span>
+          </button>
+          <button id="mobile-menu-btn" class="lg:hidden text-white text-2xl">
+            <i class="fas fa-bars"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- Mobile Menu -->
+<div id="mobile-menu" class="fixed top-20 left-0 w-full glassmorphism z-40 transform -translate-y-full transition-transform duration-300 lg:hidden">
+  <div class="px-6 py-8 space-y-4">
+    <a href="#home" class="block text-white hover:text-gold transition text-lg" data-lang-en="Home" data-lang-ar="الرئيسية">Home</a>
+    <a href="#about" class="block text-white hover:text-gold transition text-lg" data-lang-en="About" data-lang-ar="من نحن">About</a>
+    <a href="#menu" class="block text-white hover:text-gold transition text-lg" data-lang-en="Menu" data-lang-ar="القائمة">Menu</a>
+    <a href="#signature" class="block text-white hover:text-gold transition text-lg" data-lang-en="Signature" data-lang-ar="المميز">Signature</a>
+    <a href="#gallery" class="block text-white hover:text-gold transition text-lg" data-lang-en="Gallery" data-lang-ar="المعرض">Gallery</a>
+    <a href="#contact" class="block text-white hover:text-gold transition text-lg" data-lang-en="Contact" data-lang-ar="تواصل">Contact</a>
+  </div>
+</div>
+
+<!-- Hero Section -->
+<section id="home" class="relative h-screen flex items-center justify-center overflow-hidden">
+  <div class="hero-slider">
+    <div class="hero-slide active" style="background-image: url('https://images.unsplash.com/photo-1445116572660-236099ec97a0?w=1920&q=80')"></div>
+    <div class="hero-slide" style="background-image: url('https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=1920&q=80')"></div>
+    <div class="hero-slide" style="background-image: url('https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?w=1920&q=80')"></div>
+  </div>
+  
+  <div class="hero-overlay absolute inset-0 z-10"></div>
+  
+  <div class="relative z-20 text-center px-4 max-w-5xl mx-auto">
+    <h1 class="font-heading text-6xl md:text-8xl font-bold text-white mb-6 text-shadow" data-aos="fade-up">
+      <span data-lang-en="Abieta" data-lang-ar="أبيتا">Abieta</span>
+    </h1>
+    <p class="text-2xl md:text-4xl text-beige mb-4 font-heading" data-aos="fade-up" data-aos-delay="200" data-lang-en="Healthy Taste. Premium Experience." data-lang-ar="طعم صحي. تجربة فاخرة">Healthy Taste. Premium Experience.</p>
+    <p class="text-lg md:text-xl text-white/80 mb-10" data-aos="fade-up" data-aos-delay="400" data-lang-en="Luxury café & healthy restaurant in the heart of Ardiya, Kuwait" data-lang-ar="مقهى فاخر ومطعم صحي في قلب العارضية، الكويت">Luxury café & healthy restaurant in the heart of Ardiya, Kuwait</p>
+    
+    <div class="flex flex-col sm:flex-row gap-4 justify-center" data-aos="fade-up" data-aos-delay="600">
+      <a href="#menu" class="glassmorphism px-8 py-4 rounded-full text-white font-semibold hover:bg-gold hover:text-black transition-all duration-300 border border-gold/30">
+        <span data-lang-en="View Menu" data-lang-ar="عرض القائمة">View Menu</span>
+      </a>
+      <a href="https://www.talabat.com/kw" target="_blank" class="bg-gold text-black px-8 py-4 rounded-full font-semibold hover:bg-beige transition-all duration-300">
+        <span data-lang-en="Order Online" data-lang-ar="اطلب أونلاين">Order Online</span>
+      </a>
+      <a href="#contact" class="glassmorphism px-8 py-4 rounded-full text-white font-semibold hover:bg-gold hover:text-black transition-all duration-300 border border-gold/30">
+        <span data-lang-en="Book a Table" data-lang-ar="احجز طاولة">Book a Table</span>
+      </a>
+    </div>
+  </div>
+  
+  <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 z-20 animate-bounce">
+    <i class="fas fa-chevron-down text-gold text-3xl"></i>
+  </div>
+</section>
+
+<!-- About Section -->
+<section id="about" class="py-24 px-4 bg-gradient-to-b from-black to-coffee/20">
+  <div class="max-w-7xl mx-auto">
+    <div class="grid lg:grid-cols-2 gap-12 items-center">
+      <div data-aos="fade-right">
+        <span class="text-gold font-semibold text-sm uppercase tracking-widest" data-lang-en="Our Story" data-lang-ar="قصتنا">Our Story</span>
+        <h2 class="font-heading text-5xl md:text-6xl font-bold text-white mt-4 mb-6" data-lang-en="Crafted with Passion" data-lang-ar="صُنع بشغف">Crafted with Passion</h2>
+        <div class="space-y-4 text-beige/80 text-lg leading-relaxed">
+          <p data-lang-en="At Abieta, we believe that healthy living shouldn't compromise on taste or experience. Nestled in Ardiya, Kuwait, we curate a premium dining experience that celebrates fresh ingredients, nutritional balance, and culinary artistry." data-lang-ar="في أبيتا، نؤمن أن الحياة الصحية لا يجب أن تتنازل عن الطعم أو التجربة. نقع في العارضية بالكويت، ونقدم تجربة طعام فاخرة تحتفي بالمكونات الطازجة والتوازن الغذائي وفن الطهي.">At Abieta, we believe that healthy living shouldn't compromise on taste or experience. Nestled in Ardiya, Kuwait, we curate a premium dining experience that celebrates fresh ingredients, nutritional balance, and culinary artistry.</p>
+          <p data-lang-en="From our meticulously sourced specialty coffee beans to our zero-carb innovations, every dish tells a story of wellness and indulgence. We're family-friendly, health-conscious, and committed to making nutritious food delicious." data-lang-ar="من حبوب القهوة المختصة المختارة بعناية إلى ابتكاراتنا الخالية من الكربوهيدرات، كل طبق يروي قصة عن العافية والمتعة. نحن مكان مناسب للعائلة، ونهتم بالصحة، وملتزمون بجعل الطعام المغذي لذيذًا.">From our meticulously sourced specialty coffee beans to our zero-carb innovations, every dish tells a story of wellness and indulgence. We're family-friendly, health-conscious, and committed to making nutritious food delicious.</p>
+        </div>
+        <div class="grid grid-cols-3 gap-6 mt-10">
+          <div class="text-center">
+            <div class="text-gold text-4xl mb-2"><i class="fas fa-seedling"></i></div>
+            <p class="text-white font-semibold" data-lang-en="Fresh" data-lang-ar="طازج">Fresh</p>
+            <p class="text-beige/60 text-sm" data-lang-en="Ingredients" data-lang-ar="مكونات">Ingredients</p>
+          </div>
+          <div class="text-center">
+            <div class="text-gold text-4xl mb-2"><i class="fas fa-mug-hot"></i></div>
+            <p class="text-white font-semibold" data-lang-en="Specialty" data-lang-ar="مختصة">Specialty</p>
+            <p class="text-beige/60 text-sm" data-lang-en="Coffee" data-lang-ar="قهوة">Coffee</p>
+          </div>
+          <div class="text-center">
+            <div class="text-gold text-4xl mb-2"><i class="fas fa-heart"></i></div>
+            <p class="text-white font-semibold" data-lang-en="Family" data-lang-ar="عائلي">Family</p>
+            <p class="text-beige/60 text-sm" data-lang-en="Friendly" data-lang-ar="مناسب">Friendly</p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="relative" data-aos="fade-left">
+        <div class="glassmorphism rounded-3xl overflow-hidden border border-gold/20">
+          <img src="https://images.unsplash.com/photo-1559925393-8be0ec4767c8?w=800&q=80" alt="Abieta Interior" class="w-full h-[600px] object-cover" loading="lazy">
+        </div>
+        <div class="absolute -bottom-6 -left-6 glassmorphism rounded-2xl p-6 border border-gold/30">
+          <p class="text-gold text-5xl font-bold font-heading">5+</p>
+          <p class="text-white" data-lang-en="Years of Excellence" data-lang-ar="سنوات من التميز">Years of Excellence</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Menu Section -->
+<section id="menu" class="py-24 px-4 bg-black">
+  <div class="max-w-7xl mx-auto">
+    <div class="text-center mb-16" data-aos="fade-up">
+      <span class="text-gold font-semibold text-sm uppercase tracking-widest" data-lang-en="Our Menu" data-lang-ar="قائمتنا">Our Menu</span>
+      <h2 class="font-heading text-5xl md:text-6xl font-bold text-white mt-4 mb-4" data-lang-en="Culinary Excellence" data-lang-ar="التميز في الطهي">Culinary Excellence</h2>
+      <p class="text-beige/80 text-lg max-w-2xl mx-auto" data-lang-en="Discover our carefully curated selection of healthy, delicious offerings" data-lang-ar="اكتشف مجموعتنا المختارة بعناية من الأطباق الصحية واللذيذة">Discover our carefully curated selection of healthy, delicious offerings</p>
+    </div>
+
+    <!-- Filter Buttons -->
+    <div class="flex flex-wrap justify-center gap-3 mb-12" data-aos="fade-up">
+      <button class="filter-btn active glassmorphism px-6 py-3 rounded-full text-white border border-gold/30 transition-all" data-filter="all" data-lang-en="All" data-lang-ar="الكل">All</button>
+      <button class="filter-btn glassmorphism px-6 py-3 rounded-full text-white border border-gold/30 transition-all" data-filter="coffee" data-lang-en="Coffee" data-lang-ar="قهوة">Coffee</button>
+      <button class="filter-btn glassmorphism px-6 py-3 rounded-full text-white border border-gold/30 transition-all" data-filter="breakfast" data-lang-en="Breakfast" data-lang-ar="إفطار">Breakfast</button>
+      <button class="filter-btn glassmorphism px-6 py-3 rounded-full text-white border border-gold/30 transition-all" data-filter="healthy" data-lang-en="Healthy Meals" data-lang-ar="وجبات صحية">Healthy Meals</button>
+      <button class="filter-btn glassmorphism px-6 py-3 rounded-full text-white border border-gold/30 transition-all" data-filter="burgers" data-lang-en="Burgers" data-lang-ar="برجر">Burgers</button>
+      <button class="filter-btn glassmorphism px-6 py-3 rounded-full text-white border border-gold/30 transition-all" data-filter="sandwiches" data-lang-en="Sandwiches" data-lang-ar="ساندويتش">Sandwiches</button>
+      <button class="filter-btn glassmorphism px-6 py-3 rounded-full text-white border border-gold/30 transition-all" data-filter="salads" data-lang-en="Salads" data-lang-ar="سلطات">Salads</button>
+      <button class="filter-btn glassmorphism px-6 py-3 rounded-full text-white border border-gold/30 transition-all" data-filter="desserts" data-lang-en="Desserts" data-lang-ar="حلويات">Desserts</button>
+      <button class="filter-btn glassmorphism px-6 py-3 rounded-full text-white border border-gold/30 transition-all" data-filter="juices" data-lang-en="Fresh Juices" data-lang-ar="عصائر طازجة">Fresh Juices</button>
+    </div>
+
+    <!-- Menu Grid -->
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8" id="menu-grid">
+      <!-- Coffee -->
+      <div class="menu-card glassmorphism rounded-2xl overflow-hidden border border-gold/20" data-category="coffee" data-aos="fade-up">
+        <div class="relative h-64 overflow-hidden">
+          <img src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=600&q=80" alt="Signature Latte" class="w-full h-full object-cover" loading="lazy">
+          <div class="menu-overlay absolute inset-0 bg-black/70 flex items-center justify-center opacity-0 transition-opacity">
+            <button class="bg-gold text-black px-6 py-2 rounded-full font-semibold" data-lang-en="Order Now" data-lang-ar="اطلب الآن">Order Now</button>
+          </div>
+        <div class="p-6">
+          <h3 class="font-heading text-2xl text-white mb-2" data-lang-en="Signature Latte" data-lang-ar="لاتيه مميز">Signature Latte</h3>
+          <p class="text-beige/70 text-sm mb-4" data-lang-en="Velvety espresso with steamed oat milk" data-lang-ar="إسبريسو مخملي مع حليب الشوفان المبخر">Velvety espresso with steamed oat milk</p>
+          <div class="flex justify-between items-center">
+            <span class="text-gold font-bold text-xl">2.950 KD</span>
+            <span class="text-beige/60 text-sm">165 <span data-lang-en="cal" data-lang-ar="سعرة">cal</span></span>
+          </div>
+        </div>
+      </div>
+
+      <div class="menu-card glassmorphism rounded-2xl overflow-hidden border border-gold/20" data-category="coffee" data-aos="fade-up" data-aos-delay="100">
+        <div class="relative h-64 overflow-hidden">
+          <img src="https://images.unsplash.com/photo-1511920170033-f8396924c348?w=600&q=80" alt="Cold Brew" class="w-full h-full object-cover" loading="lazy">
+          <div class="menu-overlay absolute inset-0 bg-black/70 flex items-center justify-center opacity-0 transition-opacity">
+            <button class="bg-gold text-black px-6 py-2 rounded-full font-semibold" data-lang-en="Order Now" data-lang-ar="اطلب الآن">Order Now</button>
+          </div>
+        </div>
+        <div class="p-6">
+          <h3 class="font-heading text-2xl text-white mb-2" data-lang-en="Cold Brew" data-lang-ar="كولد برو">Cold Brew</h3>
+          <p class="text-beige/70 text-sm mb-4" data-lang-en="12-hour steeped, smooth & refreshing" data-lang-ar="منقوع 12 ساعة، ناعم ومنعش">12-hour steeped, smooth & refreshing</p>
+          <div class="flex justify-between items-center">
+            <span class="text-gold font-bold text-xl">2.500 KD</span>
+            <span class="text-beige/60 text-sm">5 <span data-lang-en="cal" data-lang-ar="سعرة">cal</span></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Breakfast -->
+      <div class="menu-card glassmorphism rounded-2xl overflow-hidden border border-gold/20" data-category="breakfast" data-aos="fade-up">
+        <div class="relative h-64 overflow-hidden">
+          <img src="https://images.unsplash.com/photo-1525351484163-7529414344d8?w=600&q=80" alt="Avocado Toast" class="w-full h-full object-cover" loading="lazy">
+          <div class="menu-overlay absolute inset-0 bg-black/70 flex items-center justify-center opacity-0 transition-opacity">
+            <button class="bg-gold text-black px-6 py-2 rounded-full font-semibold" data-lang-en="Order Now" data-lang-ar="اطلب الآن">Order Now</button>
+          </div>
+        </div>
+        <div class="p-6">
+          <h3 class="font-heading text-2xl text-white mb-2" data-lang-en="Avocado Toast" data-lang-ar="توست الأفوكادو">Avocado Toast</h3>
+          <p class="text-beige/70 text-sm mb-4" data-lang-en="Sourdough, smashed avocado, poached egg" data-lang-ar="خبز محمص، أفوكادو مهروس، بيض مسلوق">Sourdough, smashed avocado, poached egg</p>
+          <div class="flex justify-between items-center">
+            <span class="text-gold font-bold text-xl">3.750 KD</span>
+            <span class="text-beige/60 text-sm">340 <span data-lang-en="cal" data-lang-ar="سعرة">cal</span></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Healthy Meals -->
+      <div class="menu-card glassmorphism rounded-2xl overflow-hidden border border-gold/20" data-category="healthy" data-aos="fade-up">
+        <div class="relative h-64 overflow-hidden">
+          <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=600&q=80" alt="Grilled Salmon Bowl" class="w-full h-full object-cover" loading="lazy">
+          <div class="menu-overlay absolute inset-0 bg-black/70 flex items-center justify-center opacity-0 transition-opacity">
+            <button class="bg-gold text-black px-6 py-2 rounded-full font-semibold" data-lang-en="Order Now" data-lang-ar="اطلب الآن">Order Now</button>
+          </div>
+        </div>
+        <div class="p-6">
+          <h3 class="font-heading text-2xl text-white mb-2" data-lang-en="Salmon Power Bowl" data-lang-ar="وعاء السلمون">Salmon Power Bowl</h3>
+          <p class="text-beige/70 text-sm mb-4" data-lang-en="Grilled salmon, quinoa, kale, tahini" data-lang-ar="سلمون مشوي، كينوا، كيل، طحينة">Grilled salmon, quinoa, kale, tahini</p>
+          <div class="flex justify-between items-center">
+            <span class="text-gold font-bold text-xl">6.500 KD</span>
+            <span class="text-beige/60 text-sm">420 <span data-lang-en="cal" data-lang-ar="سعرة">cal</span></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Burgers -->
+      <div class="menu-card glassmorphism rounded-2xl overflow-hidden border border-gold/20" data-category="burgers" data-aos="fade-up">
+        <div class="relative h-64 overflow-hidden">
+          <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=600&q=80" alt="Gourmet Burger" class="w-full h-full object-cover" loading="lazy">
+          <div class="menu-overlay absolute inset-0 bg-black/70 flex items-center justify-center opacity-0 transition-opacity">
+            <button class="bg-gold text-black px-6 py-2 rounded-full font-semibold" data-lang-en="Order Now" data-lang-ar="اطلب الآن">Order Now</button>
+          </div>
+        </div>
+        <div class="p-6">
+          <h3 class="font-heading text-2xl text-white mb-2" data-lang-en="Wagyu Burger" data-lang-ar="برجر واجيو">Wagyu Burger</h3>
+          <p class="text-beige/70 text-sm mb-4" data-lang-en="Premium wagyu patty, brioche, truffle aioli" data-lang-ar="شريحة واجيو فاخرة، بريوش، مايونيز الكمأة">Premium wagyu patty, brioche, truffle aioli</p>
+          <div class="flex justify-between items-center">
+            <span class="text-gold font-bold text-xl">5.950 KD</span>
+            <span class="text-beige/60 text-sm">650 <span data-lang-en="cal" data-lang-ar="سعرة">cal</span></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sandwiches -->
+      <div class="menu-card glassmorphism rounded-2xl overflow-hidden border border-gold/20" data-category="sandwiches" data-aos="fade-up">
+        <div class="relative h-64 overflow-hidden">
+          <img src="https://images.unsplash.com/photo-1625938144755-652e08e359b7?w=600&q=80" alt="Club Sandwich" class="w-full h-full object-cover" loading="lazy">
+          <div class="menu-overlay absolute inset-0 bg-black/70 flex items-center justify-center opacity-0 transition-opacity">
+            <button class="bg-gold text-black px-6 py-2 rounded-full font-semibold" data-lang-en="Order Now" data-lang-ar="اطلب الآن">Order Now</button>
+          </div>
+        </div>
+        <div class="p-6">
+          <h3 class="font-heading text-2xl text-white mb-2" data-lang-en="Club Sandwich" data-lang-ar="كلوب ساندويتش">Club Sandwich</h3>
+          <p class="text-beige/70 text-sm mb-4" data-lang-en="Triple layer, turkey, bacon, avocado" data-lang-ar="ثلاث طبقات، تركي، بيكون، أفوكادو">Triple layer, turkey, bacon, avocado</p>
+          <div class="flex justify-between items-center">
+            <span class="text-gold font-bold text-xl">4.500 KD</span>
+            <span class="text-beige/60 text-sm">580 <span data-lang-en="cal" data-lang-ar="سعرة">cal</span></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Salads -->
+      <div class="menu-card glassmorphism rounded-2xl overflow-hidden border border-gold/20" data-category="salads" data-aos="fade-up">
+        <div class="relative h-64 overflow-hidden">
+          <img src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=600&q=80" alt="Quinoa Salad" class="w-full h-full object-cover" loading="lazy">
+          <div class="menu-overlay absolute inset-0 bg-black/70 flex items-center justify-center opacity-0 transition-opacity">
+            <button class="bg-gold text-black px-6 py-2 rounded-full font-semibold" data-lang-en="Order Now" data-lang-ar="اطلب الآن">Order Now</button>
+          </div>
+        </div>
+        <div class="p-6">
+          <h3 class="font-heading text-2xl text-white mb-2" data-lang-en="Superfood Salad" data-lang-ar="سلطة السوبرفود">Superfood Salad</h3>
+          <p class="text-beige/70 text-sm mb-4" data-lang-en="Kale, quinoa, berries, nuts, seeds" data-lang-ar="كيل، كينوا، توت، مكسرات، بذور">Kale, quinoa, berries, nuts, seeds</p>
+          <div class="flex justify-between items-center">
+            <span class="text-gold font-bold text-xl">4.250 KD</span>
+            <span class="text-beige/60 text-sm">320 <span data-lang-en="cal" data-lang-ar="سعرة">cal</span></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Desserts -->
+      <div class="menu-card glassmorphism rounded-2xl overflow-hidden border border-gold/20" data-category="desserts" data-aos="fade-up">
+        <div class="relative h-64 overflow-hidden">
+          <img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=600&q=80" alt="Chocolate Cake" class="w-full h-full object-cover" loading="lazy">
+          <div class="menu-overlay absolute inset-0 bg-black/70 flex items-center justify-center opacity-0 transition-opacity">
+            <button class="bg-gold text-black px-6 py-2 rounded-full font-semibold" data-lang-en="Order Now" data-lang-ar="اطلب الآن">Order Now</button>
+          </div>
+        </div>
+        <div class="p-6">
+          <h3 class="font-heading text-2xl text-white mb-2" data-lang-en="Cheesecake Kunafa" data-lang-ar="تشيزكيك كنافة">Cheesecake Kunafa</h3>
+          <p class="text-beige/70 text-sm mb-4" data-lang-en="Fusion of cheesecake & traditional kunafa" data-lang-ar="مزيج من التشيزكيك والكنافة التقليدية">Fusion of cheesecake & traditional kunafa</p>
+          <div class="flex justify-between items-center">
+            <span class="text-gold font-bold text-xl">3.950 KD</span>
+            <span class="text-beige/60 text-sm">450 <span data-lang-en="cal" data-lang-ar="سعرة">cal</span></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Juices -->
+      <div class="menu-card glassmorphism rounded-2xl overflow-hidden border border-gold/20" data-category="juices" data-aos="fade-up">
+        <div class="relative h-64 overflow-hidden">
+          <img src="https://images.unsplash.com/photo-1622597467836-f3c7ca3b4c6f?w=600&q=80" alt="Green Juice" class="w-full h-full object-cover" loading="lazy">
+          <div class="menu-overlay absolute inset-0 bg-black/70 flex items-center justify-center opacity-0 transition-opacity">
+            <button class="bg-gold text-black px-6 py-2 rounded-full font-semibold" data-lang-en="Order Now" data-lang-ar="اطلب الآن">Order Now</button>
+          </div>
+        </div>
+        <div class="p-6">
+          <h3 class="font-heading text-2xl text-white mb-2" data-lang-en="Green Detox" data-lang-ar="ديتوكس أخضر">Green Detox</h3>
+          <p class="text-beige/70 text-sm mb-4" data-lang-en="Kale, spinach, apple, lemon, ginger" data-lang-ar="كيل، سبانخ، تفاح، ليمون، زنجبيل">Kale, spinach, apple, lemon, ginger</p>
+          <div class="flex justify-between items-center">
+            <span class="text-gold font-bold text-xl">2.750 KD</span>
+            <span class="text-beige/60 text-sm">120 <span data-lang-en="cal" data-lang-ar="سعرة">cal</span></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Signature Items -->
+<section id="signature" class="py-24 px-4 bg-gradient-to-b from-black to-coffee/20">
+  <div class="max-w-7xl mx-auto">
+    <div class="text-center mb-16" data-aos="fade-up">
+      <span class="text-gold font-semibold text-sm uppercase tracking-widest" data-lang-en="Signature Items" data-lang-ar="أطباقنا المميزة">Signature Items</span>
+      <h2 class="font-heading text-5xl md:text-6xl font-bold text-white mt-4 mb-4" data-lang-en="Abieta Exclusives" data-lang-ar="حصريات أبيتا">Abieta Exclusives</h2>
+      <p class="text-beige/80 text-lg max-w-2xl mx-auto" data-lang-en="Our most beloved creations, crafted to perfection" data-lang-ar="أشهر إبداعاتنا، مصنوعة بإتقان">Our most beloved creations, crafted to perfection</p>
+    </div>
+
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div class="glassmorphism rounded-3xl overflow-hidden border border-gold/20 group" data-aos="fade-up">
+        <div class="relative h-80 overflow-hidden">
+          <img src="https://images.unsplash.com/photo-1625938144755-652e08e359b7?w=800&q=80" alt="Twister Sandwich" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" loading="lazy">
+          <div class="absolute top-4 right-4 bg-gold text-black px-4 py-1 rounded-full text-sm font-bold" data-lang-en="Bestseller" data-lang-ar="الأكثر مبيعاً">Bestseller</div>
+        </div>
+        <div class="p-8">
+          <h3 class="font-heading text-3xl text-white mb-3" data-lang-en="Twister Sandwich" data-lang-ar="تويستر ساندويتش">Twister Sandwich</h3>
+          <p class="text-beige/70 mb-4" data-lang-en="Grilled chicken strips, crispy lettuce, signature sauce, wrapped in fresh tortilla" data-lang-ar="شرائح دجاج مشوية، خس مقرمش، صلصة مميزة، ملفوفة في تورتيلا طازجة">Grilled chicken strips, crispy lettuce, signature sauce, wrapped in fresh tortilla</p>
+          <div class="flex justify-between items-center">
+            <span class="text-gold font-bold text-2xl">4.950 KD</span>
+            <span class="text-beige/60 text-sm">520 <span data-lang-en="cal" data-lang-ar="سعرة">cal</span></span>
+          </div>
+        </div>
+      </div>
+
+      <div class="glassmorphism rounded-3xl overflow-hidden border border-gold/20 group" data-aos="fade-up" data-aos-delay="100">
+        <div class="relative h-80 overflow-hidden">
+          <img src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=800&q=80" alt="Chicken Abieta" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" loading="lazy">
+          <div class="absolute top-4 right-4 bg-gold text-black px-4 py-1 rounded-full text-sm font-bold" data-lang-en="Chef's Choice" data-lang-ar="اختيار الشيف">Chef's Choice</div>
+        </div>
+        <div class="p-8">
+          <h3 class="font-heading text-3xl text-white mb-3" data-lang-en="Chicken Abieta" data-lang-ar="دجاج أبيتا">Chicken Abieta</h3>
+          <p class="text-beige/70 mb-4" data-lang-en="Marinated grilled chicken breast with herbs, quinoa, roasted vegetables, house dressing" data-lang-ar="صدر دجاج مشوي متبل بالأعشاب، كينوا، خضار مشوية، صلصة البيت">Marinated grilled chicken breast with herbs, quinoa, roasted vegetables, house dressing</p>
+          <div class="flex justify-between items-center">
+            <span class="text-gold font-bold text-2xl">5.750 KD</span>
+            <span class="text-beige/60 text-sm">390 <span data-lang-en="cal" data-lang-ar="سعرة">cal</span></span>
+          </div>
+        </div>
+      </div>
+
+      <div class="glassmorphism rounded-3xl overflow-hidden border border-gold/20 group" data-aos="fade-up" data-aos-delay="200">
+        <div class="relative h-80 overflow-hidden">
+          <img src="https://images.unsplash.com/photo-1607083206968-13611e3d76db?w=800&q=80" alt="Zero Carb Pizza" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" loading="lazy">
+          <div class="absolute top-4 right-4 bg-gold text-black px-4 py-1 rounded-full text-sm font-bold" data-lang-en="Healthy" data-lang-ar="صحي">Healthy</div>
+        </div>
+        <div class="p-8">
+          <h3 class="font-heading text-3xl text-white mb-3" data-lang-en="Zero Carb Pizza" data-lang-ar="بيتزا زيرو كارب">Zero Carb Pizza</h3>
+          <p class="text-beige/70 mb-4" data-lang-en="Cauliflower crust, sugar-free tomato sauce, mozzarella, fresh basil" data-lang-ar="قشرة قرنبيط، صلصة طماطم خالية من السكر، موزاريلا، ريحان طازج">Cauliflower crust, sugar-free tomato sauce, mozzarella, fresh basil</p>
+          <div class="flex justify-between items-center">
+            <span class="text-gold font-bold text-2xl">6.250 KD</span>
+            <span class="text-beige/60 text-sm">280 <span data-lang-en="cal" data-lang-ar="سعرة">cal</span></span>
+          </div>
+        </div>
+      </div>
+
+      <div class="glassmorphism rounded-3xl overflow-hidden border border-gold/20 group" data-aos="fade-up">
+        <div class="relative h-80 overflow-hidden">
+          <img src="https://images.unsplash.com/photo-1565958011703-44f9829ba187?w=800&q=80" alt="Protein Ice Cream" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" loading="lazy">
+          <div class="absolute top-4 right-4 bg-gold text-black px-4 py-1 rounded-full text-sm font-bold" data-lang-en="New" data-lang-ar="جديد">New</div>
+        </div>
+        <div class="p-8">
+          <h3 class="font-heading text-3xl text-white mb-3" data-lang-en="Protein Ice Cream" data-lang-ar="آيس كريم بروتين">Protein Ice Cream</h3>
+          <p class="text-beige/70 mb-4" data-lang-en="High-protein, low-sugar vanilla bean ice cream with fresh berries" data-lang-ar="آيس كريم فانيليا عالي البروتين قليل السكر مع توت طازج">High-protein, low-sugar vanilla bean ice cream with fresh berries</p>
+          <div class="flex justify-between items-center">
+            <span class="text-gold font-bold text-2xl">3.250 KD</span>
+            <span class="text-beige/60 text-sm">180 <span data-lang-en="cal" data-lang-ar="سعرة">cal</span></span>
+          </div>
+        </div>
+      </div>
+
+      <div class="glassmorphism rounded-3xl overflow-hidden border border-gold/20 group" data-aos="fade-up" data-aos-delay="100">
+        <div class="relative h-80 overflow-hidden">
+          <img src="https://images.unsplash.com/photo-1625938144755-652e08e359b7?w=800&q=80" alt="Club Sandwich" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" loading="lazy">
+          <div class="absolute top-4 right-4 bg-gold text-black px-4 py-1 rounded-full text-sm font-bold" data-lang-en="Popular" data-lang-ar="شعبي">Popular</div>
+        </div>
+        <div class="p-8">
+          <h3 class="font-heading text-3xl text-white mb-3" data-lang-en="Club Sandwich" data-lang-ar="كلوب ساندويتش">Club Sandwich</h3>
+          <p class="text-beige/70 mb-4" data-lang-en="Classic triple-decker with turkey, bacon, egg, lettuce, tomato, mayo" data-lang-ar="كلاسيكي ثلاثي الطبقات مع تركي، بيكون، بيض، خس، طماطم، مايونيز">Classic triple-decker with turkey, bacon, egg, lettuce, tomato, mayo</p>
+          <div class="flex justify-between items-center">
+            <span class="text-gold font-bold text-2xl">4.500 KD</span>
+            <span class="text-beige/60 text-sm">580 <span data-lang-en="cal" data-lang-ar="سعرة">cal</span></span>
+          </div>
+        </div>
+      </div>
+
+      <div class="glassmorphism rounded-3xl overflow-hidden border border-gold/20 group" data-aos="fade-up" data-aos-delay="200">
+        <div class="relative h-80 overflow-hidden">
+          <img src="https://images.unsplash.com/photo-1567003848441-11a12b0ca13a?w=800&q=80" alt="Cheesecake Kunafa" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" loading="lazy">
+          <div class="absolute top-4 right-4 bg-gold text-black px-4 py-1 rounded-full text-sm font-bold" data-lang-en="Fusion" data-lang-ar="مميز">Fusion</div>
+        </div>
+        <div class="p-8">
+          <h3 class="font-heading text-3xl text-white mb-3" data-lang-en="Cheesecake Kunafa" data-lang-ar="تشيزكيك كنافة">Cheesecake Kunafa</h3>
+          <p class="text-beige/70 mb-4" data-lang-en="Creamy cheesecake meets crispy kunafa, drizzled with pistachio syrup" data-lang-ar="تشيزكيك كريمي مع كنافة مقرمشة، مع شراب الفستق">Creamy cheesecake meets crispy kunafa, drizzled with pistachio syrup</p>
+          <div class="flex justify-between items-center">
+            <span class="text-gold font-bold text-2xl">4.750 KD</span>
+            <span class="text-beige/60 text-sm">490 <span data-lang-en="cal" data-lang-ar="سعرة">cal</span></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Delivery Section -->
+<section id="delivery" class="py-24 px-4 bg-black">
+  <div class="max-w-7xl mx-auto">
+    <div class="glassmorphism rounded-3xl p-8 md:p-16 border border-gold/20" data-aos="fade-up">
+      <div class="grid lg:grid-cols-2 gap-12 items-center">
+        <div>
+          <span class="text-gold font-semibold text-sm uppercase tracking-widest" data-lang-en="Order Online" data-lang-ar="اطلب أونلاين">Order Online</span>
+          <h2 class="font-heading text-5xl md:text-6xl font-bold text-white mt-4 mb-6" data-lang-en="Delivered to Your Door" data-lang-ar="توصيل لباب بيتك">Delivered to Your Door</h2>
+          <p class="text-beige/80 text-lg mb-8" data-lang-en="Enjoy Abieta's premium healthy cuisine from the comfort of your home. Available on Talabat and WhatsApp orders." data-lang-ar="استمتع بمأكولات أبيتا الصحية الفاخرة من راحة منزلك. متوفر على طلبات وواتساب.">Enjoy Abieta's premium healthy cuisine from the comfort of your home. Available on Talabat and WhatsApp orders.</p>
+          
+          <div class="space-y-4 mb-8">
+            <div class="flex items-center space-x-4 rtl:space-x-reverse">
+              <div class="bg-gold/20 w-12 h-12 rounded-full flex items-center justify-center text-gold">
+                <i class="fas fa-check"></i>
+              </div>
+              <span class="text-white" data-lang-en="Fast delivery across Kuwait" data-lang-ar="توصيل سريع عبر الكويت">Fast delivery across Kuwait</span>
+            </div>
+            <div class="flex items-center space-x-4 rtl:space-x-reverse">
+              <div class="bg-gold/20 w-12 h-12 rounded-full flex items-center justify-center text-gold">
+                <i class="fas fa-check"></i>
+              </div>
+              <span class="text-white" data-lang-en="Fresh ingredients, same quality" data-lang-ar="مكونات طازجة، نفس الجودة">Fresh ingredients, same quality</span>
+            </div>
+            <div class="flex items-center space-x-4 rtl:space-x-reverse">
+              <div class="bg-gold/20 w-12 h-12 rounded-full flex items-center justify-center text-gold">
+                <i class="fas fa-check"></i>
+              </div>
+              <span class="text-white" data-lang-en="Contactless delivery available" data-lang-ar="توصيل بدون تلامس متاح">Contactless delivery available</span>
+            </div>
+          </div>
+
+          <div class="flex flex-col sm:flex-row gap-4">
+            <a href="https://www.talabat.com/kw" target="_blank" class="bg-[#FF5A00] text-white px-8 py-4 rounded-full font-semibold hover:bg-[#E04E00] transition-all flex items-center justify-center space-x-2 rtl:space-x-reverse">
+              <i class="fas fa-motorcycle"></i>
+              <span data-lang-en="Order on Talabat" data-lang-ar="اطلب عبر طلبات">Order on Talabat</span>
+            </a>
+            <a href="https://wa.me/96591102270" target="_blank" class="bg-[#25D366] text-white px-8 py-4 rounded-full font-semibold hover:bg-[#20BA5A] transition-all flex items-center justify-center space-x-2 rtl:space-x-reverse">
+              <i class="fab fa-whatsapp"></i>
+              <span data-lang-en="WhatsApp Order" data-lang-ar="اطلب واتساب">WhatsApp Order</span>
+            </a>
+          </div>
+        </div>
+
+        <div class="relative">
+          <img src="https://images.unsplash.com/photo-1563379926898-05f4575a45d8?w=800&q=80" alt="Food Delivery" class="rounded-2xl w-full h-[500px] object-cover" loading="lazy">
+          <div class="absolute -bottom-6 -right-6 glassmorphism rounded-2xl p-6 border border-gold/30">
+            <p class="text-gold text-4xl font-bold font-heading">30-45</p>
+            <p class="text-white" data-lang-en="Minutes" data-lang-ar="دقيقة">Minutes</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Gallery Section -->
+<section id="gallery" class="py-24 px-4 bg-gradient-to-b from-black to-coffee/20">
+  <div class="max-w-7xl mx-auto">
+    <div class="text-center mb-16" data-aos="fade-up">
+      <span class="text-gold font-semibold text-sm uppercase tracking-widest" data-lang-en="Gallery" data-lang-ar="المعرض">Gallery</span>
+      <h2 class="font-heading text-5xl md:text-6xl font-bold text-white mt-4 mb-4" data-lang-en="Visual Experience" data-lang-ar="تجربة بصرية">Visual Experience</h2>
+      <p class="text-beige/80 text-lg max-w-2xl mx-auto" data-lang-en="A glimpse into the Abieta atmosphere and our culinary artistry" data-lang-ar="لمحة من أجواء أبيتا وفن الطهي لدينا">A glimpse into the Abieta atmosphere and our culinary artistry</p>
+    </div>
+
+    <div class="masonry-grid">
+      <div class="masonry-item" data-aos="fade-up">
+        <div class="glassmorphism rounded-2xl overflow-hidden border border-gold/20 cursor-pointer" onclick="openLightbox('https://images.unsplash.com/photo-1559925393-8be0ec4767c8?w=1200&q=80')">
+          <img src="https://images.unsplash.com/photo-1559925393-8be0ec4767c8?w=600&q=80" alt="Restaurant Interior" class="w-full hover:scale-110 transition-transform duration-700" loading="lazy">
+        </div>
+      </div>
+      <div class="masonry-item" data-aos="fade-up" data-aos-delay="100">
+        <div class="glassmorphism rounded-2xl overflow-hidden border border-gold/20 cursor-pointer" onclick="openLightbox('https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=1200&q=80')">
+          <img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=600&q=80" alt="Coffee Art" class="w-full hover:scale-110 transition-transform duration-700" loading="lazy">
+        </div>
+      <div class="masonry-item" data-aos="fade-up" data-aos-delay="200">
+        <div class="glassmorphism rounded-2xl overflow-hidden border border-gold/20 cursor-pointer" onclick="openLightbox('https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?w=1200&q=80')">
+          <img src="https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?w=600&q=80" alt="Cafe Ambiance" class="w-full hover:scale-110 transition-transform duration-700" loading="lazy">
+        </div>
+      </div>
+      <div class="masonry-item" data-aos="fade-up">
+        <div class="glassmorphism rounded-2xl overflow-hidden border border-gold/20 cursor-pointer" onclick="openLightbox('https://images.unsplash.com/photo-1513104890138-7c749659a591?w=1200&q=80')">
+          <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?w=600&q=80" alt="Gourmet Pizza" class="w-full hover:scale-110 transition-transform duration-700" loading="lazy">
+        </div>
+      </div>
+      <div class="masonry-item" data-aos="fade-up" data-aos-delay="100">
+        <div class="glassmorphism rounded-2xl overflow-hidden border border-gold/20 cursor-pointer" onclick="openLightbox('https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?w=1200&q=80')">
+          <img src="https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?w=600&q=80" alt="Healthy Bowl" class="w-full hover:scale-110 transition-transform duration-700" loading="lazy">
+        </div>
+      </div>
+      <div class="masonry-item" data-aos="fade-up" data-aos-delay="200">
+        <div class="glassmorphism rounded-2xl overflow-hidden border border-gold/20 cursor-pointer" onclick="openLightbox('https://images.unsplash.com/photo-1495147466023-ac5c588e2e94?w=1200&q=80')">
+          <img src="https://images.unsplash.com/photo-1495147466023-ac5c588e2e94?w=600&q=80" alt="Breakfast Spread" class="w-full hover:scale-110 transition-transform duration-700" loading="lazy">
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Reviews Section -->
+<section id="reviews" class="py-24 px-4 bg-black">
+  <div class="max-w-7xl mx-auto">
+    <div class="text-center mb-16" data-aos="fade-up">
+      <span class="text-gold font-semibold text-sm uppercase tracking-widest" data-lang-en="Testimonials" data-lang-ar="آراء العملاء">Testimonials</span>
+      <h2 class="font-heading text-5xl md:text-6xl font-bold text-white mt-4 mb-4" data-lang-en="What Our Guests Say" data-lang-ar="ماذا يقول ضيوفنا">What Our Guests Say</h2>
+    </div>
+
+    <div class="swiper reviews-swiper" data-aos="fade-up">
+      <div class="swiper-wrapper">
+        <div class="swiper-slide">
+          <div class="glassmorphism rounded-3xl p-8 border border-gold/20">
+            <div class="flex text-gold text-xl mb-4">
+              <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+            </div>
+            <p class="text-beige/80 text-lg mb-6 leading-relaxed" data-lang-en="Abieta has become my go-to place for healthy meals. The Zero Carb Pizza is a game-changer! Staff is incredibly welcoming and the ambiance is perfect for both work and relaxation." data-lang-ar="أصبحت أبيتا مكاني المفضل للوجبات الصحية. بيتزا زيرو كارب تغير قواعد اللعبة! الموظفون مرحبون للغاية والأجواء مثالية للعمل والاسترخاء.">Abieta has become my go-to place for healthy meals. The Zero Carb Pizza is a game-changer! Staff is incredibly welcoming and the ambiance is perfect for both work and relaxation.</p>
+            <div class="flex items-center">
+              <div class="w-12 h-12 rounded-full bg-gradient-to-br from-gold to-beige flex items-center justify-center text-black font-bold text-xl mr-4 rtl:ml-4 rtl:mr-0">SA</div>
+              <div>
+                <p class="text-white font-semibold" data-lang-en="Sara Al-Ahmed" data-lang-ar="سارة الأحمد">Sara Al-Ahmed</p>
+                <p class="text-beige/60 text-sm" data-lang-en="Regular Customer" data-lang-ar="عميلة دائمة">Regular Customer</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="swiper-slide">
+          <div class="glassmorphism rounded-3xl p-8 border border-gold/20">
+            <div class="flex text-gold text-xl mb-4">
+              <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+            </div>
+            <p class="text-beige/80 text-lg mb-6 leading-relaxed" data-lang-en="As a fitness enthusiast, finding a place that serves delicious AND nutritious food is rare. Abieta nails it! Their Protein Ice Cream is my post-workout treat. Highly recommend!" data-lang-ar="كعاشق للياقة البدنية، إيجاد مكان يقدم طعامًا لذيذًا ومغذيًا أمر نادر. أبيتا أتقنت ذلك! آيس كريم البروتين هو مكافأتي بعد التمرين. أنصح بشدة!">As a fitness enthusiast, finding a place that serves delicious AND nutritious food is rare. Abieta nails it! Their Protein Ice Cream is my post-workout treat. Highly recommend!</p>
+            <div class="flex items-center">
+              <div class="w-12 h-12 rounded-full bg-gradient-to-br from-gold to-beige flex items-center justify-center text-black font-bold text-xl mr-4 rtl:ml-4 rtl:mr-0">MK</div>
+              <div>
+                <p class="text-white font-semibold" data-lang-en="Mohammed Al-Kandari" data-lang-ar="محمد الكندري">Mohammed Al-Kandari</p>
+                <p class="text-beige/60 text-sm" data-lang-en="Fitness Coach" data-lang-ar="مدرب لياقة">Fitness Coach</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="swiper-slide">
+          <div class="glassmorphism rounded-3xl p-8 border border-gold/20">
+            <div class="flex text-gold text-xl mb-4">
+              <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+            </div>
+            <p class="text-beige/80 text-lg mb-6 leading-relaxed" data-lang-en="Brought my family here for brunch and we all left happy! Kids loved the healthy burgers, I enjoyed my Avocado Toast, and the coffee was exceptional. Family-friendly and beautiful space!" data-lang-ar="جلبت عائلتي هنا للإفطار المتأخر وغادرنا جميعًا سعداء! الأطفال أحبوا البرجر الصحي، أنا استمتعت بتوست الأفوكادو، والقهوة كانت استثنائية. مكان مناسب للعائلة وجميل!">Brought my family here for brunch and we all left happy! Kids loved the healthy burgers, I enjoyed my Avocado Toast, and the coffee was exceptional. Family-friendly and beautiful space!</p>
+            <div class="flex items-center">
+              <div class="w-12 h-12 rounded-full bg-gradient-to-br from-gold to-beige flex items-center justify-center text-black font-bold text-xl mr-4 rtl:ml-4 rtl:mr-0">FA</div>
+              <div>
+                <p class="text-white font-semibold" data-lang-en="Fatima Al-Ansari" data-lang-ar="فاطمة الأنصاري">Fatima Al-Ansari</p>
+                <p class="text-beige/60 text-sm" data-lang-en="Food Blogger" data-lang-ar="مدونة طعام">Food Blogger</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="swiper-slide">
+          <div class="glassmorphism rounded-3xl p-8 border border-gold/20">
+            <div class="flex text-gold text-xl mb-4">
+              <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+            </div>
+            <p class="text-beige/80 text-lg mb-6 leading-relaxed" data-lang-en="The Cheesecake Kunafa is absolutely divine! Perfect blend of traditional and modern. Service is top-notch, and I love that they're health-conscious without compromising on flavor." data-lang-ar="تشيزكيك الكنافة إلهية تمامًا! مزيج مثالي من التقليدي والحديث. الخدمة من الدرجة الأولى، وأحب أنهم يهتمون بالصحة دون المساومة على النكهة.">The Cheesecake Kunafa is absolutely divine! Perfect blend of traditional and modern. Service is top-notch, and I love that they're health-conscious without compromising on flavor.</p>
+            <div class="flex items-center">
+              <div class="w-12 h-12 rounded-full bg-gradient-to-br from-gold to-beige flex items-center justify-center text-black font-bold text-xl mr-4 rtl:ml-4 rtl:mr-0">AS</div>
+              <div>
+                <p class="text-white font-semibold" data-lang-en="Ahmed Al-Sabah" data-lang-ar="أحمد الصباح">Ahmed Al-Sabah</p>
+                <p class="text-beige/60 text-sm" data-lang-en="Entrepreneur" data-lang-ar="رائد أعمال">Entrepreneur</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="swiper-pagination mt-8"></div>
+    </div>
+  </div>
+</section>
+
+<!-- Location Section -->
+<section id="location" class="py-24 px-4 bg-gradient-to-b from-black to-coffee/20">
+  <div class="max-w-7xl mx-auto">
+    <div class="grid lg:grid-cols-2 gap-12 items-center">
+      <div data-aos="fade-right">
+        <span class="text-gold font-semibold text-sm uppercase tracking-widest" data-lang-en="Visit Us" data-lang-ar="زورونا">Visit Us</span>
+        <h2 class="font-heading text-5xl md:text-6xl font-bold text-white mt-4 mb-6" data-lang-en="Find Us in Ardiya" data-lang-ar="تجدوننا في العارضية">Find Us in Ardiya</h2>
+        
+        <div class="space-y-6 mb-8">
+          <div class="flex items-start space-x-4 rtl:space-x-reverse">
+            <div class="bg-gold/20 w-12 h-12 rounded-full flex items-center justify-center text-gold flex-shrink-0">
+              <i class="fas fa-map-marker-alt"></i>
+            </div>
+            <div>
+              <p class="text-white font-semibold mb-1" data-lang-en="Address" data-lang-ar="العنوان">Address</p>
+              <p class="text-beige/80" data-lang-en="Abieta, Ardiya 00965, Kuwait" data-lang-ar="أبيتا، العارضية 00965، الكويت">Abieta, Ardiya 00965, Kuwait</p>
+            </div>
+          </div>
+          
+          <div class="flex items-start space-x-4 rtl:space-x-reverse">
+            <div class="bg-gold/20 w-12 h-12 rounded-full flex items-center justify-center text-gold flex-shrink-0">
+              <i class="fas fa-clock"></i>
+            </div>
+            <div>
+              <p class="text-white font-semibold mb-1" data-lang-en="Opening Hours" data-lang-ar="ساعات العمل">Opening Hours</p>
+              <p class="text-beige/80" data-lang-en="Daily: 7:00 AM - 11:00 PM" data-lang-ar="يومياً: 7:00 ص - 11:00 م">Daily: 7:00 AM - 11:00 PM</p>
+            </div>
+          </div>
+          
+          <div class="flex items-start space-x-4 rtl:space-x-reverse">
+            <div class="bg-gold/20 w-12 h-12 rounded-full flex items-center justify-center text-gold flex-shrink-0">
+              <i class="fas fa-phone"></i>
+            </div>
+            <div>
+              <p class="text-white font-semibold mb-1" data-lang-en="Phone" data-lang-ar="الهاتف">Phone</p>
+              <a href="tel:+96591102270" class="text-beige/80 hover:text-gold transition">+965 91102270</a>
+            </div>
+          </div>
+        </div>
+
+        <a href="https://www.google.com/maps?q=29.2929,47.9056" target="_blank" class="inline-flex items-center space-x-3 rtl:space-x-reverse bg-gold text-black px-8 py-4 rounded-full font-semibold hover:bg-beige transition-all">
+          <i class="fas fa-directions"></i>
+          <span data-lang-en="Get Directions" data-lang-ar="احصل على الاتجاهات">Get Directions</span>
+        </a>
+      </div>
+
+      <div data-aos="fade-left">
+        <div class="glassmorphism rounded-3xl overflow-hidden border border-gold/20 h-[500px]">
+          <iframe 
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3479.1234567890123!2d47.9056!3d29.2929!2m3!1f0!2f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3fcf9c9844d7b6b3%3A0x1234567890abcdef!2sArdiya%2C%20Kuwait!5e0!3m2!1sen!2s!4v1234567890123!5m2!1sen!2s" 
+            width="100%" 
+            height="100%" 
+            style="border:0;" 
+            allowfullscreen="" 
+            loading="lazy" 
+            referrerpolicy="no-referrer-when-downgrade">
+          </iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Contact Section -->
+<section id="contact" class="py-24 px-4 bg-black">
+  <div class="max-w-7xl mx-auto">
+    <div class="text-center mb-16" data-aos="fade-up">
+      <span class="text-gold font-semibold text-sm uppercase tracking-widest" data-lang-en="Get in Touch" data-lang-ar="تواصل معنا">Get in Touch</span>
+      <h2 class="font-heading text-5xl md:text-6xl font-bold text-white mt-4 mb-4" data-lang-en="Contact Abieta" data-lang-ar="تواصل مع أبيتا">Contact Abieta</h2>
+      <p class="text-beige/80 text-lg max-w-2xl mx-auto" data-lang-en="Have a question or want to make a reservation? We'd love to hear from you!" data-lang-ar="هل لديك سؤال أو تريد حجز طاولة؟ نحب أن نسمع منك!">Have a question or want to make a reservation? We'd love to hear from you!</p>
+    </div>
+
+    <div class="grid lg:grid-cols-2 gap-12">
+      <!-- Contact Form -->
+      <div class="glassmorphism rounded-3xl p-8 border border-gold/20" data-aos="fade-right">
+        <form id="contact-form" class="space-y-6">
+          <div>
+            <label class="block text-white font-semibold mb-2" data-lang-en="Name" data-lang-ar="الاسم">Name</label>
+            <input type="text" class="w-full bg-white/5 border border-gold/30 rounded-lg px-4 py-3 text-white focus:border-gold focus:outline-none transition" required>
+          </div>
+          <div>
+            <label class="block text-white font-semibold mb-2" data-lang-en="Email" data-lang-ar="البريد الإلكتروني">Email</label>
+            <input type="email" class="w-full bg-white/5 border border-gold/30 rounded-lg px-4 py-3 text-white focus:border-gold focus:outline-none transition" required>
+          </div>
+          <div>
+            <label class="block text-white font-semibold mb-2" data-lang-en="Phone" data-lang-ar="الهاتف">Phone</label>
+            <input type="tel" class="w-full bg-white/5 border border-gold/30 rounded-lg px-4 py-3 text-white focus:border-gold focus:outline-none transition" required>
+          </div>
+          <div>
+            <label class="block text-white font-semibold mb-2" data-lang-en="Message" data-lang-ar="الرسالة">Message</label>
+            <textarea rows="4" class="w-full bg-white/5 border border-gold/30 rounded-lg px-4 py-3 text-white focus:border-gold focus:outline-none transition" required></textarea>
+          </div>
+          <button type="submit" class="w-full bg-gold text-black px-8 py-4 rounded-full font-semibold hover:bg-beige transition-all">
+            <span data-lang-en="Send Message" data-lang-ar="إرسال الرسالة">Send Message</span>
+          </button>
+        </form>
+      </div>
+
+      <!-- Contact Info -->
+      <div class="space-y-6" data-aos="fade-left">
+        <a href="https://wa.me/96591102270" target="_blank" class="glassmorphism rounded-2xl p-6 border border-gold/20 flex items-center space-x-4 rtl:space-x-reverse hover:border-gold transition-all group">
+          <div class="bg-[#25D366] w-16 h-16 rounded-full flex items-center justify-center text-white text-2xl group-hover:scale-110 transition-transform">
+            <i class="fab fa-whatsapp"></i>
+          </div>
+          <div>
+            <p class="text-white font-semibold text-lg" data-lang-en="WhatsApp" data-lang-ar="واتساب">WhatsApp</p>
+            <p class="text-beige/70">+965 91102270</p>
+          </div>
+        </a>
+
+        <a href="tel:+96591102270" class="glassmorphism rounded-2xl p-6 border border-gold/20 flex items-center space-x-4 rtl:space-x-reverse hover:border-gold transition-all group">
+          <div class="bg-gold w-16 h-16 rounded-full flex items-center justify-center text-black text-2xl group-hover:scale-110 transition-transform">
+            <i class="fas fa-phone"></i>
+          </div>
+          <div>
+            <p class="text-white font-semibold text-lg" data-lang-en="Call Us" data-lang-ar="اتصل بنا">Call Us</p>
+            <p class="text-beige/70">+965 91102270</p>
+          </div>
+        </a>
+
+        <a href="https://instagram.com" target="_blank" class="glassmorphism rounded-2xl p-6 border border-gold/20 flex items-center space-x-4 rtl:space-x-reverse hover:border-gold transition-all group">
+          <div class="bg-gradient-to-br from-purple-600 to-pink-500 w-16 h-16 rounded-full flex items-center justify-center text-white text-2xl group-hover:scale-110 transition-transform">
+            <i class="fab fa-instagram"></i>
+          </div>
+          <div>
+            <p class="text-white font-semibold text-lg" data-lang-en="Instagram" data-lang-ar="انستغرام">Instagram</p>
+            <p class="text-beige/70">@abieta_kw</p>
+          </div>
+        </a>
+
+        <div class="glassmorphism rounded-2xl p-6 border border-gold/20">
+          <p class="text-white font-semibold text-lg mb-4" data-lang-en="Business Hours" data-lang-ar="ساعات العمل">Business Hours</p>
+          <div class="space-y-2 text-beige/80">
+            <div class="flex justify-between">
+              <span data-lang-en="Monday - Sunday" data-lang-ar="الاثنين - الأحد">Monday - Sunday</span>
+              <span>7:00 AM - 11:00 PM</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="bg-coffee/40 border-t border-gold/20 py-16 px-4">
+  <div class="max-w-7xl mx-auto">
+    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
+      <!-- Brand -->
+      <div>
+        <h3 class="font-heading text-3xl font-bold text-gold mb-4">
+          <span data-lang-en="Abieta" data-lang-ar="أبيتا">Abieta</span>
+        </h3>
+        <p class="text-beige/70 mb-6" data-lang-en="Healthy Taste. Premium Experience." data-lang-ar="طعم صحي. تجربة فاخرة">Healthy Taste. Premium Experience.</p>
+        <div class="flex space-x-4 rtl:space-x-reverse">
+          <a href="#" class="bg-gold/20 w-10 h-10 rounded-full flex items-center justify-center text-gold hover:bg-gold hover:text-black transition">
+            <i class="fab fa-instagram"></i>
+          </a>
+          <a href="https://wa.me/96591102270" class="bg-gold/20 w-10 h-10 rounded-full flex items-center justify-center text-gold hover:bg-gold hover:text-black transition">
+            <i class="fab fa-whatsapp"></i>
+          </a>
+          <a href="#" class="bg-gold/20 w-10 h-10 rounded-full flex items-center justify-center text-gold hover:bg-gold hover:text-black transition">
+            <i class="fab fa-facebook"></i>
+          </a>
+        </div>
+      </div>
+
+      <!-- Quick Links -->
+      <div>
+        <h4 class="text-white font-semibold text-lg mb-4" data-lang-en="Quick Links" data-lang-ar="روابط سريعة">Quick Links</h4>
+        <ul class="space-y-3">
+          <li><a href="#home" class="text-beige/70 hover:text-gold transition" data-lang-en="Home" data-lang-ar="الرئيسية">Home</a></li>
+          <li><a href="#about" class="text-beige/70 hover:text-gold transition" data-lang-en="About" data-lang-ar="من نحن">About</a></li>
+          <li><a href="#menu" class="text-beige/70 hover:text-gold transition" data-lang-en="Menu" data-lang-ar="القائمة">Menu</a></li>
+          <li><a href="#signature" class="text-beige/70 hover:text-gold transition" data-lang-en="Signature Items" data-lang-ar="المميز">Signature Items</a></li>
+        </ul>
+      </div>
+
+      <!-- Information -->
+      <div>
+        <h4 class="text-white font-semibold text-lg mb-4" data-lang-en="Information" data-lang-ar="معلومات">Information</h4>
+        <ul class="space-y-3">
+          <li><a href="#delivery" class="text-beige/70 hover:text-gold transition" data-lang-en="Delivery" data-lang-ar="التوصيل">Delivery</a></li>
+          <li><a href="#gallery" class="text-beige/70 hover:text-gold transition" data-lang-en="Gallery" data-lang-ar="المعرض">Gallery</a></li>
+          <li><a href="#location" class="text-beige/70 hover:text-gold transition" data-lang-en="Location" data-lang-ar="الموقع">Location</a></li>
+          <li><a href="#contact" class="text-beige/70 hover:text-gold transition" data-lang-en="Contact" data-lang-ar="تواصل">Contact</a></li>
+        </ul>
+      </div>
+
+      <!-- Newsletter -->
+      <div>
+        <h4 class="text-white font-semibold text-lg mb-4" data-lang-en="Newsletter" data-lang-ar="النشرة الإخبارية">Newsletter</h4>
+        <p class="text-beige/70 mb-4" data-lang-en="Subscribe for exclusive offers and updates" data-lang-ar="اشترك للحصول على عروض وتحديثات حصرية">Subscribe for exclusive offers and updates</p>
+        <form class="space-y-3">
+          <input type="email" placeholder="Email" class="w-full bg-white/5 border border-gold/30 rounded-lg px-4 py-3 text-white focus:border-gold focus:outline-none transition" required>
+          <button type="submit" class="w-full bg-gold text-black px-6 py-3 rounded-lg font-semibold hover:bg-beige transition-all" data-lang-en="Subscribe" data-lang-ar="اشترك">Subscribe</button>
+        </form>
+      </div>
+    </div>
+
+    <div class="border-t border-gold/20 pt-8 text-center">
+      <p class="text-beige/60">
+        &copy; 2024 <span class="text-gold">Abieta | أبيتا</span>. 
+        <span data-lang-en="All rights reserved." data-lang-ar="جميع الحقوق محفوظة.">All rights reserved.</span>
+      </p>
+    </div>
+  </div>
+</footer>
+
+<!-- Scripts -->
+<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+<script>
+// Wait for DOM and all scripts to load
+document.addEventListener('DOMContentLoaded', function() {
+  
+  // Initialize AOS after everything is loaded
+  AOS.init({
+    duration: 1000,
+    once: true,
+    offset: 100
+  });
+
+  // Loading Screen
+  window.addEventListener('load', function() {
+    gsap.to('#loader-text', { opacity: 1, duration: 0.8, delay: 0.3 });
+    gsap.to('#loader', {
+      opacity: 0,
+      duration: 0.8,
+      delay: 1.5,
+      onComplete: () => {
+        document.getElementById('loader').style.display = 'none';
+      }
+    });
+  });
+
+  // Navbar Scroll Effect
+  let lastScroll = 0;
+  window.addEventListener('scroll', () => {
+    const navbar = document.getElementById('navbar');
+    const currentScroll = window.pageYOffset;
+    
+    if (currentScroll > 100) {
+      navbar.querySelector('.glassmorphism').style.background = 'rgba(10, 10, 10, 0.95)';
+    } else {
+      navbar.querySelector('.glassmorphism').style.background = 'rgba(232, 220, 198, 0.05)';
+    }
+    
+    lastScroll = currentScroll;
+  });
+
+  // Mobile Menu Toggle
+  const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+  const mobileMenu = document.getElementById('mobile-menu');
+  let menuOpen = false;
+  
+  mobileMenuBtn.addEventListener('click', () => {
+    menuOpen = !menuOpen;
+    if (menuOpen) {
+      mobileMenu.style.transform = 'translateY(0)';
+      mobileMenuBtn.innerHTML = '<i class="fas fa-times"></i>';
+    } else {
+      mobileMenu.style.transform = 'translateY(-100%)';
+      mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+    }
+  });
+
+  // Close mobile menu on link click
+  document.querySelectorAll('#mobile-menu a').forEach(link => {
+    link.addEventListener('click', () => {
+      mobileMenu.style.transform = 'translateY(-100%)';
+      mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+      menuOpen = false;
+    });
+  });
+
+  // Hero Slider
+  let currentSlide = 0;
+  const slides = document.querySelectorAll('.hero-slide');
+  
+  setInterval(() => {
+    slides[currentSlide].classList.remove('active');
+    currentSlide = (currentSlide + 1) % slides.length;
+    slides[currentSlide].classList.add('active');
+  }, 5000);
+
+  // Language Toggle
+  let currentLang = 'en';
+  const langToggle = document.getElementById('lang-toggle');
+  
+  function switchLanguage(lang) {
+    currentLang = lang;
+    document.documentElement.lang = lang;
+    document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
+    document.body.dir = lang === 'ar' ? 'rtl' : 'ltr';
+    
+    document.querySelectorAll('[data-lang-en]').forEach(el => {
+      if (lang === 'ar') {
+        el.textContent = el.getAttribute('data-lang-ar');
+      } else {
+        el.textContent = el.getAttribute('data-lang-en');
+      }
+    });
+    
+    // Update button text
+    const toggleText = lang === 'ar' ? 'ع | EN' : 'EN | ع';
+    langToggle.querySelector('span').textContent = toggleText;
+  }
+  
+  langToggle.addEventListener('click', () => {
+    switchLanguage(currentLang === 'en' ? 'ar' : 'en');
+  });
+
+  // Google Translate Toggle
+  const translateToggle = document.getElementById('translate-toggle');
+  translateToggle.addEventListener('click', () => {
+    const gtElement = document.getElementById('google_translate_element');
+    gtElement.classList.toggle('active');
+  });
+
+  // Menu Filter
+  const filterBtns = document.querySelectorAll('.filter-btn');
+  const menuCards = document.querySelectorAll('.menu-card');
+  
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const filter = btn.getAttribute('data-filter');
+      
+      // Update active button
+      filterBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      
+      // Filter cards
+      menuCards.forEach(card => {
+        if (filter === 'all' || card.getAttribute('data-category') === filter) {
+          gsap.to(card, { opacity: 1, scale: 1, duration: 0.3, display: 'block' });
+          setTimeout(() => { card.style.display = 'block'; }, 300);
+        } else {
+          gsap.to(card, { 
+            opacity: 0, 
+            scale: 0.8, 
+            duration: 0.3,
+            onComplete: () => { card.style.display = 'none'; }
+          });
+        }
+      });
+    });
+  });
+
+  // Lightbox
+  window.openLightbox = function(src) {
+    document.getElementById('lightbox-img').src = src;
+    document.getElementById('lightbox').classList.add('active');
+    document.body.style.overflow = 'hidden';
+  };
+  
+  document.getElementById('lightbox-close').addEventListener('click', () => {
+    document.getElementById('lightbox').classList.remove('active');
+    document.body.style.overflow = 'auto';
+  });
+  
+  document.getElementById('lightbox').addEventListener('click', (e) => {
+    if (e.target.id === 'lightbox') {
+      document.getElementById('lightbox').classList.remove('active');
+      document.body.style.overflow = 'auto';
+    }
+  });
+
+  // Swiper - Reviews
+  const swiper = new Swiper('.reviews-swiper', {
+    slidesPerView: 1,
+    spaceBetween: 30,
+    loop: true,
+    autoplay: {
+      delay: 5000,
+      disableOnInteraction: false,
+    },
+    pagination: {
+      el: '.swiper-pagination',
+      clickable: true,
+    },
+    breakpoints: {
+      768: {
+        slidesPerView: 2,
+      },
+      1024: {
+        slidesPerView: 3,
+      },
+    }
+  });
+
+  // Contact Form
+  document.getElementById('contact-form').addEventListener('submit', (e) => {
+    e.preventDefault();
+    alert(currentLang === 'ar' ? 'تم إرسال رسالتك بنجاح! سنتواصل معك قريباً.' : 'Your message has been sent successfully! We will contact you soon.');
+    e.target.reset();
+  });
+
+  // GSAP Animations
+  gsap.registerPlugin(ScrollTrigger);
+  
+  // Smooth scroll for anchor links
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+      e.preventDefault();
+      const target = document.querySelector(this.getAttribute('href'));
+      if (target) {
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  });
+});
+
+// Google Translate Init
+function googleTranslateElementInit() {
+  new google.translate.TranslateElement({
+    pageLanguage: 'en',
+    includedLanguages: 'en,ar,hi,ur,tr,fr',
+    layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+    autoDisplay: false
+  }, 'google_translate_element');
+}
+</script>
+<script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+<script>(function(){document.addEventListener("click",function(e){var a=e.target.closest("[data-product-id]");if(!a)return;e.preventDefault();var pid=a.getAttribute("data-product-id");if(pid)parent.postMessage({type:"ecto-artifact-link-click",productId:pid},"*")})})();</script>
+</body>
+</html>

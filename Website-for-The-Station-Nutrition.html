@@ -1,0 +1,1394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Station Nutrition | Healthy Shakes & Energy Teas in Dunnellon, FL</title>
+<meta name="description" content="The Station Nutrition in Dunnellon, FL serves delicious protein shakes, protein coffees, and energy teas. Healthy never tasted this good. Visit us today!">
+<meta name="keywords" content="protein shakes Dunnellon, healthy smoothies, energy tea, protein coffee, The Station Nutrition, Dunnellon FL nutrition">
+<meta name="author" content="The Station Nutrition">
+
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="The Station Nutrition | Healthy Shakes & Energy Teas in Dunnellon, FL">
+<meta property="og:description" content="Delicious protein shakes, coffees & teas with 24g protein and under 250 calories. Healthy never tasted this good.">
+<meta property="og:image" content="https://images.unsplash.com/photo-1553530666-ba11a7da3888?auto=format&fit=crop&w=1200&q=80">
+<meta property="og:url" content="#">
+
+<!-- Favicon -->
+<link rel="icon" href="https://images.unsplash.com/photo-1572490122747-3968b75cc699?auto=format&fit=crop&w=32&q=80" type="image/jpeg">
+
+<!-- Google Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        fontFamily: {
+          'sans': ['Inter', 'sans-serif'],
+        },
+        colors: {
+          'cream': '#F7F3EE',
+          'softgreen': '#7FB069',
+          'coffeebrown': '#6F4E37',
+          'fruitpink': '#FF6B9D',
+          'fruitorange': '#FF8C42',
+        },
+        animation: {
+          'float': 'float 6s ease-in-out infinite',
+          'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+          'gradient': 'gradient 8s ease infinite',
+        },
+        keyframes: {
+          float: {
+            '0%, 100%': { transform: 'translateY(0px)' },
+            '50%': { transform: 'translateY(-20px)' },
+          },
+          gradient: {
+            '0%, 100%': { 'background-position': '0% 50%' },
+            '50%': { 'background-position': '100% 50%' },
+          }
+        }
+      }
+    }
+  }
+</script>
+
+<!-- GSAP -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+<!-- Lucide Icons -->
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+
+<style>
+  * {
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    font-family: 'Inter', sans-serif;
+  }
+
+  .glass {
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+  }
+
+  .gradient-text {
+    background: linear-gradient(135deg, #7FB069 0%, #6F4E37 50%, #FF6B9D 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .gradient-bg-animated {
+    background: linear-gradient(-45deg, #7FB069, #FF6B9D, #FF8C42, #6F4E37);
+    background-size: 400% 400%;
+    animation: gradient 15s ease infinite;
+  }
+
+  .masonry {
+    column-count: 1;
+    column-gap: 1rem;
+  }
+  
+  @media (min-width: 640px) {
+    .masonry { column-count: 2; }
+  }
+  
+  @media (min-width: 1024px) {
+    .masonry { column-count: 3; }
+  }
+
+  .masonry-item {
+    break-inside: avoid;
+    margin-bottom: 1rem;
+  }
+
+  .nav-blur {
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+  }
+
+  @keyframes gradient {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+
+  .blob {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(60px);
+    opacity: 0.4;
+    z-index: 0;
+  }
+
+  .loading-screen {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    background: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.5s ease;
+  }
+
+  .loading-screen.hide {
+    opacity: 0;
+    pointer-events: none;
+  }
+</style>
+
+<!-- LocalBusiness Schema -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "CafeOrCoffeeShop",
+  "name": "The Station Nutrition",
+  "image": "https://images.unsplash.com/photo-1553530666-ba11a7da3888?auto=format&fit=crop&w=1200&q=80",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "20600 W Pennsylvania Ave Unit 2",
+    "addressLocality": "Dunnellon",
+    "addressRegion": "FL",
+    "postalCode": "34431",
+    "addressCountry": "US"
+  },
+  "telephone": "+1-352-763-4020",
+  "url": "",
+  "servesCuisine": ["Protein Shakes", "Smoothies", "Energy Tea", "Protein Coffee"],
+  "priceRange": "$",
+  "openingHoursSpecification": [
+    {"@type": "OpeningHoursSpecification", "dayOfWeek": "Monday", "opens": "07:00", "closes": "15:30"},
+    {"@type": "OpeningHoursSpecification", "dayOfWeek": "Tuesday", "opens": "06:30", "closes": "15:30"},
+    {"@type": "OpeningHoursSpecification", "dayOfWeek": "Wednesday", "opens": "07:00", "closes": "15:30"},
+    {"@type": "OpeningHoursSpecification", "dayOfWeek": "Thursday", "opens": "06:30", "closes": "15:30"},
+    {"@type": "OpeningHoursSpecification", "dayOfWeek": "Friday", "opens": "07:00", "closes": "15:30"},
+    {"@type": "OpeningHoursSpecification", "dayOfWeek": "Saturday", "opens": "08:00", "closes": "14:00"},
+    {"@type": "OpeningHoursSpecification", "dayOfWeek": "Sunday", "opens": "09:00", "closes": "14:00"}
+  ]
+}
+</script>
+</head>
+<body class="bg-cream text-gray-900 overflow-x-hidden">
+
+<!-- Loading Screen -->
+<div id="loadingScreen" class="loading-screen">
+  <div class="text-center">
+    <div class="w-20 h-20 mx-auto mb-4 rounded-full gradient-bg-animated animate-pulse-slow"></div>
+    <h2 class="text-2xl font-bold gradient-text">The Station Nutrition</h2>
+  </div>
+</div>
+
+<!-- Daily Special Banner -->
+<div id="dailySpecial" class="bg-softgreen text-white py-2 px-4 text-center text-sm font-medium relative">
+  <button id="closeBanner" class="absolute right-4 top-1/2 -translate-y-1/2 hover:opacity-70">
+    <i data-lucide="x" class="w-4 h-4"></i>
+  </button>
+  <p>🌟 <strong>Today's Special:</strong> Pumpkin Cheesecake Shake - Only $6! Limited time offer</p>
+</div>
+
+<!-- Navigation -->
+<nav id="navbar" class="fixed w-full top-0 z-50 transition-all duration-300 bg-white/80">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex justify-between items-center h-20">
+      <a href="#" class="flex items-center gap-3">
+        <div class="w-12 h-12 rounded-full gradient-bg-animated"></div>
+        <div>
+          <h1 class="text-xl font-extrabold leading-tight">The Station</h1>
+          <p class="text-xs text-softgreen font-semibold">NUTRITION</p>
+        </div>
+      </a>
+      
+      <div class="hidden lg:flex items-center gap-8">
+        <a href="#hero" class="font-medium hover:text-softgreen transition">Home</a>
+        <a href="#about" class="font-medium hover:text-softgreen transition">About</a>
+        <a href="#menu" class="font-medium hover:text-softgreen transition">Menu</a>
+        <a href="#reviews" class="font-medium hover:text-softgreen transition">Reviews</a>
+        <a href="#location" class="font-medium hover:text-softgreen transition">Visit Us</a>
+        <button onclick="openContactModal()" class="bg-softgreen text-white px-6 py-2.5 rounded-full font-semibold hover:scale-105 hover:shadow-lg transition-all">
+          Order Now
+        </button>
+      </div>
+
+      <button id="mobileMenuBtn" class="lg:hidden">
+        <i data-lucide="menu" class="w-6 h-6"></i>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile Menu -->
+  <div id="mobileMenu" class="hidden lg:hidden bg-white border-t">
+    <div class="px-4 py-4 space-y-3">
+      <a href="#hero" class="block py-2 font-medium">Home</a>
+      <a href="#about" class="block py-2 font-medium">About</a>
+      <a href="#menu" class="block py-2 font-medium">Menu</a>
+      <a href="#reviews" class="block py-2 font-medium">Reviews</a>
+      <a href="#location" class="block py-2 font-medium">Visit Us</a>
+      <button onclick="openContactModal()" class="w-full bg-softgreen text-white px-6 py-3 rounded-full font-semibold">
+        Order Now
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- Floating Order Button -->
+<button onclick="openContactModal()" class="fixed bottom-6 right-6 z-40 bg-softgreen text-white p-4 rounded-full shadow-2xl hover:scale-110 transition-transform animate-pulse-slow">
+  <i data-lucide="shopping-bag" class="w-6 h-6"></i>
+</button>
+
+<!-- Hero Section -->
+<section id="hero" class="relative min-h-screen flex items-center pt-20 overflow-hidden bg-gradient-to-br from-white via-cream to-white">
+  <!-- Animated Blobs -->
+  <div class="blob w-96 h-96 bg-softgreen top-20 -left-20"></div>
+  <div class="blob w-96 h-96 bg-fruitpink top-40 -right-20"></div>
+  <div class="blob w-72 h-72 bg-fruitorange bottom-20 left-1/3"></div>
+
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 relative z-10">
+    <div class="grid lg:grid-cols-2 gap-12 items-center">
+      <div class="space-y-8 reveal">
+        <div class="inline-block">
+          <span class="glass px-4 py-2 rounded-full text-sm font-semibold text-softgreen">
+            🌱 Dunnellon's #1 Healthy Stop
+          </span>
+        </div>
+        <h2 class="text-5xl md:text-7xl font-black leading-tight">
+          Healthy Never <br>
+          <span class="gradient-text">Tasted This Good</span>
+        </h2>
+        <p class="text-xl text-gray-600 max-w-lg">
+          Protein-packed shakes, energizing teas, and coffee that loves you back. All under 250 calories with 24g+ protein.
+        </p>
+        <div class="flex flex-wrap gap-4">
+          <a href="#menu" class="bg-softgreen text-white px-8 py-4 rounded-full font-bold text-lg hover:scale-105 hover:shadow-xl transition-all">
+            View Menu
+          </a>
+          <a href="#location" class="glass px-8 py-4 rounded-full font-bold text-lg hover:scale-105 transition-all">
+            Find Us
+          </a>
+        </div>
+        <div class="flex items-center gap-6 pt-4">
+          <div class="flex -space-x-2">
+            <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=100&q=80" alt="Customer" loading="lazy" class="w-12 h-12 rounded-full border-2 border-white object-cover">
+            <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=100&q=80" alt="Customer" loading="lazy" class="w-12 h-12 rounded-full border-2 border-white object-cover">
+            <img src="https://images.unsplash.com/photo-1607746882042-944635dfe10e?auto=format&fit=crop&w=100&q=80" alt="Customer" loading="lazy" class="w-12 h-12 rounded-full border-2 border-white object-cover">
+          </div>
+          <div>
+            <div class="flex text-yellow-400">
+              <i data-lucide="star" class="w-5 h-5 fill-current"></i>
+              <i data-lucide="star" class="w-5 h-5 fill-current"></i>
+              <i data-lucide="star" class="w-5 h-5 fill-current"></i>
+              <i data-lucide="star" class="w-5 h-5 fill-current"></i>
+              <i data-lucide="star" class="w-5 h-5 fill-current"></i>
+            </div>
+            <p class="text-sm text-gray-600">500+ Happy Customers</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="relative reveal">
+        <img id="heroFloat1" src="https://images.unsplash.com/photo-1553530666-ba11a7da3888?auto=format&fit=crop&w=1200&q=80" alt="Delicious protein shake" loading="lazy" class="rounded-3xl shadow-2xl w-full object-cover">
+        <img id="heroFloat2" src="https://images.unsplash.com/photo-1498804103079-a6351b050096?auto=format&fit=crop&w=1200&q=80" alt="Protein coffee" loading="lazy" class="absolute -bottom-10 -left-10 w-48 h-48 rounded-2xl shadow-xl object-cover border-4 border-white hidden md:block">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- About Section -->
+<section id="about" class="py-24 bg-white">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center max-w-3xl mx-auto mb-16 reveal">
+      <span class="text-softgreen font-semibold">OUR STORY</span>
+      <h3 class="text-4xl md:text-5xl font-black mt-2 mb-4">Fueling Dunnellon With Love</h3>
+      <p class="text-lg text-gray-600">
+        The Station Nutrition was born from a simple belief: healthy eating should be delicious, convenient, and make you feel amazing. Every shake is crafted with premium protein, vitamins, and real ingredients.
+      </p>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-8 mb-16">
+      <div class="glass rounded-2xl p-8 text-center hover:scale-105 transition-transform reveal">
+        <div class="text-5xl font-black gradient-text count-up" data-count="500">0</div>
+        <p class="text-gray-600 font-semibold mt-2">Happy Customers</p>
+      </div>
+      <div class="glass rounded-2xl p-8 text-center hover:scale-105 transition-transform reveal">
+        <div class="text-5xl font-black gradient-text count-up" data-count="25">0</div>
+        <p class="text-gray-600 font-semibold mt-2">Shake Flavors</p>
+      </div>
+      <div class="glass rounded-2xl p-8 text-center hover:scale-105 transition-transform reveal">
+        <div class="text-5xl font-black gradient-text count-up" data-count="3">0</div>
+        <p class="text-gray-600 font-semibold mt-2">Years Serving</p>
+      </div>
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-6 reveal">
+      <img src="https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&w=1200&q=80" alt="Cafe interior" loading="lazy" class="rounded-2xl shadow-lg w-full h-80 object-cover">
+      <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?auto=format&fit=crop&w=1200&q=80" alt="Fitness lifestyle" loading="lazy" class="rounded-2xl shadow-lg w-full h-80 object-cover">
+    </div>
+  </div>
+</section>
+
+<!-- Menu Section -->
+<section id="menu" class="py-24 bg-cream">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center max-w-3xl mx-auto mb-12 reveal">
+      <span class="text-softgreen font-semibold">MENU</span>
+      <h3 class="text-4xl md:text-5xl font-black mt-2 mb-4">Made Fresh Daily</h3>
+      <p class="text-lg text-gray-600">Every item under 250 calories with protein to keep you full and energized</p>
+    </div>
+
+    <!-- Filter Tabs -->
+    <div class="flex flex-wrap justify-center gap-3 mb-12 reveal">
+      <button class="menu-filter active bg-softgreen text-white px-6 py-2 rounded-full font-semibold" data-filter="all">All</button>
+      <button class="menu-filter glass px-6 py-2 rounded-full font-semibold" data-filter="shakes">Shakes</button>
+      <button class="menu-filter glass px-6 py-2 rounded-full font-semibold" data-filter="coffees">Coffees</button>
+      <button class="menu-filter glass px-6 py-2 rounded-full font-semibold" data-filter="teas">Teas</button>
+      <button class="menu-filter glass px-6 py-2 rounded-full font-semibold" data-filter="snacks">Snacks</button>
+    </div>
+
+    <!-- Menu Grid -->
+    <div id="menuGrid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <!-- Strawberry Cheesecake Shake -->
+      <div class="menu-item bg-white rounded-2xl overflow-hidden shadow-lg hover:scale-105 hover:shadow-2xl transition-all reveal" data-category="shakes">
+        <div class="relative">
+          <img src="https://images.unsplash.com/photo-1572490122747-3968b75cc699?auto=format&fit=crop&w=600&q=80" alt="Strawberry Cheesecake Shake" loading="lazy" class="w-full h-64 object-cover">
+          <div class="absolute top-4 right-4 bg-softgreen text-white px-3 py-1 rounded-full text-xs font-bold">Healthy Choice</div>
+        </div>
+        <div class="p-6">
+          <h4 class="text-xl font-bold mb-2">Strawberry Cheesecake Shake</h4>
+          <p class="text-gray-600 text-sm mb-4">Creamy strawberry bliss with real cheesecake flavor</p>
+          <div class="flex items-center justify-between mb-4">
+            <div class="flex gap-2">
+              <span class="bg-cream px-3 py-1 rounded-full text-xs font-semibold">24g Protein</span>
+              <span class="bg-cream px-3 py-1 rounded-full text-xs font-semibold">220 cal</span>
+            </div>
+          </div>
+          <button onclick='openNutritionModal({"name":"Strawberry Cheesecake Shake","protein":24,"calories":220,"carbs":21,"fat":4.5,"sugar":9,"image":"https://images.unsplash.com/photo-1572490122747-3968b75cc699?auto=format&fit=crop&w=600&q=80"})' class="w-full bg-softgreen text-white py-3 rounded-xl font-semibold hover:bg-green-600 transition">
+            Order Now
+          </button>
+        </div>
+      </div>
+
+      <!-- Pumpkin Cheesecake -->
+      <div class="menu-item bg-white rounded-2xl overflow-hidden shadow-lg hover:scale-105 hover:shadow-2xl transition-all reveal" data-category="shakes">
+        <div class="relative">
+          <img src="https://images.unsplash.com/photo-1623065422902-30a2d299bbe4?auto=format&fit=crop&w=600&q=80" alt="Pumpkin Cheesecake Shake" loading="lazy" class="w-full h-64 object-cover">
+          <div class="absolute top-4 right-4 bg-fruitorange text-white px-3 py-1 rounded-full text-xs font-bold">Seasonal</div>
+        </div>
+        <div class="p-6">
+          <h4 class="text-xl font-bold mb-2">Pumpkin Cheesecake Shake</h4>
+          <p class="text-gray-600 text-sm mb-4">Fall favorite with warm spices and creamy finish</p>
+          <div class="flex items-center justify-between mb-4">
+            <div class="flex gap-2">
+              <span class="bg-cream px-3 py-1 rounded-full text-xs font-semibold">24g Protein</span>
+              <span class="bg-cream px-3 py-1 rounded-full text-xs font-semibold">230 cal</span>
+            </div>
+          </div>
+          <button onclick='openNutritionModal({"name":"Pumpkin Cheesecake Shake","protein":24,"calories":230,"carbs":23,"fat":5,"sugar":10,"image":"https://images.unsplash.com/photo-1623065422902-30a2d299bbe4?auto=format&fit=crop&w=600&q=80"})' class="w-full bg-softgreen text-white py-3 rounded-xl font-semibold hover:bg-green-600 transition">
+            Order Now
+          </button>
+        </div>
+      </div>
+
+      <!-- Fruity Pebbles Shake -->
+      <div class="menu-item bg-white rounded-2xl overflow-hidden shadow-lg hover:scale-105 hover:shadow-2xl transition-all reveal" data-category="shakes">
+        <img src="https://images.unsplash.com/photo-1623065422902-30a2d299bbe4?auto=format&fit=crop&w=600&q=80" alt="Fruity Pebbles Shake" loading="lazy" class="w-full h-64 object-cover">
+        <div class="p-6">
+          <h4 class="text-xl font-bold mb-2">Fruity Pebbles Shake</h4>
+          <p class="text-gray-600 text-sm mb-4">Childhood nostalgia meets adult nutrition goals</p>
+          <div class="flex items-center justify-between mb-4">
+            <div class="flex gap-2">
+              <span class="bg-cream px-3 py-1 rounded-full text-xs font-semibold">24g Protein</span>
+              <span class="bg-cream px-3 py-1 rounded-full text-xs font-semibold">240 cal</span>
+            </div>
+          </div>
+          <button onclick='openNutritionModal({"name":"Fruity Pebbles Shake","protein":24,"calories":240,"carbs":25,"fat":5.5,"sugar":12,"image":"https://images.unsplash.com/photo-1623065422902-30a2d299bbe4?auto=format&fit=crop&w=600&q=80"})' class="w-full bg-softgreen text-white py-3 rounded-xl font-semibold hover:bg-green-600 transition">
+            Order Now
+          </button>
+        </div>
+      </div>
+
+      <!-- Maple Donut Shake -->
+      <div class="menu-item bg-white rounded-2xl overflow-hidden shadow-lg hover:scale-105 hover:shadow-2xl transition-all reveal" data-category="shakes">
+        <img src="https://images.unsplash.com/photo-1572490122747-3968b75cc699?auto=format&fit=crop&w=600&q=80" alt="Maple Donut Shake" loading="lazy" class="w-full h-64 object-cover">
+        <div class="p-6">
+          <h4 class="text-xl font-bold mb-2">Maple Donut Shake</h4>
+          <p class="text-gray-600 text-sm mb-4">Sweet maple goodness without the guilt</p>
+          <div class="flex items-center justify-between mb-4">
+            <div class="flex gap-2">
+              <span class="bg-cream px-3 py-1 rounded-full text-xs font-semibold">24g Protein</span>
+              <span class="bg-cream px-3 py-1 rounded-full text-xs font-semibold">250 cal</span>
+            </div>
+          </div>
+          <button onclick='openNutritionModal({"name":"Maple Donut Shake","protein":24,"calories":250,"carbs":26,"fat":6,"sugar":11,"image":"https://images.unsplash.com/photo-1572490122747-3968b75cc699?auto=format&fit=crop&w=600&q=80"})' class="w-full bg-softgreen text-white py-3 rounded-xl font-semibold hover:bg-green-600 transition">
+            Order Now
+          </button>
+        </div>
+      </div>
+
+      <!-- Cinnamon Roll Protein Coffee -->
+      <div class="menu-item bg-white rounded-2xl overflow-hidden shadow-lg hover:scale-105 hover:shadow-2xl transition-all reveal" data-category="coffees">
+        <div class="relative">
+          <img src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=600&q=80" alt="Cinnamon Roll Protein Coffee" loading="lazy" class="w-full h-64 object-cover">
+          <div class="absolute top-4 right-4 bg-coffeebrown text-white px-3 py-1 rounded-full text-xs font-bold">Best Seller</div>
+        </div>
+        <div class="p-6">
+          <h4 class="text-xl font-bold mb-2">Cinnamon Roll Protein Coffee</h4>
+          <p class="text-gray-600 text-sm mb-4">Your morning coffee upgraded with protein power</p>
+          <div class="flex items-center justify-between mb-4">
+            <div class="flex gap-2">
+              <span class="bg-cream px-3 py-1 rounded-full text-xs font-semibold">15g Protein</span>
+              <span class="bg-cream px-3 py-1 rounded-full text-xs font-semibold">100 cal</span>
+            </div>
+          </div>
+          <button onclick='openNutritionModal({"name":"Cinnamon Roll Protein Coffee","protein":15,"calories":100,"carbs":8,"fat":2,"sugar":4,"image":"https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=600&q=80"})' class="w-full bg-softgreen text-white py-3 rounded-xl font-semibold hover:bg-green-600 transition">
+            Order Now
+          </button>
+        </div>
+      </div>
+
+      <!-- Tropical Energy Tea -->
+      <div class="menu-item bg-white rounded-2xl overflow-hidden shadow-lg hover:scale-105 hover:shadow-2xl transition-all reveal" data-category="teas">
+        <div class="relative">
+          <img src="https://images.unsplash.com/photo-1571934811356-5cc061b6821f?auto=format&fit=crop&w=600&q=80" alt="Tropical Energy Tea" loading="lazy" class="w-full h-64 object-cover">
+          <div class="absolute top-4 right-4 bg-softgreen text-white px-3 py-1 rounded-full text-xs font-bold">Healthy Choice</div>
+        </div>
+        <div class="p-6">
+          <h4 class="text-xl font-bold mb-2">Tropical Energy Tea</h4>
+          <p class="text-gray-600 text-sm mb-4">Boost metabolism with tropical paradise flavor</p>
+          <div class="flex items-center justify-between mb-4">
+            <div class="flex gap-2">
+              <span class="bg-cream px-3 py-1 rounded-full text-xs font-semibold">B12 Boost</span>
+              <span class="bg-cream px-3 py-1 rounded-full text-xs font-semibold">0 cal</span>
+            </div>
+          </div>
+          <button onclick='openNutritionModal({"name":"Tropical Energy Tea","protein":0,"calories":0,"carbs":0,"fat":0,"sugar":0,"image":"https://images.unsplash.com/photo-1571934811356-5cc061b6821f?auto=format&fit=crop&w=600&q=80","vitamins":"B6, B12, C"})' class="w-full bg-softgreen text-white py-3 rounded-xl font-semibold hover:bg-green-600 transition">
+            Order Now
+          </button>
+        </div>
+      </div>
+
+      <!-- Watermelon Refresher -->
+      <div class="menu-item bg-white rounded-2xl overflow-hidden shadow-lg hover:scale-105 hover:shadow-2xl transition-all reveal" data-category="teas">
+        <img src="https://images.unsplash.com/photo-1571934811356-5cc061b6821f?auto=format&fit=crop&w=600&q=80" alt="Watermelon Refresher" loading="lazy" class="w-full h-64 object-cover">
+        <div class="p-6">
+          <h4 class="text-xl font-bold mb-2">Watermelon Refresher</h4>
+          <p class="text-gray-600 text-sm mb-4">Hydrating and energizing summer vibes</p>
+          <div class="flex items-center justify-between mb-4">
+            <div class="flex gap-2">
+              <span class="bg-cream px-3 py-1 rounded-full text-xs font-semibold">Electrolytes</span>
+              <span class="bg-cream px-3 py-1 rounded-full text-xs font-semibold">0 cal</span>
+            </div>
+          <button onclick='openNutritionModal({"name":"Watermelon Refresher","protein":0,"calories":0,"carbs":0,"fat":0,"sugar":0,"image":"https://images.unsplash.com/photo-1571934811356-5cc061b6821f?auto=format&fit=crop&w=600&q=80","vitamins":"B6, B12, C"})' class="w-full bg-softgreen text-white py-3 rounded-xl font-semibold hover:bg-green-600 transition">
+            Order Now
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Why Love Us Section -->
+<section id="why" class="py-24 bg-white">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center max-w-3xl mx-auto mb-16 reveal">
+      <span class="text-softgreen font-semibold">WHY CHOOSE US</span>
+      <h3 class="text-4xl md:text-5xl font-black mt-2 mb-4">Why Dunnellon Loves Us</h3>
+    </div>
+
+    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div class="glass rounded-2xl p-6 hover:scale-105 transition-transform reveal">
+        <div class="w-14 h-14 bg-softgreen/20 rounded-xl flex items-center justify-center mb-4">
+          <i data-lucide="zap" class="w-7 h-7 text-softgreen"></i>
+        </div>
+        <h4 class="text-lg font-bold mb-2">High Protein</h4>
+        <p class="text-gray-600 text-sm">24g+ protein in every shake to fuel your day</p>
+      </div>
+
+      <div class="glass rounded-2xl p-6 hover:scale-105 transition-transform reveal">
+        <div class="w-14 h-14 bg-fruitpink/20 rounded-xl flex items-center justify-center mb-4">
+          <i data-lucide="heart" class="w-7 h-7 text-fruitpink"></i>
+        </div>
+        <h4 class="text-lg font-bold mb-2">Low Calorie</h4>
+        <p class="text-gray-600 text-sm">All menu items under 250 calories</p>
+      </div>
+
+      <div class="glass rounded-2xl p-6 hover:scale-105 transition-transform reveal">
+        <div class="w-14 h-14 bg-fruitorange/20 rounded-xl flex items-center justify-center mb-4">
+          <i data-lucide="leaf" class="w-7 h-7 text-fruitorange"></i>
+        </div>
+        <h4 class="text-lg font-bold mb-2">Real Ingredients</h4>
+        <p class="text-gray-600 text-sm">No artificial junk, just real flavors</p>
+      </div>
+
+      <div class="glass rounded-2xl p-6 hover:scale-105 transition-transform reveal">
+        <div class="w-14 h-14 bg-coffeebrown/20 rounded-xl flex items-center justify-center mb-4">
+          <i data-lucide="clock" class="w-7 h-7 text-coffeebrown"></i>
+        </div>
+        <h4 class="text-lg font-bold mb-2">Quick Service</h4>
+        <p class="text-gray-600 text-sm">Made fresh in 3 minutes or less</p>
+      </div>
+
+      <div class="glass rounded-2xl p-6 hover:scale-105 transition-transform reveal">
+        <div class="w-14 h-14 bg-softgreen/20 rounded-xl flex items-center justify-center mb-4">
+          <i data-lucide="sparkles" class="w-7 h-7 text-softgreen"></i>
+        </div>
+        <h4 class="text-lg font-bold mb-2">Clean Energy</h4>
+        <p class="text-gray-600 text-sm">No crash from our vitamin B teas</p>
+      </div>
+
+      <div class="glass rounded-2xl p-6 hover:scale-105 transition-transform reveal">
+        <div class="w-14 h-14 bg-fruitpink/20 rounded-xl flex items-center justify-center mb-4">
+          <i data-lucide="users" class="w-7 h-7 text-fruitpink"></i>
+        </div>
+        <h4 class="text-lg font-bold mb-2">Community First</h4>
+        <p class="text-gray-600 text-sm">Locally owned and operated</p>
+      </div>
+
+      <div class="glass rounded-2xl p-6 hover:scale-105 transition-transform reveal">
+        <div class="w-14 h-14 bg-fruitorange/20 rounded-xl flex items-center justify-center mb-4">
+          <i data-lucide="smile" class="w-7 h-7 text-fruitorange"></i>
+        </div>
+        <h4 class="text-lg font-bold mb-2">Friendly Vibes</h4>
+        <p class="text-gray-600 text-sm">Service with a smile, every time</p>
+      </div>
+
+      <div class="glass rounded-2xl p-6 hover:scale-105 transition-transform reveal">
+        <div class="w-14 h-14 bg-coffeebrown/20 rounded-xl flex items-center justify-center mb-4">
+          <i data-lucide="star" class="w-7 h-7 text-coffeebrown"></i>
+        </div>
+        <h4 class="text-lg font-bold mb-2">5-Star Rated</h4>
+        <p class="text-gray-600 text-sm">Dunnellon's top rated nutrition spot</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Reviews Section -->
+<section id="reviews" class="py-24 bg-gradient-to-br from-softgreen/5 via-fruitpink/5 to-fruitorange/5">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center max-w-3xl mx-auto mb-16 reveal">
+      <span class="text-softgreen font-semibold">TESTIMONIALS</span>
+      <h3 class="text-4xl md:text-5xl font-black mt-2 mb-4">What Our Family Says</h3>
+    </div>
+
+    <div class="relative reveal">
+      <div id="reviewsContainer" class="overflow-hidden">
+        <div id="reviewsTrack" class="flex transition-transform duration-500">
+          <!-- Review 1 -->
+          <div class="min-w-full px-4">
+            <div class="glass rounded-3xl p-8 md:p-12 max-w-3xl mx-auto">
+              <div class="flex text-yellow-400 mb-4">
+                <i data-lucide="star" class="w-6 h-6 fill-current"></i>
+                <i data-lucide="star" class="w-6 h-6 fill-current"></i>
+                <i data-lucide="star" class="w-6 h-6 fill-current"></i>
+                <i data-lucide="star" class="w-6 h-6 fill-current"></i>
+                <i data-lucide="star" class="w-6 h-6 fill-current"></i>
+              </div>
+              <p class="text-xl text-gray-700 mb-6 leading-relaxed">
+                "The Strawberry Cheesecake shake is my absolute favorite! I come here 3x a week and I've lost 15 lbs while still enjoying dessert flavors. The staff is amazing!"
+              </p>
+              <div class="flex items-center gap-4">
+                <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=100&q=80" alt="Sarah M." loading="lazy" class="w-14 h-14 rounded-full object-cover">
+                <div>
+                  <p class="font-bold">Sarah M.</p>
+                  <p class="text-sm text-gray-600">Loyal Customer</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Review 2 -->
+          <div class="min-w-full px-4">
+            <div class="glass rounded-3xl p-8 md:p-12 max-w-3xl mx-auto">
+              <div class="flex text-yellow-400 mb-4">
+                <i data-lucide="star" class="w-6 h-6 fill-current"></i>
+                <i data-lucide="star" class="w-6 h-6 fill-current"></i>
+                <i data-lucide="star" class="w-6 h-6 fill-current"></i>
+                <i data-lucide="star" class="w-6 h-6 fill-current"></i>
+                <i data-lucide="star" class="w-6 h-6 fill-current"></i>
+              </div>
+              <p class="text-xl text-gray-700 mb-6 leading-relaxed">
+                "Finally a healthy spot in Dunnellon! The protein coffee keeps me energized all morning without the coffee crash. Best breakfast alternative ever."
+              </p>
+              <div class="flex items-center gap-4">
+                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=100&q=80" alt="Mike D." loading="lazy" class="w-14 h-14 rounded-full object-cover">
+                <div>
+                  <p class="font-bold">Mike D.</p>
+                  <p class="text-sm text-gray-600">Fitness Coach</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Review 3 -->
+          <div class="min-w-full px-4">
+            <div class="glass rounded-3xl p-8 md:p-12 max-w-3xl mx-auto">
+              <div class="flex text-yellow-400 mb-4">
+                <i data-lucide="star" class="w-6 h-6 fill-current"></i>
+                <i data-lucide="star" class="w-6 h-6 fill-current"></i>
+                <i data-lucide="star" class="w-6 h-6 fill-current"></i>
+                <i data-lucide="star" class="w-6 h-6 fill-current"></i>
+                <i data-lucide="star" class="w-6 h-6 fill-current"></i>
+              </div>
+              <p class="text-xl text-gray-700 mb-6 leading-relaxed">
+                "The energy teas are incredible! Tropical flavor is my go-to. Clean energy, no jitters, and I love supporting a local business that cares about health."
+              </p>
+              <div class="flex items-center gap-4">
+                <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=100&q=80" alt="Jessica L." loading="lazy" class="w-14 h-14 rounded-full object-cover">
+                <div>
+                  <p class="font-bold">Jessica L.</p>
+                  <p class="text-sm text-gray-600">Teacher</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Review 4 -->
+          <div class="min-w-full px-4">
+            <div class="glass rounded-3xl p-8 md:p-12 max-w-3xl mx-auto">
+              <div class="flex text-yellow-400 mb-4">
+                <i data-lucide="star" class="w-6 h-6 fill-current"></i>
+                <i data-lucide="star" class="w-6 h-6 fill-current"></i>
+                <i data-lucide="star" class="w-6 h-6 fill-current"></i>
+                <i data-lucide="star" class="w-6 h-6 fill-current"></i>
+                <i data-lucide="star" class="w-6 h-6 fill-current"></i>
+              </div>
+              <p class="text-xl text-gray-700 mb-6 leading-relaxed">
+                "Fruity Pebbles shake tastes just like the cereal but with 24g protein! My kids love coming here too. Perfect post-workout treat that actually works."
+              </p>
+              <div class="flex items-center gap-4">
+                <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=100&q=80" alt="David R." loading="lazy" class="w-14 h-14 rounded-full object-cover">
+                <div>
+                  <p class="font-bold">David R.</p>
+                  <p class="text-sm text-gray-600">Business Owner</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slider Controls -->
+      <div class="flex justify-center gap-4 mt-8">
+        <button id="prevReview" class="glass w-12 h-12 rounded-full flex items-center justify-center hover:scale-110 transition">
+          <i data-lucide="chevron-left" class="w-6 h-6"></i>
+        </button>
+        <div class="flex gap-2 items-center">
+          <button class="review-dot w-2 h-2 rounded-full bg-softgreen" data-index="0"></button>
+          <button class="review-dot w-2 h-2 rounded-full bg-gray-300" data-index="1"></button>
+          <button class="review-dot w-2 h-2 rounded-full bg-gray-300" data-index="2"></button>
+          <button class="review-dot w-2 h-2 rounded-full bg-gray-300" data-index="3"></button>
+        </div>
+        <button id="nextReview" class="glass w-12 h-12 rounded-full flex items-center justify-center hover:scale-110 transition">
+          <i data-lucide="chevron-right" class="w-6 h-6"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Lifestyle Section -->
+<section id="lifestyle" class="py-24 bg-white">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid lg:grid-cols-2 gap-12 items-center">
+      <div class="reveal">
+        <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?auto=format&fit=crop&w=1200&q=80" alt="Fitness lifestyle" loading="lazy" class="rounded-3xl shadow-2xl w-full">
+      </div>
+      <div class="space-y-6 reveal">
+        <span class="text-softgreen font-semibold">YOUR WELLNESS JOURNEY</span>
+        <h3 class="text-4xl md:text-5xl font-black">Achieve Your Goals With Us</h3>
+        <p class="text-lg text-gray-600">
+          Whether you're looking to lose weight, build muscle, or just maintain a healthy lifestyle, we're here to support you. Our nutrition-packed shakes and energy teas are designed to complement your fitness goals.
+        </p>
+        <div class="space-y-4">
+          <div class="flex items-start gap-4">
+            <div class="w-12 h-12 bg-softgreen/20 rounded-xl flex items-center justify-center flex-shrink-0">
+              <i data-lucide="target" class="w-6 h-6 text-softgreen"></i>
+            </div>
+            <div>
+              <h4 class="font-bold mb-1">Weight Management</h4>
+              <p class="text-gray-600 text-sm">Low-calorie, high-protein options that keep you full</p>
+            </div>
+          </div>
+          <div class="flex items-start gap-4">
+            <div class="w-12 h-12 bg-fruitpink/20 rounded-xl flex items-center justify-center flex-shrink-0">
+              <i data-lucide="dumbbell" class="w-6 h-6 text-fruitpink"></i>
+            </div>
+            <div>
+              <h4 class="font-bold mb-1">Post-Workout Recovery</h4>
+              <p class="text-gray-600 text-sm">24g protein to help muscles rebuild and recover</p>
+            </div>
+          </div>
+          <div class="flex items-start gap-4">
+            <div class="w-12 h-12 bg-fruitorange/20 rounded-xl flex items-center justify-center flex-shrink-0">
+              <i data-lucide="battery-charging" class="w-6 h-6 text-fruitorange"></i>
+            </div>
+            <div>
+              <h4 class="font-bold mb-1">All-Day Energy</h4>
+              <p class="text-gray-600 text-sm">Vitamin B12 boost without sugar crashes</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Gallery Section -->
+<section id="gallery" class="py-24 bg-cream">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center max-w-3xl mx-auto mb-16 reveal">
+      <span class="text-softgreen font-semibold">GALLERY</span>
+      <h3 class="text-4xl md:text-5xl font-black mt-2 mb-4">Taste The Rainbow</h3>
+    </div>
+
+    <div class="masonry reveal">
+      <div class="masonry-item">
+        <img src="https://images.unsplash.com/photo-1553530666-ba11a7da3888?auto=format&fit=crop&w=600&q=80" alt="Protein shake" loading="lazy" class="w-full rounded-2xl shadow-lg hover:scale-105 transition-transform cursor-pointer" onclick='openLightbox(this.src)'>
+      </div>
+      <div class="masonry-item">
+        <img src="https://images.unsplash.com/photo-1572490122747-3968b75cc699?auto=format&fit=crop&w=600&q=80" alt="Strawberry shake" loading="lazy" class="w-full rounded-2xl shadow-lg hover:scale-105 transition-transform cursor-pointer" onclick='openLightbox(this.src)'>
+      </div>
+      <div class="masonry-item">
+        <img src="https://images.unsplash.com/photo-1498804103079-a6351b050096?auto=format&fit=crop&w=1200&q=80" alt="Protein coffee" loading="lazy" class="w-full rounded-2xl shadow-lg hover:scale-105 transition-transform cursor-pointer" onclick='openLightbox(this.src)'>
+      </div>
+      <div class="masonry-item">
+        <img src="https://images.unsplash.com/photo-1623065422902-30a2d299bbe4?auto=format&fit=crop&w=600&q=80" alt="Fruity shake" loading="lazy" class="w-full rounded-2xl shadow-lg hover:scale-105 transition-transform cursor-pointer" onclick='openLightbox(this.src)'>
+      </div>
+      <div class="masonry-item">
+        <img src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=600&q=80" alt="Coffee" loading="lazy" class="w-full rounded-2xl shadow-lg hover:scale-105 transition-transform cursor-pointer" onclick='openLightbox(this.src)'>
+      </div>
+      <div class="masonry-item">
+        <img src="https://images.unsplash.com/photo-1571934811356-5cc061b6821f?auto=format&fit=crop&w=600&q=80" alt="Energy tea" loading="lazy" class="w-full rounded-2xl shadow-lg hover:scale-105 transition-transform cursor-pointer" onclick='openLightbox(this.src)'>
+      </div>
+      <div class="masonry-item">
+        <img src="https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&w=1200&q=80" alt="Cafe" loading="lazy" class="w-full rounded-2xl shadow-lg hover:scale-105 transition-transform cursor-pointer" onclick='openLightbox(this.src)'>
+      </div>
+      <div class="masonry-item">
+        <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?auto=format&fit=crop&w=1200&q=80" alt="Fitness" loading="lazy" class="w-full rounded-2xl shadow-lg hover:scale-105 transition-transform cursor-pointer" onclick='openLightbox(this.src)'>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Location Section -->
+<section id="location" class="py-24 bg-white">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center max-w-3xl mx-auto mb-16 reveal">
+      <span class="text-softgreen font-semibold">VISIT US</span>
+      <h3 class="text-4xl md:text-5xl font-black mt-2 mb-4">Find Us In Dunnellon</h3>
+    </div>
+
+    <div class="grid lg:grid-cols-2 gap-12">
+      <div class="reveal">
+        <div class="rounded-2xl overflow-hidden shadow-2xl h-96">
+          <iframe 
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3482.5!2d-82.4583!3d29.0508!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjnCsDAzJzAyLjkiTiA4MsKwMjcnMjkuOSJX!5e0!3m2!1sen!2sus!4v1234567890"
+            width="100%" 
+            height="100%" 
+            style="border:0;" 
+            allowfullscreen="" 
+            loading="lazy" 
+            referrerpolicy="no-referrer-when-downgrade">
+          </iframe>
+        </div>
+      </div>
+
+      <div class="space-y-6 reveal">
+        <div class="glass rounded-2xl p-6">
+          <div class="flex items-start gap-4">
+            <div class="w-12 h-12 bg-softgreen/20 rounded-xl flex items-center justify-center flex-shrink-0">
+              <i data-lucide="map-pin" class="w-6 h-6 text-softgreen"></i>
+            </div>
+            <div>
+              <h4 class="font-bold mb-1">Address</h4>
+              <p class="text-gray-600">20600 W Pennsylvania Ave Unit 2<br>Dunnellon, FL 34431</p>
+              <a href="https://maps.google.com/?q=20600+W+Pennsylvania+Ave+Unit+2+Dunnellon+FL+34431" target="_blank" class="text-softgreen font-semibold text-sm mt-2 inline-block hover:underline">
+                Get Directions →
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="glass rounded-2xl p-6">
+          <div class="flex items-start gap-4">
+            <div class="w-12 h-12 bg-fruitpink/20 rounded-xl flex items-center justify-center flex-shrink-0">
+              <i data-lucide="phone" class="w-6 h-6 text-fruitpink"></i>
+            </div>
+            <div>
+              <h4 class="font-bold mb-1">Phone</h4>
+              <a href="tel:+13527634020" class="text-gray-600 hover:text-softgreen">+1 352-763-4020</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="glass rounded-2xl p-6">
+          <div class="flex items-start gap-4">
+            <div class="w-12 h-12 bg-fruitorange/20 rounded-xl flex items-center justify-center flex-shrink-0">
+              <i data-lucide="clock" class="w-6 h-6 text-fruitorange"></i>
+            </div>
+            <div class="w-full">
+              <h4 class="font-bold mb-3">Hours</h4>
+              <div class="space-y-2 text-sm">
+                <div class="flex justify-between">
+                  <span class="text-gray-600">Monday</span>
+                  <span class="font-semibold">7:00 AM – 3:30 PM</span>
+                </div>
+                <div class="flex justify-between">
+                  <span class="text-gray-600">Tuesday</span>
+                  <span class="font-semibold">6:30 AM – 3:30 PM</span>
+                </div>
+                <div class="flex justify-between">
+                  <span class="text-gray-600">Wednesday</span>
+                  <span class="font-semibold">7:00 AM – 3:30 PM</span>
+                </div>
+                <div class="flex justify-between">
+                  <span class="text-gray-600">Thursday</span>
+                  <span class="font-semibold">6:30 AM – 3:30 PM</span>
+                </div>
+                <div class="flex justify-between">
+                  <span class="text-gray-600">Friday</span>
+                  <span class="font-semibold">7:00 AM – 3:30 PM</span>
+                </div>
+                <div class="flex justify-between">
+                  <span class="text-gray-600">Saturday</span>
+                  <span class="font-semibold">8:00 AM – 2:00 PM</span>
+                </div>
+                <div class="flex justify-between">
+                  <span class="text-gray-600">Sunday</span>
+                  <span class="font-semibold">9:00 AM – 2:00 PM</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Social Section -->
+<section id="social" class="py-24 bg-cream">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center max-w-3xl mx-auto mb-16 reveal">
+      <span class="text-softgreen font-semibold">CONNECT</span>
+      <h3 class="text-4xl md:text-5xl font-black mt-2 mb-4">Join Our Community</h3>
+      <p class="text-lg text-gray-600">Follow us for daily specials, customer spotlights, and healthy tips</p>
+    </div>
+
+    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 mb-8 reveal">
+      <a href="#" class="group relative overflow-hidden rounded-2xl aspect-square">
+        <img src="https://images.unsplash.com/photo-1553530666-ba11a7da3888?auto=format&fit=crop&w=600&q=80" alt="Instagram" loading="lazy" class="w-full h-full object-cover group-hover:scale-110 transition-transform">
+        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
+          <i data-lucide="instagram" class="w-6 h-6 text-white"></i>
+        </div>
+      </a>
+      <a href="#" class="group relative overflow-hidden rounded-2xl aspect-square">
+        <img src="https://images.unsplash.com/photo-1572490122747-3968b75cc699?auto=format&fit=crop&w=600&q=80" alt="Instagram" loading="lazy" class="w-full h-full object-cover group-hover:scale-110 transition-transform">
+        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
+          <i data-lucide="instagram" class="w-6 h-6 text-white"></i>
+        </div>
+      </a>
+      <a href="#" class="group relative overflow-hidden rounded-2xl aspect-square">
+        <img src="https://images.unsplash.com/photo-1623065422902-30a2d299bbe4?auto=format&fit=crop&w=600&q=80" alt="Instagram" loading="lazy" class="w-full h-full object-cover group-hover:scale-110 transition-transform">
+        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
+          <i data-lucide="instagram" class="w-6 h-6 text-white"></i>
+        </div>
+      </a>
+      <a href="#" class="group relative overflow-hidden rounded-2xl aspect-square">
+        <img src="https://images.unsplash.com/photo-1498804103079-a6351b050096?auto=format&fit=crop&w=1200&q=80" alt="Instagram" loading="lazy" class="w-full h-full object-cover group-hover:scale-110 transition-transform">
+        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
+          <i data-lucide="instagram" class="w-6 h-6 text-white"></i>
+        </div>
+      </a>
+      <a href="#" class="group relative overflow-hidden rounded-2xl aspect-square">
+        <img src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=600&q=80" alt="Instagram" loading="lazy" class="w-full h-full object-cover group-hover:scale-110 transition-transform">
+        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
+          <i data-lucide="instagram" class="w-6 h-6 text-white"></i>
+        </div>
+      </a>
+      <a href="#" class="group relative overflow-hidden rounded-2xl aspect-square">
+        <img src="https://images.unsplash.com/photo-1571934811356-5cc061b6821f?auto=format&fit=crop&w=600&q=80" alt="Instagram" loading="lazy" class="w-full h-full object-cover group-hover:scale-110 transition-transform">
+        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
+          <i data-lucide="instagram" class="w-6 h-6 text-white"></i>
+        </div>
+      </a>
+    </div>
+
+    <div class="flex justify-center gap-4 reveal">
+      <a href="#" class="bg-gradient-to-r from-purple-500 to-pink-500 text-white px-8 py-3 rounded-full font-semibold hover:scale-105 transition-transform flex items-center gap-2">
+        <i data-lucide="instagram" class="w-5 h-5"></i>
+        Follow on Instagram
+      </a>
+      <a href="#" class="bg-black text-white px-8 py-3 rounded-full font-semibold hover:scale-105 transition-transform flex items-center gap-2">
+        <i data-lucide="music" class="w-5 h-5"></i>
+        Follow on TikTok
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- Contact Section -->
+<section id="contact" class="py-24 bg-white">
+  <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-12 reveal">
+      <span class="text-softgreen font-semibold">GET IN TOUCH</span>
+      <h3 class="text-4xl md:text-5xl font-black mt-2 mb-4">We'd Love To Hear From You</h3>
+    </div>
+
+    <form id="contactForm" class="glass rounded-3xl p-8 space-y-6 reveal">
+      <div class="grid md:grid-cols-2 gap-6">
+        <div>
+          <label class="block text-sm font-semibold mb-2">Name *</label>
+          <input type="text" id="name" required class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-softgreen focus:ring-2 focus:ring-softgreen/20 outline-none transition">
+          <span class="text-red-500 text-xs hidden" id="nameError">Please enter your name</span>
+        </div>
+        <div>
+          <label class="block text-sm font-semibold mb-2">Email *</label>
+          <input type="email" id="email" required class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-softgreen focus:ring-2 focus:ring-softgreen/20 outline-none transition">
+          <span class="text-red-500 text-xs hidden" id="emailError">Please enter a valid email</span>
+        </div>
+      </div>
+      <div>
+        <label class="block text-sm font-semibold mb-2">Phone</label>
+        <input type="tel" id="phone" class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-softgreen focus:ring-2 focus:ring-softgreen/20 outline-none transition">
+      </div>
+      <div>
+        <label class="block text-sm font-semibold mb-2">Message *</label>
+        <textarea id="message" rows="4" required class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-softgreen focus:ring-2 focus:ring-softgreen/20 outline-none transition"></textarea>
+        <span class="text-red-500 text-xs hidden" id="messageError">Please enter your message</span>
+      </div>
+      <button type="submit" class="w-full bg-softgreen text-white py-4 rounded-xl font-bold text-lg hover:bg-green-600 hover:scale-105 transition-all">
+        Send Message
+      </button>
+    </form>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="bg-gray-900 text-white py-16">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid md:grid-cols-4 gap-12 mb-12">
+      <div>
+        <div class="flex items-center gap-3 mb-4">
+          <div class="w-12 h-12 rounded-full gradient-bg-animated"></div>
+          <div>
+            <h4 class="text-xl font-extrabold">The Station</h4>
+            <p class="text-xs text-softgreen font-semibold">NUTRITION</p>
+          </div>
+        </div>
+        <p class="text-gray-400 text-sm">Healthy never tasted this good. Fueling Dunnellon with protein shakes, teas, and good vibes.</p>
+      </div>
+
+      <div>
+        <h5 class="font-bold mb-4">Quick Links</h5>
+        <ul class="space-y-2 text-gray-400 text-sm">
+          <li><a href="#about" class="hover:text-softgreen transition">About Us</a></li>
+          <li><a href="#menu" class="hover:text-softgreen transition">Menu</a></li>
+          <li><a href="#reviews" class="hover:text-softgreen transition">Reviews</a></li>
+          <li><a href="#location" class="hover:text-softgreen transition">Location</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h5 class="font-bold mb-4">Hours</h5>
+        <ul class="space-y-2 text-gray-400 text-sm">
+          <li>Mon, Wed, Fri: 7AM-3:30PM</li>
+          <li>Tue, Thu: 6:30AM-3:30PM</li>
+          <li>Sat: 8AM-2PM</li>
+          <li>Sun: 9AM-2PM</li>
+        </ul>
+      </div>
+
+      <div>
+        <h5 class="font-bold mb-4">Newsletter</h5>
+        <p class="text-gray-400 text-sm mb-4">Get weekly specials & health tips</p>
+        <form id="newsletterForm" class="flex gap-2">
+          <input type="email" placeholder="Your email" required class="flex-1 px-4 py-2 rounded-lg bg-gray-800 border border-gray-700 text-white text-sm outline-none focus:border-softgreen">
+          <button type="submit" class="bg-softgreen px-4 py-2 rounded-lg hover:bg-green-600 transition">
+            <i data-lucide="send" class="w-4 h-4"></i>
+          </button>
+        </form>
+        <div class="flex gap-3 mt-6">
+          <a href="#" class="w-10 h-10 bg-gray-800 rounded-lg flex items-center justify-center hover:bg-softgreen transition">
+            <i data-lucide="facebook" class="w-5 h-5"></i>
+          </a>
+          <a href="#" class="w-10 h-10 bg-gray-800 rounded-lg flex items-center justify-center hover:bg-softgreen transition">
+            <i data-lucide="instagram" class="w-5 h-5"></i>
+          </a>
+          <a href="#" class="w-10 h-10 bg-gray-800 rounded-lg flex items-center justify-center hover:bg-softgreen transition">
+            <i data-lucide="music" class="w-5 h-5"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="border-t border-gray-800 pt-8 text-center text-gray-400 text-sm">
+      <p>&copy; 2024 The Station Nutrition. All rights reserved. | Dunnellon, FL</p>
+    </div>
+  </div>
+</footer>
+
+<!-- Nutrition Modal -->
+<div id="nutritionModal" class="fixed inset-0 bg-black/50 backdrop-blur-sm z-[100] hidden items-center justify-center p-4">
+  <div class="bg-white rounded-3xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+    <div class="sticky top-0 bg-white border-b p-6 flex justify-between items-center">
+      <h3 id="modalTitle" class="text-2xl font-bold"></h3>
+      <button onclick="closeNutritionModal()" class="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center hover:bg-gray-200 transition">
+        <i data-lucide="x" class="w-5 h-5"></i>
+      </button>
+    </div>
+    <div class="p-6">
+      <img id="modalImage" src="" alt="" class="w-full h-64 object-cover rounded-2xl mb-6">
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+        <div class="glass rounded-xl p-4 text-center">
+          <p class="text-3xl font-black gradient-text" id="modalCalories">0</p>
+          <p class="text-xs text-gray-600 mt-1">Calories</p>
+        </div>
+        <div class="glass rounded-xl p-4 text-center">
+          <p class="text-3xl font-black gradient-text" id="modalProtein">0g</p>
+          <p class="text-xs text-gray-600 mt-1">Protein</p>
+        </div>
+        <div class="glass rounded-xl p-4 text-center">
+          <p class="text-3xl font-black gradient-text" id="modalCarbs">0g</p>
+          <p class="text-xs text-gray-600 mt-1">Carbs</p>
+        </div>
+        <div class="glass rounded-xl p-4 text-center">
+          <p class="text-3xl font-black gradient-text" id="modalFat">0g</p>
+          <p class="text-xs text-gray-600 mt-1">Fat</p>
+        </div>
+      </div>
+      <div id="modalVitamins" class="mb-6"></div>
+      <button onclick="closeNutritionModal()" class="w-full bg-softgreen text-white py-4 rounded-xl font-bold text-lg hover:bg-green-600 transition">
+        Add To Order
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- Lightbox -->
+<div id="lightbox" class="fixed inset-0 bg-black/90 z-[100] hidden items-center justify-center p-4" onclick="closeLightbox()">
+  <button onclick="closeLightbox()" class="absolute top-4 right-4 w-12 h-12 bg-white/10 backdrop-blur rounded-full flex items-center justify-center hover:bg-white/20 transition">
+    <i data-lucide="x" class="w-6 h-6 text-white"></i>
+  </button>
+  <img id="lightboxImage" src="" alt="" class="max-w-full max-h-[90vh] rounded-2xl">
+</div>
+
+<!-- Toast -->
+<div id="toast" class="fixed top-24 right-4 bg-softgreen text-white px-6 py-4 rounded-xl shadow-2xl transform translate-x-[400px] transition-transform z-[101]">
+  <div class="flex items-center gap-3">
+    <i data-lucide="check-circle" class="w-6 h-6"></i>
+    <p class="font-semibold" id="toastMessage">Success!</p>
+  </div>
+</div>
+
+<script>
+  // Initialize Lucide icons
+  lucide.createIcons();
+
+  // Loading Screen
+  window.addEventListener('load', () => {
+    setTimeout(() => {
+      document.getElementById('loadingScreen').classList.add('hide');
+    }, 500);
+  });
+
+  // Navbar scroll effect
+  let lastScroll = 0;
+  window.addEventListener('scroll', () => {
+    const navbar = document.getElementById('navbar');
+    const currentScroll = window.pageYOffset;
+    
+    if (currentScroll > 50) {
+      navbar.classList.add('nav-blur', 'shadow-lg');
+    } else {
+      navbar.classList.remove('nav-blur', 'shadow-lg');
+    }
+    
+    lastScroll = currentScroll;
+  });
+
+  // Mobile Menu Toggle
+  document.getElementById('mobileMenuBtn').addEventListener('click', () => {
+    document.getElementById('mobileMenu').classList.toggle('hidden');
+  });
+
+  // Close mobile menu on link click
+  document.querySelectorAll('#mobileMenu a').forEach(link => {
+    link.addEventListener('click', () => {
+      document.getElementById('mobileMenu').classList.add('hidden');
+    });
+  });
+
+  // Close banner
+  document.getElementById('closeBanner').addEventListener('click', () => {
+    document.getElementById('dailySpecial').style.display = 'none';
+  });
+
+  // GSAP Animations
+  gsap.registerPlugin(ScrollTrigger);
+
+  // Hero floating animation
+  gsap.to('#heroFloat1', {
+    y: -20,
+    duration: 3,
+    repeat: -1,
+    yoyo: true,
+    ease: 'sine.inOut'
+  });
+
+  gsap.to('#heroFloat2', {
+    y: -15,
+    duration: 3.5,
+    repeat: -1,
+    yoyo: true,
+    ease: 'sine.inOut',
+    delay: 0.5
+  });
+
+  // Scroll reveal animations
+  gsap.utils.toArray('.reveal').forEach(elem => {
+    gsap.from(elem, {
+      scrollTrigger: {
+        trigger: elem,
+        start: 'top 85%',
+        toggleActions: 'play none none reverse'
+      },
+      y: 60,
+      opacity: 0,
+      duration: 1,
+      ease: 'power3.out'
+    });
+  });
+
+  // Count Up Animation
+  const countUpElements = document.querySelectorAll('.count-up');
+  countUpElements.forEach(elem => {
+    ScrollTrigger.create({
+      trigger: elem,
+      start: 'top 80%',
+      onEnter: () => {
+        const target = parseInt(elem.dataset.count);
+        gsap.to(elem, {
+          innerText: target,
+          duration: 2,
+          snap: { innerText: 1 },
+          ease: 'power1.out',
+          onUpdate: function() {
+            elem.innerText = Math.ceil(elem.innerText) + (elem.dataset.count > 50 ? '+' : '');
+          }
+        });
+      },
+      once: true
+    });
+  });
+
+  // Menu Filter
+  const menuFilters = document.querySelectorAll('.menu-filter');
+  const menuItems = document.querySelectorAll('.menu-item');
+
+  menuFilters.forEach(filter => {
+    filter.addEventListener('click', () => {
+      const category = filter.dataset.filter;
+      
+      menuFilters.forEach(f => {
+        f.classList.remove('active', 'bg-softgreen', 'text-white');
+        f.classList.add('glass');
+      });
+      filter.classList.add('active', 'bg-softgreen', 'text-white');
+      filter.classList.remove('glass');
+      
+      menuItems.forEach(item => {
+        if (category === 'all' || item.dataset.category === category) {
+          item.style.display = 'block';
+          gsap.from(item, { opacity: 0, y: 20, duration: 0.5 });
+        } else {
+          item.style.display = 'none';
+        }
+      });
+    });
+  });
+
+  // Reviews Slider
+  let currentReview = 0;
+  const reviewsTrack = document.getElementById('reviewsTrack');
+  const reviewDots = document.querySelectorAll('.review-dot');
+  const totalReviews = 4;
+
+  function updateReviewsSlider() {
+    reviewsTrack.style.transform = `translateX(-${currentReview * 100}%)`;
+    reviewDots.forEach((dot, index) => {
+      if (index === currentReview) {
+        dot.classList.remove('bg-gray-300');
+        dot.classList.add('bg-softgreen');
+      } else {
+        dot.classList.remove('bg-softgreen');
+        dot.classList.add('bg-gray-300');
+      }
+    });
+  }
+
+  document.getElementById('prevReview').addEventListener('click', () => {
+    currentReview = currentReview > 0 ? currentReview - 1 : totalReviews - 1;
+    updateReviewsSlider();
+  });
+
+  document.getElementById('nextReview').addEventListener('click', () => {
+    currentReview = currentReview < totalReviews - 1 ? currentReview + 1 : 0;
+    updateReviewsSlider();
+  });
+
+  reviewDots.forEach((dot, index) => {
+    dot.addEventListener('click', () => {
+      currentReview = index;
+      updateReviewsSlider();
+    });
+  });
+
+  // Auto-rotate reviews
+  setInterval(() => {
+    currentReview = currentReview < totalReviews - 1 ? currentReview + 1 : 0;
+    updateReviewsSlider();
+  }, 5000);
+
+  // Nutrition Modal
+  function openNutritionModal(data) {
+    document.getElementById('modalTitle').innerText = data.name;
+    document.getElementById('modalImage').src = data.image;
+    document.getElementById('modalImage').alt = data.name;
+    
+    // Animate calorie counter
+    gsap.from('#modalCalories', {
+      innerText: 0,
+      duration: 1,
+      snap: { innerText: 1 },
+      onUpdate: function() {
+        document.getElementById('modalCalories').innerText = Math.ceil(this.targets()[0].innerText);
+      }
+    });
+    
+    gsap.to('#modalCalories', { innerText: data.calories, duration: 1, delay: 0.2 });
+    document.getElementById('modalProtein').innerText = data.protein + 'g';
+    document.getElementById('modalCarbs').innerText = data.carbs + 'g';
+    document.getElementById('modalFat').innerText = data.fat + 'g';
+    
+    if (data.vitamins) {
+      document.getElementById('modalVitamins').innerHTML = `
+        <div class="glass rounded-xl p-4">
+          <p class="text-sm font-semibold mb-2">Vitamins & Minerals</p>
+          <p class="text-gray-600 text-sm">${data.vitamins}</p>
+        </div>
+      `;
+    } else {
+      document.getElementById('modalVitamins').innerHTML = '';
+    }
+    
+    document.getElementById('nutritionModal').classList.remove('hidden');
+    document.getElementById('nutritionModal').classList.add('flex');
+  }
+
+  function closeNutritionModal() {
+    document.getElementById('nutritionModal').classList.add('hidden');
+    document.getElementById('nutritionModal').classList.remove('flex');
+  }
+
+  // Lightbox
+  function openLightbox(src) {
+    document.getElementById('lightboxImage').src = src;
+    document.getElementById('lightbox').classList.remove('hidden');
+    document.getElementById('lightbox').classList.add('flex');
+  }
+
+  function closeLightbox() {
+    document.getElementById('lightbox').classList.add('hidden');
+    document.getElementById('lightbox').classList.remove('flex');
+  }
+
+  // Contact Form Validation
+  document.getElementById('contactForm').addEventListener('submit', (e) => {
+    e.preventDefault();
+    let valid = true;
+    
+    const name = document.getElementById('name');
+    const email = document.getElementById('email');
+    const message = document.getElementById('message');
+    
+    if (!name.value.trim()) {
+      document.getElementById('nameError').classList.remove('hidden');
+      valid = false;
+    } else {
+      document.getElementById('nameError').classList.add('hidden');
+    }
+    
+    if (!email.value.trim() || !email.value.includes('@')) {
+      document.getElementById('emailError').classList.remove('hidden');
+      valid = false;
+    } else {
+      document.getElementById('emailError').classList.add('hidden');
+    }
+    
+    if (!message.value.trim()) {
+      document.getElementById('messageError').classList.remove('hidden');
+      valid = false;
+    } else {
+      document.getElementById('messageError').classList.add('hidden');
+    }
+    
+    if (valid) {
+      showToast('Message sent successfully!');
+      document.getElementById('contactForm').reset();
+    }
+  });
+
+  // Newsletter Form
+  document.getElementById('newsletterForm').addEventListener('submit', (e) => {
+    e.preventDefault();
+    showToast('Subscribed to newsletter!');
+    e.target.reset();
+  });
+
+  // Contact Modal
+  function openContactModal() {
+    showToast('Call us at +1 352-763-4020 to order!');
+  }
+
+  // Toast Notification
+  function showToast(message) {
+    const toast = document.getElementById('toast');
+    document.getElementById('toastMessage').innerText = message;
+    toast.classList.remove('translate-x-[400px]');
+    setTimeout(() => {
+      toast.classList.add('translate-x-[400px]');
+    }, 3000);
+  }
+
+  // Smooth scroll for anchor links
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+      e.preventDefault();
+      const target = document.querySelector(this.getAttribute('href'));
+      if (target) {
+        const offset = 80;
+        const targetPosition = target.offsetTop - offset;
+        window.scrollTo({
+          top: targetPosition,
+          behavior: 'smooth'
+        });
+      }
+    });
+  });
+</script>
+
+<script>(function(){document.addEventListener("click",function(e){var a=e.target.closest("[data-product-id]");if(!a)return;e.preventDefault();var pid=a.getAttribute("data-product-id");if(pid)parent.postMessage({type:"ecto-artifact-link-click",productId:pid},"*")})})();</script>
+</body>
+</html>

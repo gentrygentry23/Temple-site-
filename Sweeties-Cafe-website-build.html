@@ -1,0 +1,1243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sweeties Cafe and Tea House | Historic Downtown Dunnellon, FL</title>
+<meta name="description" content="Sweeties Cafe and Tea House in historic downtown Dunnellon, Florida. Fresh teas, homemade quiche, soups, sandwiches, desserts, brunch, and elegant afternoon tea in a cozy vintage setting.">
+<meta name="keywords" content="Dunnellon cafe, tea house Dunnellon FL, afternoon tea, brunch Dunnellon, homemade quiche, vintage tea house, Florida tea room">
+<meta name="author" content="Sweeties Cafe and Tea House">
+<meta property="og:title" content="Sweeties Cafe and Tea House | Where Every Cup Feels Like Home">
+<meta property="og:description" content="Experience elegant afternoon tea, homemade comfort food, and cozy charm in historic downtown Dunnellon, Florida.">
+<meta property="og:type" content="website">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        fontFamily: {
+          'serif': ['Cormorant Garamond', 'serif'],
+          'sans': ['Montserrat', 'sans-serif'],
+        },
+        colors: {
+          'cream': '#FAF7F2',
+          'beige': '#F3EDE4',
+          'sage': '#C8D5C3',
+          'blush': '#F4DCD6',
+          'rose': '#E8B4A9',
+          'mocha': '#8B6F5C',
+          'charcoal': '#3A3532',
+          'gold': '#D4AF37',
+        },
+        animation: {
+          'float': 'float 6s ease-in-out infinite',
+          'float-delay': 'float 6s ease-in-out 2s infinite',
+          'fadeInUp': 'fadeInUp 0.8s ease-out forwards',
+          'scaleIn': 'scaleIn 0.6s ease-out forwards',
+        },
+        keyframes: {
+          float: {
+            '0%, 100%': { transform: 'translateY(0px)' },
+            '50%': { transform: 'translateY(-20px)' },
+          },
+          fadeInUp: {
+            '0%': { opacity: '0', transform: 'translateY(30px)' },
+            '100%': { opacity: '1', transform: 'translateY(0)' },
+          },
+          scaleIn: {
+            '0%': { opacity: '0', transform: 'scale(0.9)' },
+            '100%': { opacity: '1', transform: 'scale(1)' },
+          }
+        }
+      }
+    }
+  }
+</script>
+<style>
+  * {
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    font-family: 'Montserrat', sans-serif;
+    color: #3A3532;
+    background: #FAF7F2;
+  }
+
+  h1, h2, h3, h4, h5 {
+    font-family: 'Cormorant Garamond', serif;
+  }
+
+  .glassmorphism {
+    background: rgba(250, 247, 242, 0.7);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+  }
+
+  .glassmorphism-dark {
+    background: rgba(58, 53, 50, 0.6);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .floral-pattern {
+    background-image: 
+      radial-gradient(circle at 20% 50%, rgba(232, 180, 169, 0.08) 0%, transparent 50%),
+      radial-gradient(circle at 80% 80%, rgba(200, 213, 195, 0.08) 0%, transparent 50%);
+  }
+
+  .ornament::before,
+  .ornament::after {
+    content: '✦';
+    color: #D4AF37;
+    margin: 0 1rem;
+    font-size: 0.8rem;
+  }
+
+  .scroll-reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+  }
+
+  .scroll-reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .menu-card {
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  }
+
+  .menu-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 40px rgba(139, 111, 92, 0.15);
+  }
+
+  .btn-primary {
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+  }
+
+  .btn-primary::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+  }
+
+  .btn-primary:hover::before {
+    width: 300px;
+    height: 300px;
+  }
+
+  .gallery-item {
+    transition: all 0.4s ease;
+    cursor: pointer;
+  }
+
+  .gallery-item:hover {
+    transform: scale(1.03);
+    z-index: 10;
+  }
+
+  .gallery-item:hover img {
+    filter: brightness(1.1);
+  }
+
+  input:focus, textarea:focus, select:focus {
+    outline: none;
+    border-color: #D4AF37;
+    box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.1);
+  }
+
+  .lightbox {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.95);
+    z-index: 9999;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .lightbox.active {
+    display: flex;
+  }
+
+  .nav-link {
+    position: relative;
+  }
+
+  .nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background: #D4AF37;
+    transition: width 0.3s ease;
+  }
+
+  .nav-link:hover::after {
+    width: 100%;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    * {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+</style>
+</head>
+<body class="antialiased">
+
+<!-- Navigation -->
+<nav id="navbar" class="fixed w-full top-0 z-50 transition-all duration-300 glassmorphism">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex justify-between items-center h-20">
+      <div class="flex items-center space-x-3">
+        <svg class="w-8 h-8 text-rose" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M20 3H4v10c0 2.21 1.79 4 4 4h6c2.21 0 4-1.79 4-4v-3h2c1.11 0 2-.89 2-2V5c0-1.11-.89-2-2-2zm0 5h-2V5h2v3zM2 21h18v-2H2v2z"/>
+        </svg>
+        <div>
+          <h1 class="font-serif text-2xl font-semibold text-charcoal leading-none">Sweeties</h1>
+          <p class="text-xs text-mocha tracking-widest">CAFE & TEA HOUSE</p>
+        </div>
+      </div>
+
+      <div class="hidden lg:flex items-center space-x-8">
+        <a href="#home" class="nav-link text-sm font-medium text-charcoal hover:text-rose transition">Home</a>
+        <a href="#about" class="nav-link text-sm font-medium text-charcoal hover:text-rose transition">About</a>
+        <a href="#menu" class="nav-link text-sm font-medium text-charcoal hover:text-rose transition">Menu</a>
+        <a href="#experience" class="nav-link text-sm font-medium text-charcoal hover:text-rose transition">High Tea</a>
+        <a href="#gallery" class="nav-link text-sm font-medium text-charcoal hover:text-rose transition">Gallery</a>
+        <a href="#reservations" class="nav-link text-sm font-medium text-charcoal hover:text-rose transition">Reservations</a>
+        <a href="#location" class="nav-link text-sm font-medium text-charcoal hover:text-rose transition">Visit</a>
+      </div>
+
+      <a href="#reservations" class="hidden lg:block btn-primary bg-rose hover:bg-mocha text-white px-6 py-2.5 rounded-full text-sm font-medium transition shadow-md">
+        Reserve a Table
+      </a>
+
+      <button id="mobileMenuBtn" class="lg:hidden p-2" aria-label="Menu">
+        <svg class="w-6 h-6 text-charcoal" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile Menu -->
+  <div id="mobileMenu" class="hidden lg:hidden glassmorphism border-t border-beige">
+    <div class="px-4 py-6 space-y-4">
+      <a href="#home" class="block text-charcoal hover:text-rose font-medium py-2">Home</a>
+      <a href="#about" class="block text-charcoal hover:text-rose font-medium py-2">About</a>
+      <a href="#menu" class="block text-charcoal hover:text-rose font-medium py-2">Menu</a>
+      <a href="#experience" class="block text-charcoal hover:text-rose font-medium py-2">High Tea</a>
+      <a href="#gallery" class="block text-charcoal hover:text-rose font-medium py-2">Gallery</a>
+      <a href="#reservations" class="block text-charcoal hover:text-rose font-medium py-2">Reservations</a>
+      <a href="#location" class="block text-charcoal hover:text-rose font-medium py-2">Visit</a>
+      <a href="#reservations" class="block bg-rose text-white text-center px-6 py-3 rounded-full font-medium">Reserve a Table</a>
+    </div>
+  </div>
+</nav>
+
+<!-- Hero Section -->
+<section id="home" class="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
+  <div class="absolute inset-0 z-0">
+    <img src="https://images.unsplash.com/photo-1567922045116-2a00fae2ed03?w=1920&q=80" 
+         alt="Elegant tea service" 
+         class="w-full h-full object-cover"
+         loading="eager">
+    <div class="absolute inset-0 bg-gradient-to-b from-charcoal/40 via-charcoal/30 to-charcoal/50"></div>
+  </div>
+
+  <!-- Floating decorative elements -->
+  <div class="absolute top-32 left-10 w-16 h-16 animate-float opacity-70 hidden md:block">
+    <svg viewBox="0 0 64 64" fill="none" class="text-blush">
+      <path d="M32 4C32 4 28 16 20 20C12 24 4 28 4 32C4 36 12 40 20 44C28 48 32 60 32 60C32 60 36 48 44 44C52 40 60 36 60 32C60 28 52 24 44 20C36 16 32 4 32 4Z" fill="currentColor" opacity="0.6"/>
+    </svg>
+  </div>
+  <div class="absolute bottom-40 right-16 w-20 h-20 animate-float-delay opacity-70 hidden md:block">
+    <svg viewBox="0 0 64 64" fill="none" class="text-sage">
+      <circle cx="32" cy="32" r="30" stroke="currentColor" stroke-width="1" opacity="0.4" fill="none"/>
+      <circle cx="32" cy="32" r="20" stroke="currentColor" stroke-width="1" opacity="0.6" fill="none"/>
+    </svg>
+  </div>
+
+  <div class="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+    <div class="glassmorphism-dark rounded-3xl px-6 py-12 md:px-16 md:py-16 animate-scaleIn">
+      <div class="ornament text-gold text-sm mb-6 tracking-widest">EST. DUNNELLON, FL</div>
+      <h2 class="font-serif text-5xl md:text-7xl lg:text-8xl font-light text-white leading-tight mb-6">
+        Where Every Cup<br>Feels Like Home
+      </h2>
+      <p class="text-lg md:text-xl text-beige font-light max-w-2xl mx-auto mb-10 leading-relaxed">
+        Fresh teas, homemade quiche, soups, sandwiches, desserts, brunch, and afternoon tea in our charming vintage tea house
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+        <a href="#menu" class="btn-primary bg-gold hover:bg-rose text-charcoal px-8 py-4 rounded-full font-medium text-base shadow-xl w-full sm:w-auto">
+          View Menu
+        </a>
+        <a href="#reservations" class="btn-primary bg-white/20 hover:bg-white/30 text-white border-2 border-white/50 px-8 py-4 rounded-full font-medium text-base backdrop-blur-sm w-full sm:w-auto">
+          Reserve a Table
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
+    <svg class="w-6 h-6 text-white/70" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"/>
+    </svg>
+  </div>
+</section>
+
+<!-- About Section -->
+<section id="about" class="py-20 md:py-32 bg-cream floral-pattern">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid md:grid-cols-2 gap-12 lg:gap-20 items-center">
+      <div class="scroll-reveal">
+        <div class="relative">
+          <img src="https://images.unsplash.com/photo-1559305616-3f99cd43e353?w=800&q=80" 
+               alt="Vintage tea house interior" 
+               class="rounded-2xl shadow-2xl w-full h-[500px] object-cover"
+               loading="lazy">
+          <div class="absolute -bottom-6 -right-6 w-48 h-48 bg-sage/30 rounded-full blur-3xl -z-10"></div>
+          <div class="absolute -top-6 -left-6 w-32 h-32 bg-blush/30 rounded-full blur-3xl -z-10"></div>
+        </div>
+      </div>
+
+      <div class="scroll-reveal">
+        <div class="text-gold text-sm tracking-widest mb-4 font-medium">OUR STORY</div>
+        <h3 class="font-serif text-4xl md:text-5xl lg:text-6xl font-light text-charcoal mb-6 leading-tight">
+          A Charming Hidden Gem<br>in Historic Dunnellon
+        </h3>
+        <div class="w-20 h-0.5 bg-gold mb-8"></div>
+        <p class="text-mocha text-lg leading-relaxed mb-6">
+          Nestled in the heart of historic downtown Dunnellon, Sweeties Cafe and Tea House is a locally loved treasure where time slows down and every detail tells a story.
+        </p>
+        <p class="text-mocha text-lg leading-relaxed mb-6">
+          We’re community-centered, pouring our hearts into handmade comfort food, elegant tea service, and creating a space where neighbors become friends. Whether you’re relaxing indoors surrounded by vintage charm or unwinding on our garden patio, you’ll find the perfect spot to savor the moment.
+        </p>
+        <p class="text-mocha text-lg leading-relaxed mb-8">
+          From our famous homemade quiche and tomato pie to our curated selection of fine teas served in delicate china, everything is crafted with love and a touch of vintage elegance.
+        </p>
+        <div class="flex flex-wrap gap-6 text-sm text-charcoal">
+          <div class="flex items-center gap-2">
+            <svg class="w-5 h-5 text-gold" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+            </svg>
+            <span>Handmade Daily</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <svg class="w-5 h-5 text-gold" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+            </svg>
+            <span>Locally Loved</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <svg class="w-5 h-5 text-gold" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+            </svg>
+            <span>Garden Patio</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Menu Showcase -->
+<section id="menu" class="py-20 md:py-32 bg-beige">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-16 scroll-reveal">
+      <div class="text-gold text-sm tracking-widest mb-4 font-medium">OUR OFFERINGS</div>
+      <h3 class="font-serif text-4xl md:text-5xl lg:text-6xl font-light text-charcoal mb-6">
+        Menu Highlights
+      </h3>
+      <div class="w-20 h-0.5 bg-gold mx-auto mb-6"></div>
+      <p class="text-mocha text-lg max-w-2xl mx-auto">
+        From elegant afternoon tea to hearty brunch favorites, every dish is prepared fresh with the finest ingredients
+      </p>
+    </div>
+
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+      <!-- Menu Item 1 -->
+      <div class="menu-card scroll-reveal bg-white rounded-2xl overflow-hidden shadow-lg">
+        <div class="relative h-64 overflow-hidden">
+          <img src="https://images.unsplash.com/photo-1576092768241-dec231879fc3?w=600&q=80" 
+               alt="Afternoon Tea Service" 
+               class="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
+               loading="lazy">
+          <div class="absolute top-4 right-4 bg-gold text-white px-4 py-1 rounded-full text-sm font-medium">$28</div>
+        </div>
+        <div class="p-6">
+          <h4 class="font-serif text-2xl text-charcoal mb-2">Afternoon Tea</h4>
+          <p class="text-mocha text-sm leading-relaxed mb-4">
+            Traditional three-tier service with finger sandwiches, warm scones with Devonshire cream, petit fours, and your choice of premium loose-leaf tea
+          </p>
+          <div class="text-xs text-rose tracking-widest">RESERVATION REQUIRED</div>
+        </div>
+      </div>
+
+      <!-- Menu Item 2 -->
+      <div class="menu-card scroll-reveal bg-white rounded-2xl overflow-hidden shadow-lg">
+        <div class="relative h-64 overflow-hidden">
+          <img src="https://images.unsplash.com/photo-1623428187969-5da2dcea5ebf?w=600&q=80" 
+               alt="Homemade Quiche" 
+               class="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
+               loading="lazy">
+          <div class="absolute top-4 right-4 bg-gold text-white px-4 py-1 rounded-full text-sm font-medium">$14</div>
+        </div>
+        <div class="p-6">
+          <h4 class="font-serif text-2xl text-charcoal mb-2">Homemade Quiche</h4>
+          <p class="text-mocha text-sm leading-relaxed mb-4">
+            Flaky, buttery crust filled with eggs, cream, and seasonal ingredients. Served with mixed greens and house vinaigrette. Daily selections vary
+          </p>
+          <div class="text-xs text-sage tracking-widest">HOUSE SPECIALTY</div>
+        </div>
+      </div>
+
+      <!-- Menu Item 3 -->
+      <div class="menu-card scroll-reveal bg-white rounded-2xl overflow-hidden shadow-lg">
+        <div class="relative h-64 overflow-hidden">
+          <img src="https://images.unsplash.com/photo-1572448862527-d3c904757de6?w=600&q=80" 
+               alt="Tomato Pie" 
+               class="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
+               loading="lazy">
+          <div class="absolute top-4 right-4 bg-gold text-white px-4 py-1 rounded-full text-sm font-medium">$13</div>
+        </div>
+        <div class="p-6">
+          <h4 class="font-serif text-2xl text-charcoal mb-2">Classic Tomato Pie</h4>
+          <p class="text-mocha text-sm leading-relaxed mb-4">
+            Southern classic with ripe tomatoes, fresh basil, Duke's mayo, and sharp cheddar in our homemade crust. A customer favorite
+          </p>
+          <div class="text-xs text-sage tracking-widest">SOUTHERN CLASSIC</div>
+        </div>
+      </div>
+
+      <!-- Menu Item 4 -->
+      <div class="menu-card scroll-reveal bg-white rounded-2xl overflow-hidden shadow-lg">
+        <div class="relative h-64 overflow-hidden">
+          <img src="https://images.unsplash.com/photo-1547592166-23ac45744acd?w=600&q=80" 
+               alt="Seasonal Soup" 
+               class="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
+               loading="lazy">
+          <div class="absolute top-4 right-4 bg-gold text-white px-4 py-1 rounded-full text-sm font-medium">$8</div>
+        </div>
+        <div class="p-6">
+          <h4 class="font-serif text-2xl text-charcoal mb-2">Seasonal Soups</h4>
+          <p class="text-mocha text-sm leading-relaxed mb-4">
+            Made fresh daily from scratch. From creamy tomato basil to hearty chicken & dumplings. Served with warm artisan roll
+          </p>
+          <div class="text-xs text-sage tracking-widest">MADE FROM SCRATCH</div>
+        </div>
+      </div>
+
+      <!-- Menu Item 5 -->
+      <div class="menu-card scroll-reveal bg-white rounded-2xl overflow-hidden shadow-lg">
+        <div class="relative h-64 overflow-hidden">
+          <img src="https://images.unsplash.com/photo-1539252554453-80ab65ce3586?w=600&q=80" 
+               alt="Fresh Sandwiches" 
+               class="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
+               loading="lazy">
+          <div class="absolute top-4 right-4 bg-gold text-white px-4 py-1 rounded-full text-sm font-medium">$12</div>
+        </div>
+        <div class="p-6">
+          <h4 class="font-serif text-2xl text-charcoal mb-2">Artisan Sandwiches</h4>
+          <p class="text-mocha text-sm leading-relaxed mb-4">
+            Fresh sandwiches on croissants or artisan bread. Chicken salad, cucumber & dill, turkey cranberry, and more. With chips or soup
+          </p>
+          <div class="text-xs text-sage tracking-widest">FRESH DAILY</div>
+        </div>
+      </div>
+
+      <!-- Menu Item 6 -->
+      <div class="menu-card scroll-reveal bg-white rounded-2xl overflow-hidden shadow-lg">
+        <div class="relative h-64 overflow-hidden">
+          <img src="https://images.unsplash.com/photo-1464349095431-e9a21285b5f3?w=600&q=80" 
+               alt="Desserts and Scones" 
+               class="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
+               loading="lazy">
+          <div class="absolute top-4 right-4 bg-gold text-white px-4 py-1 rounded-full text-sm font-medium">$6-9</div>
+        </div>
+        <div class="p-6">
+          <h4 class="font-serif text-2xl text-charcoal mb-2">Scones & Desserts</h4>
+          <p class="text-mocha text-sm leading-relaxed mb-4">
+            Warm scones with Devonshire cream and jam, decadent cakes, pies, and pastries. All baked in-house daily with love
+          </p>
+          <div class="text-xs text-rose tracking-widest">BAKED IN-HOUSE</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="text-center mt-12 scroll-reveal">
+      <a href="#reservations" class="inline-block bg-charcoal hover:bg-mocha text-white px-8 py-4 rounded-full font-medium transition shadow-lg">
+        View Full Menu & Reserve
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- Afternoon Tea Experience -->
+<section id="experience" class="py-20 md:py-32 bg-cream relative overflow-hidden">
+  <div class="absolute top-0 right-0 w-96 h-96 bg-blush/20 rounded-full blur-3xl"></div>
+  <div class="absolute bottom-0 left-0 w-96 h-96 bg-sage/20 rounded-full blur-3xl"></div>
+  
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    <div class="grid md:grid-cols-2 gap-12 lg:gap-20 items-center">
+      <div class="scroll-reveal order-2 md:order-1">
+        <div class="text-gold text-sm tracking-widest mb-4 font-medium">SIGNATURE EXPERIENCE</div>
+        <h3 class="font-serif text-4xl md:text-5xl lg:text-6xl font-light text-charcoal mb-6 leading-tight">
+          The Premium<br>High Tea Service
+        </h3>
+        <div class="w-20 h-0.5 bg-gold mb-8"></div>
+        <p class="text-mocha text-lg leading-relaxed mb-6">
+          Step into elegance with our reservation-only afternoon tea experience. Served on traditional three-tiered stands with fine china, crystal, and sterling silver.
+        </p>
+        <p class="text-mocha text-lg leading-relaxed mb-8">
+          Begin with a selection of delicate finger sandwiches, followed by freshly baked warm scones served with house-made Devonshire cream and seasonal preserves. Conclude with an array of petit fours and French pastries, all paired with your choice of premium loose-leaf teas from around the world.
+        </p>
+        
+        <div class="space-y-4 mb-8">
+          <div class="flex items-start gap-4">
+            <svg class="w-6 h-6 text-gold flex-shrink-0 mt-1" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+            </svg>
+            <div>
+              <h4 class="font-serif text-xl text-charcoal mb-1">Reservation Only</h4>
+              <p class="text-mocha text-sm">24-hour advance booking required for proper preparation</p>
+            </div>
+          <div class="flex items-start gap-4">
+            <svg class="w-6 h-6 text-gold flex-shrink-0 mt-1" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+            </svg>
+            <div>
+              <h4 class="font-serif text-xl text-charcoal mb-1">Perfect for Celebrations</h4>
+              <p class="text-mocha text-sm">Birthdays, bridal showers, ladies' gatherings, and special occasions</p>
+            </div>
+          </div>
+          <div class="flex items-start gap-4">
+            <svg class="w-6 h-6 text-gold flex-shrink-0 mt-1" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+            </svg>
+            <div>
+              <h4 class="font-serif text-xl text-charcoal mb-1">Romantic Garden Setting</h4>
+              <p class="text-mocha text-sm">Indoor vintage parlor or outdoor garden patio seating available</p>
+            </div>
+          </div>
+        </div>
+
+        <a href="#reservations" class="inline-block bg-rose hover:bg-mocha text-white px-8 py-4 rounded-full font-medium transition shadow-lg">
+          Book Afternoon Tea
+        </a>
+      </div>
+
+      <div class="scroll-reveal order-1 md:order-2">
+        <div class="grid grid-cols-2 gap-4">
+          <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&q=80" 
+               alt="Tea stand with desserts" 
+               class="rounded-2xl shadow-xl w-full h-64 object-cover"
+               loading="lazy">
+          <img src="https://images.unsplash.com/photo-1594631252845-29fc4cc8cde9?w=400&q=80" 
+               alt="Fine china tea set" 
+               class="rounded-2xl shadow-xl w-full h-64 object-cover mt-8"
+               loading="lazy">
+          <img src="https://images.unsplash.com/photo-1564890369478-c89ca6d9cde9?w=400&q=80" 
+               alt="Elegant desserts" 
+               class="rounded-2xl shadow-xl w-full h-64 object-cover"
+               loading="lazy">
+          <img src="https://images.unsplash.com/photo-1571934811356-5cc061b6821f?w=400&q=80" 
+               alt="Garden tea setting" 
+               class="rounded-2xl shadow-xl w-full h-64 object-cover mt-8"
+               loading="lazy">
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Gallery Section -->
+<section id="gallery" class="py-20 md:py-32 bg-beige">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-16 scroll-reveal">
+      <div class="text-gold text-sm tracking-widest mb-4 font-medium">EXPERIENCE SWEETIES</div>
+      <h3 class="font-serif text-4xl md:text-5xl lg:text-6xl font-light text-charcoal mb-6">
+        Gallery
+      </h3>
+      <div class="w-20 h-0.5 bg-gold mx-auto mb-6"></div>
+      <p class="text-mocha text-lg max-w-2xl mx-auto">
+        Vintage charm, floral arrangements, cozy corners, and moments of joy captured at our tea house
+      </p>
+    </div>
+
+    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+      <div class="gallery-item scroll-reveal rounded-xl overflow-hidden shadow-lg" data-img="https://images.unsplash.com/photo-1554118811-1e0d58224f24?w=800&q=80">
+        <img src="https://images.unsplash.com/photo-1554118811-1e0d58224f24?w=600&q=80" 
+             alt="Cafe interior" 
+             class="w-full h-64 object-cover"
+             loading="lazy">
+      </div>
+      <div class="gallery-item scroll-reveal rounded-xl overflow-hidden shadow-lg md:col-span-2" data-img="https://images.unsplash.com/photo-1521017432531-fbd92d768814?w=800&q=80">
+        <img src="https://images.unsplash.com/photo-1521017432531-fbd92d768814?w=800&q=80" 
+             alt="Tea service setup" 
+             class="w-full h-64 object-cover"
+             loading="lazy">
+      </div>
+      <div class="gallery-item scroll-reveal rounded-xl overflow-hidden shadow-lg" data-img="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=800&q=80">
+        <img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=600&q=80" 
+             alt="Coffee and pastries" 
+             class="w-full h-64 object-cover"
+             loading="lazy">
+      </div>
+      <div class="gallery-item scroll-reveal rounded-xl overflow-hidden shadow-lg" data-img="https://images.unsplash.com/photo-1507133750040-4a8f57021571?w=800&q=80">
+        <img src="https://images.unsplash.com/photo-1507133750040-4a8f57021571?w=600&q=80" 
+             alt="Outdoor patio" 
+             class="w-full h-64 object-cover"
+             loading="lazy">
+      </div>
+      <div class="gallery-item scroll-reveal rounded-xl overflow-hidden shadow-lg lg:row-span-2" data-img="https://images.unsplash.com/photo-1517705008128-361805f42e86?w=800&q=80">
+        <img src="https://images.unsplash.com/photo-1517705008128-361805f42e86?w=600&q=80" 
+             alt="Floral arrangements" 
+             class="w-full h-full object-cover"
+             loading="lazy">
+      </div>
+      <div class="gallery-item scroll-reveal rounded-xl overflow-hidden shadow-lg" data-img="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=800&q=80">
+        <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=600&q=80" 
+             alt="Brunch spread" 
+             class="w-full h-64 object-cover"
+             loading="lazy">
+      </div>
+      <div class="gallery-item scroll-reveal rounded-xl overflow-hidden shadow-lg" data-img="https://images.unsplash.com/photo-1556909219-f93627e95334?w=800&q=80">
+        <img src="https://images.unsplash.com/photo-1556909219-f93627e95334?w=600&q=80" 
+             alt="Vintage decor" 
+             class="w-full h-64 object-cover"
+             loading="lazy">
+      </div>
+      <div class="gallery-item scroll-reveal rounded-xl overflow-hidden shadow-lg md:col-span-2" data-img="https://images.unsplash.com/photo-1504754524776-8f4f37790ca0?w=800&q=80">
+        <img src="https://images.unsplash.com/photo-1504754524776-8f4f37790ca0?w=800&q=80" 
+             alt="Tea and desserts" 
+             class="w-full h-64 object-cover"
+             loading="lazy">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Lightbox -->
+<div id="lightbox" class="lightbox">
+  <button id="lightboxClose" class="absolute top-6 right-6 text-white hover:text-gold transition" aria-label="Close">
+    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+    </svg>
+  </button>
+  <img id="lightboxImg" src="" alt="" class="max-w-[90%] max-h-[90vh] rounded-lg shadow-2xl">
+</div>
+
+<!-- Customer Reviews -->
+<section id="reviews" class="py-20 md:py-32 bg-cream floral-pattern">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-16 scroll-reveal">
+      <div class="text-gold text-sm tracking-widest mb-4 font-medium">TESTIMONIALS</div>
+      <h3 class="font-serif text-4xl md:text-5xl lg:text-6xl font-light text-charcoal mb-6">
+        What Our Guests Say
+      </h3>
+      <div class="w-20 h-0.5 bg-gold mx-auto"></div>
+    </div>
+
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <!-- Review 1 -->
+      <div class="scroll-reveal bg-white rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-shadow duration-300">
+        <div class="flex text-gold mb-4">
+          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+        </div>
+        <p class="text-mocha mb-6 leading-relaxed italic">
+          "Absolutely charming! The afternoon tea was exceptional - beautiful presentation, delicious scones with the best Devonshire cream I've had outside of England. The vintage décor and garden patio make you feel like you've stepped into a storybook."
+        </p>
+        <div class="flex items-center gap-3">
+          <div class="w-12 h-12 bg-blush rounded-full flex items-center justify-center text-rose font-serif text-xl">S</div>
+          <div>
+            <div class="font-serif text-lg text-charcoal">Sarah Mitchell</div>
+            <div class="text-xs text-mocha">Local Resident</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Review 2 -->
+      <div class="scroll-reveal bg-white rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-shadow duration-300">
+        <div class="flex text-gold mb-4">
+          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+        </div>
+        <p class="text-mocha mb-6 leading-relaxed italic">
+          "Sweeties is my go-to for brunch and catching up with friends. The homemade quiche is to die for, and their tomato pie reminds me of my grandmother's. The staff treats you like family. A true Dunnellon treasure!"
+        </p>
+        <div class="flex items-center gap-3">
+          <div class="w-12 h-12 bg-sage rounded-full flex items-center justify-center text-mocha font-serif text-xl">M</div>
+          <div>
+            <div class="font-serif text-lg text-charcoal">Michael Reeves</div>
+            <div class="text-xs text-mocha">Regular Customer</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Review 3 -->
+      <div class="scroll-reveal bg-white rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-shadow duration-300">
+        <div class="flex text-gold mb-4">
+          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+        </div>
+        <p class="text-mocha mb-6 leading-relaxed italic">
+          "We hosted my daughter's bridal shower here and it was magical. The staff went above and beyond with the tea service. Everyone raved about the food and the atmosphere was so elegant and relaxing. Highly recommend for special events!"
+        </p>
+        <div class="flex items-center gap-3">
+          <div class="w-12 h-12 bg-blush rounded-full flex items-center justify-center text-rose font-serif text-xl">L</div>
+          <div>
+            <div class="font-serif text-lg text-charcoal">Linda Thompson</div>
+            <div class="text-xs text-mocha">Event Host</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Events & Reservations -->
+<section id="reservations" class="py-20 md:py-32 bg-beige relative overflow-hidden">
+  <div class="absolute top-20 left-10 w-64 h-64 bg-rose/10 rounded-full blur-3xl"></div>
+  
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    <div class="grid lg:grid-cols-2 gap-12 lg:gap-20 items-start">
+      <div class="scroll-reveal">
+        <div class="text-gold text-sm tracking-widest mb-4 font-medium">EVENTS & RESERVATIONS</div>
+        <h3 class="font-serif text-4xl md:text-5xl lg:text-6xl font-light text-charcoal mb-6 leading-tight">
+          Celebrate Life's<br>Sweet Moments
+        </h3>
+        <div class="w-20 h-0.5 bg-gold mb-8"></div>
+        <p class="text-mocha text-lg leading-relaxed mb-8">
+          From intimate afternoon tea reservations to group brunches, birthday celebrations, and ladies' gatherings, we create unforgettable experiences in our elegant vintage setting.
+        </p>
+
+        <div class="space-y-6 mb-8">
+          <div class="flex gap-4">
+            <div class="w-12 h-12 bg-white rounded-full flex items-center justify-center flex-shrink-0 shadow-md">
+              <svg class="w-6 h-6 text-rose" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+              </svg>
+            </div>
+            <div>
+              <h4 class="font-serif text-xl text-charcoal mb-1">Afternoon Tea Service</h4>
+              <p class="text-mocha text-sm">Daily by reservation only • 24-hour advance notice required</p>
+            </div>
+          </div>
+
+          <div class="flex gap-4">
+            <div class="w-12 h-12 bg-white rounded-full flex items-center justify-center flex-shrink-0 shadow-md">
+              <svg class="w-6 h-6 text-rose" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
+              </svg>
+            </div>
+            <div>
+              <h4 class="font-serif text-xl text-charcoal mb-1">Group Brunches & Parties</h4>
+              <p class="text-mocha text-sm">Accommodating parties of 6-20 guests • Custom menus available</p>
+            </div>
+          </div>
+
+          <div class="flex gap-4">
+            <div class="w-12 h-12 bg-white rounded-full flex items-center justify-center flex-shrink-0 shadow-md">
+              <svg class="w-6 h-6 text-rose" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"/>
+              </svg>
+            </div>
+            <div>
+              <h4 class="font-serif text-xl text-charcoal mb-1">Seasonal Events</h4>
+              <p class="text-mocha text-sm">Holiday teas, Mother's Day brunch, special themed events throughout the year</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="glassmorphism rounded-2xl p-6 border border-gold/20">
+          <p class="text-sm text-charcoal mb-2 font-medium">Call to Reserve</p>
+          <a href="tel:+13522162510" class="font-serif text-3xl text-rose hover:text-mocha transition">
+            (352) 216-2510
+          </a>
+        </div>
+      </div>
+
+      <div class="scroll-reveal">
+        <form id="reservationForm" class="bg-white rounded-3xl p-8 md:p-10 shadow-2xl">
+          <h4 class="font-serif text-3xl text-charcoal mb-6">Request Reservation</h4>
+          
+          <div class="space-y-5">
+            <div>
+              <label for="name" class="block text-sm font-medium text-charcoal mb-2">Full Name *</label>
+              <input type="text" id="name" name="name" required 
+                     class="w-full px-4 py-3 rounded-xl border border-beige bg-cream text-charcoal transition"
+                     placeholder="Jane Doe">
+            </div>
+
+            <div class="grid sm:grid-cols-2 gap-5">
+              <div>
+                <label for="email" class="block text-sm font-medium text-charcoal mb-2">Email *</label>
+                <input type="email" id="email" name="email" required 
+                       class="w-full px-4 py-3 rounded-xl border border-beige bg-cream text-charcoal transition"
+                       placeholder="jane@example.com">
+              </div>
+              <div>
+                <label for="phone" class="block text-sm font-medium text-charcoal mb-2">Phone *</label>
+                <input type="tel" id="phone" name="phone" required 
+                       class="w-full px-4 py-3 rounded-xl border border-beige bg-cream text-charcoal transition"
+                       placeholder="(352) 555-0100">
+              </div>
+            </div>
+
+            <div class="grid sm:grid-cols-2 gap-5">
+              <div>
+                <label for="date" class="block text-sm font-medium text-charcoal mb-2">Preferred Date *</label>
+                <input type="date" id="date" name="date" required 
+                       class="w-full px-4 py-3 rounded-xl border border-beige bg-cream text-charcoal transition">
+              </div>
+              <div>
+                <label for="time" class="block text-sm font-medium text-charcoal mb-2">Preferred Time *</label>
+                <input type="time" id="time" name="time" required 
+                       class="w-full px-4 py-3 rounded-xl border border-beige bg-cream text-charcoal transition">
+              </div>
+            </div>
+
+            <div class="grid sm:grid-cols-2 gap-5">
+              <div>
+                <label for="guests" class="block text-sm font-medium text-charcoal mb-2">Number of Guests *</label>
+                <select id="guests" name="guests" required 
+                        class="w-full px-4 py-3 rounded-xl border border-beige bg-cream text-charcoal transition">
+                  <option value="">Select</option>
+                  <option value="1">1 Guest</option>
+                  <option value="2">2 Guests</option>
+                  <option value="3">3 Guests</option>
+                  <option value="4">4 Guests</option>
+                  <option value="5">5 Guests</option>
+                  <option value="6+">6+ Guests</option>
+                </select>
+              </div>
+              <div>
+                <label for="occasion" class="block text-sm font-medium text-charcoal mb-2">Occasion</label>
+                <select id="occasion" name="occasion" 
+                        class="w-full px-4 py-3 rounded-xl border border-beige bg-cream text-charcoal transition">
+                  <option value="">Select</option>
+                  <option value="afternoon-tea">Afternoon Tea</option>
+                  <option value="brunch">Brunch</option>
+                  <option value="birthday">Birthday</option>
+                  <option value="bridal-shower">Bridal Shower</option>
+                  <option value="ladies-gathering">Ladies' Gathering</option>
+                  <option value="other">Other</option>
+                </select>
+              </div>
+            </div>
+
+            <div>
+              <label for="message" class="block text-sm font-medium text-charcoal mb-2">Special Requests</label>
+              <textarea id="message" name="message" rows="3" 
+                        class="w-full px-4 py-3 rounded-xl border border-beige bg-cream text-charcoal transition resize-none"
+                        placeholder="Dietary restrictions, seating preferences, etc."></textarea>
+            </div>
+
+            <button type="submit" 
+                    class="w-full bg-rose hover:bg-mocha text-white px-8 py-4 rounded-full font-medium text-base shadow-lg transition duration-300">
+              Submit Reservation Request
+            </button>
+
+            <p class="text-xs text-mocha text-center">
+              We'll contact you within 24 hours to confirm your reservation
+            </p>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Location & Hours -->
+<section id="location" class="py-20 md:py-32 bg-cream">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-16 scroll-reveal">
+      <div class="text-gold text-sm tracking-widest mb-4 font-medium">VISIT US</div>
+      <h3 class="font-serif text-4xl md:text-5xl lg:text-6xl font-light text-charcoal mb-6">
+        Find Us in Historic<br>Downtown Dunnellon
+      </h3>
+      <div class="w-20 h-0.5 bg-gold mx-auto"></div>
+    </div>
+
+    <div class="grid lg:grid-cols-2 gap-12 items-start">
+      <div class="scroll-reveal">
+        <div class="bg-white rounded-3xl overflow-hidden shadow-2xl">
+          <iframe 
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3466.8234567890123!2d-82.4641234!3d29.0501234!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x88e8c5e123456789%3A0x123456789abcdef!2s20789%20Walnut%20St%2C%20Dunnellon%2C%20FL%2034431!5e0!3m2!1sen!2sus!4v1234567890123!5m2!1sen!2sus" 
+            width="100%" 
+            height="450" 
+            style="border:0;" 
+            allowfullscreen="" 
+            loading="lazy" 
+            referrerpolicy="no-referrer-when-downgrade"
+            class="grayscale hover:grayscale-0 transition-all duration-500">
+          </iframe>
+        </div>
+      </div>
+
+      <div class="scroll-reveal space-y-8">
+        <div class="glassmorphism rounded-2xl p-8">
+          <div class="flex items-start gap-4 mb-6">
+            <div class="w-12 h-12 bg-rose/10 rounded-full flex items-center justify-center flex-shrink-0">
+              <svg class="w-6 h-6 text-rose" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+              </svg>
+            </div>
+            <div>
+              <h4 class="font-serif text-2xl text-charcoal mb-2">Address</h4>
+              <p class="text-mocha leading-relaxed">
+                20789 Walnut St<br>
+                Dunnellon, FL 34431
+              </p>
+              <p class="text-sm text-rose mt-2">Free street parking available</p>
+            </div>
+          </div>
+
+          <div class="flex items-start gap-4 mb-6">
+            <div class="w-12 h-12 bg-rose/10 rounded-full flex items-center justify-center flex-shrink-0">
+              <svg class="w-6 h-6 text-rose" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
+              </svg>
+            </div>
+            <div>
+              <h4 class="font-serif text-2xl text-charcoal mb-2">Phone</h4>
+              <a href="tel:+13522162510" class="text-mocha hover:text-rose transition">
+                (352) 216-2510
+              </a>
+            </div>
+          </div>
+
+          <div class="flex items-start gap-4">
+            <div class="w-12 h-12 bg-rose/10 rounded-full flex items-center justify-center flex-shrink-0">
+              <svg class="w-6 h-6 text-rose" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+              </svg>
+            </div>
+            <div class="w-full">
+              <h4 class="font-serif text-2xl text-charcoal mb-4">Hours</h4>
+              <div class="space-y-2 text-mocha">
+                <div class="flex justify-between items-center py-2 border-b border-beige">
+                  <span class="font-medium">Monday - Friday</span>
+                  <span>8:00 AM - 3:00 PM</span>
+                </div>
+                <div class="flex justify-between items-center py-2 border-b border-beige">
+                  <span class="font-medium">Saturday</span>
+                  <span>8:00 AM - 3:00 PM</span>
+                </div>
+                <div class="flex justify-between items-center py-2">
+                  <span class="font-medium">Sunday</span>
+                  <span class="text-rose">Closed</span>
+                </div>
+              </div>
+              <p class="text-xs text-mocha mt-4 italic">
+                *Afternoon Tea available daily by reservation only
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-gradient-to-br from-rose to-mocha rounded-2xl p-8 text-white shadow-xl">
+          <h4 class="font-serif text-2xl mb-3">Planning a Visit?</h4>
+          <p class="text-white/90 mb-6 leading-relaxed">
+            We recommend making reservations for afternoon tea and weekend brunch to ensure seating. Walk-ins welcome for coffee, tea, and light fare.
+          </p>
+          <a href="#reservations" class="inline-block bg-white text-rose px-6 py-3 rounded-full font-medium hover:bg-cream transition">
+            Make a Reservation
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="bg-charcoal text-beige relative overflow-hidden">
+  <div class="absolute inset-0 opacity-5">
+    <div class="absolute top-0 left-0 w-96 h-96 bg-rose rounded-full blur-3xl"></div>
+    <div class="absolute bottom-0 right-0 w-96 h-96 bg-gold rounded-full blur-3xl"></div>
+  </div>
+
+  <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-20">
+    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
+      <!-- Brand -->
+      <div class="lg:col-span-1">
+        <div class="flex items-center space-x-3 mb-6">
+          <svg class="w-8 h-8 text-gold" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M20 3H4v10c0 2.21 1.79 4 4 4h6c2.21 0 4-1.79 4-4v-3h2c1.11 0 2-.89 2-2V5c0-1.11-.89-2-2-2zm0 5h-2V5h2v3zM2 21h18v-2H2v2z"/>
+          </svg>
+          <div>
+            <h1 class="font-serif text-2xl font-semibold text-white leading-none">Sweeties</h1>
+            <p class="text-xs text-beige/70 tracking-widest">CAFE & TEA HOUSE</p>
+          </div>
+        </div>
+        <p class="text-beige/80 text-sm leading-relaxed mb-6">
+          Where every cup feels like home. Experience elegant afternoon tea and homemade comfort food in historic downtown Dunnellon.
+        </p>
+        <div class="flex gap-4">
+          <a href="#" class="w-10 h-10 bg-white/10 hover:bg-gold rounded-full flex items-center justify-center transition" aria-label="Facebook">
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+            </svg>
+          </a>
+          <a href="#" class="w-10 h-10 bg-white/10 hover:bg-gold rounded-full flex items-center justify-center transition" aria-label="Instagram">
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+            </svg>
+          </a>
+          <a href="#" class="w-10 h-10 bg-white/10 hover:bg-gold rounded-full flex items-center justify-center transition" aria-label="Yelp">
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M12.57 21.978c-5.207 0-9.434-4.229-9.434-9.435 0-5.205 4.227-9.434 9.434-9.434s9.435 4.229 9.435 9.434c0 5.206-4.228 9.435-9.435 9.435zm-2.666-7.934l.931-1.872a.63.63 0 01.563-.348c.242-.004.456.275.456.275l3.056 2.3c.14.107.32.15.488.114l3.056-1.197c.168-.04.34.05.393.216l.399 1.379c.05.17-.03.346-.198.42l-7.708 3.52c-.167.074-.36.018-.454-.138l-1.982-4.67z"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- Quick Links -->
+      <div>
+        <h3 class="font-serif text-xl text-white mb-6">Quick Links</h3>
+        <ul class="space-y-3 text-sm">
+          <li><a href="#about" class="text-beige/80 hover:text-gold transition">About Us</a></li>
+          <li><a href="#menu" class="text-beige/80 hover:text-gold transition">Menu</a></li>
+          <li><a href="#experience" class="text-beige/80 hover:text-gold transition">High Tea Experience</a></li>
+          <li><a href="#gallery" class="text-beige/80 hover:text-gold transition">Gallery</a></li>
+          <li><a href="#reservations" class="text-beige/80 hover:text-gold transition">Reservations</a></li>
+        </ul>
+      </div>
+
+      <!-- Contact Info -->
+      <div>
+        <h3 class="font-serif text-xl text-white mb-6">Contact</h3>
+        <ul class="space-y-3 text-sm text-beige/80">
+          <li class="flex items-start gap-2">
+            <svg class="w-5 h-5 text-gold flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+            </svg>
+            <span>20789 Walnut St<br>Dunnellon, FL 34431</span>
+          </li>
+          <li class="flex items-center gap-2">
+            <svg class="w-5 h-5 text-gold flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
+            </svg>
+            <a href="tel:+13522162510" class="hover:text-gold transition">(352) 216-2510</a>
+          </li>
+          <li class="flex items-center gap-2">
+            <svg class="w-5 h-5 text-gold flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+            </svg>
+            <span>Mon-Sat: 8AM-3PM<br>Sun: Closed</span>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Newsletter -->
+      <div>
+        <h3 class="font-serif text-xl text-white mb-6">Stay Updated</h3>
+        <p class="text-beige/80 text-sm mb-4">
+          Subscribe for seasonal menus, special events, and tea house news.
+        </p>
+        <form id="newsletterForm" class="space-y-3">
+          <input type="email" 
+                 placeholder="Your email address" 
+                 required
+                 class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-beige/50 focus:outline-none focus:border-gold transition text-sm">
+          <button type="submit" 
+                  class="w-full bg-gold hover:bg-rose text-charcoal px-6 py-3 rounded-xl font-medium transition text-sm">
+            Subscribe
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <div class="border-t border-white/10 pt-8 mt-8">
+      <div class="flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-beige/60">
+        <p>&copy; 2025 Sweeties Cafe and Tea House. All rights reserved.</p>
+        <div class="flex gap-6">
+          <a href="#" class="hover:text-gold transition">Privacy Policy</a>
+          <a href="#" class="hover:text-gold transition">Terms of Service</a>
+          <a href="#" class="hover:text-gold transition">Accessibility</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- Back to Top Button -->
+<button id="backToTop" class="fixed bottom-8 right-8 w-12 h-12 bg-rose hover:bg-mocha text-white rounded-full shadow-2xl flex items-center justify-center transition-all duration-300 opacity-0 pointer-events-none z-40">
+  <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"/>
+  </svg>
+</button>
+
+<script>
+  // Mobile Menu Toggle
+  const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+  const mobileMenu = document.getElementById('mobileMenu');
+  
+  mobileMenuBtn.addEventListener('click', () => {
+    mobileMenu.classList.toggle('hidden');
+  });
+
+  // Close mobile menu on link click
+  document.querySelectorAll('#mobileMenu a').forEach(link => {
+    link.addEventListener('click', () => {
+      mobileMenu.classList.add('hidden');
+    });
+  });
+
+  // Navbar scroll effect
+  const navbar = document.getElementById('navbar');
+  let lastScroll = 0;
+
+  window.addEventListener('scroll', () => {
+    const currentScroll = window.pageYOffset;
+    
+    if (currentScroll > 100) {
+      navbar.classList.add('shadow-lg');
+    } else {
+      navbar.classList.remove('shadow-lg');
+    }
+    
+    lastScroll = currentScroll;
+  });
+
+  // Scroll Reveal Animation
+  const observerOptions = {
+    threshold: 0.1,
+    rootMargin: '0px 0px -50px 0px'
+  };
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('active');
+      }
+    });
+  }, observerOptions);
+
+  document.querySelectorAll('.scroll-reveal').forEach(el => {
+    observer.observe(el);
+  });
+
+  // Lightbox Gallery
+  const lightbox = document.getElementById('lightbox');
+  const lightboxImg = document.getElementById('lightboxImg');
+  const lightboxClose = document.getElementById('lightboxClose');
+
+  document.querySelectorAll('.gallery-item').forEach(item => {
+    item.addEventListener('click', () => {
+      const imgSrc = item.getAttribute('data-img');
+      lightboxImg.src = imgSrc;
+      lightbox.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    });
+  });
+
+  lightboxClose.addEventListener('click', () => {
+    lightbox.classList.remove('active');
+    document.body.style.overflow = '';
+  });
+
+  lightbox.addEventListener('click', (e) => {
+    if (e.target === lightbox) {
+      lightbox.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+  });
+
+  // Back to Top Button
+  const backToTop = document.getElementById('backToTop');
+
+  window.addEventListener('scroll', () => {
+    if (window.pageYOffset > 300) {
+      backToTop.classList.remove('opacity-0', 'pointer-events-none');
+      backToTop.classList.add('opacity-100');
+    } else {
+      backToTop.classList.add('opacity-0', 'pointer-events-none');
+      backToTop.classList.remove('opacity-100');
+    }
+  });
+
+  backToTop.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+
+  // Form Submissions
+  document.getElementById('reservationForm').addEventListener('submit', (e) => {
+    e.preventDefault();
+    alert('Thank you for your reservation request! We will contact you within 24 hours to confirm your booking. For immediate assistance, please call (352) 216-2510.');
+    e.target.reset();
+  });
+
+  document.getElementById('newsletterForm').addEventListener('submit', (e) => {
+    e.preventDefault();
+    alert('Thank you for subscribing! You\'ll receive updates about seasonal menus and special events.');
+    e.target.reset();
+  });
+
+  // Set minimum date for reservation form
+  const dateInput = document.getElementById('date');
+  const today = new Date().toISOString().split('T')[0];
+  dateInput.setAttribute('min', today);
+
+  // Smooth scroll for anchor links
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+      const href = this.getAttribute('href');
+      if (href !== '#' && href.length > 1) {
+        e.preventDefault();
+        const target = document.querySelector(href);
+        if (target) {
+          const navHeight = navbar.offsetHeight;
+          const targetPosition = target.offsetTop - navHeight;
+          window.scrollTo({
+            top: targetPosition,
+            behavior: 'smooth'
+          });
+        }
+      }
+    });
+  });
+</script>
+
+<script>(function(){document.addEventListener("click",function(e){var a=e.target.closest("[data-product-id]");if(!a)return;e.preventDefault();var pid=a.getAttribute("data-product-id");if(pid)parent.postMessage({type:"ecto-artifact-link-click",productId:pid},"*")})})();</script>
+</body>
+</html>

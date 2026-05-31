@@ -1,0 +1,2021 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="SWEET BOTTOM POT - Authentic Nigerian local meals in Port Harcourt. 24/7 Dine-in, Takeaway, Delivery & Catering. Best Afang, Egusi, Banga Soup, Native Rice, Seafood. Order now!">
+<meta name="keywords" content="Nigerian restaurant Port Harcourt, local food, Afang soup, Egusi, Banga soup, native rice, swallow, 24 hours restaurant, catering Port Harcourt">
+<meta name="author" content="SWEET BOTTOM POT">
+<meta property="og:title" content="SWEET BOTTOM POT | Authentic Nigerian Flavors Served Fresh Daily">
+<meta property="og:description" content="Premium Nigerian native restaurant in Port Harcourt. 24/7 service. Dine-in, Takeaway, Delivery & Catering.">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#8B4513">
+<title>SWEET BOTTOM POT | Authentic Nigerian Native Meals in Port Harcourt - 24/7 Service</title>
+
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=Outfit:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+<style>
+:root {
+  --brown: #8B4513;
+  --dark-brown: #5C3317;
+  --gold: #D4AF37;
+  --orange: #E67E22;
+  --deep-orange: #C65D07;
+  --cream: #FFF8E7;
+  --black: #1A120B;
+  --glass: rgba(255, 248, 231, 0.1);
+}
+
+* {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background-color: var(--cream);
+  color: var(--black);
+  overflow-x: hidden;
+}
+
+.dark body {
+  background-color: #0F0A06;
+  color: var(--cream);
+}
+
+h1, h2, h3, h4, h5 {
+  font-family: 'Montserrat', sans-serif;
+}
+
+.font-outfit {
+  font-family: 'Outfit', sans-serif;
+}
+
+.african-pattern {
+  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23D4AF37' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+}
+
+.hero-overlay {
+  background: linear-gradient(135deg, rgba(26, 18, 11, 0.85) 0%, rgba(92, 51, 23, 0.75) 100%);
+}
+
+.glass-effect {
+  background: rgba(255, 248, 231, 0.08);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(212, 175, 55, 0.2);
+}
+
+.dark .glass-effect {
+  background: rgba(26, 18, 11, 0.4);
+  border: 1px solid rgba(212, 175, 55, 0.15);
+}
+
+.card-hover {
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.card-hover:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(139, 69, 19, 0.2);
+}
+
+.dark .card-hover:hover {
+  box-shadow: 0 20px 40px rgba(212, 175, 55, 0.15);
+}
+
+.food-card img {
+  transition: transform 0.6s ease;
+}
+
+.food-card:hover img {
+  transform: scale(1.08);
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--orange) 0%, var(--deep-orange) 100%);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-primary:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+  transition: left 0.5s;
+}
+
+.btn-primary:hover:before {
+  left: 100%;
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(230, 126, 34, 0.4);
+}
+
+.btn-outline {
+  border: 2px solid var(--gold);
+  color: var(--gold);
+  transition: all 0.3s ease;
+}
+
+.btn-outline:hover {
+  background: var(--gold);
+  color: var(--black);
+  transform: translateY(-2px);
+}
+
+.nav-link {
+  position: relative;
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--gold);
+  transition: width 0.3s ease;
+}
+
+.nav-link:hover::after, .nav-link.active::after {
+  width: 100%;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+.animate-fadeInUp {
+  animation: fadeInUp 0.8s ease-out forwards;
+}
+
+.animate-fadeIn {
+  animation: fadeIn 1s ease-out forwards;
+}
+
+.animate-pulse-slow {
+  animation: pulse 3s infinite;
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: all 0.8s ease;
+}
+
+.reveal.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.masonry-grid {
+  column-count: 1;
+  column-gap: 1rem;
+}
+
+@media (min-width: 640px) {
+  .masonry-grid { column-count: 2; }
+}
+
+@media (min-width: 1024px) {
+  .masonry-grid { column-count: 3; }
+}
+
+.masonry-item {
+  break-inside: avoid;
+  margin-bottom: 1rem;
+}
+
+.cart-badge {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  background: var(--orange);
+  color: white;
+  border-radius: 50%;
+  width: 22px;
+  height: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+#loader {
+  position: fixed;
+  inset: 0;
+  background: var(--cream);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.5s, visibility 0.5s;
+}
+
+.dark #loader {
+  background: #0F0A06;
+}
+
+#loader.hidden {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.loader-pot {
+  width: 80px;
+  height: 80px;
+  border: 4px solid var(--gold);
+  border-top-color: var(--orange);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.counter {
+  font-variant-numeric: tabular-nums;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--cream);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--brown);
+  border-radius: 5px;
+}
+
+.dark ::-webkit-scrollbar-track {
+  background: #0F0A06;
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  background: var(--gold);
+}
+</style>
+</head>
+<body class="african-pattern">
+
+<!-- Loading Animation -->
+<div id="loader">
+  <div class="text-center">
+    <div class="loader-pot mx-auto mb-4"></div>
+    <p class="text-xl font-semibold text-amber-900 dark:text-amber-100">SWEET BOTTOM POT</p>
+  </div>
+</div>
+
+<!-- Sticky Navigation -->
+<nav id="navbar" class="fixed top-0 w-full z-50 transition-all duration-300 bg-transparent">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex justify-between items-center h-20">
+      <div class="flex items-center space-x-3">
+        <div class="w-12 h-12 rounded-full bg-gradient-to-br from-amber-600 to-orange-700 flex items-center justify-center">
+          <i class="fas fa-utensils text-white text-xl"></i>
+        </div>
+        <div>
+          <h1 class="text-xl md:text-2xl font-bold text-white nav-logo">SWEET BOTTOM POT</h1>
+          <p class="text-xs text-amber-200 hidden md:block">Authentic Nigerian Flavors</p>
+        </div>
+      </div>
+
+      <div class="hidden lg:flex items-center space-x-8">
+        <a href="#home" class="nav-link text-white hover:text-amber-300 font-medium">Home</a>
+        <a href="#about" class="nav-link text-white hover:text-amber-300 font-medium">About</a>
+        <a href="#popular" class="nav-link text-white hover:text-amber-300 font-medium">Popular</a>
+        <a href="#menu" class="nav-link text-white hover:text-amber-300 font-medium">Menu</a>
+        <a href="#catering" class="nav-link text-white hover:text-amber-300 font-medium">Catering</a>
+        <a href="#contact" class="nav-link text-white hover:text-amber-300 font-medium">Contact</a>
+      </div>
+
+      <div class="flex items-center space-x-4">
+        <button id="cartBtn" class="relative text-white hover:text-amber-300 transition">
+          <i class="fas fa-shopping-bag text-2xl"></i>
+          <span id="cartCount" class="cart-badge hidden">0</span>
+        </button>
+        <button id="themeToggle" class="text-white hover:text-amber-300 transition">
+          <i class="fas fa-moon text-xl"></i>
+        </button>
+        <button id="mobileMenuBtn" class="lg:hidden text-white">
+          <i class="fas fa-bars text-2xl"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mobile Menu -->
+  <div id="mobileMenu" class="hidden lg:hidden glass-effect border-t border-amber-500/20">
+    <div class="px-4 py-4 space-y-3">
+      <a href="#home" class="block text-white py-2 hover:text-amber-300">Home</a>
+      <a href="#about" class="block text-white py-2 hover:text-amber-300">About</a>
+      <a href="#popular" class="block text-white py-2 hover:text-amber-300">Popular Dishes</a>
+      <a href="#menu" class="block text-white py-2 hover:text-amber-300">Full Menu</a>
+      <a href="#gallery" class="block text-white py-2 hover:text-amber-300">Gallery</a>
+      <a href="#catering" class="block text-white py-2 hover:text-amber-300">Catering</a>
+      <a href="#contact" class="block text-white py-2 hover:text-amber-300">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<!-- Hero Section -->
+<section id="home" class="relative min-h-screen flex items-center justify-center overflow-hidden">
+  <div class="absolute inset-0 z-0">
+    <img src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=1920&h=1080&fit=crop" 
+         alt="Nigerian native food" 
+         class="w-full h-full object-cover">
+    <div class="hero-overlay absolute inset-0"></div>
+  </div>
+
+  <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-32 text-center">
+    <div class="animate-fadeInUp">
+      <span class="inline-block px-6 py-2 rounded-full glass-effect text-amber-200 text-sm font-semibold mb-6">
+        <i class="fas fa-clock mr-2"></i>Open 24 Hours • Port Harcourt
+      </span>
+      <h2 class="text-4xl sm:text-5xl md:text-7xl font-extrabold text-white mb-6 leading-tight">
+        Authentic Nigerian<br>Flavors Served Fresh Daily
+      </h2>
+      <p class="text-lg md:text-xl text-amber-100 mb-10 max-w-3xl mx-auto font-outfit">
+        From rich Afang soup to spicy Fisherman soup, experience the true taste of home. 
+        Freshly prepared native delicacies with love, tradition, and premium ingredients.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+        <a href="#menu" class="btn-primary px-8 py-4 rounded-full text-white font-semibold text-lg inline-flex items-center gap-2">
+          <i class="fas fa-utensils"></i> View Menu
+        </a>
+        <a href="https://wa.me/2348061144126?text=Hello%20SWEET%20BOTTOM%20POT%2C%20I%20want%20to%20place%20an%20order" 
+           target="_blank"
+           class="btn-outline px-8 py-4 rounded-full font-semibold text-lg inline-flex items-center gap-2">
+          <i class="fab fa-whatsapp"></i> Order Now
+        </a>
+        <a href="tel:+2348061144126" class="glass-effect px-8 py-4 rounded-full text-white font-semibold text-lg inline-flex items-center gap-2 hover:bg-white/20">
+          <i class="fas fa-phone"></i> Call Us
+        </a>
+      </div>
+    </div>
+
+    <div class="mt-16 grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto">
+      <div class="glass-effect rounded-2xl p-6 text-center">
+        <div class="text-3xl font-bold text-amber-400 counter" data-target="5000">0</div>
+        <div class="text-sm text-amber-100 mt-1">Happy Customers</div>
+      </div>
+      <div class="glass-effect rounded-2xl p-6 text-center">
+        <div class="text-3xl font-bold text-amber-400 counter" data-target="50">0</div>
+        <div class="text-sm text-amber-100 mt-1">Native Dishes</div>
+      </div>
+      <div class="glass-effect rounded-2xl p-6 text-center">
+        <div class="text-3xl font-bold text-amber-400">24/7</div>
+        <div class="text-sm text-amber-100 mt-1">Always Open</div>
+      </div>
+      <div class="glass-effect rounded-2xl p-6 text-center">
+        <div class="text-3xl font-bold text-amber-400 counter" data-target="100">0</div>
+        <div class="text-sm text-amber-100 mt-1">% Fresh</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
+    <a href="#about" class="text-white text-3xl">
+      <i class="fas fa-chevron-down"></i>
+    </a>
+  </div>
+</section>
+
+<!-- About Section -->
+<section id="about" class="py-20 md:py-32 bg-gradient-to-b from-amber-50 to-white dark:from-stone-950 dark:to-stone-900">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid lg:grid-cols-2 gap-12 items-center">
+      <div class="reveal">
+        <span class="text-amber-600 font-semibold text-sm uppercase tracking-wider">Our Story</span>
+        <h3 class="text-4xl md:text-5xl font-bold text-amber-900 dark:text-amber-100 mt-3 mb-6">
+          Taste of Home, Made with Love
+        </h3>
+        <p class="text-lg text-stone-700 dark:text-stone-300 mb-6 leading-relaxed">
+          At SWEET BOTTOM POT, we bring you the authentic taste of Nigerian cuisine straight from our kitchen to your table. 
+          Every pot tells a story of tradition, culture, and the warmth of Nigerian hospitality.
+        </p>
+        <p class="text-lg text-stone-700 dark:text-stone-300 mb-8 leading-relaxed">
+          Founded in the heart of Port Harcourt, we specialize in freshly prepared local meals that remind you of mama's cooking. 
+          From the rich, velvety Afang soup of Akwa Ibom to the spicy Fisherman soup of the Niger Delta, 
+          every dish is crafted with premium ingredients and time-honored recipes.
+        </p>
+        <div class="grid grid-cols-2 gap-6">
+          <div class="flex items-start space-x-3">
+            <div class="w-12 h-12 rounded-full bg-amber-600 flex items-center justify-center flex-shrink-0">
+              <i class="fas fa-leaf text-white"></i>
+            </div>
+            <div>
+              <h4 class="font-semibold text-amber-900 dark:text-amber-100 mb-1">Fresh Daily</h4>
+              <p class="text-sm text-stone-600 dark:text-stone-400">Ingredients sourced every morning</p>
+            </div>
+          </div>
+          <div class="flex items-start space-x-3">
+            <div class="w-12 h-12 rounded-full bg-amber-600 flex items-center justify-center flex-shrink-0">
+              <i class="fas fa-fire text-white"></i>
+            </div>
+            <div>
+              <h4 class="font-semibold text-amber-900 dark:text-amber-100 mb-1">Authentic Recipes</h4>
+              <p class="text-sm text-stone-600 dark:text-stone-400">Traditional cooking methods</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="reveal grid grid-cols-2 gap-4">
+        <div class="space-y-4">
+          <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=400&h=500&fit=crop" 
+               alt="Nigerian soup" 
+               class="rounded-2xl shadow-xl w-full h-64 object-cover">
+          <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=400&h=300&fit=crop" 
+               alt="Jollof rice" 
+               class="rounded-2xl shadow-xl w-full h-48 object-cover">
+        </div>
+        <div class="space-y-4 pt-8">
+          <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=400&h=300&fit=crop" 
+               alt="Swallow" 
+               class="rounded-2xl shadow-xl w-full h-48 object-cover">
+          <img src="https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=400&h=500&fit=crop" 
+               alt="Seafood" 
+               class="rounded-2xl shadow-xl w-full h-64 object-cover">
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Popular Dishes Section -->
+<section id="popular" class="py-20 md:py-32 bg-white dark:bg-stone-900">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-16 reveal">
+      <span class="text-amber-600 font-semibold text-sm uppercase tracking-wider">Customer Favorites</span>
+      <h3 class="text-4xl md:text-5xl font-bold text-amber-900 dark:text-amber-100 mt-3 mb-4">
+        Popular Dishes
+      </h3>
+      <p class="text-lg text-stone-600 dark:text-stone-400 max-w-2xl mx-auto">
+        Hand-picked selections loved by our customers. Order now and taste the difference.
+      </p>
+    </div>
+
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6">
+      <!-- Dish Cards -->
+      <div class="food-card card-hover bg-white dark:bg-stone-800 rounded-2xl overflow-hidden shadow-lg reveal">
+        <div class="relative h-48 overflow-hidden">
+          <img src="https://images.unsplash.com/photo-1544025162-d76694265947?w=400&h=400&fit=crop" 
+               alt="Afang Soup" 
+               class="w-full h-full object-cover">
+          <div class="absolute top-3 right-3 bg-orange-600 text-white px-3 py-1 rounded-full text-xs font-semibold">
+            Bestseller
+          </div>
+        </div>
+        <div class="p-5">
+          <h4 class="font-bold text-lg text-amber-900 dark:text-amber-100 mb-2">Afang Soup</h4>
+          <p class="text-sm text-stone-600 dark:text-stone-400 mb-3">Rich vegetable soup with assorted meat, stock fish & periwinkle</p>
+          <div class="flex items-center justify-between">
+            <span class="text-xl font-bold text-amber-600">₦3,500</span>
+            <button class="add-to-cart btn-primary px-4 py-2 rounded-full text-white text-sm font-semibold" 
+                    data-name="Afang Soup" data-price="3500">
+              <i class="fas fa-plus"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="food-card card-hover bg-white dark:bg-stone-800 rounded-2xl overflow-hidden shadow-lg reveal">
+        <div class="relative h-48 overflow-hidden">
+          <img src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=400&h=400&fit=crop" 
+               alt="Egusi Soup" 
+               class="w-full h-full object-cover">
+        </div>
+        <div class="p-5">
+          <h4 class="font-bold text-lg text-amber-900 dark:text-amber-100 mb-2">Egusi Soup</h4>
+          <p class="text-sm text-stone-600 dark:text-stone-400 mb-3">Melon seed soup with beef, pomo, stockfish & dried fish</p>
+          <div class="flex items-center justify-between">
+            <span class="text-xl font-bold text-amber-600">₦3,000</span>
+            <button class="add-to-cart btn-primary px-4 py-2 rounded-full text-white text-sm font-semibold" 
+                    data-name="Egusi Soup" data-price="3000">
+              <i class="fas fa-plus"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="food-card card-hover bg-white dark:bg-stone-800 rounded-2xl overflow-hidden shadow-lg reveal">
+        <div class="relative h-48 overflow-hidden">
+          <img src="https://images.unsplash.com/photo-1567337710282-02c9e8ac2c0c?w=400&h=400&fit=crop" 
+               alt="Fisherman Soup" 
+               class="w-full h-full object-cover">
+          <div class="absolute top-3 right-3 bg-red-600 text-white px-3 py-1 rounded-full text-xs font-semibold">
+            Hot
+          </div>
+        </div>
+        <div class="p-5">
+          <h4 class="font-bold text-lg text-amber-900 dark:text-amber-100 mb-2">Fisherman Soup</h4>
+          <p class="text-sm text-stone-600 dark:text-stone-400 mb-3">Spicy seafood soup with prawns, crabs, fish & periwinkle</p>
+          <div class="flex items-center justify-between">
+            <span class="text-xl font-bold text-amber-600">₦4,500</span>
+            <button class="add-to-cart btn-primary px-4 py-2 rounded-full text-white text-sm font-semibold" 
+                    data-name="Fisherman Soup" data-price="4500">
+              <i class="fas fa-plus"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="food-card card-hover bg-white dark:bg-stone-800 rounded-2xl overflow-hidden shadow-lg reveal">
+        <div class="relative h-48 overflow-hidden">
+          <img src="https://images.unsplash.com/photo-1604909052743-94e838986d24?w=400&h=400&fit=crop" 
+               alt="Banga Soup" 
+               class="w-full h-full object-cover">
+        </div>
+        <div class="p-5">
+          <h4 class="font-bold text-lg text-amber-900 dark:text-amber-100 mb-2">Banga Soup</h4>
+          <p class="text-sm text-stone-600 dark:text-stone-400 mb-3">Palm nut soup with fresh fish, beef & scent leaves</p>
+          <div class="flex items-center justify-between">
+            <span class="text-xl font-bold text-amber-600">₦3,200</span>
+            <button class="add-to-cart btn-primary px-4 py-2 rounded-full text-white text-sm font-semibold" 
+                    data-name="Banga Soup" data-price="3200">
+              <i class="fas fa-plus"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="food-card card-hover bg-white dark:bg-stone-800 rounded-2xl overflow-hidden shadow-lg reveal">
+        <div class="relative h-48 overflow-hidden">
+          <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=400&h=400&fit=crop" 
+               alt="Jollof Rice" 
+               class="w-full h-full object-cover">
+        </div>
+        <div class="p-5">
+          <h4 class="font-bold text-lg text-amber-900 dark:text-amber-100 mb-2">Jollof Rice</h4>
+          <p class="text-sm text-stone-600 dark:text-stone-400 mb-3">Party jollof with chicken, plantain & coleslaw</p>
+          <div class="flex items-center justify-between">
+            <span class="text-xl font-bold text-amber-600">₦2,500</span>
+            <button class="add-to-cart btn-primary px-4 py-2 rounded-full text-white text-sm font-semibold" 
+                    data-name="Jollof Rice" data-price="2500">
+              <i class="fas fa-plus"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="food-card card-hover bg-white dark:bg-stone-800 rounded-2xl overflow-hidden shadow-lg reveal">
+        <div class="relative h-48 overflow-hidden">
+          <img src="https://images.unsplash.com/photo-1625943553852-78113a815c46?w=400&h=400&fit=crop" 
+               alt="Native Rice" 
+               class="w-full h-full object-cover">
+        </div>
+        <div class="p-5">
+          <h4 class="font-bold text-lg text-amber-900 dark:text-amber-100 mb-2">Native Rice</h4>
+          <p class="text-sm text-stone-600 dark:text-stone-400 mb-3">Palm oil rice with smoked fish, ugba & ponmo</p>
+          <div class="flex items-center justify-between">
+            <span class="text-xl font-bold text-amber-600">₦2,800</span>
+            <button class="add-to-cart btn-primary px-4 py-2 rounded-full text-white text-sm font-semibold" 
+                    data-name="Native Rice" data-price="2800">
+              <i class="fas fa-plus"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="food-card card-hover bg-white dark:bg-stone-800 rounded-2xl overflow-hidden shadow-lg reveal">
+        <div class="relative h-48 overflow-hidden">
+          <img src="https://images.unsplash.com/photo-1603360946369-dc9bb6258143?w=400&h=400&fit=crop" 
+               alt="Goat Meat Pepper Soup" 
+               class="w-full h-full object-cover">
+          <div class="absolute top-3 right-3 bg-red-600 text-white px-3 py-1 rounded-full text-xs font-semibold">
+            Spicy
+          </div>
+        </div>
+        <div class="p-5">
+          <h4 class="font-bold text-lg text-amber-900 dark:text-amber-100 mb-2">Goat Meat Pepper Soup</h4>
+          <p class="text-sm text-stone-600 dark:text-stone-400 mb-3">Hot & spicy with yam or plantain</p>
+          <div class="flex items-center justify-between">
+            <span class="text-xl font-bold text-amber-600">₦3,500</span>
+            <button class="add-to-cart btn-primary px-4 py-2 rounded-full text-white text-sm font-semibold" 
+                    data-name="Goat Meat Pepper Soup" data-price="3500">
+              <i class="fas fa-plus"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="food-card card-hover bg-white dark:bg-stone-800 rounded-2xl overflow-hidden shadow-lg reveal">
+        <div class="relative h-48 overflow-hidden">
+          <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=400&h=400&fit=crop" 
+               alt="Pounded Yam" 
+               class="w-full h-full object-cover">
+        </div>
+        <div class="p-5">
+          <h4 class="font-bold text-lg text-amber-900 dark:text-amber-100 mb-2">Pounded Yam & Soup</h4>
+          <p class="text-sm text-stone-600 dark:text-stone-400 mb-3">Smooth pounded yam with soup of choice</p>
+          <div class="flex items-center justify-between">
+            <span class="text-xl font-bold text-amber-600">₦4,000</span>
+            <button class="add-to-cart btn-primary px-4 py-2 rounded-full text-white text-sm font-semibold" 
+                    data-name="Pounded Yam & Soup" data-price="4000">
+              <i class="fas fa-plus"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="food-card card-hover bg-white dark:bg-stone-800 rounded-2xl overflow-hidden shadow-lg reveal">
+        <div class="relative h-48 overflow-hidden">
+          <img src="https://images.unsplash.com/photo-1559847844-5315695dadae?w=400&h=400&fit=crop" 
+               alt="Seafood Okra" 
+               class="w-full h-full object-cover">
+        </div>
+        <div class="p-5">
+          <h4 class="font-bold text-lg text-amber-900 dark:text-amber-100 mb-2">Seafood Okra</h4>
+          <p class="text-sm text-stone-600 dark:text-stone-400 mb-3">Fresh okra with shrimps, crabs & periwinkle</p>
+          <div class="flex items-center justify-between">
+            <span class="text-xl font-bold text-amber-600">₦4,800</span>
+            <button class="add-to-cart btn-primary px-4 py-2 rounded-full text-white text-sm font-semibold" 
+                    data-name="Seafood Okra" data-price="4800">
+              <i class="fas fa-plus"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="food-card card-hover bg-white dark:bg-stone-800 rounded-2xl overflow-hidden shadow-lg reveal">
+        <div class="relative h-48 overflow-hidden">
+          <img src="https://images.unsplash.com/photo-1606491956689-2ea866880c84?w=400&h=400&fit=crop" 
+               alt="White Soup" 
+               class="w-full h-full object-cover">
+        </div>
+        <div class="p-5">
+          <h4 class="font-bold text-lg text-amber-900 dark:text-amber-100 mb-2">White Soup (Ofe Nsala)</h4>
+          <p class="text-sm text-stone-600 dark:text-stone-400 mb-3">Traditional Igbo soup with catfish & yam</p>
+          <div class="flex items-center justify-between">
+            <span class="text-xl font-bold text-amber-600">₦4,200</span>
+            <button class="add-to-cart btn-primary px-4 py-2 rounded-full text-white text-sm font-semibold" 
+                    data-name="White Soup" data-price="4200">
+              <i class="fas fa-plus"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Full Menu Section -->
+<section id="menu" class="py-20 md:py-32 bg-gradient-to-b from-amber-50 to-white dark:from-stone-950 dark:to-stone-900">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-16 reveal">
+      <span class="text-amber-600 font-semibold text-sm uppercase tracking-wider">Full Menu</span>
+      <h3 class="text-4xl md:text-5xl font-bold text-amber-900 dark:text-amber-100 mt-3 mb-4">
+        Our Complete Menu
+      </h3>
+      <p class="text-lg text-stone-600 dark:text-stone-400 max-w-2xl mx-auto">
+        From soups to swallow, proteins to specials - all made fresh daily
+      </p>
+    </div>
+
+    <!-- Menu Tabs -->
+    <div class="flex flex-wrap justify-center gap-3 mb-12 reveal">
+      <button class="menu-tab active px-6 py-3 rounded-full bg-amber-600 text-white font-semibold" data-category="all">All</button>
+      <button class="menu-tab px-6 py-3 rounded-full bg-stone-200 dark:bg-stone-700 text-stone-700 dark:text-stone-300 font-semibold" data-category="soups">Soups</button>
+      <button class="menu-tab px-6 py-3 rounded-full bg-stone-200 dark:bg-stone-700 text-stone-700 dark:text-stone-300 font-semibold" data-category="swallow">Swallow</button>
+      <button class="menu-tab px-6 py-3 rounded-full bg-stone-200 dark:bg-stone-700 text-stone-700 dark:text-stone-300 font-semibold" data-category="rice">Rice Dishes</button>
+      <button class="menu-tab px-6 py-3 rounded-full bg-stone-200 dark:bg-stone-700 text-stone-700 dark:text-stone-300 font-semibold" data-category="proteins">Proteins</button>
+      <button class="menu-tab px-6 py-3 rounded-full bg-stone-200 dark:bg-stone-700 text-stone-700 dark:text-stone-300 font-semibold" data-category="seafood">Seafood</button>
+      <button class="menu-tab px-6 py-3 rounded-full bg-stone-200 dark:bg-stone-700 text-stone-700 dark:text-stone-300 font-semibold" data-category="drinks">Drinks</button>
+    </div>
+
+    <!-- Menu Items -->
+    <div id="menuItems" class="grid md:grid-cols-2 gap-6">
+      <!-- Soups -->
+      <div class="menu-item flex justify-between items-start p-6 bg-white dark:bg-stone-800 rounded-2xl shadow-md" data-category="soups">
+        <div class="flex-1">
+          <h4 class="font-bold text-lg text-amber-900 dark:text-amber-100">Afang Soup</h4>
+          <p class="text-sm text-stone-600 dark:text-stone-400 mt-1">Waterleaf, Okazi, Assorted meat, Stock fish, Periwinkle</p>
+        </div>
+        <div class="text-right ml-4">
+          <span class="text-xl font-bold text-amber-600">₦3,500</span>
+          <button class="add-to-cart block mt-2 text-amber-600 hover:text-amber-700" data-name="Afang Soup" data-price="3500">
+            <i class="fas fa-plus-circle text-2xl"></i>
+          </button>
+        </div>
+      </div>
+
+      <div class="menu-item flex justify-between items-start p-6 bg-white dark:bg-stone-800 rounded-2xl shadow-md" data-category="soups">
+        <div class="flex-1">
+          <h4 class="font-bold text-lg text-amber-900 dark:text-amber-100">Egusi Soup</h4>
+          <p class="text-sm text-stone-600 dark:text-stone-400 mt-1">Ground melon seeds, Beef, Pomo, Stockfish, Dried fish</p>
+        </div>
+        <div class="text-right ml-4">
+          <span class="text-xl font-bold text-amber-600">₦3,000</span>
+          <button class="add-to-cart block mt-2 text-amber-600 hover:text-amber-700" data-name="Egusi Soup" data-price="3000">
+            <i class="fas fa-plus-circle text-2xl"></i>
+          </button>
+        </div>
+      </div>
+
+      <div class="menu-item flex justify-between items-start p-6 bg-white dark:bg-stone-800 rounded-2xl shadow-md" data-category="soups">
+        <div class="flex-1">
+          <h4 class="font-bold text-lg text-amber-900 dark:text-amber-100">Banga Soup</h4>
+          <p class="text-sm text-stone-600 dark:text-stone-400 mt-1">Palm nut extract, Fresh fish, Beef, Banga spices</p>
+        </div>
+        <div class="text-right ml-4">
+          <span class="text-xl font-bold text-amber-600">₦3,200</span>
+          <button class="add-to-cart block mt-2 text-amber-600 hover:text-amber-700" data-name="Banga Soup" data-price="3200">
+            <i class="fas fa-plus-circle text-2xl"></i>
+          </button>
+        </div>
+      </div>
+
+      <div class="menu-item flex justify-between items-start p-6 bg-white dark:bg-stone-800 rounded-2xl shadow-md" data-category="soups">
+        <div class="flex-1">
+          <h4 class="font-bold text-lg text-amber-900 dark:text-amber-100">Fisherman Soup</h4>
+          <p class="text-sm text-stone-600 dark:text-stone-400 mt-1">Mixed seafood, Prawns, Crabs, Periwinkle, Catfish</p>
+        </div>
+        <div class="text-right ml-4">
+          <span class="text-xl font-bold text-amber-600">₦4,500</span>
+          <button class="add-to-cart block mt-2 text-amber-600 hover:text-amber-700" data-name="Fisherman Soup" data-price="4500">
+            <i class="fas fa-plus-circle text-2xl"></i>
+          </button>
+        </div>
+      </div>
+
+      <div class="menu-item flex justify-between items-start p-6 bg-white dark:bg-stone-800 rounded-2xl shadow-md" data-category="soups">
+        <div class="flex-1">
+          <h4 class="font-bold text-lg text-amber-900 dark:text-amber-100">White Soup (Ofe Nsala)</h4>
+          <p class="text-sm text-stone-600 dark:text-stone-400 mt-1">Catfish, Yam, Uziza, Utazi leaves</p>
+        </div>
+        <div class="text-right ml-4">
+          <span class="text-xl font-bold text-amber-600">₦4,200</span>
+          <button class="add-to-cart block mt-2 text-amber-600 hover:text-amber-700" data-name="White Soup" data-price="4200">
+            <i class="fas fa-plus-circle text-2xl"></i>
+          </button>
+        </div>
+      </div>
+
+      <div class="menu-item flex justify-between items-start p-6 bg-white dark:bg-stone-800 rounded-2xl shadow-md" data-category="soups">
+        <div class="flex-1">
+          <h4 class="font-bold text-lg text-amber-900 dark:text-amber-100">Pepper Soup</h4>
+          <p class="text-sm text-stone-600 dark:text-stone-400 mt-1">Goat meat, Catfish, or Chicken options available</p>
+        </div>
+        <div class="text-right ml-4">
+          <span class="text-xl font-bold text-amber-600">₦3,500</span>
+          <button class="add-to-cart block mt-2 text-amber-600 hover:text-amber-700" data-name="Pepper Soup" data-price="3500">
+            <i class="fas fa-plus-circle text-2xl"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Swallow -->
+      <div class="menu-item flex justify-between items-start p-6 bg-white dark:bg-stone-800 rounded-2xl shadow-md" data-category="swallow">
+        <div class="flex-1">
+          <h4 class="font-bold text-lg text-amber-900 dark:text-amber-100">Pounded Yam</h4>
+          <p class="text-sm text-stone-600 dark:text-stone-400 mt-1">Freshly pounded yam, smooth and fluffy</p>
+        </div>
+        <div class="text-right ml-4">
+          <span class="text-xl font-bold text-amber-600">₦1,500</span>
+          <button class="add-to-cart block mt-2 text-amber-600 hover:text-amber-700" data-name="Pounded Yam" data-price="1500">
+            <i class="fas fa-plus-circle text-2xl"></i>
+          </button>
+        </div>
+      </div>
+
+      <div class="menu-item flex justify-between items-start p-6 bg-white dark:bg-stone-800 rounded-2xl shadow-md" data-category="swallow">
+        <div class="flex-1">
+          <h4 class="font-bold text-lg text-amber-900 dark:text-amber-100">Eba (Garri)</h4>
+          <p class="text-sm text-stone-600 dark:text-stone-400 mt-1">Premium yellow garri</p>
+        </div>
+        <div class="text-right ml-4">
+          <span class="text-xl font-bold text-amber-600">₦800</span>
+          <button class="add-to-cart block mt-2 text-amber-600 hover:text-amber-700" data-name="Eba" data-price="800">
+            <i class="fas fa-plus-circle text-2xl"></i>
+          </button>
+        </div>
+      </div>
+
+      <div class="menu-item flex justify-between items-start p-6 bg-white dark:bg-stone-800 rounded-2xl shadow-md" data-category="swallow">
+        <div class="flex-1">
+          <h4 class="font-bold text-lg text-amber-900 dark:text-amber-100">Fufu (Akpu)</h4>
+          <p class="text-sm text-stone-600 dark:text-stone-400 mt-1">Cassava fufu, smooth texture</p>
+        </div>
+        <div class="text-right ml-4">
+          <span class="text-xl font-bold text-amber-600">₦1,000</span>
+          <button class="add-to-cart block mt-2 text-amber-600 hover:text-amber-700" data-name="Fufu" data-price="1000">
+            <i class="fas fa-plus-circle text-2xl"></i>
+          </button>
+        </div>
+      </div>
+
+      <div class="menu-item flex justify-between items-start p-6 bg-white dark:bg-stone-800 rounded-2xl shadow-md" data-category="swallow">
+        <div class="flex-1">
+          <h4 class="font-bold text-lg text-amber-900 dark:text-amber-100">Semo</h4>
+          <p class="text-sm text-stone-600 dark:text-stone-400 mt-1">Semolina, light and easy to swallow</p>
+        </div>
+        <div class="text-right ml-4">
+          <span class="text-xl font-bold text-amber-600">₦1,000</span>
+          <button class="add-to-cart block mt-2 text-amber-600 hover:text-amber-700" data-name="Semo" data-price="1000">
+            <i class="fas fa-plus-circle text-2xl"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Rice -->
+      <div class="menu-item flex justify-between items-start p-6 bg-white dark:bg-stone-800 rounded-2xl shadow-md" data-category="rice">
+        <div class="flex-1">
+          <h4 class="font-bold text-lg text-amber-900 dark:text-amber-100">Jollof Rice</h4>
+          <p class="text-sm text-stone-600 dark:text-stone-400 mt-1">Party jollof with chicken & plantain</p>
+        </div>
+        <div class="text-right ml-4">
+          <span class="text-xl font-bold text-amber-600">₦2,500</span>
+          <button class="add-to-cart block mt-2 text-amber-600 hover:text-amber-700" data-name="Jollof Rice" data-price="2500">
+            <i class="fas fa-plus-circle text-2xl"></i>
+          </button>
+        </div>
+      </div>
+
+      <div class="menu-item flex justify-between items-start p-6 bg-white dark:bg-stone-800 rounded-2xl shadow-md" data-category="rice">
+        <div class="flex-1">
+          <h4 class="font-bold text-lg text-amber-900 dark:text-amber-100">Native Rice</h4>
+          <p class="text-sm text-stone-600 dark:text-stone-400 mt-1">Palm oil rice with smoked fish & ugba</p>
+        </div>
+        <div class="text-right ml-4">
+          <span class="text-xl font-bold text-amber-600">₦2,800</span>
+          <button class="add-to-cart block mt-2 text-amber-600 hover:text-amber-700" data-name="Native Rice" data-price="2800">
+            <i class="fas fa-plus-circle text-2xl"></i>
+          </button>
+        </div>
+      </div>
+
+      <div class="menu-item flex justify-between items-start p-6 bg-white dark:bg-stone-800 rounded-2xl shadow-md" data-category="rice">
+        <div class="flex-1">
+          <h4 class="font-bold text-lg text-amber-900 dark:text-amber-100">Fried Rice</h4>
+          <p class="text-sm text-stone-600 dark:text-stone-400 mt-1">With mixed vegetables & chicken</p>
+        </div>
+        <div class="text-right ml-4">
+          <span class="text-xl font-bold text-amber-600">₦2,500</span>
+          <button class="add-to-cart block mt-2 text-amber-600 hover:text-amber-700" data-name="Fried Rice" data-price="2500">
+            <i class="fas fa-plus-circle text-2xl"></i>
+          </button>
+        </div>
+      </div>
+
+      <div class="menu-item flex justify-between items-start p-6 bg-white dark:bg-stone-800 rounded-2xl shadow-md" data-category="rice">
+        <div class="flex-1">
+          <h4 class="font-bold text-lg text-amber-900 dark:text-amber-100">White Rice & Stew</h4>
+          <p class="text-sm text-stone-600 dark:text-stone-400 mt-1">With beef or chicken stew</p>
+        </div>
+        <div class="text-right ml-4">
+          <span class="text-xl font-bold text-amber-600">₦2,000</span>
+          <button class="add-to-cart block mt-2 text-amber-600 hover:text-amber-700" data-name="White Rice & Stew" data-price="2000">
+            <i class="fas fa-plus-circle text-2xl"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Proteins -->
+      <div class="menu-item flex justify-between items-start p-6 bg-white dark:bg-stone-800 rounded-2xl shadow-md" data-category="proteins">
+        <div class="flex-1">
+          <h4 class="font-bold text-lg text-amber-900 dark:text-amber-100">Grilled Chicken</h4>
+          <p class="text-sm text-stone-600 dark:text-stone-400 mt-1">Full, half, or quarter chicken</p>
+        </div>
+        <div class="text-right ml-4">
+          <span class="text-xl font-bold text-amber-600">₦3,500</span>
+          <button class="add-to-cart block mt-2 text-amber-600 hover:text-amber-700" data-name="Grilled Chicken" data-price="3500">
+            <i class="fas fa-plus-circle text-2xl"></i>
+          </button>
+        </div>
+      </div>
+
+      <div class="menu-item flex justify-between items-start p-6 bg-white dark:bg-stone-800 rounded-2xl shadow-md" data-category="proteins">
+        <div class="flex-1">
+          <h4 class="font-bold text-lg text-amber-900 dark:text-amber-100">Goat Meat</h4>
+          <p class="text-sm text-stone-600 dark:text-stone-400 mt-1">Peppered or in soup, tender pieces</p>
+        </div>
+        <div class="text-right ml-4">
+          <span class="text-xl font-bold text-amber-600">₦2,500</span>
+          <button class="add-to-cart block mt-2 text-amber-600 hover:text-amber-700" data-name="Goat Meat" data-price="2500">
+            <i class="fas fa-plus-circle text-2xl"></i>
+          </button>
+        </div>
+      </div>
+
+      <div class="menu-item flex justify-between items-start p-6 bg-white dark:bg-stone-800 rounded-2xl shadow-md" data-category="proteins">
+        <div class="flex-1">
+          <h4 class="font-bold text-lg text-amber-900 dark:text-amber-100">Assorted Meat</h4>
+          <p class="text-sm text-stone-600 dark:text-stone-400 mt-1">Mix of beef, ponmo, shaki, kidney</p>
+        </div>
+        <div class="text-right ml-4">
+          <span class="text-xl font-bold text-amber-600">₦3,000</span>
+          <button class="add-to-cart block mt-2 text-amber-600 hover:text-amber-700" data-name="Assorted Meat" data-price="3000">
+            <i class="fas fa-plus-circle text-2xl"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Seafood -->
+      <div class="menu-item flex justify-between items-start p-6 bg-white dark:bg-stone-800 rounded-2xl shadow-md" data-category="seafood">
+        <div class="flex-1">
+          <h4 class="font-bold text-lg text-amber-900 dark:text-amber-100">Catfish Pepper Soup</h4>
+          <p class="text-sm text-stone-600 dark:text-stone-400 mt-1">Fresh catfish with yam or plantain</p>
+        </div>
+        <div class="text-right ml-4">
+          <span class="text-xl font-bold text-amber-600">₦4,000</span>
+          <button class="add-to-cart block mt-2 text-amber-600 hover:text-amber-700" data-name="Catfish Pepper Soup" data-price="4000">
+            <i class="fas fa-plus-circle text-2xl"></i>
+          </button>
+        </div>
+      </div>
+
+      <div class="menu-item flex justify-between items-start p-6 bg-white dark:bg-stone-800 rounded-2xl shadow-md" data-category="seafood">
+        <div class="flex-1">
+          <h4 class="font-bold text-lg text-amber-900 dark:text-amber-100">Grilled Tilapia</h4>
+          <p class="text-sm text-stone-600 dark:text-stone-400 mt-1">Whole fish with pepper sauce</p>
+        </div>
+        <div class="text-right ml-4">
+          <span class="text-xl font-bold text-amber-600">₦5,000</span>
+          <button class="add-to-cart block mt-2 text-amber-600 hover:text-amber-700" data-name="Grilled Tilapia" data-price="5000">
+            <i class="fas fa-plus-circle text-2xl"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Drinks -->
+      <div class="menu-item flex justify-between items-start p-6 bg-white dark:bg-stone-800 rounded-2xl shadow-md" data-category="drinks">
+        <div class="flex-1">
+          <h4 class="font-bold text-lg text-amber-900 dark:text-amber-100">Palm Wine</h4>
+          <p class="text-sm text-stone-600 dark:text-stone-400 mt-1">Fresh from the tap, 1L</p>
+        </div>
+        <div class="text-right ml-4">
+          <span class="text-xl font-bold text-amber-600">₦1,500</span>
+          <button class="add-to-cart block mt-2 text-amber-600 hover:text-amber-700" data-name="Palm Wine" data-price="1500">
+            <i class="fas fa-plus-circle text-2xl"></i>
+          </button>
+        </div>
+      </div>
+
+      <div class="menu-item flex justify-between items-start p-6 bg-white dark:bg-stone-800 rounded-2xl shadow-md" data-category="drinks">
+        <div class="flex-1">
+          <h4 class="font-bold text-lg text-amber-900 dark:text-amber-100">Zobo Drink</h4>
+          <p class="text-sm text-stone-600 dark:text-stone-400 mt-1">Hibiscus drink with pineapple</p>
+        </div>
+        <div class="text-right ml-4">
+          <span class="text-xl font-bold text-amber-600">₦800</span>
+          <button class="add-to-cart block mt-2 text-amber-600 hover:text-amber-700" data-name="Zobo Drink" data-price="800">
+            <i class="fas fa-plus-circle text-2xl"></i>
+          </button>
+        </div>
+      </div>
+
+      <div class="menu-item flex justify-between items-start p-6 bg-white dark:bg-stone-800 rounded-2xl shadow-md" data-category="drinks">
+        <div class="flex-1">
+          <h4 class="font-bold text-lg text-amber-900 dark:text-amber-100">Chapman</h4>
+          <p class="text-sm text-stone-600 dark:text-stone-400 mt-1">Nigerian cocktail</p>
+        </div>
+        <div class="text-right ml-4">
+          <span class="text-xl font-bold text-amber-600">₦1,000</span>
+          <button class="add-to-cart block mt-2 text-amber-600 hover:text-amber-700" data-name="Chapman" data-price="1000">
+            <i class="fas fa-plus-circle text-2xl"></i>
+          </button>
+        </div>
+      </div>
+
+      <div class="menu-item flex justify-between items-start p-6 bg-white dark:bg-stone-800 rounded-2xl shadow-md" data-category="drinks">
+        <div class="flex-1">
+          <h4 class="font-bold text-lg text-amber-900 dark:text-amber-100">Soft Drinks</h4>
+          <p class="text-sm text-stone-600 dark:text-stone-400 mt-1">Coke, Fanta, Sprite, Malt</p>
+        </div>
+        <div class="text-right ml-4">
+          <span class="text-xl font-bold text-amber-600">₦500</span>
+          <button class="add-to-cart block mt-2 text-amber-600 hover:text-amber-700" data-name="Soft Drinks" data-price="500">
+            <i class="fas fa-plus-circle text-2xl"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Why Choose Us Section -->
+<section class="py-20 md:py-32 bg-white dark:bg-stone-900">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-16 reveal">
+      <span class="text-amber-600 font-semibold text-sm uppercase tracking-wider">Why Choose Us</span>
+      <h3 class="text-4xl md:text-5xl font-bold text-amber-900 dark:text-amber-100 mt-3 mb-4">
+        The SWEET BOTTOM POT Difference
+      </h3>
+      <p class="text-lg text-stone-600 dark:text-stone-400 max-w-2xl mx-auto">
+        We're not just a restaurant, we're your home away from home
+      </p>
+    </div>
+
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div class="card-hover bg-gradient-to-br from-amber-50 to-orange-50 dark:from-stone-800 dark:to-stone-800 p-8 rounded-3xl shadow-lg reveal">
+        <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-amber-500 to-orange-600 flex items-center justify-center mb-6">
+          <i class="fas fa-seedling text-white text-2xl"></i>
+        </div>
+        <h4 class="text-xl font-bold text-amber-900 dark:text-amber-100 mb-3">Fresh Ingredients</h4>
+        <p class="text-stone-600 dark:text-stone-400">We source our vegetables, fish, and meat fresh every morning from local markets. No preservatives, no shortcuts.</p>
+      </div>
+
+      <div class="card-hover bg-gradient-to-br from-amber-50 to-orange-50 dark:from-stone-800 dark:to-stone-800 p-8 rounded-3xl shadow-lg reveal">
+        <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-amber-500 to-orange-600 flex items-center justify-center mb-6">
+          <i class="fas fa-shipping-fast text-white text-2xl"></i>
+        </div>
+        <h4 class="text-xl font-bold text-amber-900 dark:text-amber-100 mb-3">Fast Delivery</h4>
+        <p class="text-stone-600 dark:text-stone-400">Hot food delivered to your doorstep within 45 minutes in Port Harcourt. Track your order in real-time.</p>
+      </div>
+
+      <div class="card-hover bg-gradient-to-br from-amber-50 to-orange-50 dark:from-stone-800 dark:to-stone-800 p-8 rounded-3xl shadow-lg reveal">
+        <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-amber-500 to-orange-600 flex items-center justify-center mb-6">
+          <i class="fas fa-heart text-white text-2xl"></i>
+        </div>
+        <h4 class="text-xl font-bold text-amber-900 dark:text-amber-100 mb-3">Authentic Taste</h4>
+        <p class="text-stone-600 dark:text-stone-400">Traditional recipes passed down through generations. Every spoon tastes like home cooking.</p>
+      </div>
+
+      <div class="card-hover bg-gradient-to-br from-amber-50 to-orange-50 dark:from-stone-800 dark:to-stone-800 p-8 rounded-3xl shadow-lg reveal">
+        <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-amber-500 to-orange-600 flex items-center justify-center mb-6">
+          <i class="fas fa-sparkles text-white text-2xl"></i>
+        </div>
+        <h4 class="text-xl font-bold text-amber-900 dark:text-amber-100 mb-3">Hygienic Kitchen</h4>
+        <p class="text-stone-600 dark:text-stone-400">NAFDAC approved kitchen with strict hygiene protocols. Your health is our priority.</p>
+      </div>
+
+      <div class="card-hover bg-gradient-to-br from-amber-50 to-orange-50 dark:from-stone-800 dark:to-stone-800 p-8 rounded-3xl shadow-lg reveal">
+        <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-amber-500 to-orange-600 flex items-center justify-center mb-6">
+          <i class="fas fa-wallet text-white text-2xl"></i>
+        </div>
+        <h4 class="text-xl font-bold text-amber-900 dark:text-amber-100 mb-3">Affordable Meals</h4>
+        <p class="text-stone-600 dark:text-stone-400">Premium quality at pocket-friendly prices. Great food shouldn't break the bank.</p>
+      </div>
+
+      <div class="card-hover bg-gradient-to-br from-amber-50 to-orange-50 dark:from-stone-800 dark:to-stone-800 p-8 rounded-3xl shadow-lg reveal">
+        <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-amber-500 to-orange-600 flex items-center justify-center mb-6">
+          <i class="fas fa-clock text-white text-2xl"></i>
+        </div>
+        <h4 class="text-xl font-bold text-amber-900 dark:text-amber-100 mb-3">24/7 Availability</h4>
+        <p class="text-stone-600 dark:text-stone-400">Craving soup at 3am? We're open round the clock. Dine-in, takeaway, or delivery anytime.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Customer Reviews Section -->
+<section class="py-20 md:py-32 bg-gradient-to-b from-amber-50 to-white dark:from-stone-950 dark:to-stone-900">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-16 reveal">
+      <span class="text-amber-600 font-semibold text-sm uppercase tracking-wider">Testimonials</span>
+      <h3 class="text-4xl md:text-5xl font-bold text-amber-900 dark:text-amber-100 mt-3 mb-4">
+        What Our Customers Say
+      </h3>
+      <p class="text-lg text-stone-600 dark:text-stone-400 max-w-2xl mx-auto">
+        Real reviews from real customers who love our food
+      </p>
+    </div>
+
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div class="bg-white dark:bg-stone-800 p-8 rounded-3xl shadow-lg reveal">
+        <div class="flex items-center mb-4">
+          <img src="https://i.pravatar.cc/100?img=32" alt="Customer" class="w-14 h-14 rounded-full object-cover">
+          <div class="ml-4">
+            <h4 class="font-bold text-amber-900 dark:text-amber-100">Chioma Okafor</h4>
+            <div class="flex text-amber-500">
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+            </div>
+          </div>
+        </div>
+        <p class="text-stone-600 dark:text-stone-400 italic">
+          "The Afang soup here is the closest thing to my grandmother's cooking! Thick, rich, and full of authentic flavor. 
+          I order every Sunday for the family. Best in PH!"
+        </p>
+      </div>
+
+      <div class="bg-white dark:bg-stone-800 p-8 rounded-3xl shadow-lg reveal">
+        <div class="flex items-center mb-4">
+          <img src="https://i.pravatar.cc/100?img=12" alt="Customer" class="w-14 h-14 rounded-full object-cover">
+          <div class="ml-4">
+            <h4 class="font-bold text-amber-900 dark:text-amber-100">Emeka Nwankwo</h4>
+            <div class="flex text-amber-500">
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+            </div>
+          </div>
+        </div>
+        <p class="text-stone-600 dark:text-stone-400 italic">
+          "24/7 service is a game changer! Called at 2am for pepper soup and it arrived hot in 30 mins. 
+          The portions are generous and prices are fair. Highly recommend!"
+        </p>
+      </div>
+
+      <div class="bg-white dark:bg-stone-800 p-8 rounded-3xl shadow-lg reveal">
+        <div class="flex items-center mb-4">
+          <img src="https://i.pravatar.cc/100?img=47" alt="Customer" class="w-14 h-14 rounded-full object-cover">
+          <div class="ml-4">
+            <h4 class="font-bold text-amber-900 dark:text-amber-100">Fatima Abdullahi</h4>
+            <div class="flex text-amber-500">
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+            </div>
+          </div>
+        </div>
+        <p class="text-stone-600 dark:text-stone-400 italic">
+          "Used them for my daughter's birthday catering. 50 guests, different soups and rice. 
+          Everything was delicious and on time. Professional service from start to finish!"
+        </p>
+      </div>
+
+      <div class="bg-white dark:bg-stone-800 p-8 rounded-3xl shadow-lg reveal">
+        <div class="flex items-center mb-4">
+          <img src="https://i.pravatar.cc/100?img=68" alt="Customer" class="w-14 h-14 rounded-full object-cover">
+          <div class="ml-4">
+            <h4 class="font-bold text-amber-900 dark:text-amber-100">Tunde Adebayo</h4>
+            <div class="flex text-amber-500">
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+            </div>
+          </div>
+        </div>
+        <p class="text-stone-600 dark:text-stone-400 italic">
+          "Fisherman soup is out of this world! Loads of seafood, spicy and flavorful. 
+          The restaurant ambience is classy too. My go-to spot for business lunch."
+        </p>
+      </div>
+
+      <div class="bg-white dark:bg-stone-800 p-8 rounded-3xl shadow-lg reveal">
+        <div class="flex items-center mb-4">
+          <img src="https://i.pravatar.cc/100?img=25" alt="Customer" class="w-14 h-14 rounded-full object-cover">
+          <div class="ml-4">
+            <h4 class="font-bold text-amber-900 dark:text-amber-100">Grace Eze</h4>
+            <div class="flex text-amber-500">
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+            </div>
+          </div>
+        </div>
+        <p class="text-stone-600 dark:text-stone-400 italic">
+          "As someone from Calabar, I'm very picky about my Afang. But SWEET BOTTOM POT nailed it! 
+          Fresh ingredients, perfect seasoning. Now my entire office orders from here."
+        </p>
+      </div>
+
+      <div class="bg-white dark:bg-stone-800 p-8 rounded-3xl shadow-lg reveal">
+        <div class="flex items-center mb-4">
+          <img src="https://i.pravatar.cc/100?img=56" alt="Customer" class="w-14 h-14 rounded-full object-cover">
+          <div class="ml-4">
+            <h4 class="font-bold text-amber-900 dark:text-amber-100">Ibrahim Musa</h4>
+            <div class="flex text-amber-500">
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+            </div>
+          </div>
+        </div>
+        <p class="text-stone-600 dark:text-stone-400 italic">
+          "Clean kitchen, friendly staff, and food that reminds me of home. 
+          The native rice with smoked fish is my absolute favorite. Delivery is always prompt!"
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Gallery Section -->
+<section id="gallery" class="py-20 md:py-32 bg-white dark:bg-stone-900">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-16 reveal">
+      <span class="text-amber-600 font-semibold text-sm uppercase tracking-wider">Gallery</span>
+      <h3 class="text-4xl md:text-5xl font-bold text-amber-900 dark:text-amber-100 mt-3 mb-4">
+        Taste the Visual Feast
+      </h3>
+      <p class="text-lg text-stone-600 dark:text-stone-400 max-w-2xl mx-auto">
+        A glimpse into our kitchen, dishes, and dining experience
+      </p>
+    </div>
+
+    <div class="masonry-grid">
+      <div class="masonry-item reveal">
+        <img src="https://images.unsplash.com/photo-1544025162-d76694265947?w=600&h=800&fit=crop" 
+             alt="Afang Soup" 
+             class="w-full rounded-2xl shadow-lg hover:shadow-2xl transition-shadow cursor-pointer">
+      </div>
+      <div class="masonry-item reveal">
+        <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=600&h=600&fit=crop" 
+             alt="Pounded Yam" 
+             class="w-full rounded-2xl shadow-lg hover:shadow-2xl transition-shadow cursor-pointer">
+      </div>
+      <div class="masonry-item reveal">
+        <img src="https://images.unsplash.com/photo-1567337710282-02c9e8ac2c0c?w=600&h=700&fit=crop" 
+             alt="Fisherman Soup" 
+             class="w-full rounded-2xl shadow-lg hover:shadow-2xl transition-shadow cursor-pointer">
+      </div>
+      <div class="masonry-item reveal">
+        <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=600&h=900&fit=crop" 
+             alt="Jollof Rice" 
+             class="w-full rounded-2xl shadow-lg hover:shadow-2xl transition-shadow cursor-pointer">
+      </div>
+      <div class="masonry-item reveal">
+        <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=600&h=600&fit=crop" 
+             alt="Restaurant Ambience" 
+             class="w-full rounded-2xl shadow-lg hover:shadow-2xl transition-shadow cursor-pointer">
+      </div>
+      <div class="masonry-item reveal">
+        <img src="https://images.unsplash.com/photo-1559847844-5315695dadae?w=600&h=750&fit=crop" 
+             alt="Seafood" 
+             class="w-full rounded-2xl shadow-lg hover:shadow-2xl transition-shadow cursor-pointer">
+      </div>
+      <div class="masonry-item reveal">
+        <img src="https://images.unsplash.com/photo-1606491956689-2ea866880c84?w=600&h=650&fit=crop" 
+             alt="White Soup" 
+             class="w-full rounded-2xl shadow-lg hover:shadow-2xl transition-shadow cursor-pointer">
+      </div>
+      <div class="masonry-item reveal">
+        <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=600&h=800&fit=crop" 
+             alt="Food Prep" 
+             class="w-full rounded-2xl shadow-lg hover:shadow-2xl transition-shadow cursor-pointer">
+      </div>
+      <div class="masonry-item reveal">
+        <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=600&h=600&fit=crop" 
+             alt="Dining Experience" 
+             class="w-full rounded-2xl shadow-lg hover:shadow-2xl transition-shadow cursor-pointer">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Catering & Events Section -->
+<section id="catering" class="py-20 md:py-32 bg-gradient-to-b from-amber-50 to-white dark:from-stone-950 dark:to-stone-900">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid lg:grid-cols-2 gap-12 items-center">
+      <div class="reveal">
+        <span class="text-amber-600 font-semibold text-sm uppercase tracking-wider">Catering Services</span>
+        <h3 class="text-4xl md:text-5xl font-bold text-amber-900 dark:text-amber-100 mt-3 mb-6">
+          Let Us Cater Your Special Events
+        </h3>
+        <p class="text-lg text-stone-700 dark:text-stone-300 mb-8 leading-relaxed">
+          From intimate birthday dinners to grand wedding receptions, we bring authentic Nigerian flavors to your celebrations. 
+          Our catering service covers Port Harcourt and surrounding areas with professional setup and service.
+        </p>
+
+        <div class="space-y-4 mb-8">
+          <div class="flex items-start space-x-4">
+            <div class="w-12 h-12 rounded-xl bg-amber-600 flex items-center justify-center flex-shrink-0">
+              <i class="fas fa-birthday-cake text-white"></i>
+            </div>
+            <div>
+              <h4 class="font-bold text-amber-900 dark:text-amber-100">Birthday Catering</h4>
+              <p class="text-stone-600 dark:text-stone-400">Custom menus for all ages, from kids parties to milestone celebrations</p>
+            </div>
+          </div>
+
+          <div class="flex items-start space-x-4">
+            <div class="w-12 h-12 rounded-xl bg-amber-600 flex items-center justify-center flex-shrink-0">
+              <i class="fas fa-ring text-white"></i>
+            </div>
+            <div>
+              <h4 class="font-bold text-amber-900 dark:text-amber-100">Wedding Food Service</h4>
+              <p class="text-stone-600 dark:text-stone-400">Traditional & modern menus for 50 to 2000+ guests</p>
+            </div>
+          </div>
+
+          <div class="flex items-start space-x-4">
+            <div class="w-12 h-12 rounded-xl bg-amber-600 flex items-center justify-center flex-shrink-0">
+              <i class="fas fa-briefcase text-white"></i>
+            </div>
+            <div>
+              <h4 class="font-bold text-amber-900 dark:text-amber-100">Corporate Events</h4>
+              <p class="text-stone-600 dark:text-stone-400">Office parties, conferences, product launches with professional service</p>
+            </div>
+          </div>
+
+          <div class="flex items-start space-x-4">
+            <div class="w-12 h-12 rounded-xl bg-amber-600 flex items-center justify-center flex-shrink-0">
+              <i class="fas fa-truck text-white"></i>
+            </div>
+            <div>
+              <h4 class="font-bold text-amber-900 dark:text-amber-100">Outdoor Catering</h4>
+              <p class="text-stone-600 dark:text-stone-400">Beach parties, picnics, and outdoor events with full equipment</p>
+            </div>
+          </div>
+        </div>
+
+        <a href="https://wa.me/2348061144126?text=Hello%20SWEET%20BOTTOM%20POT%2C%20I%20want%20to%20inquire%20about%20catering%20services" 
+           target="_blank"
+           class="btn-primary inline-flex items-center gap-2 px-8 py-4 rounded-full text-white font-semibold text-lg">
+          <i class="fab fa-whatsapp"></i> Get Catering Quote
+        </a>
+      </div>
+
+      <div class="reveal">
+        <img src="https://images.unsplash.com/photo-1530103862676-de8c9debad1d?w=700&h=900&fit=crop" 
+             alt="Catering Event" 
+             class="rounded-3xl shadow-2xl w-full">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Contact Section -->
+<section id="contact" class="py-20 md:py-32 bg-white dark:bg-stone-900">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-16 reveal">
+      <span class="text-amber-600 font-semibold text-sm uppercase tracking-wider">Get In Touch</span>
+      <h3 class="text-4xl md:text-5xl font-bold text-amber-900 dark:text-amber-100 mt-3 mb-4">
+        Visit Us or Order Online
+      </h3>
+      <p class="text-lg text-stone-600 dark:text-stone-400 max-w-2xl mx-auto">
+        We're open 24/7 to serve you. Dine-in, takeaway, or delivery
+      </p>
+    </div>
+
+    <div class="grid lg:grid-cols-2 gap-12">
+      <div class="reveal">
+        <div class="bg-gradient-to-br from-amber-50 to-orange-50 dark:from-stone-800 dark:to-stone-800 p-8 rounded-3xl shadow-lg mb-8">
+          <h4 class="text-2xl font-bold text-amber-900 dark:text-amber-100 mb-6">Contact Information</h4>
+          
+          <div class="space-y-6">
+            <div class="flex items-start space-x-4">
+              <div class="w-12 h-12 rounded-xl bg-amber-600 flex items-center justify-center flex-shrink-0">
+                <i class="fas fa-map-marker-alt text-white"></i>
+              </div>
+              <div>
+                <h5 class="font-semibold text-amber-900 dark:text-amber-100 mb-1">Address</h5>
+                <p class="text-stone-600 dark:text-stone-400">1 Multiplan Street, Port Harcourt,<br>Rivers State, Nigeria</p>
+              </div>
+            </div>
+
+            <div class="flex items-start space-x-4">
+              <div class="w-12 h-12 rounded-xl bg-amber-600 flex items-center justify-center flex-shrink-0">
+                <i class="fas fa-phone text-white"></i>
+              </div>
+              <div>
+                <h5 class="font-semibold text-amber-900 dark:text-amber-100 mb-1">Phone</h5>
+                <a href="tel:+2348061144126" class="text-stone-600 dark:text-stone-400 hover:text-amber-600">+234 806 114 4126</a>
+              </div>
+            </div>
+
+            <div class="flex items-start space-x-4">
+              <div class="w-12 h-12 rounded-xl bg-amber-600 flex items-center justify-center flex-shrink-0">
+                <i class="fab fa-whatsapp text-white"></i>
+              </div>
+              <div>
+                <h5 class="font-semibold text-amber-900 dark:text-amber-100 mb-1">WhatsApp</h5>
+                <a href="https://wa.me/2348061144126" target="_blank" class="text-stone-600 dark:text-stone-400 hover:text-amber-600">Chat with us</a>
+              </div>
+            </div>
+
+            <div class="flex items-start space-x-4">
+              <div class="w-12 h-12 rounded-xl bg-amber-600 flex items-center justify-center flex-shrink-0">
+                <i class="fas fa-clock text-white"></i>
+              </div>
+              <div>
+                <h5 class="font-semibold text-amber-900 dark:text-amber-100 mb-1">Opening Hours</h5>
+                <p class="text-stone-600 dark:text-stone-400">24 Hours Daily<br>Dine-in • Takeaway • Delivery • Catering</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-white dark:bg-stone-800 rounded-3xl shadow-lg overflow-hidden">
+          <iframe 
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3975.6399999999994!2d7.0133!3d4.8156!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNMKwNDgnNTYuMiJOIDfCsDAwJzQ3LjkiRQ!5e0!3m2!1sen!2sng!4v1234567890"
+            width="100%" 
+            height="300" 
+            style="border:0;" 
+            allowfullscreen="" 
+            loading="lazy" 
+            referrerpolicy="no-referrer-when-downgrade">
+          </iframe>
+        </div>
+      </div>
+
+      <div class="reveal">
+        <div class="bg-gradient-to-br from-amber-50 to-orange-50 dark:from-stone-800 dark:to-stone-800 p-8 rounded-3xl shadow-lg">
+          <h4 class="text-2xl font-bold text-amber-900 dark:text-amber-100 mb-6">Send Us a Message</h4>
+          <form id="contactForm" class="space-y-6">
+            <div>
+              <label class="block text-sm font-semibold text-stone-700 dark:text-stone-300 mb-2">Full Name</label>
+              <input type="text" required class="w-full px-4 py-3 rounded-xl bg-white dark:bg-stone-700 border border-stone-300 dark:border-stone-600 focus:ring-2 focus:ring-amber-500 focus:border-transparent outline-none transition" placeholder="Your name">
+            </div>
+
+            <div>
+              <label class="block text-sm font-semibold text-stone-700 dark:text-stone-300 mb-2">Phone Number</label>
+              <input type="tel" required class="w-full px-4 py-3 rounded-xl bg-white dark:bg-stone-700 border border-stone-300 dark:border-stone-600 focus:ring-2 focus:ring-amber-500 focus:border-transparent outline-none transition" placeholder="+234 800 000 0000">
+            </div>
+
+            <div>
+              <label class="block text-sm font-semibold text-stone-700 dark:text-stone-300 mb-2">Email</label>
+              <input type="email" required class="w-full px-4 py-3 rounded-xl bg-white dark:bg-stone-700 border border-stone-300 dark:border-stone-600 focus:ring-2 focus:ring-amber-500 focus:border-transparent outline-none transition" placeholder="your@email.com">
+            </div>
+
+            <div>
+              <label class="block text-sm font-semibold text-stone-700 dark:text-stone-300 mb-2">Subject</label>
+              <select class="w-full px-4 py-3 rounded-xl bg-white dark:bg-stone-700 border border-stone-300 dark:border-stone-600 focus:ring-2 focus:ring-amber-500 focus:border-transparent outline-none transition">
+                <option>General Inquiry</option>
+                <option>Catering Request</option>
+                <option>Reservation</option>
+                <option>Feedback</option>
+              </select>
+            </div>
+
+            <div>
+              <label class="block text-sm font-semibold text-stone-700 dark:text-stone-300 mb-2">Message</label>
+              <textarea required rows="4" class="w-full px-4 py-3 rounded-xl bg-white dark:bg-stone-700 border border-stone-300 dark:border-stone-600 focus:ring-2 focus:ring-amber-500 focus:border-transparent outline-none transition resize-none" placeholder="Your message..."></textarea>
+            </div>
+
+            <button type="submit" class="btn-primary w-full py-4 rounded-xl text-white font-semibold text-lg">
+              Send Message
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="bg-stone-900 text-stone-300 py-16">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
+      <div>
+        <div class="flex items-center space-x-3 mb-6">
+          <div class="w-12 h-12 rounded-full bg-gradient-to-br from-amber-600 to-orange-700 flex items-center justify-center">
+            <i class="fas fa-utensils text-white text-xl"></i>
+          </div>
+          <div>
+            <h3 class="text-xl font-bold text-white">SWEET BOTTOM POT</h3>
+          </div>
+        <p class="text-sm text-stone-400 mb-6">
+          Authentic Nigerian flavors served fresh daily. Your home for premium native delicacies in Port Harcourt.
+        </p>
+        <div class="flex space-x-4">
+          <a href="#" class="w-10 h-10 rounded-full bg-stone-800 flex items-center justify-center hover:bg-amber-600 transition">
+            <i class="fab fa-facebook-f"></i>
+          </a>
+          <a href="#" class="w-10 h-10 rounded-full bg-stone-800 flex items-center justify-center hover:bg-amber-600 transition">
+            <i class="fab fa-instagram"></i>
+          </a>
+          <a href="#" class="w-10 h-10 rounded-full bg-stone-800 flex items-center justify-center hover:bg-amber-600 transition">
+            <i class="fab fa-twitter"></i>
+          </a>
+          <a href="https://wa.me/2348061144126" target="_blank" class="w-10 h-10 rounded-full bg-stone-800 flex items-center justify-center hover:bg-green-600 transition">
+            <i class="fab fa-whatsapp"></i>
+          </a>
+        </div>
+      </div>
+
+      <div>
+        <h4 class="text-lg font-bold text-white mb-6">Quick Links</h4>
+        <ul class="space-y-3">
+          <li><a href="#home" class="hover:text-amber-500 transition">Home</a></li>
+          <li><a href="#about" class="hover:text-amber-500 transition">About Us</a></li>
+          <li><a href="#menu" class="hover:text-amber-500 transition">Menu</a></li>
+          <li><a href="#catering" class="hover:text-amber-500 transition">Catering</a></li>
+          <li><a href="#contact" class="hover:text-amber-500 transition">Contact</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="text-lg font-bold text-white mb-6">Services</h4>
+        <ul class="space-y-3">
+          <li class="flex items-center space-x-2">
+            <i class="fas fa-check text-amber-500"></i>
+            <span>Dine-in Service</span>
+          </li>
+          <li class="flex items-center space-x-2">
+            <i class="fas fa-check text-amber-500"></i>
+            <span>Takeaway Orders</span>
+          </li>
+          <li class="flex items-center space-x-2">
+            <i class="fas fa-check text-amber-500"></i>
+            <span>Home Delivery</span>
+          </li>
+          <li class="flex items-center space-x-2">
+            <i class="fas fa-check text-amber-500"></i>
+            <span>Event Catering</span>
+          </li>
+          <li class="flex items-center space-x-2">
+            <i class="fas fa-check text-amber-500"></i>
+            <span>Bulk Orders</span>
+          </li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="text-lg font-bold text-white mb-6">Contact Info</h4>
+        <ul class="space-y-4">
+          <li class="flex items-start space-x-3">
+            <i class="fas fa-map-marker-alt text-amber-500 mt-1"></i>
+            <span class="text-sm">1 Multiplan Street,<br>Port Harcourt, Rivers State</span>
+          </li>
+          <li class="flex items-center space-x-3">
+            <i class="fas fa-phone text-amber-500"></i>
+            <a href="tel:+2348061144126" class="text-sm hover:text-amber-500">+234 806 114 4126</a>
+          </li>
+          <li class="flex items-center space-x-3">
+            <i class="fas fa-clock text-amber-500"></i>
+            <span class="text-sm">Open 24 Hours Daily</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="border-t border-stone-800 pt-8 text-center">
+      <p class="text-sm text-stone-500">
+        © 2024 SWEET BOTTOM POT. All Rights Reserved. | Designed with <i class="fas fa-heart text-red-500"></i> in Port Harcourt
+      </p>
+    </div>
+  </div>
+</footer>
+
+<!-- Floating WhatsApp Button -->
+<a href="https://wa.me/2348061144126?text=Hello%20SWEET%20BOTTOM%20POT%2C%20I%20want%20to%20place%20an%20order" 
+   target="_blank"
+   class="fixed bottom-6 right-6 w-16 h-16 bg-green-500 hover:bg-green-600 rounded-full flex items-center justify-center shadow-2xl z-40 transition-transform hover:scale-110 animate-pulse-slow">
+  <i class="fab fa-whatsapp text-white text-3xl"></i>
+</a>
+
+<!-- Scroll to Top Button -->
+<button id="scrollTopBtn" class="fixed bottom-6 right-24 w-14 h-14 bg-amber-600 hover:bg-amber-700 rounded-full flex items-center justify-center shadow-2xl z-40 transition-all opacity-0 invisible">
+  <i class="fas fa-chevron-up text-white text-xl"></i>
+</button>
+
+<!-- Shopping Cart Sidebar -->
+<div id="cartSidebar" class="fixed right-0 top-0 h-full w-full sm:w-96 bg-white dark:bg-stone-900 shadow-2xl z-50 transform translate-x-full transition-transform duration-300">
+  <div class="flex flex-col h-full">
+    <div class="flex items-center justify-between p-6 border-b border-stone-200 dark:border-stone-700">
+      <h3 class="text-2xl font-bold text-amber-900 dark:text-amber-100">Your Order</h3>
+      <button id="closeCart" class="text-stone-600 dark:text-stone-400 hover:text-amber-600">
+        <i class="fas fa-times text-2xl"></i>
+      </button>
+    </div>
+
+    <div id="cartItems" class="flex-1 overflow-y-auto p-6">
+      <div id="emptyCart" class="text-center py-12">
+        <i class="fas fa-shopping-bag text-6xl text-stone-300 dark:text-stone-700 mb-4"></i>
+        <p class="text-stone-500 dark:text-stone-400">Your cart is empty</p>
+      </div>
+    </div>
+
+    <div class="border-t border-stone-200 dark:border-stone-700 p-6">
+      <div class="mb-6">
+        <label class="block text-sm font-semibold text-stone-700 dark:text-stone-300 mb-2">Order Type</label>
+        <select id="orderType" class="w-full px-4 py-3 rounded-xl bg-stone-100 dark:bg-stone-800 border border-stone-300 dark:border-stone-600 focus:ring-2 focus:ring-amber-500 focus:border-transparent outline-none">
+          <option value="delivery">Delivery</option>
+          <option value="pickup">Pickup</option>
+          <option value="dine-in">Dine-in</option>
+        </select>
+      </div>
+
+      <div id="deliveryAddress" class="mb-6">
+        <label class="block text-sm font-semibold text-stone-700 dark:text-stone-300 mb-2">Delivery Address</label>
+        <input type="text" class="w-full px-4 py-3 rounded-xl bg-stone-100 dark:bg-stone-800 border border-stone-300 dark:border-stone-600 focus:ring-2 focus:ring-amber-500 focus:border-transparent outline-none" placeholder="Enter your address">
+      </div>
+
+      <div class="flex justify-between items-center mb-6">
+        <span class="text-lg font-semibold text-stone-700 dark:text-stone-300">Total:</span>
+        <span id="cartTotal" class="text-3xl font-bold text-amber-600">₦0</span>
+      </div>
+
+      <button id="checkoutBtn" class="btn-primary w-full py-4 rounded-xl text-white font-semibold text-lg flex items-center justify-center gap-2">
+        <i class="fab fa-whatsapp"></i> Order via WhatsApp
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- Cart Overlay -->
+<div id="cartOverlay" class="fixed inset-0 bg-black/50 z-40 hidden"></div>
+
+<!-- Mobile Bottom Navigation -->
+<div class="lg:hidden fixed bottom-0 left-0 right-0 bg-white dark:bg-stone-900 border-t border-stone-200 dark:border-stone-700 z-30">
+  <div class="grid grid-cols-5 gap-1">
+    <a href="#home" class="flex flex-col items-center justify-center py-3 text-stone-600 dark:text-stone-400 hover:text-amber-600">
+      <i class="fas fa-home text-xl mb-1"></i>
+      <span class="text-xs">Home</span>
+    </a>
+    <a href="#menu" class="flex flex-col items-center justify-center py-3 text-stone-600 dark:text-stone-400 hover:text-amber-600">
+      <i class="fas fa-utensils text-xl mb-1"></i>
+      <span class="text-xs">Menu</span>
+    </a>
+    <button id="mobileCartBtn" class="flex flex-col items-center justify-center py-3 text-stone-600 dark:text-stone-400 hover:text-amber-600 relative">
+      <i class="fas fa-shopping-bag text-xl mb-1"></i>
+      <span class="text-xs">Cart</span>
+      <span id="mobileCartCount" class="absolute top-1 right-4 bg-orange-600 text-white text-xs w-5 h-5 rounded-full flex items-center justify-center hidden">0</span>
+    </button>
+    <a href="#catering" class="flex flex-col items-center justify-center py-3 text-stone-600 dark:text-stone-400 hover:text-amber-600">
+      <i class="fas fa-calendar text-xl mb-1"></i>
+      <span class="text-xs">Catering</span>
+    </a>
+    <a href="#contact" class="flex flex-col items-center justify-center py-3 text-stone-600 dark:text-stone-400 hover:text-amber-600">
+      <i class="fas fa-phone text-xl mb-1"></i>
+      <span class="text-xs">Contact</span>
+    </a>
+  </div>
+</div>
+
+<script>
+  // Loading Animation
+  window.addEventListener('load', () => {
+    setTimeout(() => {
+      document.getElementById('loader').classList.add('hidden');
+    }, 1000);
+  });
+
+  // Theme Toggle
+  const themeToggle = document.getElementById('themeToggle');
+  const html = document.documentElement;
+  
+  function setTheme(isDark) {
+    if (isDark) {
+      html.classList.add('dark');
+      themeToggle.innerHTML = '<i class="fas fa-sun text-xl"></i>';
+      localStorage.setItem('theme', 'dark');
+    } else {
+      html.classList.remove('dark');
+      themeToggle.innerHTML = '<i class="fas fa-moon text-xl"></i>';
+      localStorage.setItem('theme', 'light');
+    }
+  }
+
+  const savedTheme = localStorage.getItem('theme');
+  setTheme(savedTheme === 'dark');
+
+  themeToggle.addEventListener('click', () => {
+    setTheme(!html.classList.contains('dark'));
+  });
+
+  // Mobile Menu Toggle
+  const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+  const mobileMenu = document.getElementById('mobileMenu');
+  
+  mobileMenuBtn.addEventListener('click', () => {
+    mobileMenu.classList.toggle('hidden');
+  });
+
+  // Navbar Scroll Effect
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 100) {
+      navbar.classList.add('bg-stone-900/95', 'backdrop-blur-lg', 'shadow-lg');
+      navbar.classList.remove('bg-transparent');
+    } else {
+      navbar.classList.remove('bg-stone-900/95', 'backdrop-blur-lg', 'shadow-lg');
+      navbar.classList.add('bg-transparent');
+    }
+  });
+
+  // Scroll to Top Button
+  const scrollTopBtn = document.getElementById('scrollTopBtn');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 500) {
+      scrollTopBtn.classList.remove('opacity-0', 'invisible');
+    } else {
+      scrollTopBtn.classList.add('opacity-0', 'invisible');
+    }
+  });
+
+  scrollTopBtn.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+
+  // Reveal Animation on Scroll
+  const revealElements = document.querySelectorAll('.reveal');
+  const revealOnScroll = () => {
+    revealElements.forEach(element => {
+      const elementTop = element.getBoundingClientRect().top;
+      const windowHeight = window.innerHeight;
+      if (elementTop < windowHeight - 100) {
+        element.classList.add('active');
+      }
+    });
+  };
+
+  window.addEventListener('scroll', revealOnScroll);
+  revealOnScroll();
+
+  // Counter Animation
+  const counters = document.querySelectorAll('.counter');
+  const animateCounter = (counter) => {
+    const target = parseInt(counter.getAttribute('data-target'));
+    const duration = 2000;
+    const increment = target / (duration / 16);
+    let current = 0;
+
+    const updateCounter = () => {
+      current += increment;
+      if (current < target) {
+        counter.textContent = Math.floor(current);
+        requestAnimationFrame(updateCounter);
+      } else {
+        counter.textContent = target + '+';
+      }
+    };
+
+    updateCounter();
+  };
+
+  const counterObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting && !entry.target.classList.contains('counted')) {
+        animateCounter(entry.target);
+        entry.target.classList.add('counted');
+      }
+    });
+  }, { threshold: 0.5 });
+
+  counters.forEach(counter => counterObserver.observe(counter));
+
+  // Menu Tabs Filter
+  const menuTabs = document.querySelectorAll('.menu-tab');
+  const menuItems = document.querySelectorAll('.menu-item');
+
+  menuTabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      const category = tab.getAttribute('data-category');
+      
+      menuTabs.forEach(t => {
+        t.classList.remove('active', 'bg-amber-600', 'text-white');
+        t.classList.add('bg-stone-200', 'dark:bg-stone-700', 'text-stone-700', 'dark:text-stone-300');
+      });
+      
+      tab.classList.add('active', 'bg-amber-600', 'text-white');
+      tab.classList.remove('bg-stone-200', 'dark:bg-stone-700', 'text-stone-700', 'dark:text-stone-300');
+
+      menuItems.forEach(item => {
+        if (category === 'all' || item.getAttribute('data-category') === category) {
+          item.style.display = 'flex';
+        } else {
+          item.style.display = 'none';
+        }
+      });
+    });
+  });
+
+  // Shopping Cart Functionality
+  let cart = [];
+  
+  const cartBtn = document.getElementById('cartBtn');
+  const mobileCartBtn = document.getElementById('mobileCartBtn');
+  const cartSidebar = document.getElementById('cartSidebar');
+  const cartOverlay = document.getElementById('cartOverlay');
+  const closeCart = document.getElementById('closeCart');
+  const cartItems = document.getElementById('cartItems');
+  const emptyCart = document.getElementById('emptyCart');
+  const cartCount = document.getElementById('cartCount');
+  const mobileCartCount = document.getElementById('mobileCartCount');
+  const cartTotal = document.getElementById('cartTotal');
+  const checkoutBtn = document.getElementById('checkoutBtn');
+  const orderType = document.getElementById('orderType');
+  const deliveryAddress = document.getElementById('deliveryAddress');
+
+  function openCart() {
+    cartSidebar.classList.remove('translate-x-full');
+    cartOverlay.classList.remove('hidden');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeCartSidebar() {
+    cartSidebar.classList.add('translate-x-full');
+    cartOverlay.classList.add('hidden');
+    document.body.style.overflow = '';
+  }
+
+  cartBtn.addEventListener('click', openCart);
+  mobileCartBtn.addEventListener('click', openCart);
+  closeCart.addEventListener('click', closeCartSidebar);
+  cartOverlay.addEventListener('click', closeCartSidebar);
+
+  function updateCart() {
+    const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+    const totalPrice = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+
+    if (totalItems > 0) {
+      cartCount.textContent = totalItems;
+      cartCount.classList.remove('hidden');
+      mobileCartCount.textContent = totalItems;
+      mobileCartCount.classList.remove('hidden');
+    } else {
+      cartCount.classList.add('hidden');
+      mobileCartCount.classList.add('hidden');
+    }
+
+    cartTotal.textContent = `₦${totalPrice.toLocaleString()}`;
+
+    if (cart.length === 0) {
+      emptyCart.style.display = 'block';
+      cartItems.innerHTML = '';
+      cartItems.appendChild(emptyCart);
+    } else {
+      emptyCart.style.display = 'none';
+      cartItems.innerHTML = '';
+      
+      cart.forEach((item, index) => {
+        const itemElement = document.createElement('div');
+        itemElement.className = 'flex items-center justify-between p-4 bg-stone-50 dark:bg-stone-800 rounded-xl mb-3';
+        itemElement.innerHTML = `
+          <div class="flex-1">
+            <h4 class="font-semibold text-amber-900 dark:text-amber-100">${item.name}</h4>
+            <p class="text-sm text-stone-600 dark:text-stone-400">₦${item.price.toLocaleString()}</p>
+          </div>
+          <div class="flex items-center space-x-3">
+            <button class="decrease-qty w-8 h-8 rounded-full bg-stone-200 dark:bg-stone-700 text-stone-700 dark:text-stone-300 hover:bg-amber-600 hover:text-white transition" data-index="${index}">
+              <i class="fas fa-minus text-xs"></i>
+            </button>
+            <span class="font-semibold text-amber-900 dark:text-amber-100 w-8 text-center">${item.quantity}</span>
+            <button class="increase-qty w-8 h-8 rounded-full bg-stone-200 dark:bg-stone-700 text-stone-700 dark:text-stone-300 hover:bg-amber-600 hover:text-white transition" data-index="${index}">
+              <i class="fas fa-plus text-xs"></i>
+            </button>
+            <button class="remove-item ml-2 text-red-500 hover:text-red-700" data-index="${index}">
+              <i class="fas fa-trash"></i>
+            </button>
+          </div>
+        `;
+        cartItems.appendChild(itemElement);
+      });
+
+      // Add event listeners for quantity buttons
+      document.querySelectorAll('.increase-qty').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          const index = parseInt(e.currentTarget.getAttribute('data-index'));
+          cart[index].quantity++;
+          updateCart();
+        });
+      });
+
+      document.querySelectorAll('.decrease-qty').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          const index = parseInt(e.currentTarget.getAttribute('data-index'));
+          if (cart[index].quantity > 1) {
+            cart[index].quantity--;
+          } else {
+            cart.splice(index, 1);
+          }
+          updateCart();
+        });
+      });
+
+      document.querySelectorAll('.remove-item').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          const index = parseInt(e.currentTarget.getAttribute('data-index'));
+          cart.splice(index, 1);
+          updateCart();
+        });
+      });
+    }
+  }
+
+  document.querySelectorAll('.add-to-cart').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      const name = btn.getAttribute('data-name');
+      const price = parseInt(btn.getAttribute('data-price'));
+      
+      const existingItem = cart.find(item => item.name === name);
+      if (existingItem) {
+        existingItem.quantity++;
+      } else {
+        cart.push({ name, price, quantity: 1 });
+      }
+      
+      updateCart();
+      
+      // Show success feedback
+      btn.innerHTML = '<i class="fas fa-check"></i>';
+      setTimeout(() => {
+        btn.innerHTML = '<i class="fas fa-plus"></i>';
+      }, 1000);
+    });
+  });
+
+  orderType.addEventListener('change', () => {
+    if (orderType.value === 'delivery') {
+      deliveryAddress.style.display = 'block';
+    } else {
+      deliveryAddress.style.display = 'none';
+    }
+  });
+
+  checkoutBtn.addEventListener('click', () => {
+    if (cart.length === 0) {
+      alert('Your cart is empty!');
+      return;
+    }
+
+    const type = orderType.value;
+    const address = deliveryAddress.querySelector('input').value;
+    
+    if (type === 'delivery' && !address.trim()) {
+      alert('Please enter your delivery address');
+      return;
+    }
+
+    let message = `Hello SWEET BOTTOM POT! I want to place an order:%0A%0A`;
+    cart.forEach(item => {
+      message += `• ${item.name} x${item.quantity} - ₦${(item.price * item.quantity).toLocaleString()}%0A`;
+    });
+    message += `%0A*Total: ₦${cart.reduce((sum, item) => sum + (item.price * item.quantity), 0).toLocaleString()}*%0A`;
+    message += `%0AOrder Type: ${type.charAt(0).toUpperCase() + type.slice(1)}%0A`;
+    if (type === 'delivery') {
+      message += `Delivery Address: ${address}%0A`;
+    }
+    message += `%0APlease confirm my order. Thank you!`;
+
+    window.open(`https://wa.me/2348061144126?text=${message}`, '_blank');
+  });
+
+  // Contact Form
+  document.getElementById('contactForm').addEventListener('submit', (e) => {
+    e.preventDefault();
+    alert('Thank you for your message! We will get back to you soon.');
+    e.target.reset();
+  });
+
+  // Smooth scroll for navigation links
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+      e.preventDefault();
+      const target = document.querySelector(this.getAttribute('href'));
+      if (target) {
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        mobileMenu.classList.add('hidden');
+      }
+    });
+  });
+
+  // Active nav link on scroll
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.nav-link');
+
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(section => {
+      const sectionTop = section.offsetTop;
+      const sectionHeight = section.clientHeight;
+      if (window.scrollY >= sectionTop - 200) {
+        current = section.getAttribute('id');
+      }
+    });
+
+    navLinks.forEach(link => {
+      link.classList.remove('active');
+      if (link.getAttribute('href') === `#${current}`) {
+        link.classList.add('active');
+      }
+    });
+  });
+</script>
+
+<script>(function(){document.addEventListener("click",function(e){var a=e.target.closest("[data-product-id]");if(!a)return;e.preventDefault();var pid=a.getAttribute("data-product-id");if(pid)parent.postMessage({type:"ecto-artifact-link-click",productId:pid},"*")})})();</script>
+</body>
+</html>
