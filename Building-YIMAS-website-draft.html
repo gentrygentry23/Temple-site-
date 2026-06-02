@@ -1,0 +1,1007 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>YIMAS - Premium Property Development & Facility Management in Nigeria</title>
+<meta name="description" content="YIMAS delivers premium property development and facility management services across Nigeria. Explore luxury estates, request site visits, and experience trusted corporate real estate solutions.">
+
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+
+<style>
+    :root {
+        --primary: #6A0DAD;
+        --primary-dark: #4B0082;
+        --primary-light: #8B4BC2;
+        --charcoal: #2C2C2C;
+        --silver: #C0C0C0;
+        --silver-light: #F5F5F7;
+    }
+    
+    body {
+        font-family: 'Inter', sans-serif;
+        color: var(--charcoal);
+        scroll-behavior: smooth;
+    }
+    
+    .font-display {
+        font-family: 'Playfair Display', serif;
+    }
+    
+    .bg-primary {
+        background-color: var(--primary);
+    }
+    
+    .bg-primary-dark {
+        background-color: var(--primary-dark);
+    }
+    
+    .text-primary {
+        color: var(--primary);
+    }
+    
+    .border-primary {
+        border-color: var(--primary);
+    }
+    
+    .gradient-primary {
+        background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+    }
+    
+    .gradient-overlay {
+        background: linear-gradient(180deg, rgba(44,44,44,0.1) 0%, rgba(44,44,44,0.7) 100%);
+    }
+    
+    .trust-badge {
+        box-shadow: 0 4px 20px rgba(106, 13, 173, 0.15);
+        transition: all 0.3s ease;
+    }
+    
+    .trust-badge:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 8px 30px rgba(106, 13, 173, 0.25);
+    }
+    
+    .property-card {
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+    
+    .property-card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 20px 40px rgba(0,0,0,0.12);
+    }
+    
+    .btn-primary {
+        background: var(--primary);
+        transition: all 0.3s ease;
+    }
+    
+    .btn-primary:hover {
+        background: var(--primary-dark);
+        transform: translateY(-2px);
+        box-shadow: 0 10px 20px rgba(106, 13, 173, 0.3);
+    }
+    
+    .nav-link {
+        position: relative;
+    }
+    
+    .nav-link::after {
+        content: '';
+        position: absolute;
+        bottom: -4px;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background: var(--primary);
+        transition: width 0.3s ease;
+    }
+    
+    .nav-link:hover::after {
+        width: 100%;
+    }
+    
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+    
+    .animate-fade-in-up {
+        animation: fadeInUp 0.6s ease-out forwards;
+    }
+    
+    .stats-number {
+        background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+    
+    select, input {
+        appearance: none;
+        -webkit-appearance: none;
+    }
+    
+    .mobile-menu {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease-in-out;
+    }
+    
+    .mobile-menu.active {
+        max-height: 500px;
+    }
+</style>
+</head>
+<body class="bg-white antialiased">
+
+<!-- Top Bar -->
+<div class="bg-[#2C2C2C] text-white py-2 text-sm hidden md:block">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center">
+        <div class="flex items-center gap-6">
+            <span><i class="fa-solid fa-phone text-purple-400 mr-2"></i>+234 800 123 4567</span>
+            <span><i class="fa-solid fa-envelope text-purple-400 mr-2"></i>info@yimas.com</span>
+        </div>
+        <div class="flex items-center gap-4">
+            <span class="text-gray-300">RC: 1234567</span>
+            <div class="flex gap-3">
+                <a href="#" class="hover:text-purple-400 transition"><i class="fab fa-facebook"></i></a>
+                <a href="#" class="hover:text-purple-400 transition"><i class="fab fa-instagram"></i></a>
+                <a href="#" class="hover:text-purple-400 transition"><i class="fab fa-linkedin"></i></a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Header -->
+<header class="bg-white sticky top-0 z-50 shadow-sm">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between items-center h-20">
+            <div class="flex items-center gap-3">
+                <div class="w-12 h-12 gradient-primary rounded-lg flex items-center justify-center">
+                    <span class="text-white font-bold text-2xl font-display">Y</span>
+                </div>
+                <div>
+                    <h1 class="font-display text-2xl font-bold text-[#2C2C2C]">YIMAS</h1>
+                    <p class="text-xs text-gray-500 -mt-1">Development & Facility Management</p>
+                </div>
+            </div>
+            
+            <nav class="hidden lg:flex items-center gap-8">
+                <a href="#home" class="nav-link text-[#2C2C2C] font-medium">Home</a>
+                <a href="#properties" class="nav-link text-[#2C2C2C] font-medium">Properties</a>
+                <a href="#projects" class="nav-link text-[#2C2C2C] font-medium">Projects</a>
+                <a href="#services" class="nav-link text-[#2C2C2C] font-medium">Facility Management</a>
+                <a href="#about" class="nav-link text-[#2C2C2C] font-medium">About Us</a>
+                <a href="#contact" class="nav-link text-[#2C2C2C] font-medium">Contact</a>
+            </nav>
+            
+            <div class="flex items-center gap-4">
+                <a href="#contact" class="hidden md:flex btn-primary text-white px-6 py-3 rounded-lg font-semibold items-center gap-2">
+                    <i class="fa-solid fa-calendar-check"></i>
+                    Book Site Visit
+                </a>
+                <button id="mobile-menu-btn" class="lg:hidden text-[#2C2C2C] text-2xl">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="mobile-menu lg:hidden pb-4">
+            <div class="flex flex-col gap-4 pt-4 border-t border-gray-200">
+                <a href="#home" class="text-[#2C2C2C] font-medium py-2">Home</a>
+                <a href="#properties" class="text-[#2C2C2C] font-medium py-2">Properties</a>
+                <a href="#projects" class="text-[#2C2C2C] font-medium py-2">Projects</a>
+                <a href="#services" class="text-[#2C2C2C] font-medium py-2">Facility Management</a>
+                <a href="#about" class="text-[#2C2C2C] font-medium py-2">About Us</a>
+                <a href="#contact" class="text-[#2C2C2C] font-medium py-2">Contact</a>
+                <a href="#contact" class="btn-primary text-white px-6 py-3 rounded-lg font-semibold text-center">
+                    Book Site Visit
+                </a>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Hero Section -->
+<section id="home" class="relative">
+    <div class="relative h-[650px] lg:h-[750px]">
+        <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=2070&auto=format&fit=crop" 
+             alt="Luxury Estate Development" 
+             class="w-full h-full object-cover">
+        <div class="absolute inset-0 gradient-overlay"></div>
+        
+        <div class="absolute inset-0 flex items-center">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+                <div class="max-w-3xl animate-fade-in-up">
+                    <div class="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md px-4 py-2 rounded-full mb-6 border border-white/20">
+                        <i class="fa-solid fa-award text-yellow-400"></i>
+                        <span class="text-white text-sm font-medium">15+ Years of Trusted Excellence</span>
+                    </div>
+                    <h2 class="font-display text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-6 leading-tight">
+                        Building Premium Living Experiences
+                    </h2>
+                    <p class="text-lg md:text-xl text-gray-200 mb-8 leading-relaxed">
+                        Nigeria's leading property development and facility management company. From luxury estates to comprehensive estate management solutions.
+                    </p>
+                    <div class="flex flex-wrap gap-4">
+                        <a href="#properties" class="bg-white text-[#6A0DAD] px-8 py-4 rounded-lg font-semibold hover:bg-gray-100 transition flex items-center gap-2">
+                            Explore Properties
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </a>
+                        <a href="#services" class="bg-transparent border-2 border-white text-white px-8 py-4 rounded-lg font-semibold hover:bg-white hover:text-[#6A0DAD] transition">
+                            Our Services
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Advanced Search Bar -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-24 relative z-10">
+        <div class="bg-white rounded-2xl shadow-2xl p-6 md:p-8">
+            <h3 class="text-xl font-semibold text-[#2C2C2C] mb-6 flex items-center gap-2">
+                <i class="fa-solid fa-magnifying-glass text-primary"></i>
+                Find Your Perfect Property
+            </h3>
+            <form id="searchForm" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
+                <div class="relative">
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Location</label>
+                    <select class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-primary focus:ring-2 focus:ring-purple-200 transition">
+                        <option>All Locations</option>
+                        <option>Lekki, Lagos</option>
+                        <option>Ikoyi, Lagos</option>
+                        <option>Abuja FCT</option>
+                        <option>Victoria Island</option>
+                    </select>
+                    <i class="fa-solid fa-chevron-down absolute right-4 bottom-4 text-gray-400 pointer-events-none"></i>
+                </div>
+                <div class="relative">
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Property Type</label>
+                    <select class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-primary focus:ring-2 focus:ring-purple-200 transition">
+                        <option>All Types</option>
+                        <option>Duplex</option>
+                        <option>Terrace</option>
+                        <option>Apartment</option>
+                        <option>Bungalow</option>
+                    </select>
+                    <i class="fa-solid fa-chevron-down absolute right-4 bottom-4 text-gray-400 pointer-events-none"></i>
+                </div>
+                <div class="relative">
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Price Range</label>
+                    <select class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-primary focus:ring-2 focus:ring-purple-200 transition">
+                        <option>Any Price</option>
+                        <option>₦50M - ₦100M</option>
+                        <option>₦100M - ₦200M</option>
+                        <option>₦200M - ₦500M</option>
+                        <option>₦500M+</option>
+                    </select>
+                    <i class="fa-solid fa-chevron-down absolute right-4 bottom-4 text-gray-400 pointer-events-none"></i>
+                </div>
+                <div class="relative">
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Bedrooms</label>
+                    <select class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-primary focus:ring-2 focus:ring-purple-200 transition">
+                        <option>Any</option>
+                        <option>1 Bedroom</option>
+                        <option>2 Bedrooms</option>
+                        <option>3 Bedrooms</option>
+                        <option>4+ Bedrooms</option>
+                    </select>
+                    <i class="fa-solid fa-chevron-down absolute right-4 bottom-4 text-gray-400 pointer-events-none"></i>
+                </div>
+                <div class="flex items-end">
+                    <button type="submit" class="w-full btn-primary text-white px-6 py-3 rounded-lg font-semibold h-[50px] flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-search"></i>
+                        Search
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+
+<!-- Trust Indicators -->
+<section class="py-16 bg-[#F5F5F7]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-2 lg:grid-cols-4 gap-6">
+            <div class="trust-badge bg-white rounded-xl p-6 text-center">
+                <div class="text-4xl font-bold stats-number mb-2" data-count="15">0</div>
+                <p class="text-gray-600 font-medium">Years Experience</p>
+            </div>
+            <div class="trust-badge bg-white rounded-xl p-6 text-center">
+                <div class="text-4xl font-bold stats-number mb-2" data-count="50">0</div>
+                <p class="text-gray-600 font-medium">Projects Completed</p>
+            </div>
+            <div class="trust-badge bg-white rounded-xl p-6 text-center">
+                <div class="text-4xl font-bold stats-number mb-2" data-count="1200">0</div>
+                <p class="text-gray-600 font-medium">Happy Clients</p>
+            </div>
+            <div class="trust-badge bg-white rounded-xl p-6 text-center">
+                <div class="text-4xl font-bold stats-number mb-2">ISO</div>
+                <p class="text-gray-600 font-medium">9001:2015 Certified</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Featured Properties -->
+<section id="properties" class="py-20 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12">
+            <span class="text-primary font-semibold text-sm uppercase tracking-wider">Featured Listings</span>
+            <h2 class="font-display text-4xl md:text-5xl font-bold text-[#2C2C2C] mt-3 mb-4">Premium Property Showcase</h2>
+            <p class="text-gray-600 max-w-2xl mx-auto">Discover our handpicked selection of luxury properties across Nigeria's most prestigious locations</p>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Property 1 -->
+            <div class="property-card bg-white rounded-2xl overflow-hidden shadow-lg border border-gray-100">
+                <div class="relative h-64">
+                    <img src="https://images.unsplash.com/photo-1613490493576-7fde63acd811?q=80&w=2071&auto=format&fit=crop" 
+                         alt="Luxury Duplex Lekki" 
+                         class="w-full h-full object-cover">
+                    <div class="absolute top-4 left-4 bg-primary text-white px-4 py-1 rounded-full text-sm font-semibold">
+                        Featured
+                    </div>
+                    <div class="absolute top-4 right-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-sm font-semibold text-[#6A0DAD]">
+                        For Sale
+                    </div>
+                </div>
+                <div class="p-6">
+                    <div class="flex justify-between items-start mb-3">
+                        <h3 class="font-display text-xl font-bold text-[#2C2C2C]">5 Bedroom Smart Duplex</h3>
+                        <span class="text-2xl font-bold text-primary">₦250M</span>
+                    </div>
+                    <p class="text-gray-600 mb-4 flex items-center gap-2">
+                        <i class="fa-solid fa-location-dot text-primary"></i>
+                        Lekki Phase 1, Lagos
+                    </p>
+                    <div class="flex items-center gap-4 text-sm text-gray-600 mb-6 pb-6 border-b border-gray-200">
+                        <span><i class="fa-solid fa-bed text-primary mr-1"></i> 5 Beds</span>
+                        <span><i class="fa-solid fa-bath text-primary mr-1"></i> 6 Baths</span>
+                        <span><i class="fa-solid fa-ruler-combined text-primary mr-1"></i> 450 sqm</span>
+                    </div>
+                    <div class="flex gap-3">
+                        <button class="flex-1 bg-[#6A0DAD] text-white py-3 rounded-lg font-semibold hover:bg-[#4B0082] transition">
+                            View Details
+                        </button>
+                        <button class="w-12 h-12 border-2 border-gray-200 rounded-lg hover:border-primary hover:text-primary transition">
+                            <i class="fa-regular fa-heart"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Property 2 -->
+            <div class="property-card bg-white rounded-2xl overflow-hidden shadow-lg border border-gray-100">
+                <div class="relative h-64">
+                    <img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?q=80&w=2075&auto=format&fit=crop" 
+                         alt="Luxury Terrace Abuja" 
+                         class="w-full h-full object-cover">
+                    <div class="absolute top-4 right-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-sm font-semibold text-[#6A0DAD]">
+                        For Sale
+                    </div>
+                </div>
+                <div class="p-6">
+                    <div class="flex justify-between items-start mb-3">
+                        <h3 class="font-display text-xl font-bold text-[#2C2C2C]">4 Bedroom Terrace</h3>
+                        <span class="text-2xl font-bold text-primary">₦180M</span>
+                    </div>
+                    <p class="text-gray-600 mb-4 flex items-center gap-2">
+                        <i class="fa-solid fa-location-dot text-primary"></i>
+                        Maitama, Abuja FCT
+                    </p>
+                    <div class="flex items-center gap-4 text-sm text-gray-600 mb-6 pb-6 border-b border-gray-200">
+                        <span><i class="fa-solid fa-bed text-primary mr-1"></i> 4 Beds</span>
+                        <span><i class="fa-solid fa-bath text-primary mr-1"></i> 5 Baths</span>
+                        <span><i class="fa-solid fa-ruler-combined text-primary mr-1"></i> 380 sqm</span>
+                    </div>
+                    <div class="flex gap-3">
+                        <button class="flex-1 bg-[#6A0DAD] text-white py-3 rounded-lg font-semibold hover:bg-[#4B0082] transition">
+                            View Details
+                        </button>
+                        <button class="w-12 h-12 border-2 border-gray-200 rounded-lg hover:border-primary hover:text-primary transition">
+                            <i class="fa-regular fa-heart"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Property 3 -->
+            <div class="property-card bg-white rounded-2xl overflow-hidden shadow-lg border border-gray-100">
+                <div class="relative h-64">
+                    <img src="https://images.unsplash.com/photo-1605146769289-440113cc3d00?q=80&w=2070&auto=format&fit=crop" 
+                         alt="Luxury Apartment Ikoyi" 
+                         class="w-full h-full object-cover">
+                    <div class="absolute top-4 left-4 bg-green-600 text-white px-4 py-1 rounded-full text-sm font-semibold">
+                        New
+                    </div>
+                    <div class="absolute top-4 right-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-sm font-semibold text-[#6A0DAD]">
+                        For Sale
+                    </div>
+                </div>
+                <div class="p-6">
+                    <div class="flex justify-between items-start mb-3">
+                        <h3 class="font-display text-xl font-bold text-[#2C2C2C]">3 Bedroom Penthouse</h3>
+                        <span class="text-2xl font-bold text-primary">₦320M</span>
+                    </div>
+                    <p class="text-gray-600 mb-4 flex items-center gap-2">
+                        <i class="fa-solid fa-location-dot text-primary"></i>
+                        Banana Island, Lagos
+                    </p>
+                    <div class="flex items-center gap-4 text-sm text-gray-600 mb-6 pb-6 border-b border-gray-200">
+                        <span><i class="fa-solid fa-bed text-primary mr-1"></i> 3 Beds</span>
+                        <span><i class="fa-solid fa-bath text-primary mr-1"></i> 4 Baths</span>
+                        <span><i class="fa-solid fa-ruler-combined text-primary mr-1"></i> 520 sqm</span>
+                    </div>
+                    <div class="flex gap-3">
+                        <button class="flex-1 bg-[#6A0DAD] text-white py-3 rounded-lg font-semibold hover:bg-[#4B0082] transition">
+                            View Details
+                        </button>
+                        <button class="w-12 h-12 border-2 border-gray-200 rounded-lg hover:border-primary hover:text-primary transition">
+                            <i class="fa-regular fa-heart"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="text-center mt-12">
+            <a href="#" class="inline-flex items-center gap-2 border-2 border-primary text-primary px-8 py-4 rounded-lg font-semibold hover:bg-primary hover:text-white transition">
+                View All Properties
+                <i class="fa-solid fa-arrow-right"></i>
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- Facility Management Services -->
+<section id="services" class="py-20 bg-[#F5F5F7]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12">
+            <span class="text-primary font-semibold text-sm uppercase tracking-wider">Facility Management</span>
+            <h2 class="font-display text-4xl md:text-5xl font-bold text-[#2C2C2C] mt-3 mb-4">Comprehensive Estate Solutions</h2>
+            <p class="text-gray-600 max-w-2xl mx-auto">End-to-end facility management services designed to preserve value and enhance living experiences</p>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div class="bg-white rounded-2xl p-8 hover:shadow-xl transition">
+                <div class="w-16 h-16 gradient-primary rounded-xl flex items-center justify-center mb-6">
+                    <i class="fa-solid fa-screwdriver-wrench text-white text-2xl"></i>
+                </div>
+                <h3 class="font-display text-xl font-bold text-[#2C2C2C] mb-3">Maintenance & Repairs</h3>
+                <p class="text-gray-600 mb-4">24/7 preventive and corrective maintenance for mechanical, electrical, and plumbing systems across residential and commercial properties.</p>
+                <ul class="space-y-2 text-sm text-gray-600">
+                    <li class="flex items-center gap-2"><i class="fa-solid fa-check text-primary"></i> Scheduled inspections</li>
+                    <li class="flex items-center gap-2"><i class="fa-solid fa-check text-primary"></i> Emergency response team</li>
+                    <li class="flex items-center gap-2"><i class="fa-solid fa-check text-primary"></i> Vendor management</li>
+                </ul>
+            </div>
+            
+            <div class="bg-white rounded-2xl p-8 hover:shadow-xl transition">
+                <div class="w-16 h-16 gradient-primary rounded-xl flex items-center justify-center mb-6">
+                    <i class="fa-solid fa-shield-halved text-white text-2xl"></i>
+                </div>
+                <h3 class="font-display text-xl font-bold text-[#2C2C2C] mb-3">Security Management</h3>
+                <p class="text-gray-600 mb-4">Integrated security solutions combining trained personnel, CCTV surveillance, and access control systems for complete peace of mind.</p>
+                <ul class="space-y-2 text-sm text-gray-600">
+                    <li class="flex items-center gap-2"><i class="fa-solid fa-check text-primary"></i> 24/7 Security personnel</li>
+                    <li class="flex items-center gap-2"><i class="fa-solid fa-check text-primary"></i> Smart access control</li>
+                    <li class="flex items-center gap-2"><i class="fa-solid fa-check text-primary"></i> Incident reporting</li>
+                </ul>
+            </div>
+            
+            <div class="bg-white rounded-2xl p-8 hover:shadow-xl transition">
+                <div class="w-16 h-16 gradient-primary rounded-xl flex items-center justify-center mb-6">
+                    <i class="fa-solid fa-tree text-white text-2xl"></i>
+                </div>
+                <h3 class="font-display text-xl font-bold text-[#2C2C2C] mb-3">Estate Management</h3>
+                <p class="text-gray-600 mb-4">Complete estate administration including landscaping, waste management, amenities coordination, and resident relations.</p>
+                <ul class="space-y-2 text-sm text-gray-600">
+                    <li class="flex items-center gap-2"><i class="fa-solid fa-check text-primary"></i> Landscape maintenance</li>
+                    <li class="flex items-center gap-2"><i class="fa-solid fa-check text-primary"></i> Amenity management</li>
+                    <li class="flex items-center gap-2"><i class="fa-solid fa-check text-primary"></i> Service charge admin</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="mt-12 text-center">
+            <a href="#contact" class="btn-primary text-white px-8 py-4 rounded-lg font-semibold inline-flex items-center gap-2">
+                <i class="fa-solid fa-file-lines"></i>
+                Request Service Proposal
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- Project Portfolio -->
+<section id="projects" class="py-20 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12">
+            <span class="text-primary font-semibold text-sm uppercase tracking-wider">Our Portfolio</span>
+            <h2 class="font-display text-4xl md:text-5xl font-bold text-[#2C2C2C] mt-3 mb-4">Completed & Ongoing Projects</h2>
+            <p class="text-gray-600 max-w-2xl mx-auto">A showcase of our commitment to excellence in property development across Nigeria</p>
+        </div>
+        
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <div class="relative rounded-2xl overflow-hidden h-96 group">
+                <img src="https://images.unsplash.com/photo-1580587771525-78b9dba3b914?q=80&w=2074&auto=format&fit=crop" 
+                     alt="YIMAS Gardens Lekki" 
+                     class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent"></div>
+                <div class="absolute bottom-0 left-0 right-0 p-8 text-white">
+                    <div class="inline-block bg-green-600 px-4 py-1 rounded-full text-sm font-semibold mb-3">Completed 2023</div>
+                    <h3 class="font-display text-3xl font-bold mb-2">YIMAS Gardens</h3>
+                    <p class="text-gray-200 mb-4">50-unit luxury estate with smart home technology, Lekki Phase 2</p>
+                    <div class="flex items-center gap-6 text-sm">
+                        <span><i class="fa-solid fa-building mr-2"></i>50 Units</span>
+                        <span><i class="fa-solid fa-money-bill mr-2"></i>₦12B+ Value</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="relative rounded-2xl overflow-hidden h-96 group">
+                <img src="https://images.unsplash.com/photo-1558036117-15d82a90b9b1?q=80&w=2070&auto=format&fit=crop" 
+                     alt="The Residences Abuja" 
+                     class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent"></div>
+                <div class="absolute bottom-0 left-0 right-0 p-8 text-white">
+                    <div class="inline-block bg-primary px-4 py-1 rounded-full text-sm font-semibold mb-3">Ongoing</div>
+                    <h3 class="font-display text-3xl font-bold mb-2">The Residences Abuja</h3>
+                    <p class="text-gray-200 mb-4">Premium high-rise development with panoramic city views, Maitama</p>
+                    <div class="flex items-center gap-6 text-sm">
+                        <span><i class="fa-solid fa-building mr-2"></i>120 Units</span>
+                        <span><i class="fa-solid fa-calendar mr-2"></i>Delivery Q4 2025</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Testimonials -->
+<section class="py-20 bg-[#2C2C2C] text-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12">
+            <span class="text-purple-400 font-semibold text-sm uppercase tracking-wider">Client Testimonials</span>
+            <h2 class="font-display text-4xl md:text-5xl font-bold mt-3 mb-4">Trusted by Homeowners</h2>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="bg-white/5 backdrop-blur-sm rounded-2xl p-8 border border-white/10">
+                <div class="flex gap-1 text-yellow-400 mb-4">
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                </div>
+                <p class="text-gray-300 mb-6">"YIMAS delivered beyond expectations. The quality of construction and attention to detail in our duplex is exceptional. Their facility management team keeps our estate running smoothly."</p>
+                <div class="flex items-center gap-4">
+                    <div class="w-12 h-12 rounded-full bg-purple-600 flex items-center justify-center font-bold">AO</div>
+                    <div>
+                        <p class="font-semibold">Adebayo Ogundimu</p>
+                        <p class="text-sm text-gray-400">Homeowner, YIMAS Gardens</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="bg-white/5 backdrop-blur-sm rounded-2xl p-8 border border-white/10">
+                <div class="flex gap-1 text-yellow-400 mb-4">
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                </div>
+                <p class="text-gray-300 mb-6">"Professional, transparent, and reliable. From site visit to handover, YIMAS made the entire process seamless. Their estate management services are top-notch."</p>
+                <div class="flex items-center gap-4">
+                    <div class="w-12 h-12 rounded-full bg-purple-600 flex items-center justify-center font-bold">CN</div>
+                    <div>
+                        <p class="font-semibold">Chioma Nwosu</p>
+                        <p class="text-sm text-gray-400">Property Investor</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="bg-white/5 backdrop-blur-sm rounded-2xl p-8 border border-white/10">
+                <div class="flex gap-1 text-yellow-400 mb-4">
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                </div>
+                <p class="text-gray-300 mb-6">"The security and maintenance standards at our estate are world-class. YIMAS has set a new benchmark for facility management in Nigeria."</p>
+                <div class="flex items-center gap-4">
+                    <div class="w-12 h-12 rounded-full bg-purple-600 flex items-center justify-center font-bold">IM</div>
+                    <div>
+                        <p class="font-semibold">Ibrahim Musa</p>
+                        <p class="text-sm text-gray-400">Chairman, Residents Association</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- About Section -->
+<section id="about" class="py-20 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div>
+                <span class="text-primary font-semibold text-sm uppercase tracking-wider">About YIMAS</span>
+                <h2 class="font-display text-4xl md:text-5xl font-bold text-[#2C2C2C] mt-3 mb-6">Building Trust Through Excellence</h2>
+                <p class="text-gray-600 mb-6 leading-relaxed">
+                    Founded in 2009, YIMAS has grown to become one of Nigeria's most trusted names in premium property development and facility management. Our mission is to create exceptional living and working spaces while maintaining the highest standards of quality, integrity, and customer service.
+                </p>
+                <p class="text-gray-600 mb-8 leading-relaxed">
+                    With over 50 completed projects and 1,200+ satisfied clients, we combine innovative architectural design with sustainable building practices and comprehensive estate management solutions.
+                </p>
+                
+                <div class="grid grid-cols-2 gap-6 mb-8">
+                    <div>
+                        <div class="flex items-center gap-3 mb-2">
+                            <div class="w-10 h-10 bg-purple-100 rounded-lg flex items-center justify-center">
+                                <i class="fa-solid fa-certificate text-primary"></i>
+                            </div>
+                            <h4 class="font-semibold text-[#2C2C2C]">ISO Certified</h4>
+                        </div>
+                        <p class="text-sm text-gray-600">ISO 9001:2015 Quality Management</p>
+                    </div>
+                    <div>
+                        <div class="flex items-center gap-3 mb-2">
+                            <div class="w-10 h-10 bg-purple-100 rounded-lg flex items-center justify-center">
+                                <i class="fa-solid fa-handshake text-primary"></i>
+                            </div>
+                            <h4 class="font-semibold text-[#2C2C2C]">REDAN Member</h4>
+                        </div>
+                        <p class="text-sm text-gray-600">Real Estate Developers Association</p>
+                    </div>
+                </div>
+                
+                <a href="#contact" class="btn-primary text-white px-8 py-4 rounded-lg font-semibold inline-flex items-center gap-2">
+                    Learn More About Us
+                    <i class="fa-solid fa-arrow-right"></i>
+                </a>
+            </div>
+            
+            <div class="relative">
+                <img src="https://images.unsplash.com/photo-1560520653-9e0e4c89eb11?q=80&w=2073&auto=format&fit=crop" 
+                     alt="YIMAS Team" 
+                     class="rounded-2xl shadow-2xl">
+                <div class="absolute -bottom-6 -left-6 bg-white rounded-xl shadow-xl p-6 max-w-xs">
+                    <div class="flex items-center gap-4">
+                        <div class="text-4xl font-bold text-primary">15+</div>
+                        <div>
+                            <p class="font-semibold text-[#2C2C2C]">Years of Excellence</p>
+                            <p class="text-sm text-gray-600">Serving Nigeria</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA Section -->
+<section class="py-20 gradient-primary">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-white">
+        <h2 class="font-display text-4xl md:text-5xl font-bold mb-6">Ready to Find Your Dream Property?</h2>
+        <p class="text-xl text-purple-100 mb-8">Schedule a private site visit or request a facility management proposal today</p>
+        <div class="flex flex-wrap gap-4 justify-center">
+            <a href="#contact" class="bg-white text-[#6A0DAD] px-8 py-4 rounded-lg font-semibold hover:bg-gray-100 transition flex items-center gap-2">
+                <i class="fa-solid fa-calendar-check"></i>
+                Book Site Visit
+            </a>
+            <a href="tel:+2348001234567" class="bg-transparent border-2 border-white text-white px-8 py-4 rounded-lg font-semibold hover:bg-white hover:text-[#6A0DAD] transition flex items-center gap-2">
+                <i class="fa-solid fa-phone"></i>
+                Call Us Now
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- Contact Section -->
+<section id="contact" class="py-20 bg-[#F5F5F7]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12">
+            <span class="text-primary font-semibold text-sm uppercase tracking-wider">Get In Touch</span>
+            <h2 class="font-display text-4xl md:text-5xl font-bold text-[#2C2C2C] mt-3 mb-4">Contact Us Today</h2>
+            <p class="text-gray-600 max-w-2xl mx-auto">Our team is ready to assist with your property inquiries and facility management needs</p>
+        </div>
+        
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <div class="lg:col-span-1 space-y-6">
+                <div class="bg-white rounded-xl p-6">
+                    <div class="w-12 h-12 gradient-primary rounded-lg flex items-center justify-center mb-4">
+                        <i class="fa-solid fa-location-dot text-white text-xl"></i>
+                    </div>
+                    <h3 class="font-semibold text-[#2C2C2C] mb-2">Head Office</h3>
+                    <p class="text-gray-600">Plot 123, Admiralty Way<br>Lekki Phase 1, Lagos, Nigeria</p>
+                </div>
+                
+                <div class="bg-white rounded-xl p-6">
+                    <div class="w-12 h-12 gradient-primary rounded-lg flex items-center justify-center mb-4">
+                        <i class="fa-solid fa-phone text-white text-xl"></i>
+                    </div>
+                    <h3 class="font-semibold text-[#2C2C2C] mb-2">Phone</h3>
+                    <p class="text-gray-600">+234 800 123 4567<br>+234 802 987 6543</p>
+                </div>
+                
+                <div class="bg-white rounded-xl p-6">
+                    <div class="w-12 h-12 gradient-primary rounded-lg flex items-center justify-center mb-4">
+                        <i class="fa-solid fa-envelope text-white text-xl"></i>
+                    </div>
+                    <h3 class="font-semibold text-[#2C2C2C] mb-2">Email</h3>
+                    <p class="text-gray-600">info@yimas.com<br>sales@yimas.com</p>
+                </div>
+                
+                <div class="bg-white rounded-xl p-6">
+                    <h3 class="font-semibold text-[#2C2C2C] mb-4">Business Hours</h3>
+                    <div class="space-y-2 text-sm text-gray-600">
+                        <div class="flex justify-between">
+                            <span>Mon - Fri:</span>
+                            <span class="font-medium">8:00 AM - 6:00 PM</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span>Saturday:</span>
+                            <span class="font-medium">9:00 AM - 4:00 PM</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span>Sunday:</span>
+                            <span class="font-medium">Closed</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="lg:col-span-2">
+                <div class="bg-white rounded-2xl p-8 shadow-lg">
+                    <h3 class="font-display text-2xl font-bold text-[#2C2C2C] mb-6">Send Us a Message</h3>
+                    <form id="contactForm" class="space-y-6">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Full Name *</label>
+                                <input type="text" required class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-primary focus:ring-2 focus:ring-purple-200 transition" placeholder="John Doe">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Phone Number *</label>
+                                <input type="tel" required class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-primary focus:ring-2 focus:ring-purple-200 transition" placeholder="+234 800 000 0000">
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Email Address *</label>
+                            <input type="email" required class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-primary focus:ring-2 focus:ring-purple-200 transition" placeholder="john@example.com">
+                        </div>
+                        
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Inquiry Type *</label>
+                            <select required class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-primary focus:ring-2 focus:ring-purple-200 transition">
+                                <option value="">Select an option</option>
+                                <option>Property Purchase</option>
+                                <option>Site Visit Request</option>
+                                <option>Facility Management Services</option>
+                                <option>Investment Opportunity</option>
+                                <option>General Inquiry</option>
+                            </select>
+                        </div>
+                        
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Message *</label>
+                            <textarea required rows="5" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-primary focus:ring-2 focus:ring-purple-200 transition" placeholder="Tell us about your requirements..."></textarea>
+                        </div>
+                        
+                        <button type="submit" class="w-full btn-primary text-white py-4 rounded-lg font-semibold text-lg">
+                            Send Message
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer class="bg-[#2C2C2C] text-white pt-16 pb-8">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
+            <div>
+                <div class="flex items-center gap-3 mb-6">
+                    <div class="w-12 h-12 gradient-primary rounded-lg flex items-center justify-center">
+                        <span class="text-white font-bold text-2xl font-display">Y</span>
+                    </div>
+                    <div>
+                        <h3 class="font-display text-2xl font-bold">YIMAS</h3>
+                        <p class="text-xs text-gray-400 -mt-1">Development & Facility Management</p>
+                    </div>
+                <p class="text-gray-400 mb-6">Nigeria's premier property development and facility management company, building premium living experiences since 2009.</p>
+                <div class="flex gap-3">
+                    <a href="#" class="w-10 h-10 bg-white/10 rounded-lg flex items-center justify-center hover:bg-primary transition">
+                        <i class="fab fa-facebook"></i>
+                    </a>
+                    <a href="#" class="w-10 h-10 bg-white/10 rounded-lg flex items-center justify-center hover:bg-primary transition">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="#" class="w-10 h-10 bg-white/10 rounded-lg flex items-center justify-center hover:bg-primary transition">
+                        <i class="fab fa-linkedin"></i>
+                    </a>
+                    <a href="#" class="w-10 h-10 bg-white/10 rounded-lg flex items-center justify-center hover:bg-primary transition">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                </div>
+            </div>
+            
+            <div>
+                <h4 class="font-semibold text-lg mb-6">Quick Links</h4>
+                <ul class="space-y-3">
+                    <li><a href="#home" class="text-gray-400 hover:text-white transition">Home</a></li>
+                    <li><a href="#about" class="text-gray-400 hover:text-white transition">About Us</a></li>
+                    <li><a href="#properties" class="text-gray-400 hover:text-white transition">Properties</a></li>
+                    <li><a href="#projects" class="text-gray-400 hover:text-white transition">Projects</a></li>
+                    <li><a href="#services" class="text-gray-400 hover:text-white transition">Facility Management</a></li>
+                    <li><a href="#contact" class="text-gray-400 hover:text-white transition">Contact</a></li>
+                </ul>
+            </div>
+            
+            <div>
+                <h4 class="font-semibold text-lg mb-6">Services</h4>
+                <ul class="space-y-3">
+                    <li><a href="#" class="text-gray-400 hover:text-white transition">Property Development</a></li>
+                    <li><a href="#" class="text-gray-400 hover:text-white transition">Estate Management</a></li>
+                    <li><a href="#" class="text-gray-400 hover:text-white transition">Maintenance Services</a></li>
+                    <li><a href="#" class="text-gray-400 hover:text-white transition">Security Solutions</a></li>
+                    <li><a href="#" class="text-gray-400 hover:text-white transition">Property Investment</a></li>
+                    <li><a href="#" class="text-gray-400 hover:text-white transition">Consultancy</a></li>
+                </ul>
+            </div>
+            
+            <div>
+                <h4 class="font-semibold text-lg mb-6">Newsletter</h4>
+                <p class="text-gray-400 mb-4">Subscribe for property updates and investment opportunities</p>
+                <form id="newsletterForm" class="space-y-3">
+                    <input type="email" placeholder="Your email address" class="w-full px-4 py-3 rounded-lg bg-white/10 border border-white/20 text-white placeholder-gray-400 focus:outline-none focus:border-primary">
+                    <button type="submit" class="w-full bg-primary text-white py-3 rounded-lg font-semibold hover:bg-[#4B0082] transition">
+                        Subscribe
+                    </button>
+                </form>
+            </div>
+        </div>
+        
+        <div class="border-t border-white/10 pt-8">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-4">
+                <p class="text-gray-400 text-sm">© 2024 YIMAS Development & Facility Management. All rights reserved.</p>
+                <div class="flex gap-6 text-sm">
+                    <a href="#" class="text-gray-400 hover:text-white transition">Privacy Policy</a>
+                    <a href="#" class="text-gray-400 hover:text-white transition">Terms of Service</a>
+                    <a href="#" class="text-gray-400 hover:text-white transition">RC: 1234567</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script>
+    // Mobile Menu Toggle
+    const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    
+    mobileMenuBtn.addEventListener('click', () => {
+        mobileMenu.classList.toggle('active');
+        const icon = mobileMenuBtn.querySelector('i');
+        icon.classList.toggle('fa-bars');
+        icon.classList.toggle('fa-times');
+    });
+    
+    // Close mobile menu on link click
+    document.querySelectorAll('#mobile-menu a').forEach(link => {
+        link.addEventListener('click', () => {
+            mobileMenu.classList.remove('active');
+            mobileMenuBtn.querySelector('i').classList.replace('fa-times', 'fa-bars');
+        });
+    });
+    
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                const headerOffset = 80;
+                const elementPosition = target.getBoundingClientRect().top;
+                const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+                
+                window.scrollTo({
+                    top: offsetPosition,
+                    behavior: 'smooth'
+                });
+            }
+        });
+    });
+    
+    // Animated counter for stats
+    const observerOptions = {
+        threshold: 0.5,
+        rootMargin: '0px'
+    };
+    
+    const countUp = (el) => {
+        const target = parseInt(el.getAttribute('data-count'));
+        const duration = 2000;
+        const increment = target / (duration / 16);
+        let current = 0;
+        
+        const updateCount = () => {
+            current += increment;
+            if (current < target) {
+                el.textContent = Math.floor(current).toLocaleString() + '+';
+                requestAnimationFrame(updateCount);
+            } else {
+                el.textContent = target.toLocaleString() + '+';
+            }
+        };
+        
+        updateCount();
+    };
+    
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting && !entry.target.classList.contains('counted')) {
+                entry.target.classList.add('counted');
+                countUp(entry.target);
+            }
+        });
+    }, observerOptions);
+    
+    document.querySelectorAll('[data-count]').forEach(el => {
+        observer.observe(el);
+    });
+    
+    // Form submissions
+    document.getElementById('searchForm').addEventListener('submit', (e) => {
+        e.preventDefault();
+        alert('Search functionality would connect to property database. Filtering properties based on your criteria...');
+    });
+    
+    document.getElementById('contactForm').addEventListener('submit', (e) => {
+        e.preventDefault();
+        alert('Thank you for your inquiry! Our team will contact you within 24 hours to schedule your site visit or discuss your requirements.');
+        e.target.reset();
+    });
+    
+    document.getElementById('newsletterForm').addEventListener('submit', (e) => {
+        e.preventDefault();
+        alert('Successfully subscribed! You will receive our latest property updates and investment opportunities.');
+        e.target.reset();
+    });
+    
+    // Add scroll effect to header
+    let lastScroll = 0;
+    window.addEventListener('scroll', () => {
+        const header = document.querySelector('header');
+        const currentScroll = window.pageYOffset;
+        
+        if (currentScroll > 100) {
+            header.classList.add('shadow-md');
+        } else {
+            header.classList.remove('shadow-md');
+        }
+        
+        lastScroll = currentScroll;
+    });
+</script>
+
+<script>(function(){document.addEventListener("click",function(e){var a=e.target.closest("[data-product-id]");if(!a)return;e.preventDefault();var pid=a.getAttribute("data-product-id");if(pid)parent.postMessage({type:"ecto-artifact-link-click",productId:pid},"*")})})();</script>
+</body>
+</html>
