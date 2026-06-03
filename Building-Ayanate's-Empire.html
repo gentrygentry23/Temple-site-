@@ -1,0 +1,1221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ayanate's Empire | Premium Human Hair & Quality Hair Blends</title>
+<meta name="description" content="Experience luxury, confidence, and beauty with Ayanate's Empire. Shop premium human hair, bone straight, curly, deep wave, body wave, bob wigs, frontal & closure wigs. Free Nationwide Delivery.">
+<meta name="keywords" content="human hair, wigs, bone straight, body wave, curly hair, frontal wigs, closure wigs, hair bundles, luxury hair, Ayanate's Empire">
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://ayanatesempire.com/">
+<meta property="og:title" content="Ayanate's Empire | Premium Human Hair & Quality Hair Blends">
+<meta property="og:description" content="Experience luxury, confidence, and beauty with our premium collection of bone straight, curly, deep wave, body wave, and custom wigs.">
+<meta property="og:image" content="https://source.unsplash.com/1200x630/?luxury,hair,beauty">
+
+<!-- Twitter -->
+<meta property="twitter:card" content="summary_large_image">
+<meta property="twitter:url" content="https://ayanatesempire.com/">
+<meta property="twitter:title" content="Ayanate's Empire | Premium Human Hair & Quality Hair Blends">
+<meta property="twitter:description" content="Experience luxury, confidence, and beauty with our premium collection of bone straight, curly, deep wave, body wave, and custom wigs.">
+<meta property="twitter:image" content="https://source.unsplash.com/1200x630/?luxury,hair,beauty">
+
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com"></script>
+
+<!-- Google Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<!-- AOS Animation -->
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+<!-- Font Awesome -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+<!-- LocalBusiness Schema -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "name": "Ayanate's Empire",
+  "image": "https://source.unsplash.com/1200x630/?luxury,hair",
+  "description": "Premium Human Hair & Quality Hair Blends. We specialize in bone straight, curly, deep wave, body wave, and custom wigs.",
+  "url": "https://ayanatesempire.com",
+  "telephone": "+2348104865431",
+  "email": "gentryafuroyanate311@gmail.com",
+  "address": {
+    "@type": "PostalAddress",
+    "addressCountry": "NG"
+  },
+  "sameAs": [
+    "https://instagram.com/Yanate"
+  ],
+  "priceRange": "$$"
+}
+</script>
+
+<style>
+    :root {
+        --gold: #D4AF37;
+        --black: #000000;
+        --white: #FFFFFF;
+        --nude: #F8F4EE;
+    }
+    
+    * {
+        scroll-behavior: smooth;
+    }
+    
+    body {
+        font-family: 'Inter', sans-serif;
+        color: #1a1a1a;
+    }
+    
+    h1, h2, h3, h4, h5 {
+        font-family: 'Playfair Display', serif;
+    }
+    
+    .text-gold {
+        color: var(--gold);
+    }
+    
+    .bg-gold {
+        background-color: var(--gold);
+    }
+    
+    .bg-nude {
+        background-color: var(--nude);
+    }
+    
+    .border-gold {
+        border-color: var(--gold);
+    }
+    
+    .hover-gold:hover {
+        color: var(--gold);
+    }
+    
+    .btn-primary {
+        background: linear-gradient(135deg, #D4AF37 0%, #C5A028 100%);
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+    }
+    
+    .btn-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 25px rgba(212, 175, 55, 0.4);
+    }
+    
+    .btn-secondary {
+        border: 2px solid var(--gold);
+        color: var(--gold);
+        transition: all 0.3s ease;
+    }
+    
+    .btn-secondary:hover {
+        background-color: var(--gold);
+        color: white;
+        transform: translateY(-2px);
+    }
+    
+    .card-hover {
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+    
+    .card-hover:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    }
+    
+    .nav-link {
+        position: relative;
+    }
+    
+    .nav-link::after {
+        content: '';
+        position: absolute;
+        width: 0;
+        height: 2px;
+        bottom: -4px;
+        left: 0;
+        background-color: var(--gold);
+        transition: width 0.3s ease;
+    }
+    
+    .nav-link:hover::after, .nav-link.active::after {
+        width: 100%;
+    }
+    
+    .hero-overlay {
+        background: linear-gradient(135deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.4) 100%);
+    }
+    
+    .testimonial-card {
+        background: linear-gradient(135deg, #FFFFFF 0%, #F8F4EE 100%);
+    }
+    
+    .whatsapp-float {
+        animation: pulse 2s infinite;
+    }
+    
+    @keyframes pulse {
+        0%, 100% {
+            box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7);
+        }
+        50% {
+            box-shadow: 0 0 0 15px rgba(37, 211, 102, 0);
+        }
+    }
+    
+    .faq-item.active .faq-answer {
+        max-height: 500px;
+        padding-top: 1rem;
+    }
+    
+    .faq-answer {
+        max-height: 0;
+        overflow: hidden;
+        transition: all 0.3s ease;
+    }
+    
+    .img-placeholder {
+        background: linear-gradient(135deg, #F8F4EE 0%, #E8E0D6 100%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+</style>
+</head>
+<body class="bg-white">
+
+<!-- Navigation -->
+<nav id="navbar" class="fixed w-full z-50 bg-white/95 backdrop-blur-md shadow-sm transition-all duration-300">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between items-center h-20">
+            <div class="flex items-center">
+                <a href="#home" class="flex items-center space-x-2" aria-label="Ayanate's Empire Home">
+                    <span class="text-2xl md:text-3xl font-bold text-black">Ayanate's <span class="text-gold">Empire</span></span>
+                </a>
+            </div>
+            
+            <div class="hidden lg:flex items-center space-x-8">
+                <a href="#home" class="nav-link text-gray-800 font-medium hover-gold">Home</a>
+                <a href="#about" class="nav-link text-gray-800 font-medium hover-gold">About</a>
+                <a href="#collections" class="nav-link text-gray-800 font-medium hover-gold">Collections</a>
+                <a href="#testimonials" class="nav-link text-gray-800 font-medium hover-gold">Testimonials</a>
+                <a href="#faq" class="nav-link text-gray-800 font-medium hover-gold">FAQ</a>
+                <a href="#contact" class="btn-primary text-white px-6 py-2.5 rounded-full font-semibold">Contact Us</a>
+            </div>
+            
+            <button id="mobile-menu-btn" class="lg:hidden text-black focus:outline-none" aria-label="Toggle mobile menu">
+                <i class="fas fa-bars text-2xl"></i>
+            </button>
+        </div>
+    </div>
+    
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="hidden lg:hidden bg-white border-t border-gray-100">
+        <div class="px-4 py-4 space-y-4">
+            <a href="#home" class="block text-gray-800 font-medium hover-gold py-2">Home</a>
+            <a href="#about" class="block text-gray-800 font-medium hover-gold py-2">About</a>
+            <a href="#collections" class="block text-gray-800 font-medium hover-gold py-2">Collections</a>
+            <a href="#testimonials" class="block text-gray-800 font-medium hover-gold py-2">Testimonials</a>
+            <a href="#faq" class="block text-gray-800 font-medium hover-gold py-2">FAQ</a>
+            <a href="#contact" class="block btn-primary text-white text-center px-6 py-2.5 rounded-full font-semibold">Contact Us</a>
+        </div>
+    </div>
+</nav>
+
+<!-- Hero Section -->
+<section id="home" class="relative h-screen flex items-center justify-center overflow-hidden">
+    <div class="absolute inset-0 z-0">
+        <img src="https://source.unsplash.com/1920x1080/?luxury,hair,beauty,model" 
+             alt="Premium Human Hair Collection - Luxury hair model showcasing beautiful long hair" 
+             class="w-full h-full object-cover"
+             onerror="this.style.display='none'; this.parentElement.classList.add('img-placeholder');">
+        <div class="hero-overlay absolute inset-0"></div>
+    </div>
+    
+    <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-white" data-aos="fade-up" data-aos-duration="1000">
+        <h1 class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight">
+            Premium Human Hair &<br><span class="text-gold">Quality Hair Blends</span>
+        </h1>
+        <p class="text-lg md:text-xl lg:text-2xl mb-10 max-w-3xl mx-auto font-light">
+            Experience luxury, confidence, and beauty with our premium collection of bone straight, curly, deep wave, body wave, and custom wigs.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
+            <a href="#collections" class="btn-primary text-white px-8 py-4 rounded-full font-semibold text-lg w-full sm:w-auto">
+                Shop Now
+            </a>
+            <a href="#contact" class="btn-secondary px-8 py-4 rounded-full font-semibold text-lg w-full sm:w-auto bg-white/10 backdrop-blur-sm">
+                Contact Us
+            </a>
+        </div>
+        
+        <div class="flex flex-wrap justify-center gap-6 md:gap-12 text-sm md:text-base">
+            <div class="flex items-center gap-2" data-aos="fade-up" data-aos-delay="100">
+                <i class="fas fa-tag text-gold text-xl"></i>
+                <span>Affordable Prices</span>
+            </div>
+            <div class="flex items-center gap-2" data-aos="fade-up" data-aos-delay="200">
+                <i class="fas fa-gem text-gold text-xl"></i>
+                <span>Long-Lasting Quality</span>
+            </div>
+            <div class="flex items-center gap-2" data-aos="fade-up" data-aos-delay="300">
+                <i class="fas fa-truck text-gold text-xl"></i>
+                <span>Free Nationwide Delivery</span>
+            </div>
+        </div>
+    </div>
+    
+    <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
+        <a href="#about" aria-label="Scroll to about section">
+            <i class="fas fa-chevron-down text-white text-2xl"></i>
+        </a>
+    </div>
+</section>
+
+<!-- About Us Section -->
+<section id="about" class="py-20 md:py-32 bg-nude">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid md:grid-cols-2 gap-12 items-center">
+            <div data-aos="fade-right" data-aos-duration="800">
+                <img src="https://source.unsplash.com/800x1000/?hair,woman,portrait" 
+                     alt="Luxury Hair Collection - Beautiful woman with premium human hair extensions" 
+                     class="rounded-2xl shadow-2xl w-full h-[500px] object-cover"
+                     onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22800%22 height=%221000%22%3E%3Crect fill=%22%23F8F4EE%22 width=%22800%22 height=%221000%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 dominant-baseline=%22middle%22 text-anchor=%22middle%22 font-family=%22Arial%22 font-size=%2224%22 fill=%22%23D4AF37%22%3ELuxury Hair%3C/text%3E%3C/svg%3E';">
+            </div>
+            
+            <div data-aos="fade-left" data-aos-duration="800">
+                <span class="text-gold font-semibold text-sm uppercase tracking-wider">About Us</span>
+                <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-black mt-3 mb-6">
+                    Welcome to Ayanate's Empire
+                </h2>
+                <p class="text-gray-700 text-lg mb-6 leading-relaxed">
+                    At Ayanate's Empire, we specialize in providing premium human hair and quality hair blends that help women look and feel their best.
+                </p>
+                <p class="text-gray-700 text-lg mb-8 leading-relaxed">
+                    Our collection is carefully selected to ensure durability, softness, natural appearance, and long-lasting beauty. Whether you're looking for everyday elegance or a glamorous transformation, we have the perfect hair solution for you.
+                </p>
+                
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div class="flex items-start gap-3">
+                        <i class="fas fa-check-circle text-gold text-xl mt-1"></i>
+                        <div>
+                            <h4 class="font-semibold text-black">Premium Quality Hair</h4>
+                            <p class="text-gray-600 text-sm">100% authentic human hair</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-3">
+                        <i class="fas fa-check-circle text-gold text-xl mt-1"></i>
+                        <div>
+                            <h4 class="font-semibold text-black">Affordable Pricing</h4>
+                            <p class="text-gray-600 text-sm">Luxury that fits your budget</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-3">
+                        <i class="fas fa-check-circle text-gold text-xl mt-1"></i>
+                        <div>
+                            <h4 class="font-semibold text-black">Long-Lasting Products</h4>
+                            <p class="text-gray-600 text-sm">Durable & reusable</p>
+                        </div>
+                    <div class="flex items-start gap-3">
+                        <i class="fas fa-check-circle text-gold text-xl mt-1"></i>
+                        <div>
+                            <h4 class="font-semibold text-black">Professional Service</h4>
+                            <p class="text-gray-600 text-sm">Expert customer support</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Our Collections Section -->
+<section id="collections" class="py-20 md:py-32 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16" data-aos="fade-up">
+            <span class="text-gold font-semibold text-sm uppercase tracking-wider">Our Collections</span>
+            <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-black mt-3 mb-4">
+                Discover Your Perfect Hair
+            </h2>
+            <p class="text-gray-600 text-lg max-w-2xl mx-auto">
+                From sleek bone straight to bouncy curls, explore our curated collection of premium hair extensions and wigs
+            </p>
+        </div>
+        
+        <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
+            <!-- Product 1 -->
+            <div class="card-hover bg-white rounded-2xl overflow-hidden shadow-lg" data-aos="fade-up" data-aos-delay="100">
+                <div class="relative h-80 overflow-hidden bg-nude">
+                    <img src="https://source.unsplash.com/600x800/?straight,hair,black" 
+                         alt="Bone Straight Hair - Silky smooth straight human hair extensions" 
+                         class="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
+                         onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22600%22 height=%22800%22%3E%3Crect fill=%22%23F8F4EE%22 width=%22600%22 height=%22800%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 dominant-baseline=%22middle%22 text-anchor=%22middle%22 font-family=%22Arial%22 font-size=%2220%22 fill=%22%23D4AF37%22%3EBone Straight%3C/text%3E%3C/svg%3E';">
+                    <div class="absolute top-4 right-4 bg-gold text-white px-3 py-1 rounded-full text-xs font-semibold">
+                        Popular
+                    </div>
+                <div class="p-6">
+                    <h3 class="text-xl font-bold text-black mb-2">Bone Straight Hair</h3>
+                    <p class="text-gray-600 text-sm mb-4">Sleek, silky straight hair with natural shine and smooth texture</p>
+                    <div class="flex items-center justify-between">
+                        <span class="text-gold font-bold">Price on Request</span>
+                        <a href="https://wa.me/2348104865431?text=Hello%20Ayanate's%20Empire%2C%20I%20would%20like%20to%20place%20an%20order%20for%20Bone%20Straight%20Hair" 
+                           target="_blank"
+                           class="btn-primary text-white px-5 py-2 rounded-full text-sm font-semibold"
+                           aria-label="Order Bone Straight Hair on WhatsApp">
+                            Order Now
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Product 2 -->
+            <div class="card-hover bg-white rounded-2xl overflow-hidden shadow-lg" data-aos="fade-up" data-aos-delay="200">
+                <div class="relative h-80 overflow-hidden bg-nude">
+                    <img src="https://source.unsplash.com/600x800/?wavy,hair,beautiful" 
+                         alt="Deep Wave Hair - Luxurious deep wave human hair with volume" 
+                         class="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
+                         onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22600%22 height=%22800%22%3E%3Crect fill=%22%23F8F4EE%22 width=%22600%22 height=%22800%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 dominant-baseline=%22middle%22 text-anchor=%22middle%22 font-family=%22Arial%22 font-size=%2220%22 fill=%22%23D4AF37%22%3EDeep Wave%3C/text%3E%3C/svg%3E';">
+                </div>
+                <div class="p-6">
+                    <h3 class="text-xl font-bold text-black mb-2">Deep Wave Hair</h3>
+                    <p class="text-gray-600 text-sm mb-4">Luxurious deep waves with perfect volume and bounce</p>
+                    <div class="flex items-center justify-between">
+                        <span class="text-gold font-bold">Price on Request</span>
+                        <a href="https://wa.me/2348104865431?text=Hello%20Ayanate's%20Empire%2C%20I%20would%20like%20to%20place%20an%20order%20for%20Deep%20Wave%20Hair" 
+                           target="_blank"
+                           class="btn-primary text-white px-5 py-2 rounded-full text-sm font-semibold"
+                           aria-label="Order Deep Wave Hair on WhatsApp">
+                            Order Now
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Product 3 -->
+            <div class="card-hover bg-white rounded-2xl overflow-hidden shadow-lg" data-aos="fade-up" data-aos-delay="300">
+                <div class="relative h-80 overflow-hidden bg-nude">
+                    <img src="https://source.unsplash.com/600x800/?bodywave,hair" 
+                         alt="Body Wave Hair - Soft natural body wave human hair extensions" 
+                         class="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
+                         onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22600%22 height=%22800%22%3E%3Crect fill=%22%23F8F4EE%22 width=%22600%22 height=%22800%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 dominant-baseline=%22middle%22 text-anchor=%22middle%22 font-family=%22Arial%22 font-size=%2220%22 fill=%22%23D4AF37%22%3EBody Wave%3C/text%3E%3C/svg%3E';">
+                </div>
+                <div class="p-6">
+                    <h3 class="text-xl font-bold text-black mb-2">Body Wave Hair</h3>
+                    <p class="text-gray-600 text-sm mb-4">Soft body waves for a natural, effortless look</p>
+                    <div class="flex items-center justify-between">
+                        <span class="text-gold font-bold">Price on Request</span>
+                        <a href="https://wa.me/2348104865431?text=Hello%20Ayanate's%20Empire%2C%20I%20would%20like%20to%20place%20an%20order%20for%20Body%20Wave%20Hair" 
+                           target="_blank"
+                           class="btn-primary text-white px-5 py-2 rounded-full text-sm font-semibold"
+                           aria-label="Order Body Wave Hair on WhatsApp">
+                            Order Now
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Product 4 -->
+            <div class="card-hover bg-white rounded-2xl overflow-hidden shadow-lg" data-aos="fade-up" data-aos-delay="400">
+                <div class="relative h-80 overflow-hidden bg-nude">
+                    <img src="https://source.unsplash.com/600x800/?curly,hair,portrait" 
+                         alt="Curly Hair - Beautiful bouncy curly human hair extensions" 
+                         class="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
+                         onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22600%22 height=%22800%22%3E%3Crect fill=%22%23F8F4EE%22 width=%22600%22 height=%22800%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 dominant-baseline=%22middle%22 text-anchor=%22middle%22 font-family=%22Arial%22 font-size=%2220%22 fill=%22%23D4AF37%22%3ECurly Hair%3C/text%3E%3C/svg%3E';">
+                </div>
+                <div class="p-6">
+                    <h3 class="text-xl font-bold text-black mb-2">Curly Hair</h3>
+                    <p class="text-gray-600 text-sm mb-4">Beautiful bouncy curls with natural texture and volume</p>
+                    <div class="flex items-center justify-between">
+                        <span class="text-gold font-bold">Price on Request</span>
+                        <a href="https://wa.me/2348104865431?text=Hello%20Ayanate's%20Empire%2C%20I%20would%20like%20to%20place%20an%20order%20for%20Curly%20Hair" 
+                           target="_blank"
+                           class="btn-primary text-white px-5 py-2 rounded-full text-sm font-semibold"
+                           aria-label="Order Curly Hair on WhatsApp">
+                            Order Now
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Product 5 -->
+            <div class="card-hover bg-white rounded-2xl overflow-hidden shadow-lg" data-aos="fade-up" data-aos-delay="100">
+                <div class="relative h-80 overflow-hidden bg-nude">
+                    <img src="https://source.unsplash.com/600x800/?pixie,haircut,woman" 
+                         alt="Pixie Wigs - Stylish short pixie cut human hair wigs" 
+                         class="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
+                         onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22600%22 height=%22800%22%3E%3Crect fill=%22%23F8F4EE%22 width=%22600%22 height=%22800%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 dominant-baseline=%22middle%22 text-anchor=%22middle%22 font-family=%22Arial%22 font-size=%2220%22 fill=%22%23D4AF37%22%3EPixie Wigs%3C/text%3E%3C/svg%3E';">
+                </div>
+                <div class="p-6">
+                    <h3 class="text-xl font-bold text-black mb-2">Pixie Wigs</h3>
+                    <p class="text-gray-600 text-sm mb-4">Chic and stylish pixie cuts for a bold, confident look</p>
+                    <div class="flex items-center justify-between">
+                        <span class="text-gold font-bold">Price on Request</span>
+                        <a href="https://wa.me/2348104865431?text=Hello%20Ayanate's%20Empire%2C%20I%20would%20like%20to%20place%20an%20order%20for%20Pixie%20Wigs" 
+                           target="_blank"
+                           class="btn-primary text-white px-5 py-2 rounded-full text-sm font-semibold"
+                           aria-label="Order Pixie Wigs on WhatsApp">
+                            Order Now
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Product 6 -->
+            <div class="card-hover bg-white rounded-2xl overflow-hidden shadow-lg" data-aos="fade-up" data-aos-delay="200">
+                <div class="relative h-80 overflow-hidden bg-nude">
+                    <img src="https://source.unsplash.com/600x800/?bob,haircut,fashion" 
+                         alt="Bob Cut Wigs - Classic bob style human hair wigs" 
+                         class="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
+                         onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22600%22 height=%22800%22%3E%3Crect fill=%22%23F8F4EE%22 width=%22600%22 height=%22800%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 dominant-baseline=%22middle%22 text-anchor=%22middle%22 font-family=%22Arial%22 font-size=%2220%22 fill=%22%23D4AF37%22%3EBob Cut%3C/text%3E%3C/svg%3E';">
+                    <div class="absolute top-4 right-4 bg-gold text-white px-3 py-1 rounded-full text-xs font-semibold">
+                        Trending
+                    </div>
+                </div>
+                <div class="p-6">
+                    <h3 class="text-xl font-bold text-black mb-2">Bob Cut Wigs</h3>
+                    <p class="text-gray-600 text-sm mb-4">Classic bob styles that never go out of fashion</p>
+                    <div class="flex items-center justify-between">
+                        <span class="text-gold font-bold">Price on Request</span>
+                        <a href="https://wa.me/2348104865431?text=Hello%20Ayanate's%20Empire%2C%20I%20would%20like%20to%20place%20an%20order%20for%20Bob%20Cut%20Wigs" 
+                           target="_blank"
+                           class="btn-primary text-white px-5 py-2 rounded-full text-sm font-semibold"
+                           aria-label="Order Bob Cut Wigs on WhatsApp">
+                            Order Now
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Product 7 -->
+            <div class="card-hover bg-white rounded-2xl overflow-hidden shadow-lg" data-aos="fade-up" data-aos-delay="300">
+                <div class="relative h-80 overflow-hidden bg-nude">
+                    <img src="https://source.unsplash.com/600x800/?frontal,wig,beauty" 
+                         alt="Frontal Wigs - Full lace frontal human hair wigs for versatile styling" 
+                         class="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
+                         onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22600%22 height=%22800%22%3E%3Crect fill=%22%23F8F4EE%22 width=%22600%22 height=%22800%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 dominant-baseline=%22middle%22 text-anchor=%22middle%22 font-family=%22Arial%22 font-size=%2220%22 fill=%22%23D4AF37%22%3EFrontal Wigs%3C/text%3E%3C/svg%3E';">
+                </div>
+                <div class="p-6">
+                    <h3 class="text-xl font-bold text-black mb-2">Frontal Wigs</h3>
+                    <p class="text-gray-600 text-sm mb-4">Full frontal lace wigs for versatile styling options</p>
+                    <div class="flex items-center justify-between">
+                        <span class="text-gold font-bold">Price on Request</span>
+                        <a href="https://wa.me/2348104865431?text=Hello%20Ayanate's%20Empire%2C%20I%20would%20like%20to%20place%20an%20order%20for%20Frontal%20Wigs" 
+                           target="_blank"
+                           class="btn-primary text-white px-5 py-2 rounded-full text-sm font-semibold"
+                           aria-label="Order Frontal Wigs on WhatsApp">
+                            Order Now
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Product 8 -->
+            <div class="card-hover bg-white rounded-2xl overflow-hidden shadow-lg" data-aos="fade-up" data-aos-delay="400">
+                <div class="relative h-80 overflow-hidden bg-nude">
+                    <img src="https://source.unsplash.com/600x800/?closure,wig,lace" 
+                         alt="Closure Wigs - Natural-looking lace closure human hair wigs" 
+                         class="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
+                         onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22600%22 height=%22800%22%3E%3Crect fill=%22%23F8F4EE%22 width=%22600%22 height=%22800%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 dominant-baseline=%22middle%22 text-anchor=%22middle%22 font-family=%22Arial%22 font-size=%2220%22 fill=%22%23D4AF37%22%3EClosure Wigs%3C/text%3E%3C/svg%3E';">
+                </div>
+                <div class="p-6">
+                    <h3 class="text-xl font-bold text-black mb-2">Closure Wigs</h3>
+                    <p class="text-gray-600 text-sm mb-4">Natural-looking closure wigs with seamless blend</p>
+                    <div class="flex items-center justify-between">
+                        <span class="text-gold font-bold">Price on Request</span>
+                        <a href="https://wa.me/2348104865431?text=Hello%20Ayanate's%20Empire%2C%20I%20would%20like%20to%20place%20an%20order%20for%20Closure%20Wigs" 
+                           target="_blank"
+                           class="btn-primary text-white px-5 py-2 rounded-full text-sm font-semibold"
+                           aria-label="Order Closure Wigs on WhatsApp">
+                            Order Now
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Why Choose Us Section -->
+<section class="py-20 md:py-32 bg-nude">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16" data-aos="fade-up">
+            <span class="text-gold font-semibold text-sm uppercase tracking-wider">Why Choose Us</span>
+            <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-black mt-3 mb-4">
+                Trusted by Hair Lovers
+            </h2>
+            <p class="text-gray-600 text-lg max-w-2xl mx-auto">
+                Join thousands of satisfied customers who trust Ayanate's Empire for their hair needs
+            </p>
+        </div>
+        
+        <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
+            <div class="bg-white rounded-2xl p-8 text-center card-hover" data-aos="zoom-in" data-aos-delay="100">
+                <div class="w-16 h-16 bg-gold/10 rounded-full flex items-center justify-center mx-auto mb-6">
+                    <i class="fas fa-tag text-gold text-2xl"></i>
+                </div>
+                <h3 class="text-xl font-bold text-black mb-3">Affordable Prices</h3>
+                <p class="text-gray-600">Premium quality hair at prices that won't break the bank</p>
+            </div>
+            
+            <div class="bg-white rounded-2xl p-8 text-center card-hover" data-aos="zoom-in" data-aos-delay="200">
+                <div class="w-16 h-16 bg-gold/10 rounded-full flex items-center justify-center mx-auto mb-6">
+                    <i class="fas fa-gem text-gold text-2xl"></i>
+                </div>
+                <h3 class="text-xl font-bold text-black mb-3">Long-Lasting Quality</h3>
+                <p class="text-gray-600">Durable hair that maintains its beauty wash after wash</p>
+            </div>
+            
+            <div class="bg-white rounded-2xl p-8 text-center card-hover" data-aos="zoom-in" data-aos-delay="300">
+                <div class="w-16 h-16 bg-gold/10 rounded-full flex items-center justify-center mx-auto mb-6">
+                    <i class="fas fa-truck-fast text-gold text-2xl"></i>
+                </div>
+                <h3 class="text-xl font-bold text-black mb-3">Free Nationwide Delivery</h3>
+                <p class="text-gray-600">Enjoy free delivery to any location across Nigeria</p>
+            </div>
+            
+            <div class="bg-white rounded-2xl p-8 text-center card-hover" data-aos="zoom-in" data-aos-delay="400">
+                <div class="w-16 h-16 bg-gold/10 rounded-full flex items-center justify-center mx-auto mb-6">
+                    <i class="fas fa-headset text-gold text-2xl"></i>
+                </div>
+                <h3 class="text-xl font-bold text-black mb-3">Premium Customer Service</h3>
+                <p class="text-gray-600">Professional support to help you find your perfect match</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Testimonials Section -->
+<section id="testimonials" class="py-20 md:py-32 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16" data-aos="fade-up">
+            <span class="text-gold font-semibold text-sm uppercase tracking-wider">Testimonials</span>
+            <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-black mt-3 mb-4">
+                What Our Customers Say
+            </h2>
+            <p class="text-gray-600 text-lg max-w-2xl mx-auto">
+                Real experiences from real customers who love their Ayanate's Empire hair
+            </p>
+        </div>
+        
+        <div class="grid md:grid-cols-3 gap-8">
+            <div class="testimonial-card rounded-2xl p-8 shadow-lg" data-aos="fade-up" data-aos-delay="100">
+                <div class="flex gap-1 mb-4">
+                    <i class="fas fa-star text-gold"></i>
+                    <i class="fas fa-star text-gold"></i>
+                    <i class="fas fa-star text-gold"></i>
+                    <i class="fas fa-star text-gold"></i>
+                    <i class="fas fa-star text-gold"></i>
+                </div>
+                <p class="text-gray-700 text-lg mb-6 italic leading-relaxed">
+                    "The quality exceeded my expectations. Very soft and beautiful. I've received so many compliments since I started wearing this hair!"
+                </p>
+                <div class="flex items-center gap-4">
+                    <div class="w-12 h-12 bg-gold/20 rounded-full flex items-center justify-center">
+                        <i class="fas fa-user text-gold"></i>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-black">Sarah O.</h4>
+                        <p class="text-gray-600 text-sm">Verified Customer</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="testimonial-card rounded-2xl p-8 shadow-lg" data-aos="fade-up" data-aos-delay="200">
+                <div class="flex gap-1 mb-4">
+                    <i class="fas fa-star text-gold"></i>
+                    <i class="fas fa-star text-gold"></i>
+                    <i class="fas fa-star text-gold"></i>
+                    <i class="fas fa-star text-gold"></i>
+                    <i class="fas fa-star text-gold"></i>
+                </div>
+                <p class="text-gray-700 text-lg mb-6 italic leading-relaxed">
+                    "My wig arrived quickly and looked exactly like the photos. The customer service was exceptional. Highly recommend!"
+                </p>
+                <div class="flex items-center gap-4">
+                    <div class="w-12 h-12 bg-gold/20 rounded-full flex items-center justify-center">
+                        <i class="fas fa-user text-gold"></i>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-black">Amaka T.</h4>
+                        <p class="text-gray-600 text-sm">Verified Customer</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="testimonial-card rounded-2xl p-8 shadow-lg" data-aos="fade-up" data-aos-delay="300">
+                <div class="flex gap-1 mb-4">
+                    <i class="fas fa-star text-gold"></i>
+                    <i class="fas fa-star text-gold"></i>
+                    <i class="fas fa-star text-gold"></i>
+                    <i class="fas fa-star text-gold"></i>
+                    <i class="fas fa-star text-gold"></i>
+                </div>
+                <p class="text-gray-700 text-lg mb-6 italic leading-relaxed">
+                    "I've been buying from Ayanate's Empire and the quality is always amazing. Best hair vendor I've ever dealt with!"
+                </p>
+                <div class="flex items-center gap-4">
+                    <div class="w-12 h-12 bg-gold/20 rounded-full flex items-center justify-center">
+                        <i class="fas fa-user text-gold"></i>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-black">Chioma E.</h4>
+                        <p class="text-gray-600 text-sm">Verified Customer</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Instagram Gallery Section -->
+<section class="py-20 md:py-32 bg-nude">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16" data-aos="fade-up">
+            <span class="text-gold font-semibold text-sm uppercase tracking-wider">Instagram</span>
+            <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-black mt-3 mb-4">
+                Follow Us on Instagram
+            </h2>
+            <a href="https://instagram.com/Yanate" target="_blank" class="inline-flex items-center gap-2 text-xl text-gray-700 hover-gold transition-colors">
+                <i class="fab fa-instagram text-gold text-2xl"></i>
+                <span class="font-semibold">@Yanate</span>
+            </a>
+        </div>
+        
+        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 mb-8">
+            <a href="https://instagram.com/Yanate" target="_blank" class="relative group overflow-hidden rounded-xl aspect-square bg-nude" data-aos="zoom-in" data-aos-delay="100">
+                <img src="https://source.unsplash.com/400x400/?hair,model,luxury" 
+                     alt="Instagram Post - Luxury hair style showcase from Ayanate's Empire" 
+                     class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                     onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22400%22 height=%22400%22%3E%3Crect fill=%22%23F8F4EE%22 width=%22400%22 height=%22400%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 dominant-baseline=%22middle%22 text-anchor=%22middle%22 font-family=%22Arial%22 font-size=%2216%22 fill=%22%23D4AF37%22%3E%40Yanate%3C/text%3E%3C/svg%3E';">
+                <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                    <i class="fab fa-instagram text-white text-3xl"></i>
+                </div>
+            </a>
+            <a href="https://instagram.com/Yanate" target="_blank" class="relative group overflow-hidden rounded-xl aspect-square bg-nude" data-aos="zoom-in" data-aos-delay="150">
+                <img src="https://source.unsplash.com/400x400/?wig,fashion,beauty" 
+                     alt="Instagram Post - Beautiful wig styling from Ayanate's Empire" 
+                     class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                     onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22400%22 height=%22400%22%3E%3Crect fill=%22%23F8F4EE%22 width=%22400%22 height=%22400%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 dominant-baseline=%22middle%22 text-anchor=%22middle%22 font-family=%22Arial%22 font-size=%2216%22 fill=%22%23D4AF37%22%3E%40Yanate%3C/text%3E%3C/svg%3E';">
+                <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                    <i class="fab fa-instagram text-white text-3xl"></i>
+                </div>
+            </a>
+            <a href="https://instagram.com/Yanate" target="_blank" class="relative group overflow-hidden rounded-xl aspect-square bg-nude" data-aos="zoom-in" data-aos-delay="200">
+                <img src="https://source.unsplash.com/400x400/?curls,hair,portrait" 
+                     alt="Instagram Post - Curly hair inspiration from Ayanate's Empire" 
+                     class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                     onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22400%22 height=%22400%22%3E%3Crect fill=%22%23F8F4EE%22 width=%22400%22 height=%22400%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 dominant-baseline=%22middle%22 text-anchor=%22middle%22 font-family=%22Arial%22 font-size=%2216%22 fill=%22%23D4AF37%22%3E%40Yanate%3C/text%3E%3C/svg%3E';">
+                <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                    <i class="fab fa-instagram text-white text-3xl"></i>
+                </div>
+            </a>
+            <a href="https://instagram.com/Yanate" target="_blank" class="relative group overflow-hidden rounded-xl aspect-square bg-nude" data-aos="zoom-in" data-aos-delay="250">
+                <img src="https://source.unsplash.com/400x400/?straight,hair,fashion" 
+                     alt="Instagram Post - Bone straight hair look from Ayanate's Empire" 
+                     class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                     onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22400%22 height=%22400%22%3E%3Crect fill=%22%23F8F4EE%22 width=%22400%22 height=%22400%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 dominant-baseline=%22middle%22 text-anchor=%22middle%22 font-family=%22Arial%22 font-size=%2216%22 fill=%22%23D4AF37%22%3E%40Yanate%3C/text%3E%3C/svg%3E';">
+                <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                    <i class="fab fa-instagram text-white text-3xl"></i>
+                </div>
+            </a>
+            <a href="https://instagram.com/Yanate" target="_blank" class="relative group overflow-hidden rounded-xl aspect-square bg-nude" data-aos="zoom-in" data-aos-delay="300">
+                <img src="https://source.unsplash.com/400x400/?wave,hair,style" 
+                     alt="Instagram Post - Body wave hair style from Ayanate's Empire" 
+                     class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                     onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22400%22 height=%22400%22%3E%3Crect fill=%22%23F8F4EE%22 width=%22400%22 height=%22400%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 dominant-baseline=%22middle%22 text-anchor=%22middle%22 font-family=%22Arial%22 font-size=%2216%22 fill=%22%23D4AF37%22%3E%40Yanate%3C/text%3E%3C/svg%3E';">
+                <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                    <i class="fab fa-instagram text-white text-3xl"></i>
+                </div>
+            </a>
+            <a href="https://instagram.com/Yanate" target="_blank" class="relative group overflow-hidden rounded-xl aspect-square bg-nude" data-aos="zoom-in" data-aos-delay="350">
+                <img src="https://source.unsplash.com/400x400/?hairstyle,luxury,woman" 
+                     alt="Instagram Post - Premium hair collection from Ayanate's Empire" 
+                     class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                     onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22400%22 height=%22400%22%3E%3Crect fill=%22%23F8F4EE%22 width=%22400%22 height=%22400%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 dominant-baseline=%22middle%22 text-anchor=%22middle%22 font-family=%22Arial%22 font-size=%2216%22 fill=%22%23D4AF37%22%3E%40Yanate%3C/text%3E%3C/svg%3E';">
+                <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                    <i class="fab fa-instagram text-white text-3xl"></i>
+                </div>
+            </a>
+        </div>
+        
+        <div class="text-center">
+            <a href="https://instagram.com/Yanate" target="_blank" class="btn-primary text-white px-8 py-4 rounded-full font-semibold text-lg inline-flex items-center gap-2">
+                <i class="fab fa-instagram"></i>
+                Follow @Yanate
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- FAQ Section -->
+<section id="faq" class="py-20 md:py-32 bg-white">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16" data-aos="fade-up">
+            <span class="text-gold font-semibold text-sm uppercase tracking-wider">FAQ</span>
+            <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-black mt-3 mb-4">
+                Frequently Asked Questions
+            </h2>
+            <p class="text-gray-600 text-lg">Got questions? We've got answers</p>
+        </div>
+        
+        <div class="space-y-4">
+            <div class="faq-item bg-nude rounded-2xl overflow-hidden" data-aos="fade-up" data-aos-delay="100">
+                <button class="faq-question w-full text-left p-6 flex items-center justify-between focus:outline-none" aria-expanded="false">
+                    <span class="text-lg font-semibold text-black">Do you offer nationwide delivery?</span>
+                    <i class="fas fa-chevron-down text-gold transition-transform"></i>
+                </button>
+                <div class="faq-answer px-6">
+                    <p class="text-gray-700 pb-6">Yes, delivery is available nationwide across Nigeria. We offer free nationwide delivery as part of our special promotion. Your order will be carefully packaged and delivered to your doorstep.</p>
+                </div>
+            </div>
+            
+            <div class="faq-item bg-nude rounded-2xl overflow-hidden" data-aos="fade-up" data-aos-delay="200">
+                <button class="faq-question w-full text-left p-6 flex items-center justify-between focus:outline-none" aria-expanded="false">
+                    <span class="text-lg font-semibold text-black">Are your products made from human hair?</span>
+                    <i class="fas fa-chevron-down text-gold transition-transform"></i>
+                </button>
+                <div class="faq-answer px-6">
+                    <p class="text-gray-700 pb-6">Yes, we offer premium human hair and quality hair blends. Our human hair products are 100% authentic, sourced from trusted suppliers, and can be washed, styled, and colored just like your natural hair.</p>
+                </div>
+            </div>
+            
+            <div class="faq-item bg-nude rounded-2xl overflow-hidden" data-aos="fade-up" data-aos-delay="300">
+                <button class="faq-question w-full text-left p-6 flex items-center justify-between focus:outline-none" aria-expanded="false">
+                    <span class="text-lg font-semibold text-black">How do I place an order?</span>
+                    <i class="fas fa-chevron-down text-gold transition-transform"></i>
+                </button>
+                <div class="faq-answer px-6">
+                    <p class="text-gray-700 pb-6">You can place an order by contacting us via phone at 08104865431, WhatsApp, Instagram @Yanate, or email gentryafuroyanate311@gmail.com. You can also fill out our contact form below and we'll get back to you immediately.</p>
+                </div>
+            </div>
+            
+            <div class="faq-item bg-nude rounded-2xl overflow-hidden" data-aos="fade-up" data-aos-delay="400">
+                <button class="faq-question w-full text-left p-6 flex items-center justify-between focus:outline-none" aria-expanded="false">
+                    <span class="text-lg font-semibold text-black">How long does delivery take?</span>
+                    <i class="fas fa-chevron-down text-gold transition-transform"></i>
+                </button>
+                <div class="faq-answer px-6">
+                    <p class="text-gray-700 pb-6">Delivery timelines depend on your location. Typically, deliveries within major cities take 2-3 business days, while other locations may take 3-5 business days. We'll provide you with tracking information once your order ships.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Contact Section -->
+<section id="contact" class="py-20 md:py-32 bg-nude">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16" data-aos="fade-up">
+            <span class="text-gold font-semibold text-sm uppercase tracking-wider">Contact Us</span>
+            <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-black mt-3 mb-4">
+                Place Your Order Today
+            </h2>
+            <p class="text-gray-600 text-lg max-w-2xl mx-auto">
+                Send a message today to place your order. We're here to help you find your perfect hair!
+            </p>
+        </div>
+        
+        <div class="grid lg:grid-cols-5 gap-12">
+            <div class="lg:col-span-2" data-aos="fade-right">
+                <div class="bg-white rounded-2xl p-8 shadow-lg">
+                    <h3 class="text-2xl font-bold text-black mb-6">Get In Touch</h3>
+                    
+                    <div class="space-y-6">
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 bg-gold/10 rounded-full flex items-center justify-center flex-shrink-0">
+                                <i class="fas fa-phone text-gold"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-black mb-1">Phone</h4>
+                                <a href="tel:08104865431" class="text-gray-600 hover-gold">08104865431</a>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 bg-gold/10 rounded-full flex items-center justify-center flex-shrink-0">
+                                <i class="fab fa-instagram text-gold text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-black mb-1">Instagram</h4>
+                                <a href="https://instagram.com/Yanate" target="_blank" class="text-gray-600 hover-gold">@Yanate</a>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 bg-gold/10 rounded-full flex items-center justify-center flex-shrink-0">
+                                <i class="fas fa-envelope text-gold"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-black mb-1">Email</h4>
+                                <a href="mailto:gentryafuroyanate311@gmail.com" class="text-gray-600 hover-gold break-all">gentryafuroyanate311@gmail.com</a>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 bg-gold/10 rounded-full flex items-center justify-center flex-shrink-0">
+                                <i class="fab fa-whatsapp text-gold text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-black mb-1">WhatsApp</h4>
+                                <a href="https://wa.me/2348104865431" target="_blank" class="text-gray-600 hover-gold">Chat with us instantly</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-8 pt-8 border-t border-gray-200">
+                        <h4 class="font-semibold text-black mb-4">Business Hours</h4>
+                        <p class="text-gray-600">Monday - Saturday: 8AM - 8PM</p>
+                        <p class="text-gray-600">Sunday: 12PM - 6PM</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="lg:col-span-3" data-aos="fade-left">
+                <form id="contact-form" class="bg-white rounded-2xl p-8 shadow-lg" aria-label="Contact form">
+                    <div class="grid sm:grid-cols-2 gap-6 mb-6">
+                        <div>
+                            <label for="name" class="block text-sm font-semibold text-black mb-2">Name *</label>
+                            <input type="text" 
+                                   id="name" 
+                                   name="name" 
+                                   required 
+                                   class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-gold focus:outline-none transition-colors"
+                                   placeholder="Your full name"
+                                   aria-required="true">
+                            <span class="error-message text-red-500 text-sm hidden">Please enter your name</span>
+                        </div>
+                        
+                        <div>
+                            <label for="phone" class="block text-sm font-semibold text-black mb-2">Phone Number *</label>
+                            <input type="tel" 
+                                   id="phone" 
+                                   name="phone" 
+                                   required 
+                                   class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-gold focus:outline-none transition-colors"
+                                   placeholder="Your phone number"
+                                   aria-required="true">
+                            <span class="error-message text-red-500 text-sm hidden">Please enter a valid phone number</span>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-6">
+                        <label for="product" class="block text-sm font-semibold text-black mb-2">Product Interested In *</label>
+                        <select id="product" 
+                                name="product" 
+                                required 
+                                class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-gold focus:outline-none transition-colors bg-white"
+                                aria-required="true">
+                            <option value="">Select a product</option>
+                            <option value="Bone Straight Hair">Bone Straight Hair</option>
+                            <option value="Deep Wave Hair">Deep Wave Hair</option>
+                            <option value="Body Wave Hair">Body Wave Hair</option>
+                            <option value="Curly Hair">Curly Hair</option>
+                            <option value="Pixie Wigs">Pixie Wigs</option>
+                            <option value="Bob Cut Wigs">Bob Cut Wigs</option>
+                            <option value="Frontal Wigs">Frontal Wigs</option>
+                            <option value="Closure Wigs">Closure Wigs</option>
+                            <option value="Other">Other / Custom Request</option>
+                        </select>
+                        <span class="error-message text-red-500 text-sm hidden">Please select a product</span>
+                    </div>
+                    
+                    <div class="mb-6">
+                        <label for="message" class="block text-sm font-semibold text-black mb-2">Message *</label>
+                        <textarea id="message" 
+                                  name="message" 
+                                  required 
+                                  rows="5" 
+                                  class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-gold focus:outline-none transition-colors resize-none"
+                                  placeholder="Tell us about your order or any questions you have..."
+                                  aria-required="true"></textarea>
+                        <span class="error-message text-red-500 text-sm hidden">Please enter your message</span>
+                    </div>
+                    
+                    <button type="submit" 
+                            class="btn-primary w-full text-white px-8 py-4 rounded-full font-semibold text-lg">
+                        Send Message via WhatsApp
+                    </button>
+                    
+                    <p class="text-center text-gray-500 text-sm mt-4">
+                        Your message will be sent directly to our WhatsApp
+                    </p>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer class="bg-black text-white py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid md:grid-cols-3 gap-12 mb-12">
+            <div>
+                <h3 class="text-2xl font-bold mb-4">Ayanate's <span class="text-gold">Empire</span></h3>
+                <p class="text-gray-400 mb-6">Premium Human Hair & Quality Hair Blends</p>
+                <p class="text-gray-400 text-sm leading-relaxed">
+                    Your trusted destination for luxurious, long-lasting hair solutions that enhance your natural beauty and boost your confidence.
+                </p>
+            </div>
+            
+            <div>
+                <h4 class="text-lg font-bold mb-4">Quick Links</h4>
+                <ul class="space-y-3">
+                    <li><a href="#home" class="text-gray-400 hover-gold transition-colors">Home</a></li>
+                    <li><a href="#about" class="text-gray-400 hover-gold transition-colors">About</a></li>
+                    <li><a href="#collections" class="text-gray-400 hover-gold transition-colors">Collections</a></li>
+                    <li><a href="#testimonials" class="text-gray-400 hover-gold transition-colors">Testimonials</a></li>
+                    <li><a href="#contact" class="text-gray-400 hover-gold transition-colors">Contact</a></li>
+                </ul>
+            </div>
+            
+            <div>
+                <h4 class="text-lg font-bold mb-4">Contact Information</h4>
+                <ul class="space-y-3">
+                    <li class="flex items-center gap-3">
+                        <i class="fas fa-phone text-gold"></i>
+                        <a href="tel:08104865431" class="text-gray-400 hover-gold">08104865431</a>
+                    </li>
+                    <li class="flex items-center gap-3">
+                        <i class="fab fa-instagram text-gold"></i>
+                        <a href="https://instagram.com/Yanate" target="_blank" class="text-gray-400 hover-gold">@Yanate</a>
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <i class="fas fa-envelope text-gold mt-1"></i>
+                        <a href="mailto:gentryafuroyanate311@gmail.com" class="text-gray-400 hover-gold break-all">gentryafuroyanate311@gmail.com</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="border-t border-gray-800 pt-8">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-4">
+                <p class="text-gray-400 text-sm">
+                    © 2026 Ayanate's Empire. All Rights Reserved.
+                </p>
+                <div class="flex gap-4">
+                    <a href="https://instagram.com/Yanate" target="_blank" class="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-gold transition-colors" aria-label="Instagram">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="https://wa.me/2348104865431" target="_blank" class="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-gold transition-colors" aria-label="WhatsApp">
+                        <i class="fab fa-whatsapp"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- WhatsApp Floating Button -->
+<a href="https://wa.me/2348104865431?text=Hello%20Ayanate's%20Empire%2C%20I%20would%20like%20to%20place%20an%20order." 
+   target="_blank" 
+   class="whatsapp-float fixed bottom-6 right-6 w-16 h-16 bg-[#25D366] rounded-full flex items-center justify-center shadow-2xl z-50 hover:scale-110 transition-transform"
+   aria-label="Chat on WhatsApp">
+    <i class="fab fa-whatsapp text-white text-3xl"></i>
+</a>
+
+<!-- Back to Top Button -->
+<button id="back-to-top" 
+        class="fixed bottom-24 right-6 w-12 h-12 bg-gold rounded-full flex items-center justify-center shadow-lg z-50 opacity-0 invisible transition-all duration-300 hover:scale-110"
+        aria-label="Back to top">
+    <i class="fas fa-chevron-up text-white"></i>
+</button>
+
+<!-- AOS Script -->
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+<script>
+    // Initialize AOS
+    if (typeof AOS !== 'undefined') {
+        AOS.init({
+            duration: 800,
+            once: true,
+            offset: 100
+        });
+    }
+    
+    // Mobile Menu Toggle
+    const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    
+    mobileMenuBtn.addEventListener('click', () => {
+        mobileMenu.classList.toggle('hidden');
+        const icon = mobileMenuBtn.querySelector('i');
+        icon.classList.toggle('fa-bars');
+        icon.classList.toggle('fa-times');
+    });
+    
+    // Close mobile menu when clicking a link
+    const mobileLinks = mobileMenu.querySelectorAll('a');
+    mobileLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            mobileMenu.classList.add('hidden');
+            const icon = mobileMenuBtn.querySelector('i');
+            icon.classList.remove('fa-times');
+            icon.classList.add('fa-bars');
+        });
+    });
+    
+    // Navbar scroll effect
+    const navbar = document.getElementById('navbar');
+    let lastScroll = 0;
+    
+    window.addEventListener('scroll', () => {
+        const currentScroll = window.pageYOffset;
+        
+        if (currentScroll > 100) {
+            navbar.classList.add('shadow-md');
+        } else {
+            navbar.classList.remove('shadow-md');
+        }
+        
+        lastScroll = currentScroll;
+    });
+    
+    // Active nav link on scroll
+    const sections = document.querySelectorAll('section[id]');
+    const navLinks = document.querySelectorAll('.nav-link');
+    
+    window.addEventListener('scroll', () => {
+        let current = '';
+        
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop;
+            const sectionHeight = section.clientHeight;
+            if (pageYOffset >= sectionTop - 200) {
+                current = section.getAttribute('id');
+            }
+        });
+        
+        navLinks.forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('href').slice(1) === current) {
+                link.classList.add('active');
+            }
+        });
+    });
+    
+    // FAQ Accordion
+    const faqQuestions = document.querySelectorAll('.faq-question');
+    
+    faqQuestions.forEach(question => {
+        question.addEventListener('click', () => {
+            const faqItem = question.parentElement;
+            const isActive = faqItem.classList.contains('active');
+            
+            // Close all FAQ items
+            document.querySelectorAll('.faq-item').forEach(item => {
+                item.classList.remove('active');
+                item.querySelector('.fa-chevron-down').style.transform = 'rotate(0deg)';
+                item.querySelector('.faq-question').setAttribute('aria-expanded', 'false');
+            });
+            
+            // Open clicked item if it wasn't active
+            if (!isActive) {
+                faqItem.classList.add('active');
+                question.querySelector('.fa-chevron-down').style.transform = 'rotate(180deg)';
+                question.setAttribute('aria-expanded', 'true');
+            }
+        });
+    });
+    
+    // Form Validation & WhatsApp Integration
+    const contactForm = document.getElementById('contact-form');
+    
+    contactForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        
+        let isValid = true;
+        
+        // Validate Name
+        const name = document.getElementById('name');
+        const nameError = name.nextElementSibling;
+        if (name.value.trim() === '') {
+            name.classList.add('border-red-500');
+            nameError.classList.remove('hidden');
+            isValid = false;
+        } else {
+            name.classList.remove('border-red-500');
+            nameError.classList.add('hidden');
+        }
+        
+        // Validate Phone
+        const phone = document.getElementById('phone');
+        const phoneError = phone.nextElementSibling;
+        const phoneRegex = /^[0-9+\s-()]+$/;
+        if (phone.value.trim() === '' || !phoneRegex.test(phone.value)) {
+            phone.classList.add('border-red-500');
+            phoneError.classList.remove('hidden');
+            isValid = false;
+        } else {
+            phone.classList.remove('border-red-500');
+            phoneError.classList.add('hidden');
+        }
+        
+        // Validate Product
+        const product = document.getElementById('product');
+        const productError = product.nextElementSibling;
+        if (product.value === '') {
+            product.classList.add('border-red-500');
+            productError.classList.remove('hidden');
+            isValid = false;
+        } else {
+            product.classList.remove('border-red-500');
+            productError.classList.add('hidden');
+        }
+        
+        // Validate Message
+        const message = document.getElementById('message');
+        const messageError = message.nextElementSibling;
+        if (message.value.trim() === '') {
+            message.classList.add('border-red-500');
+            messageError.classList.remove('hidden');
+            isValid = false;
+        } else {
+            message.classList.remove('border-red-500');
+            messageError.classList.add('hidden');
+        }
+        
+        if (isValid) {
+            // Create WhatsApp message
+            const whatsappMessage = `Hello Ayanate's Empire,\n\nName: ${name.value}\nPhone: ${phone.value}\nProduct Interest: ${product.value}\n\nMessage: ${message.value}`;
+            const encodedMessage = encodeURIComponent(whatsappMessage);
+            const whatsappUrl = `https://wa.me/2348104865431?text=${encodedMessage}`;
+            
+            // Open WhatsApp
+            window.open(whatsappUrl, '_blank');
+            
+            // Reset form
+            contactForm.reset();
+        }
+    });
+    
+    // Back to Top Button
+    const backToTopBtn = document.getElementById('back-to-top');
+    
+    window.addEventListener('scroll', () => {
+        if (window.pageYOffset > 300) {
+            backToTopBtn.classList.remove('opacity-0', 'invisible');
+            backToTopBtn.classList.add('opacity-100', 'visible');
+        } else {
+            backToTopBtn.classList.remove('opacity-100', 'visible');
+            backToTopBtn.classList.add('opacity-0', 'invisible');
+        }
+    });
+    
+    backToTopBtn.addEventListener('click', () => {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    });
+</script>
+
+<script>(function(){document.addEventListener("click",function(e){var a=e.target.closest("[data-product-id]");if(!a)return;e.preventDefault();var pid=a.getAttribute("data-product-id");if(pid)parent.postMessage({type:"ecto-artifact-link-click",productId:pid},"*")})})();</script>
+</body>
+</html>
