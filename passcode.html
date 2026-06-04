@@ -1,0 +1,2142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
+<title>PASSCODE — Invitation-Only Access</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script src="https://unpkg.com/html5-qrcode@2.3.8/html5-qrcode.min.js"></script>
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+  import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged, updateProfile } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+  import { getDatabase, ref, set, get, push, update, remove, onValue, off, query, orderByChild, equalTo, limitToLast, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyCIi1CJZ7ZZd3yKXfCkQ0hJDmiDgpi2k9A",
+    authDomain: "passcode-d02ec.firebaseapp.com",
+    databaseURL: "https://passcode-d02ec-default-rtdb.firebaseio.com",
+    projectId: "passcode-d02ec",
+    storageBucket: "passcode-d02ec.firebasestorage.app",
+    messagingSenderId: "560755402776",
+    appId: "1:560755402776:web:65b116944083674995fb6d",
+    measurementId: "G-KFN8LNZGK2"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+  const db = getDatabase(app);
+
+  // ─────────────────────── STATE ───────────────────────
+  let currentUser = null;
+  let currentUserData = null;
+  let currentPage = 'landing';
+  let activeListeners = [];
+  let typingTimeout = null;
+  let activeChatId = null;
+  let html5QrScanner = null;
+
+  // ─────────────────────── HELPERS ───────────────────────
+  function genPasscode() {
+    return 'PASS-' + Math.floor(100000 + Math.random() * 900000);
+  }
+  function genId(len=8){
+    return Math.random().toString(36).substr(2,len).toUpperCase();
+  }
+  function ts(){return Date.now();}
+  function fmtDate(ms){
+    if(!ms) return '';
+    return new Date(ms).toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'});
+  }
+  function fmtTime(ms){
+    if(!ms) return '';
+    return new Date(ms).toLocaleTimeString('en-US',{hour:'2-digit',minute:'2-digit'});
+  }
+  function fmtDateTime(ms){return fmtDate(ms)+' '+fmtTime(ms);}
+  function toast(msg,type='info'){
+    const t=document.createElement('div');
+    t.className=`toast toast-${type}`;
+    t.textContent=msg;
+    document.getElementById('toastArea').appendChild(t);
+    setTimeout(()=>t.classList.add('show'),10);
+    setTimeout(()=>{t.classList.remove('show');setTimeout(()=>t.remove(),400)},3500);
+  }
+  function showLoader(show=true){
+    document.getElementById('globalLoader').style.display=show?'flex':'none';
+  }
+  function avatar(name='?',size=40){
+    const initials=(name||'?').split(' ').map(n=>n[0]).join('').substr(0,2).toUpperCase();
+    const colors=['#7C3AED','#6D28D9','#5B21B6','#8B5CF6','#A78BFA'];
+    const color=colors[name.charCodeAt(0)%colors.length];
+    return `<div class="avatar" style="width:${size}px;height:${size}px;background:${color};font-size:${size*0.38}px">${initials}</div>`;
+  }
+
+  // ─────────────────────── NAVIGATION ───────────────────────
+  function navigate(page, params={}){
+    currentPage=page;
+    document.querySelectorAll('.page').forEach(p=>p.style.display='none');
+    const el=document.getElementById('page-'+page);
+    if(el) el.style.display='flex';
+    document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
+    const navEl=document.querySelector(`.nav-item[data-page="${page}"]`);
+    if(navEl) navEl.classList.add('active');
+    const appNav=document.getElementById('appNav');
+    const publicPages=['landing','login','register','resetPassword'];
+    appNav.style.display=publicPages.includes(page)?'none':'flex';
+    window._navParams=params;
+    if(page==='dashboard') loadDashboard();
+    else if(page==='events') loadEvents();
+    else if(page==='eventDetail') loadEventDetail(params.eventId);
+    else if(page==='invitations') loadInvitations();
+    else if(page==='notifications') loadNotifications();
+    else if(page==='messages') loadMessages();
+    else if(page==='chat') loadChat(params.chatId, params.otherUserId);
+    else if(page==='profile') loadProfile(params.userId||currentUser?.uid);
+    else if(page==='security') loadSecurityDashboard(params.eventId);
+    else if(page==='admin') loadAdmin();
+    else if(page==='createEvent') initCreateEvent();
+    else if(page==='qrcode') loadQRCode();
+    else if(page==='resetPassword') initResetPassword();
+    else if(page==='requests') loadRequests();
+  }
+
+  // ─────────────────────── AUTH ───────────────────────
+  window.handleRegister = async function(){
+    const name=document.getElementById('reg-name').value.trim();
+    const username=document.getElementById('reg-username').value.trim().toLowerCase();
+    const email=document.getElementById('reg-email').value.trim();
+    const phone=document.getElementById('reg-phone').value.trim();
+    const pass=document.getElementById('reg-pass').value;
+    const photo=window._uploadedProfilePhoto||'';
+
+    if(!name||!username||!email||!phone||!pass){toast('Please fill all fields','error');return;}
+    if(pass.length<6){toast('Password must be at least 6 characters','error');return;}
+
+    showLoader(true);
+    try {
+      // Check username unique
+      const uSnap=await get(ref(db,`usernames/${username}`));
+      if(uSnap.exists()){toast('Username already taken','error');showLoader(false);return;}
+
+      const cred=await createUserWithEmailAndPassword(auth,email,pass);
+      const uid=cred.user.uid;
+      const passcode=genPasscode();
+
+      await updateProfile(cred.user,{displayName:name});
+
+      const userData={
+        uid, name, username, email, phone,
+        photo, passcode,
+        role:'user',
+        createdAt:ts(),
+        lastSeen:ts(),
+        status:'active'
+      };
+
+      await set(ref(db,`users/${uid}`),userData);
+      await set(ref(db,`usernames/${username}`),uid);
+      await set(ref(db,`emailIndex/${email.replace(/\./g,'_')}`),uid);
+
+      toast('Account created! Welcome to PASSCODE','success');
+    } catch(e){
+      toast(e.message,'error');
+    }
+    showLoader(false);
+  };
+
+  window.handleLogin = async function(){
+    const identifier=document.getElementById('login-id').value.trim();
+    const pass=document.getElementById('login-pass').value;
+    if(!identifier||!pass){toast('Please fill all fields','error');return;}
+    showLoader(true);
+    try {
+      let email=identifier;
+      if(!identifier.includes('@')){
+        const uSnap=await get(ref(db,`usernames/${identifier.toLowerCase()}`));
+        if(!uSnap.exists()){toast('User not found','error');showLoader(false);return;}
+        const uid=uSnap.val();
+        const userSnap=await get(ref(db,`users/${uid}`));
+        email=userSnap.val().email;
+      }
+      await signInWithEmailAndPassword(auth,email,pass);
+      toast('Welcome back!','success');
+    } catch(e){
+      toast('Invalid credentials','error');
+    }
+    showLoader(false);
+  };
+
+  window.handleLogout = async function(){
+    if(currentUser) await update(ref(db,`users/${currentUser.uid}`),{lastSeen:ts()});
+    activeListeners.forEach(l=>off(l));
+    activeListeners=[];
+    await signOut(auth);
+    navigate('landing');
+  };
+
+  onAuthStateChanged(auth, async(user)=>{
+    if(user){
+      currentUser=user;
+      const snap=await get(ref(db,`users/${user.uid}`));
+      if(snap.exists()){
+        currentUserData=snap.val();
+        await update(ref(db,`users/${user.uid}`),{lastSeen:ts()});
+        setupNotificationListener();
+        setupRequestListener();
+        if(currentUserData.role==='admin'||currentUserData.role==='superadmin'){
+          document.querySelector('.nav-item[data-page="admin"]').style.display='flex';
+        }
+        navigate('dashboard');
+      }
+    } else {
+      currentUser=null;
+      currentUserData=null;
+      navigate('landing');
+    }
+  });
+
+  // ─────────────────────── UPLOADCARE ───────────────────────
+  window.openUploadcare = function(callback){
+    const w=window.open(`https://ucarecdn.com/widget/3.x/uploadcare.full.js`,'','width=600,height=600');
+    const widget=uploadcare.openDialog(null,{
+      publicKey:'691b9ecdbe2da2b8f34e',
+      imagesOnly:true,
+      crop:'1:1'
+    });
+    widget.done(function(fileInfo){
+      callback(fileInfo.cdnUrl);
+    });
+  };
+
+  function initUploadcare(inputId, previewId, onSuccess){
+    const btn=document.getElementById('btn-upload-'+inputId);
+    if(!btn) return;
+    btn.addEventListener('click',()=>{
+      const widget=window.uploadcare.openDialog(null,{
+        publicKey:'691b9ecdbe2da2b8f34e',
+        imagesOnly:true
+      });
+      widget.done(f=>{
+        f.promise().done(info=>{
+          window['_uploaded_'+inputId]=info.cdnUrl;
+          if(previewId){
+            const prev=document.getElementById(previewId);
+            if(prev){prev.src=info.cdnUrl;prev.style.display='block';}
+          }
+          if(onSuccess) onSuccess(info.cdnUrl);
+          toast('Image uploaded','success');
+        });
+      });
+    });
+  }
+
+  // ─────────────────────── QR CODE ───────────────────────
+  function loadQRCode(){
+    const container=document.getElementById('qr-container');
+    container.innerHTML='';
+    const data=JSON.stringify({userId:currentUser.uid, passcode:currentUserData.passcode});
+    new QRCode(container,{
+      text:data,
+      width:220,
+      height:220,
+      colorDark:'#7C3AED',
+      colorLight:'#0d0d14',
+      correctLevel:QRCode.CorrectLevel.H
+    });
+    document.getElementById('qr-passcode').textContent=currentUserData.passcode;
+  }
+
+  window.downloadQR = function(){
+    const canvas=document.querySelector('#qr-container canvas');
+    if(!canvas){toast('QR not loaded','error');return;}
+    const a=document.createElement('a');
+    a.download=`passcode-${currentUserData.passcode}.png`;
+    a.href=canvas.toDataURL();
+    a.click();
+  };
+
+  // ─────────────────────── DASHBOARD ───────────────────────
+  async function loadDashboard(){
+    if(!currentUser) return;
+    const snap=await get(ref(db,`users/${currentUser.uid}`));
+    currentUserData=snap.val();
+
+    document.getElementById('dash-photo').innerHTML=currentUserData.photo
+      ? `<img src="${currentUserData.photo}" alt=""/>`
+      : avatar(currentUserData.name,60);
+    document.getElementById('dash-name').textContent=currentUserData.name;
+    document.getElementById('dash-username').textContent='@'+currentUserData.username;
+    document.getElementById('dash-email').textContent=currentUserData.email;
+    document.getElementById('dash-phone').textContent=currentUserData.phone;
+
+    // Stats
+    const [evSnap,invSnap,secSnap]=await Promise.all([
+      get(query(ref(db,'events'),orderByChild('ownerId'),equalTo(currentUser.uid))),
+      get(query(ref(db,'invitations'),orderByChild('guestId'),equalTo(currentUser.uid))),
+      get(query(ref(db,'securityAssignments'),orderByChild('userId'),equalTo(currentUser.uid)))
+    ]);
+
+    const evCount=evSnap.exists()?Object.keys(evSnap.val()).length:0;
+    const invCount=invSnap.exists()?Object.keys(invSnap.val()).length:0;
+    const secCount=secSnap.exists()?Object.keys(secSnap.val()).length:0;
+    const attendedCount=invSnap.exists()?Object.values(invSnap.val()).filter(i=>i.status==='checked_in').length:0;
+
+    document.getElementById('stat-events').textContent=evCount;
+    document.getElementById('stat-attended').textContent=attendedCount;
+    document.getElementById('stat-invitations').textContent=invCount;
+    document.getElementById('stat-security').textContent=secCount;
+
+    // Recent events
+    loadRecentEvents();
+  }
+
+  async function loadRecentEvents(){
+    const snap=await get(ref(db,'events'));
+    const container=document.getElementById('recent-events');
+    if(!snap.exists()){container.innerHTML='<p class="empty-state">No events yet</p>';return;}
+    const events=Object.entries(snap.val()).sort((a,b)=>b[1].createdAt-a[1].createdAt).slice(0,4);
+    container.innerHTML=events.map(([id,ev])=>`
+      <div class="event-card-mini" onclick="navigate('eventDetail',{eventId:'${id}'})">
+        ${ev.banner?`<img src="${ev.banner}" class="event-mini-banner"/>`:`<div class="event-mini-banner-placeholder"></div>`}
+        <div class="event-card-mini-info">
+          <h4>${ev.title}</h4>
+          <p>${fmtDate(ev.date)}</p>
+          <p class="venue-text">${ev.venue}</p>
+        </div>
+      </div>
+    `).join('');
+  }
+
+  // ─────────────────────── EVENTS ───────────────────────
+  async function loadEvents(){
+    const snap=await get(ref(db,'events'));
+    const container=document.getElementById('events-list');
+    const myContainer=document.getElementById('my-events-list');
+    if(!snap.exists()){
+      container.innerHTML='<p class="empty-state">No events</p>';
+      myContainer.innerHTML='<p class="empty-state">You have no events</p>';
+      return;
+    }
+    const all=Object.entries(snap.val()).sort((a,b)=>b[1].createdAt-a[1].createdAt);
+    const mine=all.filter(([,e])=>e.ownerId===currentUser.uid);
+
+    function eventCard([id,ev]){
+      return `<div class="event-card" onclick="navigate('eventDetail',{eventId:'${id}'})">
+        ${ev.banner?`<img src="${ev.banner}" class="event-banner-img"/>`:`<div class="event-banner-placeholder"><span>NO PHOTO</span></div>`}
+        <div class="event-card-body">
+          <h3>${ev.title}</h3>
+          <p class="event-meta">${fmtDate(ev.date)} · ${ev.time||''}</p>
+          <p class="event-venue">📍 ${ev.venue}</p>
+          <div class="event-footer">
+            <span class="guest-count">👥 ${ev.maxGuests||'∞'} max</span>
+            ${ev.ownerId===currentUser.uid?'<span class="owner-badge">Owner</span>':''}
+          </div>
+        </div>
+      </div>`;
+    }
+
+    container.innerHTML=all.map(eventCard).join('');
+    myContainer.innerHTML=mine.length?mine.map(eventCard).join(''):'<p class="empty-state">No events created yet</p>';
+  }
+
+  window.initCreateEvent = function(){
+    document.getElementById('create-event-form').reset?.();
+    setTimeout(()=>initUploadcare('event-banner','event-banner-preview'),200);
+  };
+
+  window.handleCreateEvent = async function(){
+    const title=document.getElementById('ev-title').value.trim();
+    const desc=document.getElementById('ev-desc').value.trim();
+    const date=document.getElementById('ev-date').value;
+    const time=document.getElementById('ev-time').value;
+    const venue=document.getElementById('ev-venue').value.trim();
+    const maxGuests=parseInt(document.getElementById('ev-max').value)||100;
+    const banner=window._uploaded_event-banner||'';
+
+    if(!title||!date||!venue){toast('Please fill required fields','error');return;}
+    showLoader(true);
+    try {
+      const evId=genId(10);
+      await set(ref(db,`events/${evId}`),{
+        id:evId, title, description:desc, date:new Date(date).getTime(),
+        time, venue, banner, maxGuests, ownerId:currentUser.uid,
+        ownerName:currentUserData.name, createdAt:ts()
+      });
+      toast('Event created!','success');
+      navigate('events');
+    } catch(e){ toast(e.message,'error'); }
+    showLoader(false);
+  };
+
+  // ─────────────────────── EVENT DETAIL ───────────────────────
+  async function loadEventDetail(eventId){
+    if(!eventId) return;
+    const [evSnap,invSnap,secSnap]=await Promise.all([
+      get(ref(db,`events/${eventId}`)),
+      get(query(ref(db,'invitations'),orderByChild('eventId'),equalTo(eventId))),
+      get(query(ref(db,'securityAssignments'),orderByChild('eventId'),equalTo(eventId)))
+    ]);
+
+    if(!evSnap.exists()){toast('Event not found','error');navigate('events');return;}
+    const ev=evSnap.val();
+    const isOwner=ev.ownerId===currentUser.uid;
+
+    document.getElementById('ed-banner').innerHTML=ev.banner
+      ?`<img src="${ev.banner}" style="width:100%;height:200px;object-fit:cover;border-radius:12px"/>`
+      :`<div class="event-banner-full-placeholder"></div>`;
+    document.getElementById('ed-title').textContent=ev.title;
+    document.getElementById('ed-date').textContent=fmtDate(ev.date)+' · '+(ev.time||'');
+    document.getElementById('ed-venue').textContent=ev.venue;
+    document.getElementById('ed-desc').textContent=ev.description||'No description';
+    document.getElementById('ed-max').textContent=ev.maxGuests||'Unlimited';
+    document.getElementById('ed-owner').textContent=ev.ownerName;
+
+    // Owner controls
+    document.getElementById('ed-owner-controls').style.display=isOwner?'block':'none';
+    document.getElementById('ed-delete-btn').onclick=()=>deleteEvent(eventId);
+
+    // Guests
+    const guests=invSnap.exists()?Object.entries(invSnap.val()):[];
+    const guestContainer=document.getElementById('ed-guests');
+    guestContainer.innerHTML=guests.length?guests.map(([gid,inv])=>`
+      <div class="guest-item">
+        <div class="guest-info">
+          ${inv.guestPhoto?`<img src="${inv.guestPhoto}" class="guest-photo"/>`:`<div class="guest-avatar">${avatar(inv.guestName||'?',36)}</div>`}
+          <div>
+            <p>${inv.guestName||'Unknown'}</p>
+            <small>${inv.guestEmail}</small>
+          </div>
+        </div>
+        <span class="status-badge status-${inv.status}">${inv.status}</span>
+        ${isOwner?`<button class="btn-icon-sm" onclick="removeGuest('${gid}','${eventId}')">✕</button>`:''}
+      </div>
+    `).join(''):'<p class="empty-state">No guests yet</p>';
+
+    // Security
+    const secPersonnel=secSnap.exists()?Object.entries(secSnap.val()):[];
+    const secContainer=document.getElementById('ed-security');
+    secContainer.innerHTML=secPersonnel.length?secPersonnel.map(([sid,sec])=>`
+      <div class="guest-item">
+        <div class="guest-info">${avatar(sec.userName||'?',36)}<div><p>${sec.userName||'Unknown'}</p></div></div>
+        ${isOwner?`<button class="btn-icon-sm" onclick="removeSecurity('${sid}')">✕</button>`:''}
+      </div>
+    `).join(''):'<p class="empty-state">No security assigned</p>';
+
+    // Check if current user is security
+    const isSec=secPersonnel.some(([,s])=>s.userId===currentUser.uid);
+    document.getElementById('ed-security-btn').style.display=isSec?'block':'none';
+    document.getElementById('ed-security-btn').onclick=()=>navigate('security',{eventId});
+
+    // Invite form (owner only)
+    document.getElementById('ed-invite-form').style.display=isOwner?'flex':'none';
+    document.getElementById('ed-assign-form').style.display=isOwner?'flex':'none';
+
+    document.getElementById('btn-invite-guest').onclick=()=>inviteGuest(eventId,ev.title);
+    document.getElementById('btn-assign-security').onclick=()=>assignSecurity(eventId,ev.title);
+    window._currentEventId=eventId;
+  }
+
+  async function inviteGuest(eventId,eventTitle){
+    const email=document.getElementById('invite-email').value.trim();
+    if(!email){toast('Enter email','error');return;}
+
+    const emailKey=email.replace(/\./g,'_');
+    const uidSnap=await get(ref(db,`emailIndex/${emailKey}`));
+    if(!uidSnap.exists()){toast('User not registered','error');return;}
+
+    const guestId=uidSnap.val();
+    const guestSnap=await get(ref(db,`users/${guestId}`));
+    const guest=guestSnap.val();
+
+    // Check if already invited
+    const existingSnap=await get(query(ref(db,'invitations'),orderByChild('guestId'),equalTo(guestId)));
+    if(existingSnap.exists()){
+      const existing=Object.values(existingSnap.val()).find(i=>i.eventId===eventId);
+      if(existing){toast('Already invited','error');return;}
+    }
+
+    const invId=genId(10);
+    await set(ref(db,`invitations/${invId}`),{
+      id:invId, eventId, guestId,
+      guestEmail:email, guestName:guest.name, guestPhoto:guest.photo||'',
+      invitedBy:currentUser.uid, status:'pending', createdAt:ts()
+    });
+
+    // Send notification
+    const notifId=genId(10);
+    await set(ref(db,`notifications/${notifId}`),{
+      id:notifId, userId:guestId, type:'invitation',
+      title:'New Invitation',
+      message:`You have been invited to ${eventTitle}`,
+      eventId, invitationId:invId,
+      read:false, createdAt:ts()
+    });
+
+    document.getElementById('invite-email').value='';
+    toast('Invitation sent!','success');
+    loadEventDetail(eventId);
+  }
+
+  async function assignSecurity(eventId, eventTitle){
+    const usernameOrEmail=document.getElementById('assign-security-input').value.trim();
+    if(!usernameOrEmail){toast('Enter username or email','error');return;}
+
+    let uid=null;
+    if(usernameOrEmail.includes('@')){
+      const snap=await get(ref(db,`emailIndex/${usernameOrEmail.replace(/\./g,'_')}`));
+      if(snap.exists()) uid=snap.val();
+    } else {
+      const snap=await get(ref(db,`usernames/${usernameOrEmail.toLowerCase()}`));
+      if(snap.exists()) uid=snap.val();
+    }
+
+    if(!uid){toast('User not found','error');return;}
+    const userSnap=await get(ref(db,`users/${uid}`));
+    const user=userSnap.val();
+
+    const secId=genId(10);
+    await set(ref(db,`securityAssignments/${secId}`),{
+      id:secId, eventId, userId:uid, userName:user.name,
+      assignedBy:currentUser.uid, createdAt:ts()
+    });
+
+    const notifId=genId(10);
+    await set(ref(db,`notifications/${notifId}`),{
+      id:notifId, userId:uid, type:'security_assignment',
+      title:'Security Assignment',
+      message:`You have been assigned as security for ${eventTitle}`,
+      eventId, read:false, createdAt:ts()
+    });
+
+    document.getElementById('assign-security-input').value='';
+    toast('Security assigned!','success');
+    loadEventDetail(eventId);
+  }
+
+  window.removeGuest = async function(invId,eventId){
+    await remove(ref(db,`invitations/${invId}`));
+    toast('Guest removed','info');
+    loadEventDetail(eventId);
+  };
+
+  window.removeSecurity = async function(secId){
+    await remove(ref(db,`securityAssignments/${secId}`));
+    toast('Security removed','info');
+    loadEventDetail(window._currentEventId);
+  };
+
+  async function deleteEvent(eventId){
+    if(!confirm('Delete this event?')) return;
+    await remove(ref(db,`events/${eventId}`));
+    toast('Event deleted','info');
+    navigate('events');
+  }
+
+  // ─────────────────────── INVITATIONS ───────────────────────
+  async function loadInvitations(){
+    const snap=await get(query(ref(db,'invitations'),orderByChild('guestId'),equalTo(currentUser.uid)));
+    const container=document.getElementById('invitations-list');
+    if(!snap.exists()){container.innerHTML='<p class="empty-state">No invitations</p>';return;}
+
+    const invitations=Object.entries(snap.val()).sort((a,b)=>b[1].createdAt-a[1].createdAt);
+    const html=await Promise.all(invitations.map(async([id,inv])=>{
+      const evSnap=await get(ref(db,`events/${inv.eventId}`));
+      const ev=evSnap.exists()?evSnap.val():{title:'Unknown Event',date:0,venue:'Unknown'};
+      return `<div class="invitation-card">
+        <div class="inv-event-info">
+          ${ev.banner?`<img src="${ev.banner}" class="inv-banner"/>`:`<div class="inv-banner-ph"></div>`}
+          <div>
+            <h3>${ev.title}</h3>
+            <p>${fmtDate(ev.date)}</p>
+            <p class="venue-text">📍 ${ev.venue}</p>
+          </div>
+        </div>
+        <div class="inv-actions">
+          <span class="status-badge status-${inv.status}">${inv.status}</span>
+          ${inv.status==='pending'?`
+            <button class="btn-accept" onclick="respondInvitation('${id}','accepted')">Accept</button>
+            <button class="btn-decline" onclick="respondInvitation('${id}','declined')">Decline</button>
+          `:''}
+        </div>
+      </div>`;
+    }));
+    container.innerHTML=html.join('');
+  }
+
+  window.respondInvitation = async function(invId, status){
+    await update(ref(db,`invitations/${invId}`),{status});
+    const invSnap=await get(ref(db,`invitations/${invId}`));
+    const inv=invSnap.val();
+    const evSnap=await get(ref(db,`events/${inv.eventId}`));
+    const ev=evSnap.val();
+
+    // Notify event owner
+    const notifId=genId(10);
+    await set(ref(db,`notifications/${notifId}`),{
+      id:notifId, userId:ev.ownerId, type:status==='accepted'?'invitation_accepted':'invitation_declined',
+      title:'Invitation '+status.charAt(0).toUpperCase()+status.slice(1),
+      message:`${currentUserData.name} has ${status} your invitation to ${ev.title}`,
+      eventId:inv.eventId, read:false, createdAt:ts()
+    });
+
+    toast('Response sent','success');
+    loadInvitations();
+  };
+
+  // ─────────────────────── NOTIFICATIONS ───────────────────────
+  function setupNotificationListener(){
+    if(!currentUser) return;
+    const nRef=query(ref(db,'notifications'),orderByChild('userId'),equalTo(currentUser.uid));
+    const listener=onValue(nRef,(snap)=>{
+      if(!snap.exists()){updateNotifBadge(0);return;}
+      const all=Object.values(snap.val());
+      const unread=all.filter(n=>!n.read).length;
+      updateNotifBadge(unread);
+    });
+    activeListeners.push(nRef);
+  }
+
+  function updateNotifBadge(count){
+    const badge=document.getElementById('notif-badge');
+    badge.textContent=count;
+    badge.style.display=count>0?'flex':'none';
+  }
+
+  async function loadNotifications(){
+    const snap=await get(query(ref(db,'notifications'),orderByChild('userId'),equalTo(currentUser.uid)));
+    const container=document.getElementById('notif-list');
+    if(!snap.exists()){container.innerHTML='<p class="empty-state">No notifications</p>';return;}
+
+    const notifs=Object.entries(snap.val()).sort((a,b)=>b[1].createdAt-a[1].createdAt);
+    container.innerHTML=notifs.map(([id,n])=>`
+      <div class="notif-item ${n.read?'':'notif-unread'}" onclick="markNotifRead('${id}','${n.eventId||''}','${n.type}','${n.invitationId||''}')">
+        <div class="notif-icon notif-icon-${n.type}">${getNotifIcon(n.type)}</div>
+        <div class="notif-body">
+          <p class="notif-title">${n.title}</p>
+          <p class="notif-msg">${n.message}</p>
+          <small>${fmtDateTime(n.createdAt)}</small>
+        </div>
+        ${!n.read?'<div class="notif-dot"></div>':''}
+      </div>
+    `).join('');
+    // Mark all read
+    notifs.filter(([,n])=>!n.read).forEach(([id])=>{
+      update(ref(db,`notifications/${id}`),{read:true});
+    });
+    updateNotifBadge(0);
+  }
+
+  function getNotifIcon(type){
+    const icons={invitation:'✉️',invitation_accepted:'✅',invitation_declined:'❌',message:'💬',event_reminder:'📅',security_assignment:'🛡️',friend_request:'👥',friend_accepted:'🤝',checkin:'✅'};
+    return icons[type]||'🔔';
+  }
+
+  window.markNotifRead = function(id,eventId,type,invId){
+    update(ref(db,`notifications/${id}`),{read:true});
+    if(type==='invitation'&&invId) navigate('invitations');
+    else if(eventId) navigate('eventDetail',{eventId});
+  };
+
+  // ─────────────────────── MESSAGES ───────────────────────
+  async function loadMessages(){
+    const usersSnap=await get(ref(db,'users'));
+    const container=document.getElementById('users-list');
+    if(!usersSnap.exists()){container.innerHTML='<p class="empty-state">No users</p>';return;}
+
+    // Fetch friend requests for current user to show correct button state
+    const [inSnap,outSnap]=await Promise.all([
+      get(query(ref(db,'friendRequests'),orderByChild('toId'),equalTo(currentUser.uid))),
+      get(query(ref(db,'friendRequests'),orderByChild('fromId'),equalTo(currentUser.uid)))
+    ]);
+    const sentTo=new Set(); const friends=new Set();
+    if(outSnap.exists()) Object.values(outSnap.val()).forEach(r=>{
+      if(r.status==='pending') sentTo.add(r.toId);
+      if(r.status==='accepted') friends.add(r.toId);
+    });
+    if(inSnap.exists()) Object.values(inSnap.val()).forEach(r=>{
+      if(r.status==='accepted') friends.add(r.fromId);
+    });
+
+    const users=Object.entries(usersSnap.val()).filter(([uid])=>uid!==currentUser.uid);
+    container.innerHTML=users.map(([uid,u])=>{
+      let reqBtn='';
+      if(friends.has(uid)) reqBtn=`<span style="font-size:11px;color:var(--success);font-weight:600">✓ Friends</span>`;
+      else if(sentTo.has(uid)) reqBtn=`<span style="font-size:11px;color:var(--text3)">Sent</span>`;
+      else reqBtn=`<button class="btn-sm" onclick="event.stopPropagation();sendFriendRequest('${uid}')">+ Add</button>`;
+      return `
+      <div class="user-row" onclick="startChat('${uid}')">
+        <div class="user-row-avatar">
+          ${u.photo?`<img src="${u.photo}" class="user-row-img"/>`:`${avatar(u.name,44)}`}
+          <div class="online-dot"></div>
+        </div>
+        <div class="user-row-info">
+          <p>${u.name}</p>
+          <small>@${u.username}</small>
+        </div>
+        <div class="user-row-meta">${reqBtn}</div>
+      </div>`;
+    }).join('');
+  }
+
+  window.startChat = async function(otherUserId){
+    const chatId=[currentUser.uid,otherUserId].sort().join('_');
+    navigate('chat',{chatId,otherUserId});
+  };
+
+  async function loadChat(chatId, otherUserId){
+    activeChatId=chatId;
+    const otherSnap=await get(ref(db,`users/${otherUserId}`));
+    const other=otherSnap.val();
+
+    document.getElementById('chat-user-name').textContent=other.name;
+    document.getElementById('chat-user-status').textContent='@'+other.username;
+    document.getElementById('chat-avatar').innerHTML=other.photo
+      ?`<img src="${other.photo}" style="width:40px;height:40px;border-radius:50%;object-fit:cover"/>`
+      :avatar(other.name,40);
+
+    // Listen to messages
+    const msgRef=ref(db,`messages/${chatId}`);
+    const msgListener=onValue(msgRef,(snap)=>{
+      const container=document.getElementById('chat-messages');
+      if(!snap.exists()){container.innerHTML='<p class="empty-state">Say hello!</p>';return;}
+      const msgs=Object.entries(snap.val()).sort((a,b)=>a[1].ts-b[1].ts);
+      container.innerHTML=msgs.map(([mid,m])=>`
+        <div class="msg-bubble ${m.senderId===currentUser.uid?'msg-mine':'msg-theirs'}">
+          <p>${m.text}</p>
+          <small>${fmtTime(m.ts)} ${m.senderId===currentUser.uid&&m.read?'✓✓':''}</small>
+        </div>
+      `).join('');
+      container.scrollTop=container.scrollHeight;
+      // Mark read
+      msgs.filter(([,m])=>m.senderId!==currentUser.uid&&!m.read).forEach(([mid])=>{
+        update(ref(db,`messages/${chatId}/${mid}`),{read:true});
+      });
+    });
+    activeListeners.push(msgRef);
+
+    // Typing indicator
+    const typingRef=ref(db,`typing/${chatId}/${otherUserId}`);
+    onValue(typingRef,(snap)=>{
+      document.getElementById('typing-indicator').style.display=snap.val()?'block':'none';
+    });
+    activeListeners.push(typingRef);
+
+    document.getElementById('chat-input').oninput=()=>{
+      set(ref(db,`typing/${chatId}/${currentUser.uid}`),true);
+      clearTimeout(typingTimeout);
+      typingTimeout=setTimeout(()=>set(ref(db,`typing/${chatId}/${currentUser.uid}`),false),2000);
+    };
+  }
+
+  window.sendMessage = async function(){
+    const input=document.getElementById('chat-input');
+    const text=input.value.trim();
+    if(!text||!activeChatId) return;
+
+    const msgId=genId(12);
+    await set(ref(db,`messages/${activeChatId}/${msgId}`),{
+      senderId:currentUser.uid, text, ts:ts(), read:false
+    });
+    input.value='';
+    set(ref(db,`typing/${activeChatId}/${currentUser.uid}`),false);
+
+    // Notify other user
+    const [uid1,uid2]=activeChatId.split('_');
+    const otherId=uid1===currentUser.uid?uid2:uid1;
+    const notifId=genId(10);
+    await set(ref(db,`notifications/${notifId}`),{
+      id:notifId, userId:otherId, type:'message',
+      title:'New Message',
+      message:`${currentUserData.name}: ${text.substr(0,50)}`,
+      chatId:activeChatId, read:false, createdAt:ts()
+    });
+  };
+
+  // ─────────────────────── PROFILE ───────────────────────
+  async function loadProfile(userId){
+    const snap=await get(ref(db,`users/${userId}`));
+    if(!snap.exists()) return;
+    const u=snap.val();
+    const isMe=userId===currentUser.uid;
+
+    document.getElementById('prof-photo').innerHTML=u.photo
+      ?`<img src="${u.photo}" style="width:90px;height:90px;border-radius:50%;object-fit:cover;border:3px solid #7C3AED"/>`
+      :avatar(u.name,90);
+    document.getElementById('prof-name').textContent=u.name;
+    document.getElementById('prof-username').textContent='@'+u.username;
+    document.getElementById('prof-email').textContent=u.email;
+    document.getElementById('prof-phone').textContent=u.phone;
+
+    // QR
+    const qrDiv=document.getElementById('prof-qr');
+    qrDiv.innerHTML='';
+    const data=JSON.stringify({userId:u.uid, passcode:u.passcode});
+    new QRCode(qrDiv,{text:data,width:150,height:150,colorDark:'#7C3AED',colorLight:'#0d0d14',correctLevel:QRCode.CorrectLevel.H});
+    document.getElementById('prof-passcode').textContent=u.passcode;
+
+    document.getElementById('prof-edit-btn').style.display=isMe?'block':'none';
+    if(isMe) document.getElementById('prof-edit-btn').onclick=()=>navigate('editProfile');
+
+    // Stats
+    const [evSnap,invSnap,secSnap]=await Promise.all([
+      get(query(ref(db,'events'),orderByChild('ownerId'),equalTo(userId))),
+      get(query(ref(db,'invitations'),orderByChild('guestId'),equalTo(userId))),
+      get(query(ref(db,'securityAssignments'),orderByChild('userId'),equalTo(userId)))
+    ]);
+    document.getElementById('prof-stat-events').textContent=evSnap.exists()?Object.keys(evSnap.val()).length:0;
+    document.getElementById('prof-stat-attended').textContent=invSnap.exists()?Object.values(invSnap.val()).filter(i=>i.status==='checked_in').length:0;
+    document.getElementById('prof-stat-security').textContent=secSnap.exists()?Object.keys(secSnap.val()).length:0;
+
+    if(!isMe){
+      document.getElementById('prof-msg-btn').style.display='block';
+      document.getElementById('prof-msg-btn').onclick=()=>startChat(userId);
+    } else {
+      document.getElementById('prof-msg-btn').style.display='none';
+    }
+  }
+
+  window.handleUpdateProfile = async function(){
+    const name=document.getElementById('edit-name').value.trim();
+    const phone=document.getElementById('edit-phone').value.trim();
+    const photo=window._uploaded_profile_edit||currentUserData.photo||'';
+    if(!name){toast('Name required','error');return;}
+    showLoader(true);
+    try {
+      await update(ref(db,`users/${currentUser.uid}`),{name,phone,photo});
+      currentUserData={...currentUserData,name,phone,photo};
+      toast('Profile updated','success');
+      navigate('profile',{userId:currentUser.uid});
+    } catch(e){toast(e.message,'error');}
+    showLoader(false);
+  };
+
+  // ─────────────────────── SECURITY DASHBOARD ───────────────────────
+  async function loadSecurityDashboard(eventId){
+    if(!eventId) return;
+    document.getElementById('sec-event-id').textContent=eventId;
+    const evSnap=await get(ref(db,`events/${eventId}`));
+    if(!evSnap.exists()) return;
+    const ev=evSnap.val();
+    document.getElementById('sec-event-name').textContent=ev.title;
+    window._secEventId=eventId;
+    window._secEventData=ev;
+  }
+
+  window.startQRScanner = function(){
+    const container=document.getElementById('qr-reader');
+    container.innerHTML='';
+    container.style.display='block';
+    document.getElementById('stop-scanner-btn').style.display='block';
+    document.getElementById('start-scanner-btn').style.display='none';
+
+    html5QrScanner=new Html5Qrcode('qr-reader');
+    html5QrScanner.start(
+      {facingMode:'environment'},
+      {fps:10,qrbox:{width:250,height:250}},
+      async(decodedText)=>{
+        html5QrScanner.stop();
+        document.getElementById('qr-reader').style.display='none';
+        document.getElementById('stop-scanner-btn').style.display='none';
+        document.getElementById('start-scanner-btn').style.display='block';
+        try {
+          const data=JSON.parse(decodedText);
+          await verifyAttendee(data.userId, window._secEventId);
+        } catch {
+          showVerifyResult(false,null,'Invalid QR code');
+        }
+      },
+      ()=>{}
+    ).catch(()=>toast('Camera access denied','error'));
+  };
+
+  window.stopQRScanner = function(){
+    if(html5QrScanner) html5QrScanner.stop().catch(()=>{});
+    document.getElementById('qr-reader').style.display='none';
+    document.getElementById('stop-scanner-btn').style.display='none';
+    document.getElementById('start-scanner-btn').style.display='block';
+  };
+
+  window.searchAttendee = async function(){
+    const q=document.getElementById('sec-search').value.trim().toLowerCase();
+    if(!q){toast('Enter search term','error');return;}
+    const usersSnap=await get(ref(db,'users'));
+    if(!usersSnap.exists()){showVerifyResult(false,null,'No users found');return;}
+    const users=Object.values(usersSnap.val());
+    const found=users.find(u=>
+      u.name?.toLowerCase().includes(q)||
+      u.username?.toLowerCase().includes(q)||
+      u.email?.toLowerCase().includes(q)
+    );
+    if(!found){showVerifyResult(false,null,'User not found');return;}
+    await verifyAttendee(found.uid, window._secEventId);
+  };
+
+  async function verifyAttendee(userId, eventId){
+    const [userSnap,invSnap]=await Promise.all([
+      get(ref(db,`users/${userId}`)),
+      get(query(ref(db,'invitations'),orderByChild('guestId'),equalTo(userId)))
+    ]);
+
+    if(!userSnap.exists()){showVerifyResult(false,null,'User not found');return;}
+    const user=userSnap.val();
+
+    let invitation=null;
+    if(invSnap.exists()){
+      invitation=Object.entries(invSnap.val()).find(([,inv])=>inv.eventId===eventId);
+      if(invitation) invitation={id:invitation[0],...invitation[1]};
+    }
+
+    if(!invitation||invitation.status==='declined'){
+      showVerifyResult(false,user,'Not invited to this event');
+      return;
+    }
+
+    showVerifyResult(true,user,null,invitation);
+  }
+
+  function showVerifyResult(success, user, errorMsg, invitation=null){
+    const container=document.getElementById('verify-result');
+    container.style.display='block';
+    if(!success){
+      container.innerHTML=`
+        <div class="verify-card verify-fail">
+          <div class="verify-icon">✗</div>
+          <h3>ACCESS DENIED</h3>
+          <p>${errorMsg||'Not authorized'}</p>
+          ${user?`<p>${user.name}</p>`:''}
+        </div>`;
+      return;
+    }
+    const alreadyCheckedIn=invitation.status==='checked_in';
+    container.innerHTML=`
+      <div class="verify-card verify-success">
+        <div class="verify-icon">✓</div>
+        <h3>${alreadyCheckedIn?'ALREADY CHECKED IN':'ACCESS GRANTED'}</h3>
+        ${user.photo?`<img src="${user.photo}" class="verify-photo"/>`:`<div style="margin:10px auto">${avatar(user.name,70)}</div>`}
+        <h4>${user.name}</h4>
+        <p>@${user.username}</p>
+        <div class="verify-details">
+          <div class="verify-detail-row"><span>Event</span><span>${window._secEventData?.title||'N/A'}</span></div>
+          <div class="verify-detail-row"><span>Status</span><span class="status-badge status-${invitation.status}">${invitation.status}</span></div>
+        </div>
+        ${!alreadyCheckedIn?`<button class="btn-checkin" onclick="checkInGuest('${invitation.id}','${user.uid}')">Check In Guest</button>`:`<p class="checked-in-time">Checked in at ${fmtDateTime(invitation.checkinTime||0)}</p>`}
+      </div>`;
+  }
+
+  window.checkInGuest = async function(invId, guestId){
+    showLoader(true);
+    try {
+      const now=ts();
+      await update(ref(db,`invitations/${invId}`),{
+        status:'checked_in', checkinTime:now,
+        checkinBy:currentUser.uid, checkinEvent:window._secEventId
+      });
+      await set(ref(db,`checkins/${invId}`),{
+        invitationId:invId, guestId, eventId:window._secEventId,
+        securityId:currentUser.uid, time:now
+      });
+      // Notify guest
+      const notifId=genId(10);
+      await set(ref(db,`notifications/${notifId}`),{
+        id:notifId, userId:guestId, type:'checkin',
+        title:'Checked In',
+        message:`You have been checked in to ${window._secEventData?.title}`,
+        eventId:window._secEventId, read:false, createdAt:now
+      });
+      toast('Guest checked in!','success');
+      document.getElementById('verify-result').style.display='none';
+    } catch(e){toast(e.message,'error');}
+    showLoader(false);
+  };
+
+  // ─────────────────────── ADMIN ───────────────────────
+  async function loadAdmin(){
+    if(!currentUserData||currentUserData.role==='user'){toast('Admin access required','error');navigate('dashboard');return;}
+    const [usersSnap,evSnap,invSnap,checkinSnap,reqSnap]=await Promise.all([
+      get(ref(db,'users')),
+      get(ref(db,'events')),
+      get(ref(db,'invitations')),
+      get(ref(db,'checkins')),
+      get(ref(db,'friendRequests'))
+    ]);
+
+    document.getElementById('admin-total-users').textContent=usersSnap.exists()?Object.keys(usersSnap.val()).length:0;
+    document.getElementById('admin-total-events').textContent=evSnap.exists()?Object.keys(evSnap.val()).length:0;
+    document.getElementById('admin-total-invitations').textContent=invSnap.exists()?Object.keys(invSnap.val()).length:0;
+    document.getElementById('admin-total-checkins').textContent=checkinSnap.exists()?Object.keys(checkinSnap.val()).length:0;
+
+    // Users list
+    const usersList=document.getElementById('admin-users-list');
+    if(usersSnap.exists()){
+      const users=Object.entries(usersSnap.val());
+      usersList.innerHTML=users.map(([uid,u])=>`
+        <div class="admin-user-row">
+          <div class="user-row-avatar">${u.photo?`<img src="${u.photo}" style="width:40px;height:40px;border-radius:50%;object-fit:cover"/>`:`${avatar(u.name,40)}`}</div>
+          <div style="flex:1">
+            <p>${u.name} <span class="role-badge role-${u.role||'user'}">${u.role||'user'}</span></p>
+            <small>${u.email}</small>
+          </div>
+          <div class="admin-actions">
+            <span class="status-badge ${u.status==='suspended'?'status-declined':'status-accepted'}">${u.status||'active'}</span>
+            ${uid!==currentUser.uid?`
+              <button class="btn-sm" onclick="adminToggleUser('${uid}','${u.status||'active'}')">${u.status==='suspended'?'Activate':'Suspend'}</button>
+              <button class="btn-sm btn-danger" onclick="adminDeleteUser('${uid}')">Delete</button>
+            `:'<small>(you)</small>'}
+          </div>
+        </div>
+      `).join('');
+    }
+
+    // Events list
+    const eventsList=document.getElementById('admin-events-list');
+    if(evSnap.exists()){
+      const events=Object.entries(evSnap.val());
+      eventsList.innerHTML=events.map(([id,ev])=>`
+        <div class="admin-user-row">
+          <div style="flex:1">
+            <p>${ev.title}</p>
+            <small>${fmtDate(ev.date)} · ${ev.ownerName}</small>
+          </div>
+          <button class="btn-sm btn-danger" onclick="adminDeleteEvent('${id}')">Delete</button>
+        </div>
+      `).join('');
+    }
+  }
+
+  window.adminToggleUser = async function(uid,currentStatus){
+    const newStatus=currentStatus==='suspended'?'active':'suspended';
+    await update(ref(db,`users/${uid}`),{status:newStatus});
+    toast(`User ${newStatus}`,'success');
+    loadAdmin();
+  };
+
+  window.adminDeleteUser = async function(uid){
+    if(!confirm('Delete this user?')) return;
+    await remove(ref(db,`users/${uid}`));
+    toast('User deleted','info');
+    loadAdmin();
+  };
+
+  window.adminDeleteEvent = async function(id){
+    if(!confirm('Delete this event?')) return;
+    await remove(ref(db,`events/${id}`));
+    toast('Event deleted','info');
+    loadAdmin();
+  };
+
+  // ─────────────────────── RESET PASSWORD ───────────────────────
+  function initResetPassword(){
+    document.getElementById('reset-email').value='';
+    document.getElementById('reset-success-msg').style.display='none';
+  }
+
+  window.handleResetPassword = async function(){
+    const { sendPasswordResetEmail } = await import("https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js");
+    const email = document.getElementById('reset-email').value.trim();
+    if(!email){ toast('Please enter your email','error'); return; }
+    showLoader(true);
+    try {
+      await sendPasswordResetEmail(auth, email);
+      document.getElementById('reset-success-msg').style.display='block';
+      toast('Reset email sent!','success');
+    } catch(e){
+      toast(e.message,'error');
+    }
+    showLoader(false);
+  };
+
+  // ─────────────────────── FRIEND REQUESTS ───────────────────────
+  async function loadRequests(){
+    if(!currentUser) return;
+    const [inSnap, outSnap, usersSnap] = await Promise.all([
+      get(query(ref(db,'friendRequests'), orderByChild('toId'), equalTo(currentUser.uid))),
+      get(query(ref(db,'friendRequests'), orderByChild('fromId'), equalTo(currentUser.uid))),
+      get(ref(db,'users'))
+    ]);
+    const allUsers = usersSnap.exists() ? usersSnap.val() : {};
+
+    // Incoming
+    const inContainer = document.getElementById('req-incoming-list');
+    if(inSnap.exists()){
+      const incoming = Object.entries(inSnap.val()).filter(([,r])=>r.status==='pending');
+      if(incoming.length){
+        inContainer.innerHTML = incoming.map(([id,r])=>{
+          const u = allUsers[r.fromId]||{};
+          return `<div class="user-row" style="justify-content:space-between">
+            <div style="display:flex;align-items:center;gap:10px">
+              ${u.photo?`<img src="${u.photo}" class="user-row-img"/>`:`${avatar(u.name||'?',44)}`}
+              <div><p style="font-size:14px;font-weight:600">${u.name||'Unknown'}</p><small style="color:var(--text3)">@${u.username||''}</small></div>
+            </div>
+            <div style="display:flex;gap:6px">
+              <button class="btn-accept" onclick="respondRequest('${id}','accepted')">Accept</button>
+              <button class="btn-decline" onclick="respondRequest('${id}','declined')">Decline</button>
+            </div>
+          </div>`;
+        }).join('');
+        // update badge
+        const cnt = incoming.length;
+        const badge = document.getElementById('req-nav-badge');
+        const hbadge = document.getElementById('req-badge-header');
+        badge.textContent = cnt; badge.style.display = cnt>0?'flex':'none';
+        hbadge.textContent = cnt; hbadge.style.display = cnt>0?'flex':'none';
+      } else {
+        inContainer.innerHTML='<p class="empty-state">No incoming requests</p>';
+      }
+    } else {
+      inContainer.innerHTML='<p class="empty-state">No incoming requests</p>';
+    }
+
+    // Outgoing
+    const outContainer = document.getElementById('req-outgoing-list');
+    if(outSnap.exists()){
+      const outgoing = Object.entries(outSnap.val());
+      if(outgoing.length){
+        outContainer.innerHTML = outgoing.map(([id,r])=>{
+          const u = allUsers[r.toId]||{};
+          return `<div class="user-row" style="justify-content:space-between">
+            <div style="display:flex;align-items:center;gap:10px">
+              ${u.photo?`<img src="${u.photo}" class="user-row-img"/>`:`${avatar(u.name||'?',44)}`}
+              <div><p style="font-size:14px;font-weight:600">${u.name||'Unknown'}</p><small style="color:var(--text3)">@${u.username||''}</small></div>
+            </div>
+            <span class="status-badge status-${r.status}">${r.status}</span>
+          </div>`;
+        }).join('');
+      } else {
+        outContainer.innerHTML='<p class="empty-state">No sent requests</p>';
+      }
+    } else {
+      outContainer.innerHTML='<p class="empty-state">No sent requests</p>';
+    }
+
+    // Friends
+    const friendsContainer = document.getElementById('req-friends-list');
+    const allReqs = [];
+    if(inSnap.exists()) allReqs.push(...Object.values(inSnap.val()));
+    if(outSnap.exists()) allReqs.push(...Object.values(outSnap.val()));
+    const friends = allReqs.filter(r=>r.status==='accepted').map(r=>{
+      const uid = r.fromId===currentUser.uid ? r.toId : r.fromId;
+      return allUsers[uid];
+    }).filter(Boolean);
+    if(friends.length){
+      friendsContainer.innerHTML = friends.map(u=>`
+        <div class="user-row friend-row" onclick="startChat('${u.uid}')">
+          ${u.photo?`<img src="${u.photo}" class="user-row-img"/>`:`${avatar(u.name,44)}`}
+          <div class="user-row-info"><p>${u.name}</p><small>@${u.username}</small></div>
+          <button class="btn-outline" style="padding:6px 12px;font-size:12px" onclick="event.stopPropagation();startChat('${u.uid}')">💬</button>
+        </div>`).join('');
+    } else {
+      friendsContainer.innerHTML='<p class="empty-state">No friends yet. Send requests from Messages!</p>';
+    }
+  }
+
+  window.filterFriends = function(q){
+    document.querySelectorAll('#req-friends-list .friend-row').forEach(row=>{
+      row.style.display=row.textContent.toLowerCase().includes(q.toLowerCase())?'flex':'none';
+    });
+  };
+
+  window.sendFriendRequest = async function(toId){
+    if(!currentUser||toId===currentUser.uid) return;
+    // Check if already exists
+    const existCheck = await get(query(ref(db,'friendRequests'), orderByChild('fromId'), equalTo(currentUser.uid)));
+    if(existCheck.exists()){
+      const already = Object.values(existCheck.val()).find(r=>r.toId===toId);
+      if(already){ toast('Request already sent','info'); return; }
+    }
+    const reqId = genId(10);
+    await set(ref(db,`friendRequests/${reqId}`),{
+      id:reqId, fromId:currentUser.uid, toId,
+      fromName:currentUserData.name, status:'pending', createdAt:ts()
+    });
+    const notifId = genId(10);
+    await set(ref(db,`notifications/${notifId}`),{
+      id:notifId, userId:toId, type:'friend_request',
+      title:'Friend Request', message:`${currentUserData.name} sent you a friend request`,
+      fromId:currentUser.uid, read:false, createdAt:ts()
+    });
+    toast('Friend request sent!','success');
+  };
+
+  window.respondRequest = async function(reqId, status){
+    const reqSnap = await get(ref(db,`friendRequests/${reqId}`));
+    if(!reqSnap.exists()) return;
+    const req = reqSnap.val();
+    await update(ref(db,`friendRequests/${reqId}`),{status});
+    if(status==='accepted'){
+      const notifId = genId(10);
+      await set(ref(db,`notifications/${notifId}`),{
+        id:notifId, userId:req.fromId, type:'friend_accepted',
+        title:'Friend Request Accepted',
+        message:`${currentUserData.name} accepted your friend request`,
+        read:false, createdAt:ts()
+      });
+      toast('Request accepted!','success');
+    } else {
+      toast('Request declined','info');
+    }
+    loadRequests();
+  };
+
+  function setupRequestListener(){
+    if(!currentUser) return;
+    const rRef = query(ref(db,'friendRequests'), orderByChild('toId'), equalTo(currentUser.uid));
+    onValue(rRef, snap=>{
+      if(!snap.exists()){ updateReqBadge(0); return; }
+      const cnt = Object.values(snap.val()).filter(r=>r.status==='pending').length;
+      updateReqBadge(cnt);
+    });
+    activeListeners.push(rRef);
+  }
+
+  function updateReqBadge(count){
+    const badge = document.getElementById('req-nav-badge');
+    if(badge){ badge.textContent=count; badge.style.display=count>0?'flex':'none'; }
+  }
+
+  // ─────────────────────── EXPOSE ───────────────────────
+  window.navigate=navigate;
+  window.loadQRCode=loadQRCode;
+  window.sendFriendRequest=sendFriendRequest;
+  window.respondRequest=respondRequest;
+  window.handleResetPassword=window.handleResetPassword;
+
+  // ─────────────────────── UPLOADCARE WIDGET ───────────────────────
+  const ucScript=document.createElement('script');
+  ucScript.src='https://ucarecdn.com/libs/widget/3.x/uploadcare.full.min.js';
+  ucScript.setAttribute('data-public-key','691b9ecdbe2da2b8f34e');
+  ucScript.setAttribute('data-images-only','true');
+  ucScript.onload=()=>{
+    window.UPLOADCARE_PUBLIC_KEY='691b9ecdbe2da2b8f34e';
+    window.UPLOADCARE_LOCALE='en';
+    setTimeout(()=>{
+      const regPhotoBtn=document.getElementById('reg-photo-btn');
+      if(regPhotoBtn){
+        regPhotoBtn.onclick=()=>{
+          uploadcare.openDialog(null,{publicKey:'691b9ecdbe2da2b8f34e',imagesOnly:true}).done(f=>{
+            f.promise().done(info=>{
+              window._uploadedProfilePhoto=info.cdnUrl;
+              const prev=document.getElementById('reg-photo-preview');
+              prev.src=info.cdnUrl;
+              prev.style.display='block';
+              toast('Photo uploaded','success');
+            });
+          });
+        };
+      }
+    },500);
+  };
+  document.head.appendChild(ucScript);
+
+</script>
+<style>
+:root {
+  --bg: #080810;
+  --surface: #0f0f1a;
+  --surface2: #16162a;
+  --surface3: #1e1e35;
+  --border: rgba(124,58,237,0.15);
+  --border2: rgba(255,255,255,0.06);
+  --purple: #7C3AED;
+  --purple-light: #9F67F7;
+  --purple-dim: rgba(124,58,237,0.2);
+  --purple-glow: rgba(124,58,237,0.4);
+  --text: #f0eeff;
+  --text2: #9490b8;
+  --text3: #5a5678;
+  --success: #22c55e;
+  --error: #ef4444;
+  --warning: #f59e0b;
+  --radius: 14px;
+  --radius-sm: 8px;
+  --shadow: 0 4px 24px rgba(0,0,0,0.5);
+  --shadow-glow: 0 0 30px rgba(124,58,237,0.25);
+  --font-display: 'Syne', sans-serif;
+  --font-body: 'DM Sans', sans-serif;
+  --nav-h: 64px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;background:var(--bg);color:var(--text);font-family:var(--font-body);font-size:15px;line-height:1.5;overflow-x:hidden}
+body{display:flex;flex-direction:column}
+button{cursor:pointer;font-family:var(--font-body);border:none;outline:none}
+input,textarea,select{font-family:var(--font-body);outline:none}
+img{display:block}
+a{color:inherit;text-decoration:none}
+
+/* ── TOAST ── */
+#toastArea{position:fixed;top:20px;right:16px;z-index:9999;display:flex;flex-direction:column;gap:8px;max-width:320px}
+.toast{padding:12px 18px;border-radius:10px;font-size:14px;font-weight:500;opacity:0;transform:translateX(30px);transition:all .35s cubic-bezier(.34,1.56,.64,1);pointer-events:none;backdrop-filter:blur(10px)}
+.toast.show{opacity:1;transform:translateX(0);pointer-events:auto}
+.toast-info{background:rgba(124,58,237,0.85);border:1px solid var(--purple)}
+.toast-success{background:rgba(34,197,94,0.85);border:1px solid #22c55e}
+.toast-error{background:rgba(239,68,68,0.85);border:1px solid #ef4444}
+
+/* ── LOADER ── */
+#globalLoader{position:fixed;inset:0;background:rgba(8,8,16,0.8);z-index:9998;display:none;align-items:center;justify-content:center;backdrop-filter:blur(4px)}
+.loader-ring{width:48px;height:48px;border:3px solid var(--border);border-top-color:var(--purple);border-radius:50%;animation:spin .8s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* ── NAV ── */
+#appNav{position:fixed;bottom:0;left:0;right:0;height:var(--nav-h);background:rgba(15,15,26,0.95);backdrop-filter:blur(20px);border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-around;z-index:100;padding:0 4px}
+.nav-item{display:flex;flex-direction:column;align-items:center;gap:4px;padding:8px 10px;border-radius:10px;color:var(--text3);font-size:11px;font-weight:500;transition:all .2s;position:relative;cursor:pointer;min-width:50px}
+.nav-item.active{color:var(--purple-light)}
+.nav-item.active .nav-icon{background:var(--purple-dim)}
+.nav-icon{width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:18px;transition:all .2s}
+#notif-badge{position:absolute;top:5px;right:5px;background:var(--error);color:#fff;font-size:9px;font-weight:700;min-width:16px;height:16px;border-radius:8px;display:none;align-items:center;justify-content:center;padding:0 4px}
+
+/* ── PAGES ── */
+.page{display:none;flex-direction:column;min-height:100vh;padding-bottom:var(--nav-h)}
+.page-content{flex:1;overflow-y:auto;padding:16px}
+.page-header{padding:16px 16px 8px;display:flex;align-items:center;gap:12px;position:sticky;top:0;background:var(--bg);z-index:50;border-bottom:1px solid var(--border2)}
+.page-header h2{font-family:var(--font-display);font-weight:700;font-size:20px;flex:1}
+.back-btn{width:36px;height:36px;border-radius:10px;background:var(--surface2);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;cursor:pointer;color:var(--text2);transition:all .2s}
+.back-btn:active{background:var(--surface3)}
+
+/* ── GLASSMORPHISM CARDS ── */
+.glass-card{background:rgba(22,22,42,0.7);backdrop-filter:blur(12px);border:1px solid var(--border);border-radius:var(--radius);padding:18px;margin-bottom:14px}
+.glass-card h3{font-family:var(--font-display);font-weight:700;font-size:16px;margin-bottom:12px;color:var(--purple-light)}
+
+/* ── BUTTONS ── */
+.btn-primary{background:linear-gradient(135deg,#7C3AED,#5B21B6);color:#fff;padding:14px 20px;border-radius:12px;font-weight:600;font-size:15px;width:100%;transition:all .2s;letter-spacing:.3px}
+.btn-primary:active{transform:scale(.98);opacity:.9}
+.btn-secondary{background:var(--surface2);color:var(--text);padding:12px 20px;border-radius:12px;font-weight:500;font-size:14px;border:1px solid var(--border);transition:all .2s}
+.btn-outline{background:transparent;color:var(--purple-light);padding:10px 18px;border-radius:10px;font-weight:500;font-size:14px;border:1px solid var(--purple);transition:all .2s}
+.btn-sm{background:var(--surface3);color:var(--text2);padding:6px 12px;border-radius:8px;font-size:12px;font-weight:500;transition:all .2s}
+.btn-danger{background:rgba(239,68,68,.15)!important;color:#ef4444!important;border:1px solid rgba(239,68,68,.3)!important}
+.btn-accept{background:linear-gradient(135deg,#22c55e,#16a34a);color:#fff;padding:8px 16px;border-radius:8px;font-size:13px;font-weight:600;transition:all .2s}
+.btn-decline{background:rgba(239,68,68,.15);color:#ef4444;border:1px solid rgba(239,68,68,.3);padding:8px 16px;border-radius:8px;font-size:13px;font-weight:600;transition:all .2s}
+.btn-icon-sm{background:rgba(239,68,68,.1);color:#ef4444;border:none;width:28px;height:28px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0}
+.btn-checkin{background:linear-gradient(135deg,#7C3AED,#5B21B6);color:#fff;padding:14px 24px;border-radius:12px;font-weight:700;font-size:15px;width:100%;margin-top:12px;transition:all .2s;letter-spacing:.3px}
+
+/* ── FORM INPUTS ── */
+.form-group{margin-bottom:14px}
+.form-label{display:block;font-size:12px;font-weight:600;color:var(--text3);letter-spacing:.8px;text-transform:uppercase;margin-bottom:6px}
+.form-input{width:100%;background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:12px 14px;color:var(--text);font-size:14px;transition:border-color .2s}
+.form-input:focus{border-color:var(--purple)}
+.form-input::placeholder{color:var(--text3)}
+textarea.form-input{resize:vertical;min-height:80px}
+
+/* ── AVATAR ── */
+.avatar{border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;color:#fff;font-family:var(--font-display);flex-shrink:0}
+
+/* ── STATUS BADGES ── */
+.status-badge{padding:4px 10px;border-radius:20px;font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.5px}
+.status-pending{background:rgba(245,158,11,.15);color:#f59e0b;border:1px solid rgba(245,158,11,.3)}
+.status-accepted{background:rgba(34,197,94,.15);color:#22c55e;border:1px solid rgba(34,197,94,.3)}
+.status-declined{background:rgba(239,68,68,.15);color:#ef4444;border:1px solid rgba(239,68,68,.3)}
+.status-checked_in{background:rgba(124,58,237,.15);color:#9F67F7;border:1px solid rgba(124,58,237,.3)}
+.owner-badge{background:var(--purple-dim);color:var(--purple-light);padding:3px 8px;border-radius:20px;font-size:10px;font-weight:700;border:1px solid var(--purple)}
+.role-badge{padding:2px 8px;border-radius:20px;font-size:10px;font-weight:700;text-transform:uppercase}
+.role-user{background:rgba(255,255,255,.08);color:var(--text3)}
+.role-admin{background:var(--purple-dim);color:var(--purple-light)}
+.role-superadmin{background:linear-gradient(135deg,rgba(124,58,237,.3),rgba(245,158,11,.2));color:#f59e0b}
+.empty-state{text-align:center;color:var(--text3);padding:32px 16px;font-size:14px}
+
+/* ── LANDING ── */
+#page-landing{padding-bottom:0;background:radial-gradient(ellipse 80% 50% at 50% -10%,rgba(124,58,237,.25),transparent)}
+.landing-hero{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px 24px;text-align:center;min-height:100vh}
+.landing-logo{font-family:var(--font-display);font-size:42px;font-weight:800;background:linear-gradient(135deg,#fff 30%,#9F67F7);-webkit-background-clip:text;-webkit-text-fill-color:transparent;letter-spacing:-1px;margin-bottom:8px}
+.landing-tagline{font-size:13px;font-weight:500;letter-spacing:3px;color:var(--purple-light);text-transform:uppercase;margin-bottom:28px;opacity:.8}
+.landing-desc{font-size:16px;color:var(--text2);max-width:300px;margin:0 auto 40px;line-height:1.6}
+.landing-btns{display:flex;flex-direction:column;gap:12px;width:100%;max-width:280px}
+.landing-features{padding:40px 24px;background:var(--surface);border-top:1px solid var(--border2)}
+.landing-features h3{font-family:var(--font-display);font-size:20px;font-weight:700;text-align:center;margin-bottom:24px}
+.feature-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.feature-item{background:var(--surface2);border:1px solid var(--border);border-radius:12px;padding:16px;text-align:center}
+.feature-item .feat-icon{font-size:24px;margin-bottom:8px}
+.feature-item p{font-size:12px;color:var(--text2);font-weight:500}
+
+/* ── AUTH PAGES ── */
+#page-login,#page-register{padding-bottom:0}
+.auth-container{padding:32px 24px;max-width:420px;margin:0 auto;width:100%}
+.auth-header{text-align:center;margin-bottom:32px}
+.auth-logo{font-family:var(--font-display);font-size:28px;font-weight:800;background:linear-gradient(135deg,#fff,#9F67F7);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:6px}
+.auth-subtitle{color:var(--text3);font-size:14px}
+.auth-link{text-align:center;color:var(--text3);font-size:13px;margin-top:20px}
+.auth-link span{color:var(--purple-light);cursor:pointer;font-weight:600}
+.photo-upload-area{display:flex;flex-direction:column;align-items:center;gap:10px;padding:16px;border:2px dashed var(--border);border-radius:12px;cursor:pointer;transition:border-color .2s;margin-bottom:14px}
+.photo-upload-area:hover{border-color:var(--purple)}
+#reg-photo-preview{width:70px;height:70px;border-radius:50%;object-fit:cover;display:none;border:3px solid var(--purple)}
+.photo-upload-label{font-size:13px;color:var(--text3)}
+
+/* ── DASHBOARD ── */
+.user-hero-card{background:linear-gradient(135deg,rgba(124,58,237,.2),rgba(91,33,182,.1));border:1px solid var(--border);border-radius:var(--radius);padding:20px;margin-bottom:14px;display:flex;gap:14px;align-items:center}
+.user-hero-info h3{font-family:var(--font-display);font-weight:700;font-size:18px}
+.user-hero-info p{color:var(--text3);font-size:13px;margin-top:2px}
+.stats-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px}
+.stat-card{background:var(--surface2);border:1px solid var(--border2);border-radius:12px;padding:16px;text-align:center;transition:border-color .2s}
+.stat-card:active{border-color:var(--purple)}
+.stat-number{font-family:var(--font-display);font-size:28px;font-weight:800;color:var(--purple-light)}
+.stat-label{font-size:11px;color:var(--text3);font-weight:600;letter-spacing:.5px;text-transform:uppercase;margin-top:4px}
+.section-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+.section-title{font-family:var(--font-display);font-size:15px;font-weight:700;color:var(--text2);letter-spacing:.3px}
+.see-all{font-size:12px;color:var(--purple-light);font-weight:600}
+
+/* ── EVENT CARDS ── */
+.event-card{background:var(--surface);border:1px solid var(--border2);border-radius:var(--radius);overflow:hidden;margin-bottom:14px;cursor:pointer;transition:border-color .2s,transform .15s}
+.event-card:active{transform:scale(.99);border-color:var(--purple)}
+.event-banner-img{width:100%;height:160px;object-fit:cover}
+.event-banner-placeholder{width:100%;height:120px;background:linear-gradient(135deg,var(--surface2),var(--surface3));display:flex;align-items:center;justify-content:center;font-size:11px;color:var(--text3);letter-spacing:2px;font-weight:600}
+.event-card-body{padding:14px}
+.event-card-body h3{font-family:var(--font-display);font-weight:700;font-size:16px;margin-bottom:6px}
+.event-meta{font-size:13px;color:var(--purple-light);font-weight:500;margin-bottom:4px}
+.event-venue{font-size:13px;color:var(--text3);margin-bottom:10px}
+.event-footer{display:flex;align-items:center;justify-content:space-between}
+.guest-count{font-size:12px;color:var(--text3)}
+.event-card-mini{display:flex;gap:10px;align-items:center;padding:10px;border-radius:10px;background:var(--surface2);border:1px solid var(--border2);cursor:pointer;margin-bottom:8px;transition:border-color .2s}
+.event-mini-banner{width:52px;height:52px;border-radius:8px;object-fit:cover;flex-shrink:0}
+.event-mini-banner-placeholder{width:52px;height:52px;border-radius:8px;background:var(--surface3);flex-shrink:0}
+.event-card-mini-info h4{font-size:14px;font-weight:600}
+.event-card-mini-info p{font-size:12px;color:var(--text3)}
+.venue-text{font-size:12px;color:var(--text3);margin-top:2px}
+
+/* ── TABS ── */
+.tabs{display:flex;background:var(--surface2);border-radius:10px;padding:4px;margin-bottom:16px;gap:4px}
+.tab-btn{flex:1;padding:8px;border-radius:8px;font-size:13px;font-weight:600;color:var(--text3);background:transparent;border:none;transition:all .2s;cursor:pointer}
+.tab-btn.active{background:var(--purple);color:#fff}
+.tab-content{display:none}
+.tab-content.active{display:block}
+
+/* ── EVENT DETAIL ── */
+.event-detail-meta{display:flex;flex-direction:column;gap:8px;margin-bottom:16px}
+.event-detail-meta-row{display:flex;gap:8px;align-items:center;font-size:14px;color:var(--text2)}
+.event-detail-meta-row span:first-child{font-size:18px;width:24px}
+.event-banner-full-placeholder{height:180px;background:linear-gradient(135deg,var(--surface2),var(--surface3));border-radius:12px;margin-bottom:14px}
+.guest-item{display:flex;align-items:center;gap:10px;padding:10px;border-radius:10px;background:var(--surface2);border:1px solid var(--border2);margin-bottom:8px}
+.guest-info{display:flex;align-items:center;gap:10px;flex:1;min-width:0}
+.guest-info p{font-size:14px;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.guest-info small{font-size:11px;color:var(--text3)}
+.guest-photo{width:36px;height:36px;border-radius:50%;object-fit:cover;flex-shrink:0}
+.invite-row{display:flex;gap:8px;margin-top:8px}
+.invite-row .form-input{flex:1}
+
+/* ── INVITATIONS ── */
+.invitation-card{background:var(--surface);border:1px solid var(--border2);border-radius:var(--radius);padding:14px;margin-bottom:12px}
+.inv-event-info{display:flex;gap:12px;align-items:center;margin-bottom:12px}
+.inv-banner{width:60px;height:60px;border-radius:10px;object-fit:cover;flex-shrink:0}
+.inv-banner-ph{width:60px;height:60px;border-radius:10px;background:var(--surface3);flex-shrink:0}
+.inv-event-info h3{font-family:var(--font-display);font-size:15px;font-weight:700}
+.inv-event-info p{font-size:13px;color:var(--text3);margin-top:2px}
+.inv-actions{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+
+/* ── NOTIFICATIONS ── */
+.notif-item{display:flex;align-items:flex-start;gap:12px;padding:14px;border-radius:10px;background:var(--surface2);border:1px solid var(--border2);margin-bottom:8px;cursor:pointer;transition:border-color .2s;position:relative}
+.notif-item:active{border-color:var(--purple)}
+.notif-unread{background:rgba(124,58,237,.08);border-color:rgba(124,58,237,.2)}
+.notif-icon{width:40px;height:40px;border-radius:10px;background:var(--surface3);display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0}
+.notif-body{flex:1;min-width:0}
+.notif-title{font-size:14px;font-weight:600;margin-bottom:3px}
+.notif-msg{font-size:13px;color:var(--text2);margin-bottom:4px}
+.notif-body small{font-size:11px;color:var(--text3)}
+.notif-dot{width:8px;height:8px;border-radius:50%;background:var(--purple);flex-shrink:0;margin-top:4px}
+
+/* ── MESSAGES ── */
+.search-bar{display:flex;align-items:center;gap:8px;background:var(--surface2);border:1px solid var(--border2);border-radius:10px;padding:10px 14px;margin-bottom:14px}
+.search-bar input{background:transparent;border:none;color:var(--text);font-size:14px;flex:1}
+.search-bar input::placeholder{color:var(--text3)}
+.user-row{display:flex;align-items:center;gap:12px;padding:12px;border-radius:10px;background:var(--surface2);border:1px solid var(--border2);margin-bottom:8px;cursor:pointer;transition:border-color .2s}
+.user-row:active{border-color:var(--purple)}
+.user-row-avatar{position:relative;flex-shrink:0}
+.user-row-img{width:44px;height:44px;border-radius:50%;object-fit:cover}
+.online-dot{width:10px;height:10px;border-radius:50%;background:var(--success);border:2px solid var(--surface2);position:absolute;bottom:0;right:0}
+.user-row-info{flex:1;min-width:0}
+.user-row-info p{font-size:14px;font-weight:600}
+.user-row-info small{font-size:12px;color:var(--text3)}
+.user-row-meta{text-align:right;flex-shrink:0}
+
+/* ── CHAT ── */
+#page-chat{padding-bottom:0}
+.chat-header{padding:12px 16px;background:var(--surface);border-bottom:1px solid var(--border2);display:flex;align-items:center;gap:12px;position:sticky;top:0;z-index:50}
+.chat-header-info{flex:1}
+.chat-header-info p{font-size:15px;font-weight:600}
+.chat-header-info small{font-size:12px;color:var(--text3)}
+.chat-messages{flex:1;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:10px;height:calc(100vh - 128px);padding-bottom:16px}
+.msg-bubble{max-width:80%;padding:10px 14px;border-radius:14px;font-size:14px;line-height:1.4}
+.msg-bubble small{display:block;font-size:10px;color:rgba(255,255,255,.5);margin-top:4px;text-align:right}
+.msg-mine{align-self:flex-end;background:linear-gradient(135deg,#7C3AED,#5B21B6);border-bottom-right-radius:4px}
+.msg-theirs{align-self:flex-start;background:var(--surface2);border:1px solid var(--border2);border-bottom-left-radius:4px}
+.chat-input-bar{padding:10px 14px;background:var(--surface);border-top:1px solid var(--border2);display:flex;gap:8px;align-items:center;position:sticky;bottom:0}
+.chat-input-bar input{flex:1;background:var(--surface2);border:1px solid var(--border);border-radius:22px;padding:10px 16px;color:var(--text);font-size:14px}
+.chat-send-btn{width:40px;height:40px;border-radius:50%;background:var(--purple);color:#fff;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
+.typing-indicator{font-size:12px;color:var(--text3);padding:4px 16px;display:none;font-style:italic}
+
+/* ── PROFILE ── */
+.profile-hero{text-align:center;padding:32px 16px 20px;border-bottom:1px solid var(--border2);margin-bottom:16px}
+.profile-name{font-family:var(--font-display);font-size:22px;font-weight:800;margin:12px 0 4px}
+.profile-username{color:var(--purple-light);font-size:14px;font-weight:500;margin-bottom:4px}
+.profile-contact{color:var(--text3);font-size:13px}
+.profile-stats{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1px;background:var(--border2);border-radius:12px;overflow:hidden;margin-bottom:16px}
+.profile-stat{background:var(--surface2);padding:16px 8px;text-align:center}
+.profile-stat .ps-num{font-family:var(--font-display);font-size:22px;font-weight:800;color:var(--purple-light)}
+.profile-stat .ps-label{font-size:10px;color:var(--text3);font-weight:600;letter-spacing:.5px;text-transform:uppercase;margin-top:4px}
+.qr-display{text-align:center;padding:20px;background:rgba(124,58,237,.08);border:1px solid rgba(124,58,237,.2);border-radius:14px;margin-bottom:14px}
+.qr-display canvas{margin:0 auto;border-radius:8px;padding:8px;background:#0d0d14}
+.passcode-text{font-family:var(--font-display);font-size:16px;font-weight:700;color:var(--purple-light);letter-spacing:4px;margin-top:12px}
+
+/* ── SECURITY DASHBOARD ── */
+.sec-header-card{background:linear-gradient(135deg,rgba(124,58,237,.2),rgba(91,33,182,.1));border:1px solid var(--border);border-radius:var(--radius);padding:16px;margin-bottom:14px;text-align:center}
+.sec-header-card h3{font-family:var(--font-display);font-size:18px;font-weight:800;color:var(--purple-light);margin-bottom:4px}
+.scanner-area{text-align:center;padding:16px;background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius);margin-bottom:14px}
+#qr-reader{border-radius:10px;overflow:hidden;margin:12px 0;display:none}
+.verify-card{border-radius:var(--radius);padding:24px;text-align:center;margin-top:14px}
+.verify-success{background:linear-gradient(135deg,rgba(34,197,94,.1),rgba(34,197,94,.05));border:1px solid rgba(34,197,94,.3)}
+.verify-fail{background:linear-gradient(135deg,rgba(239,68,68,.1),rgba(239,68,68,.05));border:1px solid rgba(239,68,68,.3)}
+.verify-icon{font-size:40px;font-weight:900;margin-bottom:8px}
+.verify-success .verify-icon{color:#22c55e}
+.verify-fail .verify-icon{color:#ef4444}
+.verify-card h3{font-family:var(--font-display);font-size:18px;font-weight:800;margin-bottom:8px}
+.verify-card h4{font-size:16px;font-weight:700;margin:8px 0}
+.verify-card p{font-size:14px;color:var(--text2)}
+.verify-photo{width:70px;height:70px;border-radius:50%;object-fit:cover;margin:10px auto;border:3px solid var(--success)}
+.verify-details{background:rgba(255,255,255,.05);border-radius:10px;padding:12px;margin:12px 0;text-align:left}
+.verify-detail-row{display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid rgba(255,255,255,.05);font-size:13px}
+.verify-detail-row:last-child{border-bottom:none}
+.verify-detail-row span:first-child{color:var(--text3)}
+.checked-in-time{font-size:12px;color:var(--text3);margin-top:8px}
+
+/* ── ADMIN ── */
+.admin-stats{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px}
+.admin-stat-card{background:var(--surface2);border:1px solid var(--border2);border-radius:12px;padding:14px;text-align:center}
+.admin-stat-card .asn{font-family:var(--font-display);font-size:24px;font-weight:800;color:var(--purple-light)}
+.admin-stat-card .asl{font-size:11px;color:var(--text3);text-transform:uppercase;letter-spacing:.5px;font-weight:600;margin-top:4px}
+.admin-user-row{display:flex;align-items:center;gap:10px;padding:10px;border-radius:10px;background:var(--surface2);border:1px solid var(--border2);margin-bottom:8px}
+.admin-actions{display:flex;gap:6px;align-items:center;flex-wrap:wrap;justify-content:flex-end}
+
+/* ── QR CODE PAGE ── */
+.qr-page-content{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:32px 24px;text-align:center}
+.qr-big-card{background:rgba(22,22,42,.9);border:1px solid var(--border);border-radius:20px;padding:32px 24px;width:100%;max-width:300px;text-align:center}
+#qr-container{margin:0 auto 16px;display:inline-block}
+#qr-container canvas{border-radius:10px;padding:10px;background:#0d0d14}
+.qr-actions{display:flex;gap:10px;margin-top:16px;justify-content:center}
+
+/* ── SCROLL & MISC ── */
+::-webkit-scrollbar{width:4px;height:4px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px}
+.divider{height:1px;background:var(--border2);margin:16px 0}
+.section-label{font-size:11px;font-weight:700;color:var(--text3);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:10px}
+
+/* ── CREATE EVENT ── */
+.event-banner-upload{width:100%;height:140px;border:2px dashed var(--border);border-radius:12px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;cursor:pointer;margin-bottom:14px;transition:border-color .2s;overflow:hidden;position:relative}
+.event-banner-upload:hover{border-color:var(--purple)}
+#event-banner-preview{width:100%;height:100%;object-fit:cover;display:none;position:absolute;inset:0}
+.upload-placeholder{display:flex;flex-direction:column;align-items:center;gap:6px;z-index:1}
+.upload-placeholder span{font-size:28px}
+.upload-placeholder p{font-size:13px;color:var(--text3)}
+
+/* ── RESET PASSWORD ── */
+#page-resetPassword{background:radial-gradient(ellipse 60% 40% at 50% -10%,rgba(124,58,237,.2),transparent)}
+
+/* ── FRIEND REQUESTS ── */
+#page-requests .user-row{cursor:default}
+.friend-row{cursor:pointer!important}
+
+
+</style>
+</head>
+<body>
+
+<div id="toastArea"></div>
+<div id="globalLoader"><div class="loader-ring"></div></div>
+
+<!-- ══════════════ APP NAV ══════════════ -->
+<nav id="appNav" style="display:none">
+  <div class="nav-item active" data-page="dashboard" onclick="navigate('dashboard')">
+    <div class="nav-icon">⊞</div>
+    <span>Home</span>
+  </div>
+  <div class="nav-item" data-page="events" onclick="navigate('events')">
+    <div class="nav-icon">🎫</div>
+    <span>Events</span>
+  </div>
+  <div class="nav-item" data-page="messages" onclick="navigate('messages')">
+    <div class="nav-icon">💬</div>
+    <span>Chats</span>
+  </div>
+  <div class="nav-item" data-page="requests" onclick="navigate('requests')">
+    <div class="nav-icon">👥</div>
+    <span>Friends</span>
+    <div id="req-nav-badge" style="position:absolute;top:5px;right:5px;background:var(--error);color:#fff;font-size:9px;font-weight:700;min-width:16px;height:16px;border-radius:8px;display:none;align-items:center;justify-content:center;padding:0 4px">0</div>
+  </div>
+  <div class="nav-item" data-page="notifications" onclick="navigate('notifications')">
+    <div class="nav-icon">🔔</div>
+    <span>Notifs</span>
+    <div id="notif-badge">0</div>
+  </div>
+  <div class="nav-item" data-page="profile" onclick="navigate('profile',{userId:window.currentUser?.uid})">
+    <div class="nav-icon">👤</div>
+    <span>Profile</span>
+  </div>
+  <div class="nav-item" data-page="admin" onclick="navigate('admin')" style="display:none">
+    <div class="nav-icon">⚙️</div>
+    <span>Admin</span>
+  </div>
+</nav>
+
+<!-- ══════════════ LANDING ══════════════ -->
+<div id="page-landing" class="page" style="display:flex">
+  <div class="landing-hero">
+    <div class="landing-logo">PASSCODE</div>
+    <div class="landing-tagline">Invitation-Only Access</div>
+    <p class="landing-desc">The premium event access management platform. Create events, invite guests, verify attendees with QR codes, and manage access securely.</p>
+    <div class="landing-btns">
+      <button class="btn-primary" onclick="navigate('register')">Get Started — It's Free</button>
+      <button class="btn-secondary" onclick="navigate('login')">Sign In</button>
+    </div>
+  </div>
+  <div class="landing-features">
+    <h3>Everything you need</h3>
+    <div class="feature-grid">
+      <div class="feature-item"><div class="feat-icon">🎫</div><p>Unique QR Code</p></div>
+      <div class="feature-item"><div class="feat-icon">🔒</div><p>Secure Invites</p></div>
+      <div class="feature-item"><div class="feat-icon">📱</div><p>Real-time Chat</p></div>
+      <div class="feature-item"><div class="feat-icon">🛡️</div><p>Security Check</p></div>
+      <div class="feature-item"><div class="feat-icon">📧</div><p>Email Invitations</p></div>
+      <div class="feature-item"><div class="feat-icon">🔔</div><p>Notifications</p></div>
+      <div class="feature-item"><div class="feat-icon">👥</div><p>Friend Requests</p></div>
+      <div class="feature-item"><div class="feat-icon">⚙️</div><p>Admin Panel</p></div>
+    </div>
+    <div style="margin-top:20px;padding:16px;background:var(--surface2);border-radius:12px;border:1px solid var(--border)">
+      <p style="font-size:12px;color:var(--text3);text-align:center;line-height:1.8">
+        ✓ Create accounts &amp; get a unique QR code automatically<br>
+        ✓ Create events &amp; invite guests by email<br>
+        ✓ Send &amp; receive connection requests<br>
+        ✓ Assign security personnel to events<br>
+        ✓ Verify attendees via QR scan or name search<br>
+        ✓ Display attendee details instantly on verification
+      </p>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════ LOGIN ══════════════ -->
+<div id="page-login" class="page" style="display:none;justify-content:center;align-items:flex-start;overflow-y:auto">
+  <div class="auth-container">
+    <div class="auth-header">
+      <div class="auth-logo">PASSCODE</div>
+      <p class="auth-subtitle">Welcome back</p>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Email or Username</label>
+      <input type="text" id="login-id" class="form-input" placeholder="your@email.com or @username"/>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Password</label>
+      <input type="password" id="login-pass" class="form-input" placeholder="••••••••"/>
+    </div>
+    <button class="btn-primary" onclick="handleLogin()">Sign In</button>
+    <div class="auth-link" style="margin-top:12px"><span onclick="navigate('resetPassword')" style="color:var(--text3)">Forgot password?</span></div>
+    <div class="auth-link">Don't have an account? <span onclick="navigate('register')">Sign up</span></div>
+  </div>
+</div>
+
+<!-- ══════════════ REGISTER ══════════════ -->
+<div id="page-register" class="page" style="display:none;justify-content:flex-start;overflow-y:auto">
+  <div class="auth-container">
+    <div class="auth-header">
+      <div class="auth-logo">PASSCODE</div>
+      <p class="auth-subtitle">Create your account</p>
+    </div>
+    <div class="photo-upload-area" id="reg-photo-btn">
+      <img id="reg-photo-preview" src="" alt=""/>
+      <div class="upload-placeholder">
+        <span>📷</span>
+        <p class="photo-upload-label">Upload Profile Photo</p>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Full Name</label>
+      <input type="text" id="reg-name" class="form-input" placeholder="John Doe"/>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Username</label>
+      <input type="text" id="reg-username" class="form-input" placeholder="johndoe"/>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Email</label>
+      <input type="email" id="reg-email" class="form-input" placeholder="john@example.com"/>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Phone Number</label>
+      <input type="tel" id="reg-phone" class="form-input" placeholder="+234 000 000 0000"/>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Password</label>
+      <input type="password" id="reg-pass" class="form-input" placeholder="Min. 6 characters"/>
+    </div>
+    <button class="btn-primary" onclick="handleRegister()">Create Account</button>
+    <div class="auth-link">Already have an account? <span onclick="navigate('login')">Sign in</span></div>
+    <div style="height:24px"></div>
+  </div>
+</div>
+
+<!-- ══════════════ RESET PASSWORD ══════════════ -->
+<div id="page-resetPassword" class="page" style="display:none;justify-content:center;align-items:flex-start;overflow-y:auto">
+  <div class="auth-container">
+    <div class="auth-header">
+      <div class="auth-logo">PASSCODE</div>
+      <p class="auth-subtitle">Reset your password</p>
+    </div>
+    <p style="font-size:14px;color:var(--text2);margin-bottom:24px;text-align:center;line-height:1.6">Enter your email address and we'll send you a link to reset your password.</p>
+    <div class="form-group">
+      <label class="form-label">Email Address</label>
+      <input type="email" id="reset-email" class="form-input" placeholder="your@email.com"/>
+    </div>
+    <div id="reset-success-msg" style="display:none;background:rgba(34,197,94,.1);border:1px solid rgba(34,197,94,.3);border-radius:10px;padding:14px;margin-bottom:14px;font-size:14px;color:#22c55e;text-align:center">
+      ✓ Reset link sent! Check your email inbox.
+    </div>
+    <button class="btn-primary" onclick="handleResetPassword()">Send Reset Link</button>
+    <div class="auth-link">Remember your password? <span onclick="navigate('login')">Sign in</span></div>
+  </div>
+</div>
+
+<!-- ══════════════ FRIEND REQUESTS ══════════════ -->
+<div id="page-requests" class="page" style="display:none">
+  <div class="page-header">
+    <div class="back-btn" onclick="navigate('messages')">←</div>
+    <h2>Requests</h2>
+    <div id="req-badge-header" style="background:var(--purple);color:#fff;font-size:11px;font-weight:700;padding:2px 8px;border-radius:20px;display:none">0</div>
+  </div>
+  <div class="page-content">
+    <div class="tabs">
+      <button class="tab-btn active" onclick="switchTab(this,'tab-req-incoming')">Incoming</button>
+      <button class="tab-btn" onclick="switchTab(this,'tab-req-outgoing')">Sent</button>
+      <button class="tab-btn" onclick="switchTab(this,'tab-req-friends')">Friends</button>
+    </div>
+    <div id="tab-req-incoming" class="tab-content active">
+      <div id="req-incoming-list"><p class="empty-state">No incoming requests</p></div>
+    </div>
+    <div id="tab-req-outgoing" class="tab-content">
+      <div id="req-outgoing-list"><p class="empty-state">No sent requests</p></div>
+    </div>
+    <div id="tab-req-friends" class="tab-content">
+      <div class="search-bar" style="margin-bottom:12px">
+        <span>🔍</span>
+        <input type="text" id="friends-search" placeholder="Search friends…" oninput="filterFriends(this.value)"/>
+      </div>
+      <div id="req-friends-list"><p class="empty-state">No friends yet</p></div>
+    </div>
+  </div>
+</div>
+
+
+<div id="page-dashboard" class="page" style="display:none">
+  <div class="page-content">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;padding-top:4px">
+      <div>
+        <p style="font-size:12px;color:var(--text3);letter-spacing:1px;text-transform:uppercase">Welcome back</p>
+        <h2 style="font-family:var(--font-display);font-weight:800;font-size:22px">Dashboard</h2>
+      </div>
+      <button class="btn-secondary" onclick="navigate('qrcode')" style="padding:8px 14px;font-size:13px">My QR</button>
+    </div>
+
+    <div class="user-hero-card">
+      <div id="dash-photo"></div>
+      <div class="user-hero-info">
+        <h3 id="dash-name">—</h3>
+        <p id="dash-username">—</p>
+        <p id="dash-email" style="font-size:12px;margin-top:2px">—</p>
+      </div>
+    </div>
+
+    <div class="stats-grid">
+      <div class="stat-card"><div class="stat-number" id="stat-events">0</div><div class="stat-label">Events Created</div></div>
+      <div class="stat-card"><div class="stat-number" id="stat-attended">0</div><div class="stat-label">Attended</div></div>
+      <div class="stat-card"><div class="stat-number" id="stat-invitations">0</div><div class="stat-label">Invitations</div></div>
+      <div class="stat-card"><div class="stat-number" id="stat-security">0</div><div class="stat-label">Security Jobs</div></div>
+    </div>
+
+    <div class="section-header">
+      <span class="section-title">Recent Events</span>
+      <span class="see-all" onclick="navigate('events')">See all →</span>
+    </div>
+    <div id="recent-events"></div>
+
+    <div class="divider"></div>
+    <button class="btn-outline" style="width:100%" onclick="navigate('createEvent')">+ Create New Event</button>
+    <div class="divider"></div>
+    <button class="btn-secondary" style="width:100%;margin-top:4px" onclick="handleLogout()">Sign Out</button>
+  </div>
+</div>
+
+<!-- ══════════════ QR CODE ══════════════ -->
+<div id="page-qrcode" class="page" style="display:none">
+  <div class="page-header">
+    <div class="back-btn" onclick="navigate('dashboard')">←</div>
+    <h2>My PASSCODE</h2>
+  </div>
+  <div class="qr-page-content">
+    <div class="qr-big-card">
+      <p style="font-size:12px;color:var(--text3);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:16px">Your Access Code</p>
+      <div id="qr-container"></div>
+      <div class="passcode-text" id="qr-passcode"></div>
+      <p style="font-size:12px;color:var(--text3);margin-top:8px">Scan to verify your identity</p>
+      <div class="qr-actions">
+        <button class="btn-secondary" onclick="downloadQR()">⬇ Download</button>
+        <button class="btn-outline" onclick="navigator.share&&navigator.share({title:'My PASSCODE',text:document.getElementById('qr-passcode').textContent})">↑ Share</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════ EVENTS ══════════════ -->
+<div id="page-events" class="page" style="display:none">
+  <div class="page-header">
+    <h2>Events</h2>
+    <button class="btn-outline" onclick="navigate('createEvent')" style="padding:8px 14px;font-size:13px">+ New</button>
+  </div>
+  <div class="page-content" style="padding-top:12px">
+    <div class="tabs">
+      <button class="tab-btn active" onclick="switchTab(this,'tab-all-events')">All Events</button>
+      <button class="tab-btn" onclick="switchTab(this,'tab-my-events')">My Events</button>
+    </div>
+    <div id="tab-all-events" class="tab-content active">
+      <div id="events-list"><p class="empty-state">Loading events…</p></div>
+    </div>
+    <div id="tab-my-events" class="tab-content">
+      <div id="my-events-list"><p class="empty-state">Loading…</p></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════ CREATE EVENT ══════════════ -->
+<div id="page-createEvent" class="page" style="display:none">
+  <div class="page-header">
+    <div class="back-btn" onclick="navigate('events')">←</div>
+    <h2>Create Event</h2>
+  </div>
+  <div class="page-content">
+    <form id="create-event-form" onsubmit="return false">
+      <div class="event-banner-upload" id="btn-upload-event-banner">
+        <img id="event-banner-preview" src="" alt=""/>
+        <div class="upload-placeholder"><span>🖼</span><p>Upload Event Banner</p></div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Event Title *</label>
+        <input type="text" id="ev-title" class="form-input" placeholder="Summer Gala 2025"/>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Description</label>
+        <textarea id="ev-desc" class="form-input" placeholder="Tell guests what to expect…"></textarea>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Date *</label>
+        <input type="date" id="ev-date" class="form-input"/>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Time</label>
+        <input type="time" id="ev-time" class="form-input"/>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Venue *</label>
+        <input type="text" id="ev-venue" class="form-input" placeholder="Grand Ballroom, Lagos"/>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Maximum Guests</label>
+        <input type="number" id="ev-max" class="form-input" placeholder="100" min="1"/>
+      </div>
+      <button class="btn-primary" onclick="handleCreateEvent()">Create Event</button>
+    </form>
+  </div>
+</div>
+
+<!-- ══════════════ EVENT DETAIL ══════════════ -->
+<div id="page-eventDetail" class="page" style="display:none">
+  <div class="page-header">
+    <div class="back-btn" onclick="navigate('events')">←</div>
+    <h2 id="ed-title">Event</h2>
+    <button id="ed-delete-btn" class="btn-sm btn-danger" style="display:none">Delete</button>
+  </div>
+  <div class="page-content">
+    <div id="ed-banner"></div>
+    <div class="event-detail-meta">
+      <div class="event-detail-meta-row"><span>📅</span><span id="ed-date">—</span></div>
+      <div class="event-detail-meta-row"><span>📍</span><span id="ed-venue">—</span></div>
+      <div class="event-detail-meta-row"><span>👥</span><span id="ed-max">—</span> max guests</div>
+      <div class="event-detail-meta-row"><span>👤</span>By <span id="ed-owner">—</span></div>
+    </div>
+    <p id="ed-desc" style="color:var(--text2);font-size:14px;margin-bottom:16px;line-height:1.6"></p>
+
+    <button id="ed-security-btn" class="btn-outline" style="width:100%;margin-bottom:16px;display:none">🛡 Open Security Dashboard</button>
+
+    <!-- Owner Controls -->
+    <div id="ed-owner-controls" style="display:none">
+      <div class="glass-card">
+        <h3>Invite Guests</h3>
+        <div class="invite-row" id="ed-invite-form">
+          <input type="email" id="invite-email" class="form-input" placeholder="guest@email.com"/>
+          <button class="btn-primary" id="btn-invite-guest" style="width:auto;padding:12px 16px">Send</button>
+        </div>
+      </div>
+      <div class="glass-card">
+        <h3>Assign Security</h3>
+        <div class="invite-row" id="ed-assign-form">
+          <input type="text" id="assign-security-input" class="form-input" placeholder="@username or email"/>
+          <button class="btn-primary" id="btn-assign-security" style="width:auto;padding:12px 16px">Assign</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="glass-card">
+      <h3>Guest List</h3>
+      <div id="ed-guests"></div>
+    </div>
+
+    <div class="glass-card">
+      <h3>Security Personnel</h3>
+      <div id="ed-security"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════ INVITATIONS ══════════════ -->
+<div id="page-invitations" class="page" style="display:none">
+  <div class="page-header">
+    <div class="back-btn" onclick="navigate('dashboard')">←</div>
+    <h2>Invitations</h2>
+  </div>
+  <div class="page-content">
+    <div id="invitations-list"><p class="empty-state">Loading…</p></div>
+  </div>
+</div>
+
+<!-- ══════════════ NOTIFICATIONS ══════════════ -->
+<div id="page-notifications" class="page" style="display:none">
+  <div class="page-header">
+    <h2>Notifications</h2>
+  </div>
+  <div class="page-content">
+    <div id="notif-list"><p class="empty-state">Loading…</p></div>
+  </div>
+</div>
+
+<!-- ══════════════ MESSAGES ══════════════ -->
+<div id="page-messages" class="page" style="display:none">
+  <div class="page-header">
+    <h2>Messages</h2>
+    <button class="btn-outline" onclick="navigate('requests')" style="padding:8px 14px;font-size:13px">👥 Requests</button>
+  </div>
+  <div class="page-content">
+    <div class="search-bar">
+      <span>🔍</span>
+      <input type="text" placeholder="Search users…" oninput="filterUsers(this.value)"/>
+    </div>
+    <div id="users-list"><p class="empty-state">Loading users…</p></div>
+  </div>
+</div>
+
+<!-- ══════════════ CHAT ══════════════ -->
+<div id="page-chat" class="page" style="display:none;flex-direction:column;padding-bottom:0">
+  <div class="chat-header">
+    <div class="back-btn" onclick="navigate('messages');activeChatId=null">←</div>
+    <div id="chat-avatar"></div>
+    <div class="chat-header-info">
+      <p id="chat-user-name">—</p>
+      <small id="chat-user-status">—</small>
+    </div>
+  </div>
+  <div id="chat-messages" class="chat-messages"></div>
+  <div id="typing-indicator" class="typing-indicator">typing…</div>
+  <div class="chat-input-bar">
+    <input type="text" id="chat-input" placeholder="Type a message…" onkeydown="if(event.key==='Enter')sendMessage()"/>
+    <button class="chat-send-btn" onclick="sendMessage()">➤</button>
+  </div>
+</div>
+
+<!-- ══════════════ PROFILE ══════════════ -->
+<div id="page-profile" class="page" style="display:none">
+  <div class="page-header">
+    <div class="back-btn" onclick="navigate('dashboard')">←</div>
+    <h2>Profile</h2>
+    <button id="prof-edit-btn" class="btn-secondary" style="padding:8px 14px;font-size:13px;display:none" onclick="navigate('editProfile')">Edit</button>
+  </div>
+  <div class="page-content" style="padding-top:0">
+    <div class="profile-hero">
+      <div id="prof-photo" style="display:flex;justify-content:center"></div>
+      <h2 class="profile-name" id="prof-name">—</h2>
+      <p class="profile-username" id="prof-username">—</p>
+      <p class="profile-contact" id="prof-email">—</p>
+      <p class="profile-contact" id="prof-phone">—</p>
+      <button id="prof-msg-btn" class="btn-outline" style="margin-top:12px;display:none">💬 Send Message</button>
+    </div>
+
+    <div class="profile-stats">
+      <div class="profile-stat"><div class="ps-num" id="prof-stat-events">0</div><div class="ps-label">Events</div></div>
+      <div class="profile-stat"><div class="ps-num" id="prof-stat-attended">0</div><div class="ps-label">Attended</div></div>
+      <div class="profile-stat"><div class="ps-num" id="prof-stat-security">0</div><div class="ps-label">Security</div></div>
+    </div>
+
+    <div class="qr-display">
+      <p class="section-label" style="margin-bottom:12px">Access QR Code</p>
+      <div id="prof-qr"></div>
+      <div class="passcode-text" id="prof-passcode"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════ EDIT PROFILE ══════════════ -->
+<div id="page-editProfile" class="page" style="display:none">
+  <div class="page-header">
+    <div class="back-btn" onclick="navigate('profile',{userId:currentUser?.uid})">←</div>
+    <h2>Edit Profile</h2>
+  </div>
+  <div class="page-content">
+    <div class="photo-upload-area" id="btn-upload-profile_edit">
+      <img id="profile_edit-preview" src="" alt="" style="width:80px;height:80px;border-radius:50%;object-fit:cover;display:none"/>
+      <div class="upload-placeholder"><span>📷</span><p>Change Photo</p></div>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Full Name</label>
+      <input type="text" id="edit-name" class="form-input"/>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Phone Number</label>
+      <input type="tel" id="edit-phone" class="form-input"/>
+    </div>
+    <button class="btn-primary" onclick="handleUpdateProfile()">Save Changes</button>
+  </div>
+</div>
+
+<!-- ══════════════ SECURITY DASHBOARD ══════════════ -->
+<div id="page-security" class="page" style="display:none">
+  <div class="page-header">
+    <div class="back-btn" onclick="navigate('eventDetail',{eventId:window._secEventId})">←</div>
+    <h2>Security</h2>
+  </div>
+  <div class="page-content">
+    <div class="sec-header-card">
+      <h3 id="sec-event-name">Event</h3>
+      <p style="font-size:12px;color:var(--text3)" id="sec-event-id"></p>
+    </div>
+
+    <div class="scanner-area">
+      <p class="section-label" style="margin-bottom:12px">QR Scanner</p>
+      <div id="qr-reader"></div>
+      <button id="start-scanner-btn" class="btn-primary" onclick="startQRScanner()">📷 Start Scanner</button>
+      <button id="stop-scanner-btn" class="btn-secondary" onclick="stopQRScanner()" style="display:none">⏹ Stop Scanner</button>
+    </div>
+
+    <div class="glass-card">
+      <h3>Search Guest</h3>
+      <div class="invite-row">
+        <input type="text" id="sec-search" class="form-input" placeholder="Name, @username, or email"/>
+        <button class="btn-primary" onclick="searchAttendee()" style="width:auto;padding:12px 16px">Search</button>
+      </div>
+    </div>
+
+    <div id="verify-result" style="display:none"></div>
+  </div>
+</div>
+
+<!-- ══════════════ ADMIN PANEL ══════════════ -->
+<div id="page-admin" class="page" style="display:none">
+  <div class="page-header">
+    <h2>Admin Panel</h2>
+  </div>
+  <div class="page-content">
+    <p class="section-label">Overview</p>
+    <div class="admin-stats">
+      <div class="admin-stat-card"><div class="asn" id="admin-total-users">0</div><div class="asl">Users</div></div>
+      <div class="admin-stat-card"><div class="asn" id="admin-total-events">0</div><div class="asl">Events</div></div>
+      <div class="admin-stat-card"><div class="asn" id="admin-total-invitations">0</div><div class="asl">Invitations</div></div>
+      <div class="admin-stat-card"><div class="asn" id="admin-total-checkins">0</div><div class="asl">Check-ins</div></div>
+    </div>
+
+    <div class="tabs">
+      <button class="tab-btn active" onclick="switchTab(this,'tab-admin-users')">Users</button>
+      <button class="tab-btn" onclick="switchTab(this,'tab-admin-events')">Events</button>
+    </div>
+    <div id="tab-admin-users" class="tab-content active">
+      <div id="admin-users-list"></div>
+    </div>
+    <div id="tab-admin-events" class="tab-content">
+      <div id="admin-events-list"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+// ─── TAB SWITCH ───
+function switchTab(btn, tabId){
+  const parent=btn.closest('.page-content')||btn.closest('.page');
+  parent.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  parent.querySelectorAll('.tab-content').forEach(t=>t.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById(tabId).classList.add('active');
+}
+
+// ─── FILTER USERS ───
+function filterUsers(q){
+  const rows=document.querySelectorAll('#users-list .user-row');
+  rows.forEach(row=>{
+    const text=row.textContent.toLowerCase();
+    row.style.display=text.includes(q.toLowerCase())?'flex':'none';
+  });
+}
+
+// ─── EDIT PROFILE PREFILL ───
+document.addEventListener('DOMContentLoaded',()=>{
+  const editProfilePage=document.getElementById('page-editProfile');
+  const observer=new MutationObserver(()=>{
+    if(editProfilePage.style.display!=='none'&&window.currentUserData){
+      document.getElementById('edit-name').value=window.currentUserData.name||'';
+      document.getElementById('edit-phone').value=window.currentUserData.phone||'';
+      if(window.currentUserData.photo){
+        const prev=document.getElementById('profile_edit-preview');
+        prev.src=window.currentUserData.photo;
+        prev.style.display='block';
+      }
+      // Init uploadcare for edit profile
+      setTimeout(()=>{
+        if(window.uploadcare){
+          const btn=document.getElementById('btn-upload-profile_edit');
+          if(btn&&!btn._ucInited){
+            btn._ucInited=true;
+            btn.addEventListener('click',()=>{
+              uploadcare.openDialog(null,{publicKey:'691b9ecdbe2da2b8f34e',imagesOnly:true}).done(f=>{
+                f.promise().done(info=>{
+                  window._uploaded_profile_edit=info.cdnUrl;
+                  const prev=document.getElementById('profile_edit-preview');
+                  prev.src=info.cdnUrl;
+                  prev.style.display='block';
+                });
+              });
+            });
+          }
+        }
+      },300);
+    }
+  });
+  observer.observe(editProfilePage,{attributes:true,attributeFilter:['style']});
+
+  // Create event banner upload
+  const createPage=document.getElementById('page-createEvent');
+  const createObserver=new MutationObserver(()=>{
+    if(createPage.style.display!=='none'&&window.uploadcare){
+      const btn=document.getElementById('btn-upload-event-banner');
+      if(btn&&!btn._ucInited){
+        btn._ucInited=true;
+        btn.addEventListener('click',()=>{
+          uploadcare.openDialog(null,{publicKey:'691b9ecdbe2da2b8f34e',imagesOnly:true}).done(f=>{
+            f.promise().done(info=>{
+              window['_uploaded_event-banner']=info.cdnUrl;
+              const prev=document.getElementById('event-banner-preview');
+              prev.src=info.cdnUrl;
+              prev.style.display='block';
+            });
+          });
+        });
+      }
+    }
+  });
+  createObserver.observe(createPage,{attributes:true,attributeFilter:['style']});
+});
+
+// ─── SEND MSG ON ENTER ───
+document.addEventListener('keydown', function(e){
+  if(e.key==='Enter'&&document.activeElement.id==='chat-input'){
+    window.sendMessage&&window.sendMessage();
+  }
+});
+</script>
+</body>
+</html>
